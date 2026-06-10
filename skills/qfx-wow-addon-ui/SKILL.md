@@ -1,0 +1,300 @@
+# QFX WoW Addon UI Skill
+
+Use this skill when reviewing, designing, refactoring, or packaging World of Warcraft addon user interfaces, especially QFX-style addons.
+
+This skill is optimized for:
+- Blizzard-native WoW UI style.
+- Compact but readable settings panels.
+- English, Simplified Chinese, and Traditional Chinese localization.
+- WoW 12.x secret-value / taint safety.
+- Multi-version addon UI packaging.
+- QFX addon conventions: lightweight, modular, native-looking, minimal performance cost.
+- Complex addon UI patterns: singleton scrollable dropdowns, large saved-list rendering, drag/drop collections, language-safe editor dialogs, and batched UI refresh.
+
+## Core goals
+
+When this skill is active, prefer:
+1. Native Blizzard controls over custom-drawn controls.
+2. Compact width-aware layout over tall sparse pages.
+3. Shared UI factory helpers over one-off widget code.
+4. Clear module boundaries over giant mixed UI files.
+5. Localized strings over hardcoded UI text.
+6. Deferred combat-safe apply over direct protected-frame changes in combat.
+7. Release-ready packaging checks over code-only edits.
+8. Minimal-diff, traceable changes with clear rollback notes.
+
+## Mandatory WoW UI constraints
+
+### Native first
+
+Prefer Blizzard templates and standard visual behavior:
+- `UIPanelButtonTemplate`
+- `UICheckButtonTemplate`
+- `UIDropDownMenuTemplate` or a project-local wrapper that mimics Blizzard dropdown behavior
+- `OptionsSliderTemplate` or native slider equivalents
+- `InputBoxTemplate`
+- `BackdropTemplateMixin` where required
+
+Do not mix many visual systems in the same panel unless the addon already does so and a migration is explicitly requested.
+
+### Avoid unnecessary Ace UI
+
+If the addon already depends on Ace libraries for DB/events/localization, do not remove Ace just because the UI is native.
+
+But do not introduce AceGUI for a panel that is otherwise Blizzard-native unless the user explicitly asks.
+
+### Compact multilingual layout
+
+Always consider English text length. English labels often overflow more than Chinese labels.
+
+For options rows:
+- Use two-column layouts only when each column has enough width for English.
+- Use full-width rows for long labels.
+- Allow controls to stretch horizontally when the template has unused space.
+- Keep labels and controls vertically centered on the same row.
+- Use tooltips for long explanatory text instead of crowding the panel.
+
+### Slider layout standard
+
+For QFX addon sliders, use this layout unless the user says otherwise:
+- Slider track on the main row.
+- Minimum label under the left end of the slider.
+- Maximum label under the right end of the slider.
+- Current value centered under the slider.
+- Minimum, current, and maximum labels must be on the same horizontal line.
+- Do not place the current value to the right side of the slider in compact cards.
+
+Recommended visual model:
+
+```text
+[ Label                ][ ======= slider ======= ]
+                         min      current     max
+```
+
+The current value text may update immediately while dragging, but heavy layout refresh should be deferred or throttled.
+
+## Complex addon UI patterns
+
+For addons with saved entries, collections, sound/TTS pickers, import/export panels, long dropdowns, or drag/drop sorting, follow `references/complex-addon-ui-patterns.md`.
+
+Key rules:
+- Use a lightweight Skin layer for visual normalization only; do not put business logic in Skin/UIFactory.
+- Use a singleton scrollable dropdown popup instead of creating one popup per dropdown.
+- Split large saved lists into Builder, Renderer, RowFactory, RowRenderer, Selection, DragDrop/DropTarget/Geometry, and Refresh responsibilities.
+- Use `RequestRefresh(reason)` or an equivalent pending-refresh queue to merge repeated UI refresh requests.
+- Expand/collapse collections by updating cached rows when possible; avoid full rebuilds for a single group toggle.
+- Store stable drag identities such as `sourceKey`, `sourceType`, and `dropKey`; do not rely only on row frame references.
+- Language switching must refresh labels, dropdown text, and button widths without clearing unsaved editor drafts or import/export text.
+- Toolbar buttons must re-measure localized text after language switches.
+- Editor dialogs must use grid constants and helpers instead of scattered magic coordinates.
+
+## Secret value / taint safety
+
+For Retail 12.x and modern WoW builds:
+- Do not compare, store, serialize, or arithmetic secret values.
+- Avoid direct decisions based on protected/secret results during combat.
+- Be careful with APIs returning protected booleans, spell availability, cooldowns, unit health/power, aura internals, or interruptibility.
+- Prefer event-driven approximations, fixed timers, cached safe values, or user-provided configuration.
+
+If a reported error includes phrases like:
+- `a secret boolean value`
+- `a secret number value`
+- `execution tainted by`
+
+then treat it as a taint/secret-value issue, not a normal Lua type bug.
+
+## Recommended UI architecture
+
+For medium or large QFX addons, prefer this structure:
+
+```text
+Core/
+  Init.lua
+  Events.lua
+  DB.lua
+  Migration.lua
+  Localization.lua
+UI/
+  UIFactory.lua
+  Skin.lua
+  MainFrame.lua
+  Options.lua
+  Dialogs.lua
+  Dropdown.lua
+  Lists.lua
+Modules/
+  ModuleName.lua
+Media/
+  Media.lua
+Compat/
+  Version.lua
+  Blizzard.lua
+  ElvUI.lua        only if truly needed
+  NDui.lua         only if truly needed
+```
+
+Do not create a second architecture inside an addon that already has one. Extend the existing one.
+
+## UI factory rules
+
+A project-local UI factory should centralize:
+- Button creation.
+- Checkbox creation.
+- Dropdown creation.
+- Slider creation.
+- Section/card creation.
+- Font/color helpers.
+- Tooltip helpers.
+- Consistent spacing constants.
+
+The UI factory should not know addon business rules. Business logic belongs in modules/controllers.
+
+## Dialog and popup rules
+
+Dialogs must:
+- Use one consistent width system.
+- Keep labels and controls aligned.
+- Not let controls exceed the module/card boundary.
+- Keep dropdown popups above the dialog frame.
+- Clamp to screen where needed.
+- Close or hide child popups when the parent dialog closes.
+
+For dropdowns with many items:
+- Never let the dropdown fill the whole screen.
+- Use a max visible row count.
+- Add scrolling.
+- Match popup width to control width unless there is a strong reason not to.
+- Reopen near the currently selected item when possible.
+
+## Large list and collection UI rules
+
+For saved sound lists, voice collections, addon lists, module lists, or large option lists:
+- Reuse row frames.
+- Do not rebuild every row for every tiny state change.
+- Keep selection state independent from row object lifetime.
+- Empty collections must still be selectable if edit/delete actions apply to the collection itself.
+- If an enabled/visible checkbox controls list membership, sorting rows must update immediately when the item is hidden/shown.
+- Dragging an item out of a collection must preserve the item identity until drop completes.
+
+## Sound, TTS, and media picker rules
+
+For sound/TTS addon UIs:
+- Built-in sound lists can be long; use searchable or scrollable dropdowns/lists.
+- LibSharedMedia integration should not break if the library is missing.
+- TTS test buttons must use the same playback path as real alerts where possible.
+- TTS channel controls should not be disabled unless WoW API limitations require it.
+- File path inputs should explain valid relative paths.
+- Do not assume every client locale has the same TTS voice behavior.
+
+## Combat lockdown deferred apply
+
+If a setting touches protected frames or frames likely to become protected:
+- If not in combat, apply immediately.
+- If in combat, save the setting, mark apply pending, show a small note if needed, and apply on `PLAYER_REGEN_ENABLED`.
+
+Never spam chat for every deferred setting change.
+
+## Packaging and release checklist
+
+Before returning a release zip or publishable package, verify:
+- TOC exists and points to files that exist.
+- SavedVariables are declared if used.
+- Libraries are present if referenced.
+- Media files are present if referenced.
+- No missing sub-addons were dropped from the package.
+- No debug-only test files are accidentally included unless requested.
+- Version number is updated consistently.
+- Zip root folder is correct.
+- English, Simplified Chinese, and Traditional Chinese localization files are included if the addon claims three-language support.
+
+## Modification traceability
+
+For any code or package modification, final responses should include:
+- Files changed.
+- Files added.
+- Files deleted.
+- TOC impact.
+- SavedVariables impact.
+- Risk level.
+- Rollback notes.
+- In-game test steps.
+
+Use this even for small UI-only changes unless the user asks for a very short response.
+
+## Minimal-diff discipline
+
+When fixing a specific issue:
+- Do not reformat unrelated files.
+- Do not rename unrelated functions.
+- Do not migrate architecture unless requested.
+- Do not delete fallbacks unless you are sure they are obsolete and the user agrees.
+- Do not change feature behavior while doing UI-only work.
+
+## Common user preferences for QFX addons
+
+Assume these preferences unless the user says otherwise:
+- Native Blizzard-style UI, not modern web-style UI.
+- Lightweight performance.
+- No unnecessary animation.
+- Three-language support: English, 简体中文, 繁體中文.
+- Default language follows client unless a force-language option exists.
+- Compact panels that use available width.
+- Tooltips on section titles for explanations.
+- No unnecessary ElvUI/NDui compatibility unless the addon actually interacts with their frames.
+- Release zips should include all sub-addons.
+
+## What to do when asked to optimize an addon UI
+
+1. Inspect existing UI architecture first.
+2. Identify whether the addon uses native controls, Ace, custom controls, or mixed controls.
+3. Preserve functionality and SavedVariables unless the user requests behavior changes.
+4. Centralize repeated UI logic into the existing factory/helpers.
+5. Fix alignment, spacing, overflow, dropdown height, popup layering, and localization width issues.
+6. Check combat-lockdown and secret-value risks if the UI applies live settings.
+7. Package and report changes clearly.
+
+## What to do when asked to update this skill
+
+1. Preserve the existing skill structure.
+2. Add or update focused reference files rather than dumping everything into `SKILL.md`.
+3. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version if the skill version changes.
+4. Keep names generic unless a file is intentionally a case study.
+5. Avoid reference names that make a reusable rule look like it only applies to one addon.
+
+## Reference loading guide
+
+When a task involves a specific concern, read the matching reference:
+
+- Native UI consistency: `references/blizzard-native-ui-checklist.md`
+- Architecture and UI factory: `references/qfx-ui-architecture.md`
+- Secret values and taint: `references/wow-12-secret-value-taint.md`
+- Dialog/dropdown/popup rules: `references/ui-factory-dialog-mode-rules.md`
+- Compact multilingual layout: `references/compact-multilingual-layout.md`
+- Large saved lists / collections / sounds: `references/large-list-collection-sound-ui.md`
+- Complex addon UI patterns: `references/complex-addon-ui-patterns.md`
+- Combat lockdown apply: `references/combat-lockdown-deferred-apply.md`
+- Packaging/release: `references/packaging-release-checklist.md`
+- Modular architecture: `references/modular-addon-architecture.md`
+- Safe font/media handling: `references/safe-font-media-rules.md`
+- SavedVariables migration: `references/savedvariables-migration.md`
+- Refresh performance: `references/refresh-performance-rules.md`
+- Event/OnUpdate discipline: `references/event-onupdate-rules.md`
+- Version compatibility: `references/version-compat-boundaries.md`
+- Modification traceability: `references/modification-traceability.md`
+
+## Output expectations
+
+When reviewing UI, return:
+- Priority issues.
+- Suggested fixes.
+- Files likely involved.
+- Risk level.
+- Test steps.
+
+When modifying files, return:
+- Download link or commit summary.
+- Changed/added/deleted files.
+- What changed.
+- What did not change.
+- Test steps.
+- Rollback notes.
