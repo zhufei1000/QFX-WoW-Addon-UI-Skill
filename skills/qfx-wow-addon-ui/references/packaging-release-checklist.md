@@ -19,6 +19,12 @@ Check:
 - TOC version is updated.
 - README/changelog version matches when present.
 - Zip name follows the requested naming style.
+- Use three-part decimal semantic-style addon versions: `MAJOR.MINOR.PATCH`, for example `1.1.1`.
+- Treat each version part as a decimal integer, not as a floating-point number: `1.1.10` is newer than `1.1.9`.
+- For bug fixes, UI polish, localization text changes, and small compatibility fixes, increment PATCH: `1.1.1 -> 1.1.2`.
+- For new user-facing features, new modules, or meaningful feature upgrades, increment MINOR and reset PATCH: `1.1.9 -> 1.2.0`.
+- For major rewrites, architecture changes, or intentionally incompatible SavedVariables changes, increment MAJOR and reset MINOR/PATCH: `1.9.9 -> 2.0.0`.
+- Release zip names should use only the addon name and official version, for example `QFXToolBox_0.44.20.zip`; keep notes like `secret_value_fix` or `ui_optimized` in the changelog instead of the package filename.
 
 ## Localization
 
