@@ -1,0 +1,39 @@
+{
+  "name": "qfx-wow-addon-ui-plugin",
+  "version": "1.6.0",
+  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs with Blizzard-native controls, compact multilingual width-aware layout, modular architecture, safe font/media handling, SavedVariables migration, event/OnUpdate discipline, modification traceability, minimal-diff reporting, centered slider value layout, QFX layout conventions, localization, large-list/sound UI rules, complex addon UI patterns, singleton scrollable dropdowns, batched refresh, packaging checks, performance, and taint-safety checks.",
+  "author": {
+    "name": "zhufei1000"
+  },
+  "license": "MIT",
+  "keywords": [
+    "world-of-warcraft",
+    "wow-addon",
+    "lua",
+    "ui",
+    "blizzard-native",
+    "qfx"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "QFX WoW Addon UI",
+    "shortDescription": "Blizzard-native WoW addon UI workflow",
+    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces using native Blizzard-style controls, compact multilingual width-aware layout rules, modular architecture, safe font/media handling, SavedVariables migration, event/OnUpdate discipline, modification traceability, minimal-diff reports, risk/rollback summaries, unified QFX layout rules including centered slider values, localization, large-list and sound/TTS UI guidance, complex addon UI patterns, singleton scrollable dropdowns, batched refresh, packaging checks, performance checks, and Retail 12.x secret-value/taint safety.",
+    "developerName": "zhufei1000",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use QFX WoW Addon UI to refactor this add-on settings panel into a Blizzard-native unified layout using the existing UI factory.",
+      "Use QFX WoW Addon UI to compact this settings page, account for English/zhCN/zhTW label length, and fully use the available template width without overflow.",
+      "Use QFX WoW Addon UI to review this WoW add-on UI for layout drift, custom controls, localization gaps, taint risk, performance problems, and packaging completeness.",
+      "Use QFX WoW Addon UI to fix this saved voice collection UI: selection, drag-out behavior, long sound picker, TTS test path, and large-list refresh performance.",
+      "Use QFX WoW Addon UI to apply complex addon UI patterns: singleton scrollable dropdowns, large-list row reuse, batched refresh, stable drag/drop identity, and language-safe editor dialogs.",
+      "Use QFX WoW Addon UI to prepare release notes and a package checklist for this QFX add-on.",
+      "Use QFX WoW Addon UI to modularize this addon without creating a second architecture, and add safe DB migration and media fallback rules.",
+      "Use QFX WoW Addon UI to make this change with minimal diff and provide a traceable report: changed files, risk level, rollback notes, TOC/SavedVariables impact, and in-game tests."
+    ]
+  }
+}
