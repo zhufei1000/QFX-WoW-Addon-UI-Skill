@@ -204,7 +204,9 @@ Before returning a release zip or publishable package, verify:
 - No missing sub-addons were dropped from the package.
 - No debug-only test files are accidentally included unless requested.
 - Version number is updated consistently.
+- Version numbers use three-part decimal integer progression: `MAJOR.MINOR.PATCH`; for example, `1.1.10` is newer than `1.1.9`.
 - Zip root folder is correct.
+- Release zip name uses addon name plus official version only, for example `QFXToolBox_0.44.20.zip`.
 - English, Simplified Chinese, and Traditional Chinese localization files are included if the addon claims three-language support.
 
 ## Modification traceability
