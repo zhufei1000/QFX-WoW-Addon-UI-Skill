@@ -1,12 +1,18 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.6.0
+Version: 1.6.1
 
 This package contains a Codex plugin with one skill:
 
 - `qfx-wow-addon-ui`
 
 It is designed for World of Warcraft addon UI design, review, and refactoring with QFX conventions.
+
+## What v1.6.1 adds
+
+- Adds color selector rules to the Blizzard native UI checklist.
+- Requires compact textless color swatches instead of labeled `Color` / `颜色` buttons.
+- Defines left-click color picker behavior, optional documented right-click reset behavior, immediate swatch refresh, and centralized swatch helper guidance.
 
 ## What v1.6 adds
 
