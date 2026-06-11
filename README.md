@@ -1,12 +1,18 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.6.1
+Version: 1.6.2
 
 This package contains a Codex plugin with one skill:
 
 - `qfx-wow-addon-ui`
 
 It is designed for World of Warcraft addon UI design, review, and refactoring with QFX conventions.
+
+## What v1.6.2 adds
+
+- Adds duplicate-control rules to the Blizzard native UI checklist.
+- Requires avoiding repeated controls with the same effective action on the same page unless their scope is clearly different.
+- Recommends keeping the control closest to the affected setting group and avoiding duplicate footer buttons for actions already present in the page content.
 
 ## What v1.6.1 adds
 
