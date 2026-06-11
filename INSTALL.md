@@ -1,4 +1,4 @@
-# Install QFX WoW Addon UI Skill v1.6
+# Install QFX WoW Addon UI Skill v1.6.1
 
 This package contains a Codex plugin folder:
 
