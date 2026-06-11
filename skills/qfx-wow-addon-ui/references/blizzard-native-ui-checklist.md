@@ -24,6 +24,27 @@ Check:
 - Text colors follow enabled/disabled state.
 - Tooltips are used for long explanations instead of crowding the layout.
 
+## Color selectors
+
+For color picker controls, use a compact textless swatch instead of a normal labeled button.
+
+Required behavior:
+- The visible control should be the selected color itself, inside a small bordered frame.
+- Do not put `Color`, `颜色`, or other label text inside the color swatch.
+- Put any explanation in the row label, section hint, or tooltip/help text.
+- Left-click should open the color picker.
+- Right-click may reset to default only when the UI clearly documents that behavior.
+- Update the swatch color immediately after pick, cancel/restore, or reset.
+- Keep the control compact enough for multilingual rows, usually around 24-32 px wide and one row high.
+- Preserve hover/pressed feedback with border or highlight changes so the swatch still feels clickable.
+- Centralize swatch creation in the local UI factory/helper when more than one color selector exists.
+
+Avoid:
+- A full `UIPanelButtonTemplate` labeled `Color`/`颜色` beside every row.
+- Separate text labels inside the swatch frame.
+- Recreating multiple color picker implementations in the same addon.
+- Changing unrelated layout or SavedVariables when replacing a labeled color button with a swatch.
+
 ## Dropdowns
 
 Long dropdowns must:
