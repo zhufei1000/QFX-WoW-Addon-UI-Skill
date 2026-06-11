@@ -24,6 +24,18 @@ Check:
 - Text colors follow enabled/disabled state.
 - Tooltips are used for long explanations instead of crowding the layout.
 
+## Duplicate controls
+
+Do not show multiple controls with the same effective function on the same page unless there is a clear usability reason.
+
+Required behavior:
+- Prefer one obvious primary control per action in a visible scope.
+- If two controls reset or apply the same settings, keep the one closest to the setting group and remove the duplicate global/footer control.
+- Footer buttons should be reserved for panel-level actions such as close, save, cancel, or truly global actions that are not already present in the page content.
+- If a duplicate action is intentionally kept, the labels and tooltips must make the scope different, for example `Reset position` versus `Reset all alert text`.
+- Avoid ambiguous pairs such as `Reset Default` and `Reset All` when users can reasonably interpret them as the same action.
+- Removing a duplicate button should not change SavedVariables or the underlying behavior of the remaining control.
+
 ## Color selectors
 
 For color picker controls, use a compact textless swatch instead of a normal labeled button.
