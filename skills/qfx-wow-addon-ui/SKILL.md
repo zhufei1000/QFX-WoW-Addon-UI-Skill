@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Skill
 
-Use this skill when reviewing, designing, refactoring, or packaging World of Warcraft addon user interfaces, especially QFX-style addons.
+Use this skill when reviewing, designing, refactoring, or packaging World of Warcraft addon user interfaces and addon architectures, especially QFX-style addons.
 
 This skill is optimized for:
 - Blizzard-native WoW UI style.
@@ -12,6 +12,7 @@ This skill is optimized for:
 - Complex addon UI patterns: singleton scrollable dropdowns, large saved-list rendering, drag/drop collections, language-safe editor dialogs, and batched UI refresh.
 - Plater-inspired option-panel patterns: tabbed categories, table-driven option rows, reusable templates, load-on-demand heavy tabs, searchable settings, reusable scroll rows, and one global change callback.
 - DandersFrames-inspired complex settings patterns: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and advanced diagnostics.
+- Reference-addon architecture patterns from Plater and DandersFrames: deterministic TOC load order, root namespace boundaries, lifecycle phases, module registry, event dispatchers, DB/profile migration, import/export validation, compatibility boundaries, public API separation, and lazy diagnostics.
 
 ## Core goals
 
@@ -26,6 +27,7 @@ When this skill is active, prefer:
 8. Minimal-diff, traceable changes with clear rollback notes.
 9. Reference-addon patterns as design guidance, not asset or library copying.
 10. Complex settings navigation over dumping every option into one long scroll page.
+11. Proven reference-addon architecture patterns over ad-hoc file growth.
 
 ## Mandatory WoW UI constraints
 
@@ -43,7 +45,7 @@ Do not mix many visual systems in the same panel unless the addon already does s
 
 ### Reference addon use
 
-When the user supplies a reference addon such as Plater, extract reusable design rules only:
+When the user supplies a reference addon such as Plater or DandersFrames, extract reusable design and architecture rules only:
 - tab organization;
 - table-driven option definitions;
 - shared templates and helpers;
@@ -54,7 +56,11 @@ When the user supplies a reference addon such as Plater, extract reusable design
 - profile override indicators;
 - advanced diagnostics;
 - scroll-row creation and refresh separation;
-- combat-safe visibility and refresh behavior.
+- combat-safe visibility and refresh behavior;
+- deterministic TOC load order and lifecycle phases;
+- root namespace, public/private boundary, and documented API;
+- DB/profile migration and import/export validation;
+- targeted event dispatchers and lazy diagnostics.
 
 Do not copy bundled fonts, textures, icons, sounds, third-party libraries, or brand-specific art from the reference addon into QFX addons unless the user explicitly requests it and licensing is verified.
 
@@ -93,6 +99,27 @@ Recommended visual model:
 ```
 
 The current value text may update immediately while dragging, but heavy layout refresh should be deferred or throttled.
+
+## Reference-addon architecture patterns
+
+For plugin architecture ideas extracted from Plater and DandersFrames, read `references/reference-addon-architecture-patterns.md`.
+
+Key rules:
+- Use deterministic TOC load order: libraries, locales, templates, defaults, DB/migration, utilities, UI factory, modules, options/tools, final bootstrap.
+- Use one root namespace from `local addonName, ns = ...`; keep private internals file-local or under `Internal`.
+- Scale architecture by addon size: small addons stay simple, medium addons get modules, large addons get profile/import/export/API/debug boundaries.
+- Define lifecycle phases for `ADDON_LOADED`, `PLAYER_LOGIN`, `PLAYER_ENTERING_WORLD`, combat enter/leave, and logout.
+- Runtime modules must not require option pages to be opened.
+- Use one module registry; prevent duplicate module, DB, UI factory, locale, media, and event systems.
+- Use targeted event dispatchers for high-frequency unit events; avoid many modules filtering the same global event independently.
+- Coalesce refreshes with `RequestRefresh(reason, scope)` and record last refresh reason for diagnostics.
+- Keep DB defaults, schema version, migrations, profiles, and per-character data clearly separated.
+- Import/export should use a validate pipeline: decode, decompress, deserialize, validate, migrate, preview/summary, apply, refresh.
+- Optional libraries and media must degrade gracefully and resolve to real asset paths before WoW API calls.
+- Centralize version/API compatibility fallbacks instead of scattering expansion checks across feature files.
+- Public API and callbacks belong in `API.lua`; expose stable functions, not raw internal DB tables.
+- Debug, logs, profilers, and diagnostic pages must be bounded, lazy, and safe for release packages.
+- Test/preview mode should use fake data and pooled frames without registering fake unit tokens with WoW unit APIs.
 
 ## Plater-inspired options UI patterns
 
@@ -154,9 +181,9 @@ If a reported error includes phrases like:
 
 then treat it as a taint/secret-value issue, not a normal Lua type bug.
 
-## Recommended UI architecture
+## Recommended UI and architecture structure
 
-For medium or large QFX addons, prefer this structure:
+For medium or large QFX addons, prefer this structure and scale it down for small addons:
 
 ```text
 Core/
@@ -172,7 +199,6 @@ UI/
   Options.lua
   Dialogs.lua
   Dropdown.lua
-  Lists.lua
 Modules/
   ModuleName.lua
 Media/
@@ -180,8 +206,11 @@ Media/
 Compat/
   Version.lua
   Blizzard.lua
-  ElvUI.lua        only if truly needed
-  NDui.lua         only if truly needed
+Debug/
+  Diagnostics.lua
+ImportExport/
+  ImportExport.lua      if needed
+API.lua                 if external access is needed
 ```
 
 Do not create a second architecture inside an addon that already has one. Extend the existing one.
@@ -201,23 +230,6 @@ A project-local UI factory should centralize:
 - Optional collapsible-section, banner, search-registration, setting-highlight, and wizard helpers for complex settings panels.
 
 The UI factory should not know addon business rules. Business logic belongs in modules/controllers.
-
-## Dialog and popup rules
-
-Dialogs must:
-- Use one consistent width system.
-- Keep labels and controls aligned.
-- Not let controls exceed the module/card boundary.
-- Keep dropdown popups above the dialog frame.
-- Clamp to screen where needed.
-- Close or hide child popups when the parent dialog closes.
-
-For dropdowns with many items:
-- Never let the dropdown fill the whole screen.
-- Use a max visible row count.
-- Add scrolling.
-- Match popup width to control width unless there is a strong reason not to.
-- Reopen near the currently selected item when possible.
 
 ## Large list and collection UI rules
 
@@ -298,17 +310,18 @@ Assume these preferences unless the user says otherwise:
 - No unnecessary ElvUI/NDui compatibility unless the addon actually interacts with their frames.
 - Release zips should include all sub-addons.
 
-## What to do when asked to optimize an addon UI
+## What to do when asked to optimize an addon UI or architecture
 
-1. Inspect existing UI architecture first.
+1. Inspect existing UI and architecture first.
 2. Identify whether the addon uses native controls, Ace, custom controls, or mixed controls.
 3. Preserve functionality and SavedVariables unless the user requests behavior changes.
 4. Centralize repeated UI logic into the existing factory/helpers.
 5. Fix alignment, spacing, overflow, dropdown height, popup layering, and localization width issues.
 6. For large option panels, consider Plater-style tab segmentation, option-table rows, delayed heavy tabs, searchable metadata, and reusable scroll rows.
 7. For very complex settings, consider DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages.
-8. Check combat-lockdown and secret-value risks if the UI applies live settings.
-9. Package and report changes clearly.
+8. For plugin architecture, apply reference-addon patterns: TOC order, root namespace, lifecycle phases, module registry, DB/profile migration, targeted events, import/export validation, API boundary, and lazy diagnostics.
+9. Check combat-lockdown and secret-value risks if the UI applies live settings.
+10. Package and report changes clearly.
 
 ## What to do when asked to update this skill
 
@@ -317,12 +330,13 @@ Assume these preferences unless the user says otherwise:
 3. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version if the skill version changes.
 4. Keep names generic unless a file is intentionally a case study.
 5. Avoid reference names that make a reusable rule look like it only applies to one addon.
-6. When using a reference addon, document extracted UI rules and explicitly avoid copying assets/libraries unless requested and licensed.
+6. When using a reference addon, document extracted UI and architecture rules and explicitly avoid copying assets/libraries unless requested and licensed.
 
 ## Reference loading guide
 
 When a task involves a specific concern, read the matching reference:
 
+- Reference addon architecture patterns: `references/reference-addon-architecture-patterns.md`
 - DandersFrames-style complex settings UI: `references/dandersframes-complex-settings-ui.md`
 - Plater-style options UI model: `references/plater-options-ui-patterns.md`
 - Native UI consistency: `references/blizzard-native-ui-checklist.md`
@@ -344,7 +358,7 @@ When a task involves a specific concern, read the matching reference:
 
 ## Output expectations
 
-When reviewing UI, return:
+When reviewing UI or architecture, return:
 - Priority issues.
 - Suggested fixes.
 - Files likely involved.
