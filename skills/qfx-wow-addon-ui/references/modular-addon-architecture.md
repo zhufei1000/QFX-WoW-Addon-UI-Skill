@@ -1,50 +1,24 @@
 # Modular Addon Architecture
 
-Use this reference when reorganizing a WoW addon without changing feature behavior.
+Prefer Core, DB, Migration, Localization, UI, Modules, Media, Compat, Debug, ImportExport, and optional API boundaries.
 
-## Preferred modules
+Use the architecture at the right scale:
 
-Recommended structure:
+- Small addon: one root namespace, Core, DB/defaults, Localization, Options.
+- Medium QFX addon: Core, UI, Modules, Media, Compat, Debug.
+- Large addon: add Profile, Migration, ImportExport, Designer, API, and lazy diagnostics.
 
-```text
-Core/
-  Init.lua
-  Events.lua
-  DB.lua
-  Migration.lua
-  Localization.lua
-UI/
-  UIFactory.lua
-  Skin.lua
-  MainFrame.lua
-  Options.lua
-Modules/
-  FeatureName.lua
-Media/
-  Media.lua
-Compat/
-  Version.lua
-```
+Rules:
 
-## Rules
+- Do not create duplicate module registries, DB layers, locale tables, UI factories, media resolvers, or event buses.
+- Child addons should not become independent unless explicitly requested.
+- Runtime modules should not depend on options pages being opened.
+- Defaults must load before DB initialization.
+- Localization must load before UI creation.
+- Compatibility checks should live in one boundary instead of being scattered through every file.
+- High-frequency events should use targeted dispatchers when possible.
+- Public APIs should be documented and separate from private internals.
+- Import/export should validate and migrate data before applying it.
+- Debug/profiling should be lazy-loaded or explicitly enabled, not always active.
 
-- Keep Core small and stable.
-- Keep feature logic in modules.
-- Keep UI layout in UI files.
-- Keep media resolution in Media.
-- Keep version checks in Compat.
-- Keep migration code separate from runtime logic.
-
-## Do not duplicate systems
-
-Do not create a second:
-- DB layer.
-- Locale table.
-- Module registry.
-- UI factory.
-- Event dispatcher.
-- Media resolver.
-
-## Parent/sub-addon rule
-
-Do not make sub-addons independent unless the user explicitly asks. If the parent addon owns shared libraries, DB, or localization, preserve that relationship.
+For large addon architecture derived from the reference addons, read `references/reference-addon-architecture-patterns.md`.
