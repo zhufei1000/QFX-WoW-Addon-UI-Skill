@@ -10,6 +10,7 @@ This skill is optimized for:
 - Multi-version addon UI packaging.
 - QFX addon conventions: lightweight, modular, native-looking, minimal performance cost.
 - Complex addon UI patterns: singleton scrollable dropdowns, large saved-list rendering, drag/drop collections, language-safe editor dialogs, and batched UI refresh.
+- Plater-inspired option-panel patterns: tabbed categories, table-driven option rows, reusable templates, load-on-demand heavy tabs, searchable settings, reusable scroll rows, and one global change callback.
 
 ## Core goals
 
@@ -22,6 +23,7 @@ When this skill is active, prefer:
 6. Deferred combat-safe apply over direct protected-frame changes in combat.
 7. Release-ready packaging checks over code-only edits.
 8. Minimal-diff, traceable changes with clear rollback notes.
+9. Reference-addon patterns as design guidance, not asset or library copying.
 
 ## Mandatory WoW UI constraints
 
@@ -36,6 +38,18 @@ Prefer Blizzard templates and standard visual behavior:
 - `BackdropTemplateMixin` where required
 
 Do not mix many visual systems in the same panel unless the addon already does so and a migration is explicitly requested.
+
+### Reference addon use
+
+When the user supplies a reference addon such as Plater, extract reusable design rules only:
+- tab organization;
+- table-driven option definitions;
+- shared templates and helpers;
+- search/index behavior;
+- scroll-row creation and refresh separation;
+- combat-safe visibility and refresh behavior.
+
+Do not copy bundled fonts, textures, icons, sounds, third-party libraries, or brand-specific art from the reference addon into QFX addons unless the user explicitly requests it and licensing is verified.
 
 ### Avoid unnecessary Ace UI
 
@@ -72,6 +86,20 @@ Recommended visual model:
 ```
 
 The current value text may update immediately while dragging, but heavy layout refresh should be deferred or throttled.
+
+## Plater-inspired options UI patterns
+
+For addons with many option categories, read `references/plater-options-ui-patterns.md`.
+
+Key rules:
+- Use a tab container when one scrolling page would become too long or mixed.
+- Put category definitions in one table with stable tab names and localized labels.
+- Use load-on-demand creation for heavy tabs such as search, profile, designer, media, import/export, or advanced pages.
+- Describe rows through option tables where possible: `type`, `name`, `desc`, `get`, `set`, `values`, `min`, `max`, and `step`.
+- Route option changes through one global callback that updates DB cache and applies only the required refresh.
+- Keep search as an index over existing option metadata, not a second duplicate settings UI.
+- For scroll lists, split line creation from line refresh and reuse row frames.
+- Show combat state clearly when live changes may be blocked or deferred.
 
 ## Complex addon UI patterns
 
@@ -146,6 +174,7 @@ A project-local UI factory should centralize:
 - Font/color helpers.
 - Tooltip helpers.
 - Consistent spacing constants.
+- Optional table-driven options row creation for large settings panels.
 
 The UI factory should not know addon business rules. Business logic belongs in modules/controllers.
 
@@ -252,8 +281,9 @@ Assume these preferences unless the user says otherwise:
 3. Preserve functionality and SavedVariables unless the user requests behavior changes.
 4. Centralize repeated UI logic into the existing factory/helpers.
 5. Fix alignment, spacing, overflow, dropdown height, popup layering, and localization width issues.
-6. Check combat-lockdown and secret-value risks if the UI applies live settings.
-7. Package and report changes clearly.
+6. For large option panels, consider Plater-style tab segmentation, option-table rows, delayed heavy tabs, searchable metadata, and reusable scroll rows.
+7. Check combat-lockdown and secret-value risks if the UI applies live settings.
+8. Package and report changes clearly.
 
 ## What to do when asked to update this skill
 
@@ -262,11 +292,13 @@ Assume these preferences unless the user says otherwise:
 3. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version if the skill version changes.
 4. Keep names generic unless a file is intentionally a case study.
 5. Avoid reference names that make a reusable rule look like it only applies to one addon.
+6. When using a reference addon, document extracted UI rules and explicitly avoid copying assets/libraries unless requested and licensed.
 
 ## Reference loading guide
 
 When a task involves a specific concern, read the matching reference:
 
+- Plater-style options UI model: `references/plater-options-ui-patterns.md`
 - Native UI consistency: `references/blizzard-native-ui-checklist.md`
 - Architecture and UI factory: `references/qfx-ui-architecture.md`
 - Secret values and taint: `references/wow-12-secret-value-taint.md`
