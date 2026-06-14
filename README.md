@@ -1,14 +1,25 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.8.0
+Version: 1.9.0
 
 This package contains a Codex plugin with one skill:
 
 - `qfx-wow-addon-ui`
 
-It is designed for World of Warcraft addon UI design, review, and refactoring with QFX conventions.
+It is designed for World of Warcraft addon UI design, architecture review, refactoring, and release packaging with QFX conventions.
 
-## What v1.8.0 adds
+## What v1.9.0 adds
+
+- Adds a reference-addon architecture pattern guide extracted from the two uploaded high-download reference addons: Plater and DandersFrames.
+- Adds deterministic TOC load-order rules covering libraries, locales, templates, defaults, DB/migration, utilities, UI factory, modules, options/tools, and final bootstrap.
+- Adds root namespace and public/private boundary rules using one addon table, private internals, and optional documented `API.lua`.
+- Adds architecture tiers for small, medium, and large QFX addons so small addons are not over-engineered.
+- Adds lifecycle phase guidance for `ADDON_LOADED`, `PLAYER_LOGIN`, `PLAYER_ENTERING_WORLD`, combat enter/leave, and logout.
+- Adds module registry rules, targeted event dispatcher guidance, refresh coalescing rules, and diagnostic counters.
+- Adds stronger DB/default/profile/migration and import/export validation architecture rules.
+- Adds optional library/media retry, compatibility boundary, public callback/API, lazy debug/profiler, and preview/test-mode architecture rules.
+
+## Earlier v1.8.0 additions
 
 - Adds a DandersFrames-inspired complex settings UI reference extracted from the uploaded reference addon.
 - Adds persistent collapsible group rules with SavedVariables-backed state, group summaries, and automatic relayout.
@@ -36,25 +47,6 @@ It is designed for World of Warcraft addon UI design, review, and refactoring wi
 - Adds duplicate-control rules to the Blizzard native UI checklist.
 - Requires avoiding repeated controls with the same effective action on the same page unless their scope is clearly different.
 - Recommends keeping the control closest to the affected setting group and avoiding duplicate footer buttons for actions already present in the page content.
-
-## Earlier v1.6.1 additions
-
-- Adds color selector rules to the Blizzard native UI checklist.
-- Requires compact textless color swatches instead of labeled `Color` / `颜色` buttons.
-- Defines left-click color picker behavior, optional documented right-click reset behavior, immediate swatch refresh, and centralized swatch helper guidance.
-
-## Earlier v1.6 additions
-
-- Adds complex addon UI patterns as a dedicated reference.
-- Adds lightweight Skin layer rules: unify native controls without moving business logic into Skin/UIFactory.
-- Adds singleton scrollable dropdown popup rules for long sound/media lists, dialog z-order, current-selection positioning, and outside-click close.
-- Adds large-list responsibility split: Builder, Renderer, RowFactory, RowRenderer, Selection, DragDrop/DropTarget/Geometry, and Refresh.
-- Adds batched `RequestRefresh(reason)` rules to avoid repeated full rebuilds during language switches, imports, sliders, search/filter, and collection expand/collapse.
-- Adds stable drag/drop identity rules using sourceKey/sourceType/dropKey instead of relying only on row frame references.
-- Adds language switching rules that refresh UI text without wiping open editor drafts or import/export text.
-- Adds localized toolbar/button width auto-fit rules.
-- Adds native slider wrapper implementation details for clearing template Low/High/Text labels and using QFX bottom value labels.
-- Adds editor dialog grid constant rules to avoid scattered magic coordinates.
 
 ## Install as a local personal plugin
 
@@ -108,19 +100,19 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
+$qfx-wow-addon-ui Redesign this addon architecture using reference-addon patterns from Plater and DandersFrames: deterministic TOC load order, root namespace, lifecycle phases, module registry, DB/profile migration, targeted event dispatchers, import/export validation, public API boundary, and lazy diagnostics.
+```
+
+```text
 $qfx-wow-addon-ui Apply DandersFrames-style complex settings patterns: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and lazy diagnostics.
 ```
 
 ```text
-$qfx-wow-addon-ui Review this addon settings UI. Find release blockers, layout drift, localization gaps, taint risks, performance problems, and packaging completeness.
+$qfx-wow-addon-ui Apply Plater-style options design to this addon UI: tab categories, table-driven option rows, delayed heavy tabs, searchable settings, reusable scroll rows, and one global refresh callback.
 ```
 
 ```text
-$qfx-wow-addon-ui Refactor the saved voice collection UI so collection rows can be selected, edited, deleted, and child sound items can be dragged out without lag. Also check long sound dropdowns, TTS test playback, and LibSharedMedia integration.
-```
-
-```text
-$qfx-wow-addon-ui Add a Blizzard-native dropdown with scroll support to this popup, using the existing UI factory and EN/zhCN/zhTW localization.
+$qfx-wow-addon-ui Review this addon settings UI and architecture. Find release blockers, layout drift, architecture drift, localization gaps, taint risks, performance problems, and packaging completeness.
 ```
 
 ```text
@@ -135,6 +127,7 @@ $qfx-wow-addon-ui Apply this bug fix with minimal diff and give me a traceable r
 
 The skill includes these references:
 
+- `reference-addon-architecture-patterns.md`
 - `dandersframes-complex-settings-ui.md`
 - `plater-options-ui-patterns.md`
 - `blizzard-native-ui-checklist.md`
