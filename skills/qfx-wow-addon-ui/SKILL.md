@@ -13,6 +13,7 @@ This skill is optimized for:
 - Plater-inspired option-panel patterns: tabbed categories, table-driven option rows, reusable templates, load-on-demand heavy tabs, searchable settings, reusable scroll rows, and one global change callback.
 - DandersFrames-inspired complex settings patterns: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and advanced diagnostics.
 - Reference-addon architecture patterns from Plater and DandersFrames: deterministic TOC load order, root namespace boundaries, lifecycle phases, module registry, event dispatchers, DB/profile migration, import/export validation, compatibility boundaries, public API separation, and lazy diagnostics.
+- Deep reference-addon patterns: controlled extension hooks, adapter/resolver/renderer pipelines, capability gates, self-healing media fallback, object-pool reset discipline, post-load validation, category-scoped imports, auto-profile switching, safe profiling, foreign attachment scans, alert state machines, option dependency graphs, and design tokens.
 
 ## Core goals
 
@@ -28,6 +29,7 @@ When this skill is active, prefer:
 9. Reference-addon patterns as design guidance, not asset or library copying.
 10. Complex settings navigation over dumping every option into one long scroll page.
 11. Proven reference-addon architecture patterns over ad-hoc file growth.
+12. Safe extensibility and self-healing runtime behavior over fragile ad-hoc hooks and imported-profile assumptions.
 
 ## Mandatory WoW UI constraints
 
@@ -60,7 +62,11 @@ When the user supplies a reference addon such as Plater or DandersFrames, extrac
 - deterministic TOC load order and lifecycle phases;
 - root namespace, public/private boundary, and documented API;
 - DB/profile migration and import/export validation;
-- targeted event dispatchers and lazy diagnostics.
+- targeted event dispatchers and lazy diagnostics;
+- controlled extension hooks and trigger registries;
+- adapter/resolver/renderer pipelines;
+- self-healing media fallbacks and post-load validation;
+- safe profilers, foreign attachment scanners, and alert state machines.
 
 Do not copy bundled fonts, textures, icons, sounds, third-party libraries, or brand-specific art from the reference addon into QFX addons unless the user explicitly requests it and licensing is verified.
 
@@ -99,6 +105,26 @@ Recommended visual model:
 ```
 
 The current value text may update immediately while dragging, but heavy layout refresh should be deferred or throttled.
+
+## Deep reference-addon patterns
+
+For advanced patterns found after deeper review of Plater and DandersFrames, read `references/deep-reference-addon-patterns.md`.
+
+Key rules:
+- Add controlled extension/scripting systems only when the addon truly needs presets, user packs, external integrations, or user-defined logic.
+- Extension systems need a fixed hook catalog, trigger registry, metadata, guarded dispatch, error quarantine, and a small public API instead of raw DB access.
+- Use Adapter / Resolver / Renderer pipelines for complex visual editors, text systems, aura/alert systems, minimap providers, and preview pages.
+- Centralize capability gates and feature flags so missing APIs, optional libraries, combat safety, and known taint risks have clear reasons.
+- Imported profiles must self-heal missing media by resolving assets, falling back to stock paths, warning once, and exposing diagnostics.
+- Use object pools only with explicit reset/release discipline; rebuild small stale-prone components when pooling causes state leaks.
+- Keep a final post-load validation pass to verify modules, DB paths, migrations, optional libraries, slash commands, and public API registration.
+- Support category-scoped import/export and merge touched categories through a validate/migrate/preview/apply pipeline.
+- Auto-profile switching must be explicit, validated, combat-safe, and visible in diagnostics.
+- Profilers and debug hooks must be opt-in, ownership-filtered, and must never wrap Blizzard secure frames or foreign addon frames.
+- Add on-demand foreign attachment scanners for owned frames such as unit frames or minimap containers.
+- Alert engines should use explicit state machines and cleanup all timers/tickers on stop, profile switch, spec change, logout, or module disable.
+- Centralize option dependency graphs so enabling/disabling child controls is consistent and explainable.
+- Use design tokens for spacing, row heights, semantic colors, and disabled states without copying another addon's custom skin.
 
 ## Reference-addon architecture patterns
 
@@ -320,8 +346,9 @@ Assume these preferences unless the user says otherwise:
 6. For large option panels, consider Plater-style tab segmentation, option-table rows, delayed heavy tabs, searchable metadata, and reusable scroll rows.
 7. For very complex settings, consider DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages.
 8. For plugin architecture, apply reference-addon patterns: TOC order, root namespace, lifecycle phases, module registry, DB/profile migration, targeted events, import/export validation, API boundary, and lazy diagnostics.
-9. Check combat-lockdown and secret-value risks if the UI applies live settings.
-10. Package and report changes clearly.
+9. For deep architecture review, check controlled extension hooks, adapter/resolver/renderer separation, capability gates, self-healing media fallback, object pool reset, post-load validation, category imports, auto-profile switching, safe profilers, foreign attachment scans, alert state machines, and option dependency graphs.
+10. Check combat-lockdown and secret-value risks if the UI applies live settings.
+11. Package and report changes clearly.
 
 ## What to do when asked to update this skill
 
@@ -336,6 +363,7 @@ Assume these preferences unless the user says otherwise:
 
 When a task involves a specific concern, read the matching reference:
 
+- Deep reference addon patterns: `references/deep-reference-addon-patterns.md`
 - Reference addon architecture patterns: `references/reference-addon-architecture-patterns.md`
 - DandersFrames-style complex settings UI: `references/dandersframes-complex-settings-ui.md`
 - Plater-style options UI model: `references/plater-options-ui-patterns.md`
