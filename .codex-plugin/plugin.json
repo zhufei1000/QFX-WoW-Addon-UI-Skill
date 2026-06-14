@@ -1,7 +1,7 @@
 {
   "name": "qfx-wow-addon-ui-plugin",
-  "version": "1.10.0",
-  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures with Blizzard-native controls, compact multilingual layout, modular architecture, Plater/DandersFrames-inspired deep reference patterns, controlled extension hooks, adapter/resolver/renderer pipelines, capability gates, self-healing media fallback, object pool reset discipline, post-load validation, category-scoped import/export, auto-profile switching, safe profilers, diagnostics, packaging checks, performance, and taint-safety checks.",
+  "version": "1.11.0",
+  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures with Blizzard-native controls, modular architecture, Plater/DandersFrames-inspired patterns, and WoW 12.x API source-grounding rules using current UI source/resource references, compatibility wrappers, branch/build checks, secret-value/taint safety, packaging checks, and performance discipline.",
   "author": {
     "name": "zhufei1000"
   },
@@ -12,14 +12,15 @@
     "lua",
     "ui",
     "architecture",
+    "api",
     "blizzard-native",
     "qfx"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "QFX WoW Addon UI",
-    "shortDescription": "Blizzard-native WoW addon UI and architecture workflow",
-    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using native Blizzard-style controls, compact multilingual layout, modular UI factory rules, safe media fallback, SavedVariables migration, event/OnUpdate discipline, Plater-inspired option pages, DandersFrames-inspired complex settings patterns, deep reference-addon patterns, controlled extension hooks, adapter/resolver/renderer pipelines, capability gates, object pool reset rules, post-load validation, category-scoped import/export, auto-profile switching, safe profilers, diagnostics, release packaging checks, and Retail 12.x secret-value/taint safety.",
+    "shortDescription": "WoW addon UI, architecture, and API-safe workflow",
+    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using native Blizzard-style controls, compact multilingual layout, modular UI factory rules, reference-addon architecture patterns, WoW 12.x API source-grounding rules, current UI source/resource references, branch/build checks, compatibility wrappers, secret-value/taint safety, import/export validation, diagnostics, release packaging checks, and performance discipline.",
     "developerName": "zhufei1000",
     "category": "Developer Tools",
     "capabilities": [
@@ -29,6 +30,7 @@
     "defaultPrompt": [
       "Use QFX WoW Addon UI to refactor this add-on settings panel into a Blizzard-native unified layout using the existing UI factory.",
       "Use QFX WoW Addon UI to redesign this addon architecture using reference-addon patterns from Plater and DandersFrames: deterministic TOC order, root namespace, lifecycle phases, module registry, DB/profile migration, targeted event dispatchers, import/export validation, public API boundary, and lazy diagnostics.",
+      "Use QFX WoW Addon UI to verify this addon against WoW 12.x API sources before coding: check current UI source/resources, branch/build, deprecated APIs, secret-value/taint risk, compatibility wrappers, and final API assumptions.",
       "Use QFX WoW Addon UI to do a deep architecture pass using Plater and DandersFrames patterns: controlled extension hooks, adapter/resolver/renderer pipeline, capability gates, self-healing media fallback, object pool reset, post-load validation, category import/export, auto-profile switching, safe profiler, and alert state machines.",
       "Use QFX WoW Addon UI to apply Plater-style options design: tabbed categories, table-driven option rows, reusable templates, delayed creation of heavy pages, searchable settings, and one global refresh callback.",
       "Use QFX WoW Addon UI to apply DandersFrames-style complex settings design: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and lazy diagnostics.",
