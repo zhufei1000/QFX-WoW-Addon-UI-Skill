@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.6.2
+Version: 1.7.0
 
 This package contains a Codex plugin with one skill:
 
@@ -8,19 +8,29 @@ This package contains a Codex plugin with one skill:
 
 It is designed for World of Warcraft addon UI design, review, and refactoring with QFX conventions.
 
-## What v1.6.2 adds
+## What v1.7.0 adds
+
+- Adds a Plater-inspired reference pattern extracted from the uploaded reference addon.
+- Adds rules for table-driven options pages: localized option tables, shared templates, and one global change callback.
+- Adds tab-container guidance for many settings categories, including delayed creation for heavy pages.
+- Adds searchable settings guidance: collect option metadata, group matches by tab and section, and avoid duplicating real controls.
+- Adds reusable scroll-row guidance for spell/media/list editors using create-line plus refresh-line separation.
+- Adds combat-state visibility guidance for settings panels that apply live changes.
+- Adds a strict rule to use reference addons as design models only; do not copy their bundled fonts, textures, libraries, or brand assets into QFX addons unless licensing and need are explicit.
+
+## Earlier v1.6.2 additions
 
 - Adds duplicate-control rules to the Blizzard native UI checklist.
 - Requires avoiding repeated controls with the same effective action on the same page unless their scope is clearly different.
 - Recommends keeping the control closest to the affected setting group and avoiding duplicate footer buttons for actions already present in the page content.
 
-## What v1.6.1 adds
+## Earlier v1.6.1 additions
 
 - Adds color selector rules to the Blizzard native UI checklist.
 - Requires compact textless color swatches instead of labeled `Color` / `颜色` buttons.
 - Defines left-click color picker behavior, optional documented right-click reset behavior, immediate swatch refresh, and centralized swatch helper guidance.
 
-## What v1.6 adds
+## Earlier v1.6 additions
 
 - Adds complex addon UI patterns as a dedicated reference.
 - Adds lightweight Skin layer rules: unify native controls without moving business logic into Skin/UIFactory.
@@ -32,41 +42,6 @@ It is designed for World of Warcraft addon UI design, review, and refactoring wi
 - Adds localized toolbar/button width auto-fit rules.
 - Adds native slider wrapper implementation details for clearing template Low/High/Text labels and using QFX bottom value labels.
 - Adds editor dialog grid constant rules to avoid scattered magic coordinates.
-
-## Earlier v1.5 additions
-
-- Slider value layout standard: min label under the left end, max label under the right end, and current value centered below the slider on the same line.
-- Avoid right-side slider value text in compact/two-column cards because it can crowd adjacent controls or clip at the panel edge.
-- Slider drag guidance now explicitly allows immediate current-value text updates while deferring heavy refresh work.
-
-## Earlier v1.4 additions
-
-- Modification traceability rules: every change must report modified/added/deleted files, TOC impact, SavedVariables impact, risk level, rollback notes, and in-game tests.
-- Minimal-diff discipline: do not reformat unrelated code, rename unrelated functions, or rewrite architecture during a focused bug fix.
-- Clean runtime code rule: no `modified by AI`, date-stamped edit markers, or noisy comments; comments must explain real WoW API, taint, migration, compatibility, or performance behavior.
-- Development trace guidance: use `docs/CHANGELOG_DEV.md` or `_DEV_CHANGELOG.md` only when appropriate, and keep dev-only logs out of release zips unless requested.
-- Release package cleanliness: distinguish public changelog bullets from internal trace notes.
-
-## Earlier v1.3 additions
-
-- Modular addon architecture rules: Core, DB, Migration, Localization, UIFactory, Options, Media, Compat, and feature modules.
-- No-duplicate-architecture rules: do not create second module registries, DB layers, locale tables, UI factories, or media resolvers.
-- Safe font/media rules: resolve AUTO/DEFAULT/BLIZZARD presets to real asset paths before calling WoW APIs such as `FontString:SetFont()`.
-- SavedVariables migration rules for old user profiles, per-module settings, and per-mode settings.
-- Refresh-performance rules: no full `ApplyAll` rebuild for tiny option changes; use targeted refresh and slider throttling.
-- Event and OnUpdate discipline: centralized idempotent event registration and no permanent idle polling.
-- Version-compatibility boundaries for Retail/Classic/MoP/Titan and reference-addon usage.
-- Clear parent/sub-addon dependency rules: do not make child addons independent unless explicitly requested.
-
-## Earlier v1.2 additions
-
-- Compact, multilingual, width-aware layout rules for English, 简体中文, and 繁體中文.
-- Strict UI factory/control reuse rules.
-- Dialog, popup, dropdown z-order, and mode-specific control rules.
-- Large list, saved collection, sound picker, TTS, and LibSharedMedia rules.
-- Combat-lockdown deferred-apply pattern.
-- Sub-addon, TOC, media, library, and release packaging checklist.
-- Required final summary format for code changes.
 
 ## Install as a local personal plugin
 
@@ -120,11 +95,11 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
-$qfx-wow-addon-ui Apply complex addon UI patterns to this saved-list editor: shared scrollable dropdown, stable drag/drop keys, batched refresh, and language-safe editor refresh.
+$qfx-wow-addon-ui Apply Plater-style options design to this addon UI: tab categories, table-driven option rows, delayed heavy tabs, searchable settings, reusable scroll rows, and one global refresh callback.
 ```
 
 ```text
-$qfx-wow-addon-ui Review this addon settings UI. Find release blockers, layout drift, localization gaps, taint risks, and performance problems.
+$qfx-wow-addon-ui Review this addon settings UI. Find release blockers, layout drift, localization gaps, taint risks, performance problems, and packaging completeness.
 ```
 
 ```text
@@ -140,24 +115,21 @@ $qfx-wow-addon-ui Make this settings page more compact. Fully use the template w
 ```
 
 ```text
-$qfx-wow-addon-ui Refactor this addon into a modular structure without creating a second architecture. Add safe font/media fallback, SavedVariables migration, targeted refresh, and event/OnUpdate guards.
-```
-
-```text
 $qfx-wow-addon-ui Apply this bug fix with minimal diff and give me a traceable report: changed files, risk level, rollback notes, TOC/SavedVariables impact, and in-game test steps.
 ```
-
 
 ## Reference files
 
 The skill includes these references:
 
+- `plater-options-ui-patterns.md`
 - `blizzard-native-ui-checklist.md`
 - `qfx-ui-architecture.md`
 - `wow-12-secret-value-taint.md`
 - `ui-factory-dialog-mode-rules.md`
 - `compact-multilingual-layout.md`
 - `large-list-collection-sound-ui.md`
+- `complex-addon-ui-patterns.md`
 - `combat-lockdown-deferred-apply.md`
 - `packaging-release-checklist.md`
 - `modular-addon-architecture.md`
