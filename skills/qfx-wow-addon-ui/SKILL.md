@@ -11,6 +11,7 @@ This skill is optimized for:
 - QFX addon conventions: lightweight, modular, native-looking, minimal performance cost.
 - Complex addon UI patterns: singleton scrollable dropdowns, large saved-list rendering, drag/drop collections, language-safe editor dialogs, and batched UI refresh.
 - Plater-inspired option-panel patterns: tabbed categories, table-driven option rows, reusable templates, load-on-demand heavy tabs, searchable settings, reusable scroll rows, and one global change callback.
+- DandersFrames-inspired complex settings patterns: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and advanced diagnostics.
 
 ## Core goals
 
@@ -24,6 +25,7 @@ When this skill is active, prefer:
 7. Release-ready packaging checks over code-only edits.
 8. Minimal-diff, traceable changes with clear rollback notes.
 9. Reference-addon patterns as design guidance, not asset or library copying.
+10. Complex settings navigation over dumping every option into one long scroll page.
 
 ## Mandatory WoW UI constraints
 
@@ -46,6 +48,11 @@ When the user supplies a reference addon such as Plater, extract reusable design
 - table-driven option definitions;
 - shared templates and helpers;
 - search/index behavior;
+- persistent collapsible groups;
+- semantic banners and cross-page navigation;
+- guided setup and preview-safe editors;
+- profile override indicators;
+- advanced diagnostics;
 - scroll-row creation and refresh separation;
 - combat-safe visibility and refresh behavior.
 
@@ -100,6 +107,22 @@ Key rules:
 - Keep search as an index over existing option metadata, not a second duplicate settings UI.
 - For scroll lists, split line creation from line refresh and reuse row frames.
 - Show combat state clearly when live changes may be blocked or deferred.
+
+## DandersFrames-inspired complex settings UI patterns
+
+For large addons with many modules, profiles, visual editors, or first-run setup flows, read `references/dandersframes-complex-settings-ui.md`.
+
+Key rules:
+- Use persistent collapsible groups to keep large pages compact without losing setting context.
+- Use semantic banners for combat lockdown, destructive actions, secret-value limitations, missing libraries, and compatibility warnings.
+- Use `See Also` cross-page navigation instead of duplicating the same setting in several tabs.
+- Register searchable settings metadata with stable IDs, breadcrumbs, aliases, widget type, and jump/highlight callbacks.
+- When search or navigation jumps to a setting, open the tab, expand the group, scroll to the row, and briefly highlight it.
+- Use guided setup wizards only for first-run or multi-step batch configuration; wizards must write through the same DB/module APIs as the real settings page.
+- Show profile/global/spec/mode override status when settings can come from multiple layers, and provide safe reset-to-parent behavior.
+- For visual editors, use preview-safe proxy data so Save commits and Cancel discards changes.
+- Complex preview frames should not block the settings controls; place them outside the main panel bounds or provide a lock/move toggle.
+- Advanced diagnostic pages should be lazy-loaded, hidden from normal users, and useful for bug reports without constantly running expensive scanners.
 
 ## Complex addon UI patterns
 
@@ -175,6 +198,7 @@ A project-local UI factory should centralize:
 - Tooltip helpers.
 - Consistent spacing constants.
 - Optional table-driven options row creation for large settings panels.
+- Optional collapsible-section, banner, search-registration, setting-highlight, and wizard helpers for complex settings panels.
 
 The UI factory should not know addon business rules. Business logic belongs in modules/controllers.
 
@@ -282,8 +306,9 @@ Assume these preferences unless the user says otherwise:
 4. Centralize repeated UI logic into the existing factory/helpers.
 5. Fix alignment, spacing, overflow, dropdown height, popup layering, and localization width issues.
 6. For large option panels, consider Plater-style tab segmentation, option-table rows, delayed heavy tabs, searchable metadata, and reusable scroll rows.
-7. Check combat-lockdown and secret-value risks if the UI applies live settings.
-8. Package and report changes clearly.
+7. For very complex settings, consider DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages.
+8. Check combat-lockdown and secret-value risks if the UI applies live settings.
+9. Package and report changes clearly.
 
 ## What to do when asked to update this skill
 
@@ -298,6 +323,7 @@ Assume these preferences unless the user says otherwise:
 
 When a task involves a specific concern, read the matching reference:
 
+- DandersFrames-style complex settings UI: `references/dandersframes-complex-settings-ui.md`
 - Plater-style options UI model: `references/plater-options-ui-patterns.md`
 - Native UI consistency: `references/blizzard-native-ui-checklist.md`
 - Architecture and UI factory: `references/qfx-ui-architecture.md`
