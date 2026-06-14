@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.7.0
+Version: 1.8.0
 
 This package contains a Codex plugin with one skill:
 
@@ -8,7 +8,20 @@ This package contains a Codex plugin with one skill:
 
 It is designed for World of Warcraft addon UI design, review, and refactoring with QFX conventions.
 
-## What v1.7.0 adds
+## What v1.8.0 adds
+
+- Adds a DandersFrames-inspired complex settings UI reference extracted from the uploaded reference addon.
+- Adds persistent collapsible group rules with SavedVariables-backed state, group summaries, and automatic relayout.
+- Adds semantic banner rules for info/warning/caution/danger/success notices.
+- Adds `See Also` cross-page navigation guidance to avoid duplicate controls.
+- Adds a searchable settings registry model with stable IDs, breadcrumbs, aliases, widget types, and jump/highlight callbacks.
+- Adds guided setup wizard rules for first-run and multi-step batch configuration.
+- Adds profile/global/spec/mode override indicator rules with reset-to-parent behavior.
+- Adds preview-safe editor rules for visual configuration pages so Save commits and Cancel discards draft changes.
+- Adds advanced diagnostic page guidance for large addons, with lazy loading and copyable bug-report data.
+- Keeps QFX visual direction unchanged: Blizzard-native, lightweight, and no copied DandersFrames fonts, textures, libraries, or custom skin.
+
+## Earlier v1.7.0 additions
 
 - Adds a Plater-inspired reference pattern extracted from the uploaded reference addon.
 - Adds rules for table-driven options pages: localized option tables, shared templates, and one global change callback.
@@ -95,7 +108,7 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
-$qfx-wow-addon-ui Apply Plater-style options design to this addon UI: tab categories, table-driven option rows, delayed heavy tabs, searchable settings, reusable scroll rows, and one global refresh callback.
+$qfx-wow-addon-ui Apply DandersFrames-style complex settings patterns: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and lazy diagnostics.
 ```
 
 ```text
@@ -122,6 +135,7 @@ $qfx-wow-addon-ui Apply this bug fix with minimal diff and give me a traceable r
 
 The skill includes these references:
 
+- `dandersframes-complex-settings-ui.md`
 - `plater-options-ui-patterns.md`
 - `blizzard-native-ui-checklist.md`
 - `qfx-ui-architecture.md`
