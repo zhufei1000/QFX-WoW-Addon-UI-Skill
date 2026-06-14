@@ -1,7 +1,7 @@
 {
   "name": "qfx-wow-addon-ui-plugin",
-  "version": "1.8.0",
-  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs with Blizzard-native controls, compact multilingual layout, modular architecture, safe media handling, SavedVariables migration, traceable minimal-diff reports, Plater-inspired table-driven options, and DandersFrames-inspired complex settings patterns including collapsible groups, semantic banners, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, lazy diagnostics, packaging checks, performance, and taint-safety checks.",
+  "version": "1.9.0",
+  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and addon architectures with Blizzard-native controls, compact multilingual layout, modular architecture, Plater/DandersFrames-inspired reference architecture patterns, deterministic TOC load order, lifecycle phases, module registry, DB/profile migration, import/export validation, targeted event dispatchers, public API boundaries, lazy diagnostics, complex settings UI, packaging checks, performance, and taint-safety checks.",
   "author": {
     "name": "zhufei1000"
   },
@@ -11,14 +11,15 @@
     "wow-addon",
     "lua",
     "ui",
+    "architecture",
     "blizzard-native",
     "qfx"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "QFX WoW Addon UI",
-    "shortDescription": "Blizzard-native WoW addon UI workflow",
-    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces using native Blizzard-style controls, compact multilingual layout, duplicate-control avoidance, modular UI factory rules, safe font/media fallback, SavedVariables migration, event/OnUpdate discipline, traceability, Plater-inspired table-driven option pages, DandersFrames-inspired complex settings patterns, persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizards, profile override indicators, preview-safe editors, lazy diagnostics, large-list performance rules, release packaging checks, and Retail 12.x secret-value/taint safety.",
+    "shortDescription": "Blizzard-native WoW addon UI and architecture workflow",
+    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using native Blizzard-style controls, compact multilingual layout, duplicate-control avoidance, modular UI factory rules, safe font/media fallback, SavedVariables migration, event/OnUpdate discipline, traceability, Plater-inspired option pages, DandersFrames-inspired complex settings patterns, reference-addon architecture patterns, deterministic TOC load order, lifecycle phases, module registry, targeted event dispatchers, import/export validation, public API boundaries, lazy diagnostics, release packaging checks, and Retail 12.x secret-value/taint safety.",
     "developerName": "zhufei1000",
     "category": "Developer Tools",
     "capabilities": [
@@ -27,12 +28,12 @@
     ],
     "defaultPrompt": [
       "Use QFX WoW Addon UI to refactor this add-on settings panel into a Blizzard-native unified layout using the existing UI factory.",
+      "Use QFX WoW Addon UI to redesign this addon architecture using reference-addon patterns from Plater and DandersFrames: deterministic TOC order, root namespace, lifecycle phases, module registry, DB/profile migration, targeted event dispatchers, import/export validation, public API boundary, and lazy diagnostics.",
       "Use QFX WoW Addon UI to apply Plater-style options design: tabbed categories, table-driven option rows, reusable templates, delayed creation of heavy pages, searchable settings, and one global refresh callback.",
       "Use QFX WoW Addon UI to apply DandersFrames-style complex settings design: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and lazy diagnostics.",
       "Use QFX WoW Addon UI to compact this settings page, account for English/zhCN/zhTW label length, and fully use the available template width without overflow.",
       "Use QFX WoW Addon UI to remove duplicate controls with the same effective function unless their scopes are clearly different.",
-      "Use QFX WoW Addon UI to replace labeled color buttons with compact textless swatches that open the color picker and update immediately.",
-      "Use QFX WoW Addon UI to review this WoW add-on UI for layout drift, custom controls, localization gaps, taint risk, performance problems, and packaging completeness.",
+      "Use QFX WoW Addon UI to review this WoW add-on UI for layout drift, architecture drift, custom controls, localization gaps, taint risk, performance problems, and packaging completeness.",
       "Use QFX WoW Addon UI to fix this saved voice collection UI: selection, drag-out behavior, long sound picker, TTS test path, and large-list refresh performance.",
       "Use QFX WoW Addon UI to prepare release notes and a package checklist for this QFX add-on."
     ]
