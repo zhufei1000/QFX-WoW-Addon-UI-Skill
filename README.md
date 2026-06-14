@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.9.0
+Version: 1.10.0
 
 This package contains a Codex plugin with one skill:
 
@@ -8,7 +8,17 @@ This package contains a Codex plugin with one skill:
 
 It is designed for World of Warcraft addon UI design, architecture review, refactoring, and release packaging with QFX conventions.
 
-## What v1.9.0 adds
+## What v1.10.0 adds
+
+- Adds a deep reference-addon pattern guide from a second pass over Plater and DandersFrames.
+- Adds controlled extension and scripting-system rules: fixed hook catalog, trigger registry, guarded dispatch, metadata, quarantine, and stable public API.
+- Adds Adapter / Resolver / Renderer pipeline rules for complex visual editors, text systems, aura/alert systems, minimap providers, and previews.
+- Adds capability gates and feature-flag rules for API availability, optional libraries, combat safety, and known taint risks.
+- Adds self-healing configuration rules for imported profiles that reference missing fonts, textures, sounds, or SharedMedia entries.
+- Adds object-pool reset discipline, including when not to pool stale-prone UI components.
+- Adds post-load validation, category-scoped import/export merging, explicit auto-profile switching, safe ownership-filtered profilers, foreign attachment scanning, alert state machines, option dependency graphs, and design-token rules.
+
+## Earlier v1.9.0 additions
 
 - Adds a reference-addon architecture pattern guide extracted from the two uploaded high-download reference addons: Plater and DandersFrames.
 - Adds deterministic TOC load-order rules covering libraries, locales, templates, defaults, DB/migration, utilities, UI factory, modules, options/tools, and final bootstrap.
@@ -100,6 +110,10 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
+$qfx-wow-addon-ui Do a deep architecture pass using Plater and DandersFrames patterns: controlled extension hooks, adapter/resolver/renderer pipeline, capability gates, self-healing media fallback, object pool reset, post-load validation, category import/export, auto-profile switching, safe profiler, and alert state machines.
+```
+
+```text
 $qfx-wow-addon-ui Redesign this addon architecture using reference-addon patterns from Plater and DandersFrames: deterministic TOC load order, root namespace, lifecycle phases, module registry, DB/profile migration, targeted event dispatchers, import/export validation, public API boundary, and lazy diagnostics.
 ```
 
@@ -127,6 +141,7 @@ $qfx-wow-addon-ui Apply this bug fix with minimal diff and give me a traceable r
 
 The skill includes these references:
 
+- `deep-reference-addon-patterns.md`
 - `reference-addon-architecture-patterns.md`
 - `dandersframes-complex-settings-ui.md`
 - `plater-options-ui-patterns.md`
