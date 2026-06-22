@@ -1,7 +1,7 @@
 {
   "name": "qfx-wow-addon-ui-plugin",
-  "version": "1.12.0",
-  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures with Blizzard-native controls, modular architecture, Plater/DandersFrames-inspired patterns, EllesmereUI-style runtime performance patterns, and WoW 12.x API source-grounding rules using current UI source/resource references, compatibility wrappers, branch/build checks, secret-value/taint safety, packaging checks, and performance discipline.",
+  "version": "1.13.0",
+  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures using a primary scalable QFX design method inspired by EllesmereUI, with Blizzard-native visuals, modular architecture, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, Plater/DandersFrames supplements, and WoW 12.x API source-grounding rules.",
   "author": {
     "name": "zhufei1000"
   },
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "QFX WoW Addon UI",
     "shortDescription": "WoW addon UI, architecture, and API-safe workflow",
-    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using native Blizzard-style controls, compact multilingual layout, modular UI factory rules, reference-addon architecture patterns, EllesmereUI-style runtime performance patterns, WoW 12.x API source-grounding rules, current UI source/resource references, branch/build checks, compatibility wrappers, secret-value/taint safety, import/export validation, diagnostics, release packaging checks, and performance discipline.",
+    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using a primary scalable QFX design method inspired by EllesmereUI: small/medium/large architecture tiers, native Blizzard-style controls, compact multilingual layout, modular UI factory rules, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table state, Plater/DandersFrames supplements, WoW 12.x API source-grounding, branch/build checks, compatibility wrappers, secret-value/taint safety, import/export validation, diagnostics, release packaging checks, and performance discipline.",
     "developerName": "zhufei1000",
     "category": "Developer Tools",
     "capabilities": [
@@ -29,13 +29,10 @@
       "Write"
     ],
     "defaultPrompt": [
+      "Use QFX WoW Addon UI to review this addon with the primary QFX design method: choose small/medium/large scale, preserve native visuals, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.",
       "Use QFX WoW Addon UI to refactor this add-on settings panel into a Blizzard-native unified layout using the existing UI factory.",
-      "Use QFX WoW Addon UI to apply EllesmereUI-style runtime patterns: registered settings shell, deferred options loading, page cache with widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table state, and combat-safe deferred apply.",
-      "Use QFX WoW Addon UI to redesign this addon architecture using reference-addon patterns from Plater and DandersFrames: deterministic TOC order, root namespace, lifecycle phases, module registry, DB/profile migration, targeted event dispatchers, import/export validation, public API boundary, and lazy diagnostics.",
+      "Use QFX WoW Addon UI to redesign this addon architecture using the primary scalable QFX method plus Plater/DandersFrames supplements where useful.",
       "Use QFX WoW Addon UI to verify this addon against WoW 12.x API sources before coding: check current UI source/resources, branch/build, deprecated APIs, secret-value/taint risk, compatibility wrappers, and final API assumptions.",
-      "Use QFX WoW Addon UI to do a deep architecture pass using Plater and DandersFrames patterns: controlled extension hooks, adapter/resolver/renderer pipeline, capability gates, self-healing media fallback, object pool reset, post-load validation, category import/export, auto-profile switching, safe profiler, and alert state machines.",
-      "Use QFX WoW Addon UI to apply Plater-style options design: tabbed categories, table-driven option rows, reusable templates, delayed creation of heavy pages, searchable settings, and one global refresh callback.",
-      "Use QFX WoW Addon UI to apply DandersFrames-style complex settings design: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and lazy diagnostics.",
       "Use QFX WoW Addon UI to compact this settings page, account for English/zhCN/zhTW label length, and fully use the available template width without overflow.",
       "Use QFX WoW Addon UI to remove duplicate controls with the same effective function unless their scopes are clearly different.",
       "Use QFX WoW Addon UI to review this WoW add-on UI for layout drift, architecture drift, custom controls, localization gaps, taint risk, performance problems, and packaging completeness.",
