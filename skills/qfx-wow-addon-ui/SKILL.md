@@ -4,6 +4,7 @@ Use this skill when reviewing, designing, refactoring, or packaging World of War
 
 This skill is optimized for:
 - Blizzard-native WoW UI style.
+- English-first layout sizing, then Simplified Chinese and Traditional Chinese verification, so English labels do not overflow and Chinese layouts remain safe.
 - Compact but readable settings panels.
 - English, Simplified Chinese, and Traditional Chinese localization.
 - WoW 12.x / Midnight API source-grounding and secret-value / taint safety.
@@ -21,21 +22,22 @@ When this skill is active, prefer:
 
 1. The EllesmereUI-style scalable design method as the primary architecture baseline.
 2. Native Blizzard controls over custom-drawn controls unless the user explicitly requests a modern custom skin.
-3. Compact width-aware layout over tall sparse pages.
-4. Shared UI factory helpers over one-off widget code.
-5. Clear module boundaries over giant mixed UI files.
-6. Localized strings over hardcoded UI text.
-7. Deferred combat-safe apply over direct protected-frame changes in combat.
-8. Runtime modules that do not require options pages to be opened.
-9. Deferred heavy options initialization over startup-time settings construction.
-10. Widget refresh callbacks and targeted refresh over repeated full-page rebuilds.
-11. Central event dispatch and coalesced refresh over duplicate high-frequency event handlers.
-12. Temporary active-only OnUpdate over permanent idle polling.
-13. Weak-table state for Blizzard or foreign frames when ownership, lifecycle, or taint risk exists.
-14. Release-ready packaging checks over code-only edits.
-15. Minimal-diff, traceable changes with clear rollback notes.
-16. Source-grounded WoW API usage over memory-based API guesses.
-17. Reference-addon patterns as design guidance, not asset or library copying.
+3. English-first UI layout sizing over Chinese-first layouts that later overflow after translation.
+4. Compact width-aware layout over tall sparse pages.
+5. Shared UI factory helpers over one-off widget code.
+6. Clear module boundaries over giant mixed UI files.
+7. Localized strings over hardcoded UI text.
+8. Deferred combat-safe apply over direct protected-frame changes in combat.
+9. Runtime modules that do not require options pages to be opened.
+10. Deferred heavy options initialization over startup-time settings construction.
+11. Widget refresh callbacks and targeted refresh over repeated full-page rebuilds.
+12. Central event dispatch and coalesced refresh over duplicate high-frequency event handlers.
+13. Temporary active-only OnUpdate over permanent idle polling.
+14. Weak-table state for Blizzard or foreign frames when ownership, lifecycle, or taint risk exists.
+15. Release-ready packaging checks over code-only edits.
+16. Minimal-diff, traceable changes with clear rollback notes.
+17. Source-grounded WoW API usage over memory-based API guesses.
+18. Reference-addon patterns as design guidance, not asset or library copying.
 
 ## Mandatory WoW UI constraints
 
@@ -50,6 +52,20 @@ Prefer Blizzard templates and standard visual behavior:
 - `BackdropTemplateMixin` where required
 
 Do not mix many visual systems in the same panel unless the addon already does so and a migration is explicitly requested.
+
+### English-first multilingual layout
+
+For any UI that supports English, Simplified Chinese, and Traditional Chinese, design width from English first.
+
+Rules:
+- Treat English as the base layout language because English strings are usually longer than Chinese.
+- Size labels, buttons, dropdowns, tabs, section titles, and column widths against English strings first.
+- Then verify Simplified Chinese and Traditional Chinese.
+- Do not design a tight Chinese layout and translate it to English afterward.
+- If English overflows, fix the layout structure with a wider control, full-width row, shorter visible label, tooltip description, fewer columns, or more horizontal space.
+- Do not solve English overflow by shrinking fonts below the QFX standard unless there is no better layout option.
+
+For details, read `references/compact-multilingual-layout.md`.
 
 ### Reference addon use
 
@@ -119,6 +135,7 @@ Rules:
 - Heavy options UI is created only when the settings panel is opened.
 - Repeated controls use the shared UI factory or table-driven option rows.
 - Repeated refreshes use `RequestRefresh` or equivalent.
+- Layout width is validated against English strings before Chinese localization is considered complete.
 
 ### Large addon or addon suite
 
@@ -148,6 +165,7 @@ Rules:
 - Central dispatch handles shared high-frequency events.
 - Search indexes real setting metadata and jumps to real controls; it does not duplicate controls.
 - Debug/profiling is lazy-loaded or explicitly enabled.
+- The settings shell, tabs, module list, buttons, dropdowns, and searchable metadata are sized from English first.
 
 ## WoW 12.x API source-grounding rules
 
@@ -251,6 +269,7 @@ A project-local UI factory should centralize:
 - Consistent spacing constants.
 - Optional table-driven options row creation for large settings panels.
 - Optional collapsible-section, banner, search-registration, setting-highlight, wizard, page-cache, and widget-refresh helpers for complex settings panels.
+- English-first sizing helpers for labels, buttons, tabs, dropdowns, and column widths.
 
 The UI factory should not know addon business rules. Business logic belongs in modules/controllers.
 
@@ -263,6 +282,7 @@ For QFX addon sliders, use this layout unless the user says otherwise:
 - Current value centered under the slider.
 - Minimum, current, and maximum labels must be on the same horizontal line.
 - Do not place the current value to the right side of the slider in compact cards.
+- Validate the row with English min/current/max labels before accepting the Chinese layout.
 
 ## Large list and collection UI rules
 
@@ -340,6 +360,7 @@ Assume these preferences unless the user says otherwise:
 - Lightweight performance.
 - No unnecessary animation.
 - Three-language support: English, 简体中文, 繁體中文.
+- English is the base layout language; Chinese and Traditional Chinese are verified after English width passes.
 - Default language follows client unless a force-language option exists.
 - Compact panels that use available width.
 - Tooltips on section titles for explanations.
@@ -353,13 +374,14 @@ Assume these preferences unless the user says otherwise:
 2. Identify whether the addon uses native controls, Ace, custom controls, or mixed controls.
 3. Choose the correct scale: small, medium, or large addon.
 4. Use the EllesmereUI-style method as the primary structure, scaled down when needed.
-5. Preserve functionality and SavedVariables unless the user requests behavior changes.
-6. Centralize repeated UI logic into the existing factory/helpers.
-7. For WoW 12.x work, verify changed APIs against current source/resources/wiki, isolate risky calls in Compat wrappers, and report branch/build assumptions.
-8. For large option panels, apply tabs, option-table rows, delayed heavy tabs, searchable metadata, reusable scroll rows, page cache, widget refresh callbacks, and one global refresh/apply queue.
-9. For very complex settings, add DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages only when useful.
-10. Check combat-lockdown and secret-value risks if the UI applies live settings.
-11. Package and report changes clearly.
+5. Inspect or draft English UI strings first, then size labels, buttons, dropdowns, tabs, and columns against English before checking Chinese.
+6. Preserve functionality and SavedVariables unless the user requests behavior changes.
+7. Centralize repeated UI logic into the existing factory/helpers.
+8. For WoW 12.x work, verify changed APIs against current source/resources/wiki, isolate risky calls in Compat wrappers, and report branch/build assumptions.
+9. For large option panels, apply tabs, option-table rows, delayed heavy tabs, searchable metadata, reusable scroll rows, page cache, widget refresh callbacks, and one global refresh/apply queue.
+10. For very complex settings, add DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages only when useful.
+11. Check combat-lockdown and secret-value risks if the UI applies live settings.
+12. Package and report changes clearly.
 
 ## What to do when asked to update this skill
 
@@ -380,6 +402,7 @@ When a task involves a specific concern, read the matching reference:
 - Modular architecture scale tiers: `references/modular-addon-architecture.md`
 - Refresh performance, page cache, widget callbacks: `references/refresh-performance-rules.md`
 - Event/OnUpdate discipline, central dispatch, weak-table state: `references/event-onupdate-rules.md`
+- Compact multilingual and English-first layout: `references/compact-multilingual-layout.md`
 - WoW 12.x API source rules: `references/wow-12-api-source-rules.md`
 - Deep reference addon supplements: `references/deep-reference-addon-patterns.md`
 - Reference addon architecture supplements: `references/reference-addon-architecture-patterns.md`
@@ -388,7 +411,6 @@ When a task involves a specific concern, read the matching reference:
 - Native UI consistency: `references/blizzard-native-ui-checklist.md`
 - Secret values and taint: `references/wow-12-secret-value-taint.md`
 - Dialog/dropdown/popup rules: `references/ui-factory-dialog-mode-rules.md`
-- Compact multilingual layout: `references/compact-multilingual-layout.md`
 - Large saved lists / collections / sounds: `references/large-list-collection-sound-ui.md`
 - Complex addon UI patterns: `references/complex-addon-ui-patterns.md`
 - Combat lockdown apply: `references/combat-lockdown-deferred-apply.md`
