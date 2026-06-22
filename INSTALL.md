@@ -1,4 +1,4 @@
-# Install QFX WoW Addon UI Skill v1.13.0
+# Install QFX WoW Addon UI Skill v1.14.0
 
 This package contains a Codex plugin folder:
 
@@ -44,5 +44,11 @@ Use qfx-wow-addon-ui to review this WoW addon UI before release.
 For architecture-heavy work, you can say:
 
 ```text
-Use qfx-wow-addon-ui to apply the primary QFX design method: choose small/medium/large scale, preserve native Blizzard visuals, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
+Use qfx-wow-addon-ui to apply the primary QFX design method: choose small/medium/large scale, preserve native Blizzard visuals, size layout from English first, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
+```
+
+For multilingual layout work, you can say:
+
+```text
+Use qfx-wow-addon-ui to review this settings UI using English as the base layout language, then verify Simplified Chinese and Traditional Chinese for overflow, clipping, row balance, and runtime language switching.
 ```
