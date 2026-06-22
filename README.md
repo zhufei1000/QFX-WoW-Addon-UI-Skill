@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.13.0
+Version: 1.14.0
 
 This package contains a Codex plugin with one skill:
 
@@ -8,7 +8,15 @@ This package contains a Codex plugin with one skill:
 
 It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
 
-## What v1.13.0 changes
+## What v1.14.0 changes
+
+- Strengthens the multilingual UI rule: design layout from English first, then verify Simplified Chinese and Traditional Chinese.
+- Updates `compact-multilingual-layout.md` with an English-first layout baseline for labels, buttons, dropdowns, tabs, section titles, column widths, and card widths.
+- Adds guidance that English overflow should be fixed by layout structure, not by shrinking fonts or designing a Chinese-tight layout first.
+- Adds a button-width helper pattern that measures English and current localized text, then uses the larger width plus padding.
+- Updates `SKILL.md` so English-first sizing is part of the core goals, mandatory UI constraints, UI factory responsibilities, slider review, common user preferences, and optimization workflow.
+
+## Earlier v1.13.0 changes
 
 - Makes the EllesmereUI-style design method the primary QFX UI architecture baseline instead of a separate reference module.
 - Folds the new method into existing core references: `qfx-ui-architecture.md`, `modular-addon-architecture.md`, `refresh-performance-rules.md`, and `event-onupdate-rules.md`.
@@ -120,7 +128,11 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
-$qfx-wow-addon-ui Use the primary QFX design method to review this addon: choose small/medium/large scale, preserve native visuals, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
+$qfx-wow-addon-ui Use the primary QFX design method to review this addon: choose small/medium/large scale, preserve native visuals, size the layout from English first, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
+```
+
+```text
+$qfx-wow-addon-ui Review this multilingual settings UI using English as the base layout language, then verify Simplified Chinese and Traditional Chinese for overflow, clipping, row balance, and runtime language switching.
 ```
 
 ```text
@@ -139,6 +151,7 @@ The skill includes these references:
 - `modular-addon-architecture.md`
 - `refresh-performance-rules.md`
 - `event-onupdate-rules.md`
+- `compact-multilingual-layout.md`
 - `wow-12-api-source-rules.md`
 - `deep-reference-addon-patterns.md`
 - `reference-addon-architecture-patterns.md`
@@ -147,7 +160,6 @@ The skill includes these references:
 - `blizzard-native-ui-checklist.md`
 - `wow-12-secret-value-taint.md`
 - `ui-factory-dialog-mode-rules.md`
-- `compact-multilingual-layout.md`
 - `large-list-collection-sound-ui.md`
 - `complex-addon-ui-patterns.md`
 - `combat-lockdown-deferred-apply.md`
