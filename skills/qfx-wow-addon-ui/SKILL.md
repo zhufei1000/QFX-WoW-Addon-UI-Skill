@@ -9,30 +9,33 @@ This skill is optimized for:
 - WoW 12.x / Midnight API source-grounding and secret-value / taint safety.
 - Multi-version addon UI packaging.
 - QFX addon conventions: lightweight, modular, native-looking, minimal performance cost.
-- Complex addon UI patterns: singleton scrollable dropdowns, large saved-list rendering, drag/drop collections, language-safe editor dialogs, and batched UI refresh.
-- Plater-inspired option-panel patterns: tabbed categories, table-driven option rows, reusable templates, load-on-demand heavy tabs, searchable settings, reusable scroll rows, and one global change callback.
-- DandersFrames-inspired complex settings patterns: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and advanced diagnostics.
-- Reference-addon architecture patterns from Plater and DandersFrames: deterministic TOC load order, root namespace boundaries, lifecycle phases, module registry, event dispatchers, DB/profile migration, import/export validation, compatibility boundaries, public API separation, and lazy diagnostics.
-- Deep reference-addon patterns: controlled extension hooks, adapter/resolver/renderer pipelines, capability gates, self-healing media fallback, object-pool reset discipline, post-load validation, category-scoped imports, auto-profile switching, safe profiling, foreign attachment scans, alert state machines, option dependency graphs, and design tokens.
-- EllesmereUI-inspired modular UI runtime patterns: registered settings shell, deferred options initialization, cached pages with widget refresh callbacks, centralized high-frequency event dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, and combat-safe deferred apply.
+- EllesmereUI-style primary design method: one scalable architecture for small, medium, and large addons using a registered settings shell when needed, deferred options creation, page cache where useful, widget refresh callbacks, central event dispatch, coalesced refresh/apply queues, temporary OnUpdate, weak-table frame state, and combat-safe deferred apply.
+- Plater-inspired option-panel supplements: tabbed categories, table-driven option rows, reusable templates, load-on-demand heavy tabs, searchable settings, reusable scroll rows, and one global change callback.
+- DandersFrames-inspired complex settings supplements: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and advanced diagnostics.
+- Reference-addon architecture supplements from Plater and DandersFrames: deterministic TOC load order, root namespace boundaries, lifecycle phases, module registry, DB/profile migration, import/export validation, compatibility boundaries, public API separation, and lazy diagnostics.
+- Deep reference-addon supplements: controlled extension hooks, adapter/resolver/renderer pipelines, capability gates, self-healing media fallback, object-pool reset discipline, post-load validation, category-scoped imports, auto-profile switching, safe profiling, foreign attachment scans, alert state machines, option dependency graphs, and design tokens.
 
 ## Core goals
 
 When this skill is active, prefer:
 
-1. Native Blizzard controls over custom-drawn controls.
-2. Compact width-aware layout over tall sparse pages.
-3. Shared UI factory helpers over one-off widget code.
-4. Clear module boundaries over giant mixed UI files.
-5. Localized strings over hardcoded UI text.
-6. Deferred combat-safe apply over direct protected-frame changes in combat.
-7. Release-ready packaging checks over code-only edits.
-8. Minimal-diff, traceable changes with clear rollback notes.
-9. Reference-addon patterns as design guidance, not asset or library copying.
-10. Complex settings navigation over dumping every option into one long scroll page.
-11. Proven reference-addon architecture patterns over ad-hoc file growth.
-12. Source-grounded WoW API usage over memory-based API guesses.
-13. EllesmereUI-style runtime performance patterns over repeated full-page rebuilds, duplicate high-frequency event handlers, and permanent idle polling.
+1. The EllesmereUI-style scalable design method as the primary architecture baseline.
+2. Native Blizzard controls over custom-drawn controls unless the user explicitly requests a modern custom skin.
+3. Compact width-aware layout over tall sparse pages.
+4. Shared UI factory helpers over one-off widget code.
+5. Clear module boundaries over giant mixed UI files.
+6. Localized strings over hardcoded UI text.
+7. Deferred combat-safe apply over direct protected-frame changes in combat.
+8. Runtime modules that do not require options pages to be opened.
+9. Deferred heavy options initialization over startup-time settings construction.
+10. Widget refresh callbacks and targeted refresh over repeated full-page rebuilds.
+11. Central event dispatch and coalesced refresh over duplicate high-frequency event handlers.
+12. Temporary active-only OnUpdate over permanent idle polling.
+13. Weak-table state for Blizzard or foreign frames when ownership, lifecycle, or taint risk exists.
+14. Release-ready packaging checks over code-only edits.
+15. Minimal-diff, traceable changes with clear rollback notes.
+16. Source-grounded WoW API usage over memory-based API guesses.
+17. Reference-addon patterns as design guidance, not asset or library copying.
 
 ## Mandatory WoW UI constraints
 
@@ -50,36 +53,101 @@ Do not mix many visual systems in the same panel unless the addon already does s
 
 ### Reference addon use
 
-When the user supplies a reference addon such as Plater, DandersFrames, or EllesmereUI, extract reusable design, architecture, and runtime rules only:
-- tab organization;
-- table-driven option definitions;
-- shared templates and helpers;
-- search/index behavior;
-- persistent collapsible groups;
-- semantic banners and cross-page navigation;
-- guided setup and preview-safe editors;
-- profile override indicators;
-- advanced diagnostics;
-- scroll-row creation and refresh separation;
-- combat-safe visibility and refresh behavior;
-- deterministic TOC load order and lifecycle phases;
-- root namespace, public/private boundary, and documented API;
-- DB/profile migration and import/export validation;
-- targeted event dispatchers and lazy diagnostics;
-- controlled extension hooks and trigger registries;
-- adapter/resolver/renderer pipelines;
-- self-healing media fallbacks and post-load validation;
-- safe profilers, foreign attachment scanners, and alert state machines;
-- registered settings shell and module/page builders;
+When the user supplies a reference addon such as EllesmereUI, Plater, or DandersFrames, extract reusable design, architecture, and runtime rules only.
+
+Use EllesmereUI-style rules as the primary design method for:
+- small-addon, medium-addon, and large-addon architecture scaling;
+- registered settings shells;
+- module metadata and page builders;
+- runtime/options separation;
 - deferred options initialization;
-- page cache with widget refresh callbacks;
-- centralized high-frequency event dispatch;
-- coalesced refresh and temporary OnUpdate discipline;
-- weak-table state storage for external frames.
+- page cache and page invalidation;
+- widget refresh callbacks;
+- central high-frequency event dispatch;
+- coalesced refresh and apply queues;
+- temporary OnUpdate discipline;
+- weak-table state storage;
+- combat-safe deferred apply.
 
-Do not copy bundled fonts, textures, icons, sounds, third-party libraries, or brand-specific art from the reference addon into QFX addons unless the user explicitly requests it and licensing is verified.
+Use earlier QFX, Plater-inspired, DandersFrames-inspired, native-UI, and WoW API rules as supplements. If they conflict with the EllesmereUI-style method on UI lifecycle, refresh strategy, event dispatch, OnUpdate behavior, or runtime performance, prefer the EllesmereUI-style method.
 
-When a supplied EllesmereUI-style reference conflicts with older generic advice about UI lifecycle, refresh strategy, event dispatch, or OnUpdate behavior, prefer the EllesmereUI-style runtime/performance pattern. This does not override the QFX native-visual preference unless the user explicitly asks for a modern custom-drawn skin.
+This priority does not override the QFX visual preference. Keep QFX addons Blizzard-native by default unless the user explicitly asks for custom-drawn visuals.
+
+Do not copy bundled fonts, textures, icons, sounds, third-party libraries, or brand-specific art from reference addons into QFX addons unless the user explicitly requests it and licensing is verified.
+
+## Primary QFX design method
+
+For all QFX addons, choose the right scale.
+
+### Small addon
+
+Use a simple root namespace, small DB/defaults, optional localization, optional options page, and one local event frame.
+
+Do not add a large settings shell, page cache, search registry, or central dispatcher unless the addon has repeated settings, heavy lists, or high-frequency events.
+
+### Medium addon
+
+Use:
+
+```text
+Core/
+  Init.lua
+  Events.lua
+  DB.lua
+  Migration.lua
+  Localization.lua
+UI/
+  UIFactory.lua
+  Skin.lua
+  MainFrame.lua
+  Options.lua
+  Dialogs.lua
+  Dropdown.lua
+  Lists.lua
+Modules/
+  ModuleName.lua
+Media/
+  Media.lua
+Compat/
+  Version.lua
+  Blizzard.lua
+```
+
+Rules:
+- Runtime modules expose `Enable`, `Disable`, `Apply`, `Refresh`, and optional `GetStatus` functions.
+- Options pages call module APIs; they do not own runtime state.
+- Heavy options UI is created only when the settings panel is opened.
+- Repeated controls use the shared UI factory or table-driven option rows.
+- Repeated refreshes use `RequestRefresh` or equivalent.
+
+### Large addon or addon suite
+
+Add only the boundaries the addon needs:
+
+```text
+UI/
+  ModuleRegistry.lua
+  PageCache.lua
+  RefreshRegistry.lua
+  SearchRegistry.lua
+Core/
+  Dispatcher.lua
+  RefreshQueue.lua
+Debug/
+  Diagnostics.lua
+ImportExport/
+  ImportExport.lua      if needed
+API.lua                 if external access is needed
+```
+
+Rules:
+- Use one registered settings shell for module navigation.
+- Modules register title, description, pages, page builders, refresh hooks, and reset hooks.
+- Page cache is allowed but must have invalidation rules.
+- Widget refresh callbacks handle value/status refreshes.
+- Central dispatch handles shared high-frequency events.
+- Search indexes real setting metadata and jumps to real controls; it does not duplicate controls.
+- Debug/profiling is lazy-loaded or explicitly enabled.
 
 ## WoW 12.x API source-grounding rules
 
@@ -109,9 +177,9 @@ If a reported error includes phrases like:
 
 then treat it as a taint/secret-value issue, not a normal Lua type bug.
 
-## Plater-inspired options UI patterns
+## Plater-inspired options UI supplements
 
-For addons with many option categories, read `references/plater-options-ui-patterns.md`.
+For addons with many option categories, read `references/plater-options-ui-patterns.md` as a supplement to the primary QFX design method.
 
 Key rules:
 - Use a tab container when one scrolling page would become too long or mixed.
@@ -123,9 +191,9 @@ Key rules:
 - For scroll lists, split line creation from line refresh and reuse row frames.
 - Show combat state clearly when live changes may be blocked or deferred.
 
-## DandersFrames-inspired complex settings UI patterns
+## DandersFrames-inspired complex settings supplements
 
-For large addons with many modules, profiles, visual editors, or first-run setup flows, read `references/dandersframes-complex-settings-ui.md`.
+For large addons with many modules, profiles, visual editors, or first-run setup flows, read `references/dandersframes-complex-settings-ui.md` as a supplement to the primary QFX design method.
 
 Key rules:
 - Use persistent collapsible groups to keep large pages compact without losing setting context.
@@ -137,43 +205,24 @@ Key rules:
 - For visual editors, use preview-safe proxy data so Save commits and Cancel discards changes.
 - Advanced diagnostic pages should be lazy-loaded, hidden from normal users, and useful for bug reports without constantly running expensive scanners.
 
-## Modular UI runtime performance patterns
+## Reference-addon architecture supplements
 
-For large settings panels, addon suites, action/button systems, saved lists, visual editors, or refresh lag, read `references/modular-ui-runtime-performance-patterns.md`.
-
-Key rules:
-- Use one registered settings shell instead of one independent settings frame per module.
-- Runtime modules must not depend on options pages being opened.
-- Defer heavy options initialization until the settings panel is first opened.
-- Cache settings pages when useful, but refresh widget values in place through registered callbacks.
-- Use full page rebuild only for structural changes, filter/sort changes, locale relayout, or invalid cache.
-- Prefer option-row metadata for repeated settings so controls, search, dependencies, and refresh behavior share one source.
-- Use a central event dispatcher for high-frequency events instead of every button/row/module registering the same event independently.
-- Coalesce repeated event bursts with a next-frame `RequestRefresh` / `RequestApply` queue.
-- Use `OnUpdate` only while a drag, animation, smooth scroll, resize capture, or short resnap is active; clear it immediately afterward.
-- Store metadata for Blizzard or foreign frames in weak tables when direct custom fields could cause taint, leaks, or ownership confusion.
-- Do not add duplicate DB, UI factory, module registry, event dispatcher, or media resolver systems.
-- Keep QFX native visuals unless the user explicitly asks for a modern custom-drawn skin; adopt the runtime architecture, not the reference addon's assets.
-
-## Reference-addon architecture patterns
-
-For plugin architecture ideas extracted from Plater and DandersFrames, read `references/reference-addon-architecture-patterns.md` and `references/deep-reference-addon-patterns.md`.
+For plugin architecture ideas extracted from Plater and DandersFrames, read `references/reference-addon-architecture-patterns.md` and `references/deep-reference-addon-patterns.md` as supplements.
 
 Key rules:
-- Use deterministic TOC load order: libraries, locales, templates, defaults, DB/migration, utilities, UI factory, modules, options/tools, final bootstrap.
+- Use deterministic TOC load order: libraries, locales, templates, defaults, DB/migration, utilities, UI factory, modules, options/tools, and final bootstrap.
 - Use one root namespace from `local addonName, ns = ...`; keep private internals file-local or under `Internal`.
-- Scale architecture by addon size: small addons stay simple, medium addons get modules, large addons get profile/import/export/API/debug boundaries.
 - Define lifecycle phases for `ADDON_LOADED`, `PLAYER_LOGIN`, `PLAYER_ENTERING_WORLD`, combat enter/leave, and logout.
 - Runtime modules must not require option pages to be opened.
 - Use one module registry; prevent duplicate module, DB, UI factory, locale, media, and event systems.
-- Use targeted event dispatchers for high-frequency unit events; avoid many modules filtering the same global event independently.
+- Use targeted or central event dispatchers for high-frequency unit/events; avoid many modules filtering the same global event independently.
 - Coalesce refreshes with `RequestRefresh(reason, scope)` and record last refresh reason for diagnostics.
 - Keep DB defaults, schema version, migrations, profiles, and per-character data clearly separated.
 - Import/export should use a validate pipeline: decode, decompress, deserialize, validate, migrate, preview/summary, apply, refresh.
 - Optional libraries and media must degrade gracefully and resolve to real asset paths before WoW API calls.
 - Public API and callbacks belong in `API.lua`; expose stable functions, not raw internal DB tables.
 
-## Deep architecture patterns
+## Deep architecture supplements
 
 For advanced larger-addon work, read `references/deep-reference-addon-patterns.md`.
 
@@ -188,53 +237,6 @@ Key rules:
 - Profilers and debug hooks must be opt-in, ownership-filtered, and must never wrap Blizzard secure frames or foreign addon frames.
 - Alert engines should use explicit state machines and cleanup all timers/tickers on stop, profile switch, spec change, logout, or module disable.
 - Centralize option dependency graphs so enabling/disabling child controls is consistent and explainable.
-
-## Recommended UI and architecture structure
-
-For medium or large QFX addons, prefer this structure and scale it down for small addons:
-
-```text
-Core/
-  Init.lua
-  Events.lua
-  DB.lua
-  Migration.lua
-  Localization.lua
-UI/
-  UIFactory.lua
-  Skin.lua
-  MainFrame.lua
-  Options.lua
-  Dialogs.lua
-  Dropdown.lua
-Modules/
-  ModuleName.lua
-Media/
-  Media.lua
-Compat/
-  Version.lua
-  Blizzard.lua
-Debug/
-  Diagnostics.lua
-ImportExport/
-  ImportExport.lua      if needed
-API.lua                 if external access is needed
-```
-
-For large addon suites or settings-heavy addons, add:
-
-```text
-UI/
-  ModuleRegistry.lua
-  PageCache.lua
-  RefreshRegistry.lua
-  SearchRegistry.lua
-Core/
-  Dispatcher.lua
-  RefreshQueue.lua
-```
-
-Do not create a second architecture inside an addon that already has one. Extend the existing one.
 
 ## UI factory rules
 
@@ -343,44 +345,47 @@ Assume these preferences unless the user says otherwise:
 - Tooltips on section titles for explanations.
 - No unnecessary ElvUI/NDui compatibility unless the addon actually interacts with their frames.
 - Release zips should include all sub-addons.
-- For architecture/performance conflicts after an EllesmereUI-style reference review, prefer deferred options loading, page-cache plus widget-refresh, central dispatch, coalesced refresh, temporary OnUpdate, and weak-table state.
+- For architecture/performance conflicts after an EllesmereUI-style reference review, prefer its scalable primary method: small/medium/large architecture tiers, deferred options loading, page cache plus widget-refresh, central dispatch, coalesced refresh, temporary OnUpdate, and weak-table state.
 
 ## What to do when asked to optimize an addon UI, architecture, or API usage
 
 1. Inspect existing UI, architecture, and API usage first.
 2. Identify whether the addon uses native controls, Ace, custom controls, or mixed controls.
-3. Preserve functionality and SavedVariables unless the user requests behavior changes.
-4. Centralize repeated UI logic into the existing factory/helpers.
-5. For WoW 12.x work, verify changed APIs against current source/resources/wiki, isolate risky calls in Compat wrappers, and report branch/build assumptions.
-6. For large option panels, consider Plater-style tab segmentation, option-table rows, delayed heavy tabs, searchable metadata, and reusable scroll rows.
-7. For very complex settings, consider DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages.
-8. For settings-heavy addon suites or repeated refresh lag, apply EllesmereUI-style modular runtime patterns: registered settings shell, deferred options loading, page cache with widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, and weak-table frame state.
-9. For plugin architecture, apply reference-addon patterns: TOC order, root namespace, lifecycle phases, module registry, DB/profile migration, targeted events, import/export validation, API boundary, and lazy diagnostics.
+3. Choose the correct scale: small, medium, or large addon.
+4. Use the EllesmereUI-style method as the primary structure, scaled down when needed.
+5. Preserve functionality and SavedVariables unless the user requests behavior changes.
+6. Centralize repeated UI logic into the existing factory/helpers.
+7. For WoW 12.x work, verify changed APIs against current source/resources/wiki, isolate risky calls in Compat wrappers, and report branch/build assumptions.
+8. For large option panels, apply tabs, option-table rows, delayed heavy tabs, searchable metadata, reusable scroll rows, page cache, widget refresh callbacks, and one global refresh/apply queue.
+9. For very complex settings, add DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages only when useful.
 10. Check combat-lockdown and secret-value risks if the UI applies live settings.
 11. Package and report changes clearly.
 
 ## What to do when asked to update this skill
 
 1. Preserve the existing skill structure.
-2. Add or update focused reference files rather than dumping everything into `SKILL.md`.
-3. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version if the skill version changes.
-4. Keep names generic unless a file is intentionally a case study.
-5. Avoid reference names that make a reusable rule look like it only applies to one addon.
-6. When using a reference addon or API source, document extracted rules and explicitly avoid copying assets/libraries unless requested and licensed.
-7. When the user explicitly says a supplied reference should win conflicts, add a priority note to the focused reference and summarize the scope of the override.
+2. Prefer integrating new primary design rules into existing core references instead of creating a separate competing reference file.
+3. Add new focused reference files only when the content is truly separate.
+4. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version if the skill version changes.
+5. Keep names generic unless a file is intentionally a case study.
+6. Avoid reference names that make a reusable rule look like it only applies to one addon.
+7. When using a reference addon or API source, document extracted rules and explicitly avoid copying assets/libraries unless requested and licensed.
+8. When the user explicitly says a supplied reference should win conflicts, add a priority note and summarize the scope of the override.
 
 ## Reference loading guide
 
 When a task involves a specific concern, read the matching reference:
 
+- Architecture and UI factory / primary QFX method: `references/qfx-ui-architecture.md`
+- Modular architecture scale tiers: `references/modular-addon-architecture.md`
+- Refresh performance, page cache, widget callbacks: `references/refresh-performance-rules.md`
+- Event/OnUpdate discipline, central dispatch, weak-table state: `references/event-onupdate-rules.md`
 - WoW 12.x API source rules: `references/wow-12-api-source-rules.md`
-- Deep reference addon patterns: `references/deep-reference-addon-patterns.md`
-- Reference addon architecture patterns: `references/reference-addon-architecture-patterns.md`
-- Modular UI runtime performance patterns: `references/modular-ui-runtime-performance-patterns.md`
+- Deep reference addon supplements: `references/deep-reference-addon-patterns.md`
+- Reference addon architecture supplements: `references/reference-addon-architecture-patterns.md`
 - DandersFrames-style complex settings UI: `references/dandersframes-complex-settings-ui.md`
 - Plater-style options UI model: `references/plater-options-ui-patterns.md`
 - Native UI consistency: `references/blizzard-native-ui-checklist.md`
-- Architecture and UI factory: `references/qfx-ui-architecture.md`
 - Secret values and taint: `references/wow-12-secret-value-taint.md`
 - Dialog/dropdown/popup rules: `references/ui-factory-dialog-mode-rules.md`
 - Compact multilingual layout: `references/compact-multilingual-layout.md`
@@ -388,11 +393,8 @@ When a task involves a specific concern, read the matching reference:
 - Complex addon UI patterns: `references/complex-addon-ui-patterns.md`
 - Combat lockdown apply: `references/combat-lockdown-deferred-apply.md`
 - Packaging/release: `references/packaging-release-checklist.md`
-- Modular architecture: `references/modular-addon-architecture.md`
 - Safe font/media handling: `references/safe-font-media-rules.md`
 - SavedVariables migration: `references/savedvariables-migration.md`
-- Refresh performance: `references/refresh-performance-rules.md`
-- Event/OnUpdate discipline: `references/event-onupdate-rules.md`
 - Version compatibility: `references/version-compat-boundaries.md`
 - Modification traceability: `references/modification-traceability.md`
 
