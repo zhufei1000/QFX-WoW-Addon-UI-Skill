@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.11.0
+Version: 1.12.0
 
 This package contains a Codex plugin with one skill:
 
@@ -8,7 +8,17 @@ This package contains a Codex plugin with one skill:
 
 It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
 
-## What v1.11.0 adds
+## What v1.12.0 adds
+
+- Adds `modular-ui-runtime-performance-patterns.md`, extracted from an EllesmereUI / EllesmereUIActionBars reference review.
+- Adds registered settings-shell guidance: modules provide title, description, pages, page builders, refresh hooks, and reset hooks while one shared shell owns navigation and scroll behavior.
+- Adds deferred options initialization rules so runtime modules load normally but heavy settings widgets, search metadata, media pickers, import/export editors, and diagnostics are created only when needed.
+- Adds page-cache plus widget-refresh-callback rules: cached pages should refresh values in place, and full rebuilds should be reserved for structural changes, filter/sort changes, locale relayout, or invalid cache.
+- Adds central high-frequency event dispatcher guidance to avoid every button, row, or module registering and filtering the same event independently.
+- Adds next-frame refresh coalescing, temporary OnUpdate, weak-table frame state, and combat-safe deferred apply rules.
+- Adds a priority rule: for UI lifecycle, refresh strategy, event dispatch, and runtime performance conflicts, the EllesmereUI-style pattern wins; QFX native visuals and no-asset-copying rules still apply unless the user explicitly requests a modern custom skin.
+
+## Earlier v1.11.0 additions
 
 - Adds `wow-12-api-source-rules.md` for WoW 12.x / Midnight API-source grounding.
 - Documents that no ready-made public `WoW 12.0 API Codex Skill` was found during the GitHub search, so this skill references current API/source repositories instead.
@@ -107,6 +117,10 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
+$qfx-wow-addon-ui Apply EllesmereUI-style runtime patterns to this settings-heavy addon: registered settings shell, deferred options loading, page cache with widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table state, and combat-safe deferred apply.
+```
+
+```text
 $qfx-wow-addon-ui Verify this addon against WoW 12.x API sources before coding: check current UI source/resources, branch/build, deprecated APIs, secret-value/taint risk, compatibility wrappers, and final API assumptions.
 ```
 
@@ -122,6 +136,7 @@ $qfx-wow-addon-ui Review this addon settings UI and architecture. Find release b
 
 The skill includes these references:
 
+- `modular-ui-runtime-performance-patterns.md`
 - `wow-12-api-source-rules.md`
 - `deep-reference-addon-patterns.md`
 - `reference-addon-architecture-patterns.md`
