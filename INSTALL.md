@@ -1,4 +1,4 @@
-# Install QFX WoW Addon UI Skill v1.11.0
+# Install QFX WoW Addon UI Skill v1.12.0
 
 This package contains a Codex plugin folder:
 
@@ -39,4 +39,10 @@ Or mention it in your prompt:
 
 ```text
 Use qfx-wow-addon-ui to review this WoW addon UI before release.
+```
+
+For settings-heavy addons, you can also say:
+
+```text
+Use qfx-wow-addon-ui to apply EllesmereUI-style runtime patterns: deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, and weak-table state.
 ```
