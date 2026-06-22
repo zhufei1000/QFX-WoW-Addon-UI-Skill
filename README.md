@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.12.0
+Version: 1.13.0
 
 This package contains a Codex plugin with one skill:
 
@@ -8,15 +8,18 @@ This package contains a Codex plugin with one skill:
 
 It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
 
-## What v1.12.0 adds
+## What v1.13.0 changes
 
-- Adds `modular-ui-runtime-performance-patterns.md`, extracted from an EllesmereUI / EllesmereUIActionBars reference review.
-- Adds registered settings-shell guidance: modules provide title, description, pages, page builders, refresh hooks, and reset hooks while one shared shell owns navigation and scroll behavior.
-- Adds deferred options initialization rules so runtime modules load normally but heavy settings widgets, search metadata, media pickers, import/export editors, and diagnostics are created only when needed.
-- Adds page-cache plus widget-refresh-callback rules: cached pages should refresh values in place, and full rebuilds should be reserved for structural changes, filter/sort changes, locale relayout, or invalid cache.
-- Adds central high-frequency event dispatcher guidance to avoid every button, row, or module registering and filtering the same event independently.
-- Adds next-frame refresh coalescing, temporary OnUpdate, weak-table frame state, and combat-safe deferred apply rules.
-- Adds a priority rule: for UI lifecycle, refresh strategy, event dispatch, and runtime performance conflicts, the EllesmereUI-style pattern wins; QFX native visuals and no-asset-copying rules still apply unless the user explicitly requests a modern custom skin.
+- Makes the EllesmereUI-style design method the primary QFX UI architecture baseline instead of a separate reference module.
+- Folds the new method into existing core references: `qfx-ui-architecture.md`, `modular-addon-architecture.md`, `refresh-performance-rules.md`, and `event-onupdate-rules.md`.
+- Removes the standalone `modular-ui-runtime-performance-patterns.md` reference to avoid parallel or competing design modules.
+- Defines one scalable method for small, medium, and large addons: small addons stay simple, medium addons use modules and lazy options, and large addons add settings shell, page cache, search registry, central dispatcher, diagnostics, import/export, and optional API boundaries.
+- Keeps previous QFX, Plater, DandersFrames, Blizzard-native UI, and WoW 12.x API rules as supplements. When they conflict with the primary method on UI lifecycle, refresh strategy, event dispatch, or runtime performance, the EllesmereUI-style method wins.
+- Keeps QFX Blizzard-native visuals as the default; the skill adopts the architecture and runtime behavior, not the reference addon's custom-drawn visual skin or assets.
+
+## Earlier v1.12.0 additions
+
+- Added an EllesmereUI / EllesmereUIActionBars reference review covering registered settings shell, deferred options loading, page cache, widget refresh callbacks, central dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, and combat-safe deferred apply.
 
 ## Earlier v1.11.0 additions
 
@@ -117,15 +120,11 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
-$qfx-wow-addon-ui Apply EllesmereUI-style runtime patterns to this settings-heavy addon: registered settings shell, deferred options loading, page cache with widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table state, and combat-safe deferred apply.
+$qfx-wow-addon-ui Use the primary QFX design method to review this addon: choose small/medium/large scale, preserve native visuals, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
 ```
 
 ```text
 $qfx-wow-addon-ui Verify this addon against WoW 12.x API sources before coding: check current UI source/resources, branch/build, deprecated APIs, secret-value/taint risk, compatibility wrappers, and final API assumptions.
-```
-
-```text
-$qfx-wow-addon-ui Do a deep architecture pass using Plater and DandersFrames patterns: controlled extension hooks, adapter/resolver/renderer pipeline, capability gates, self-healing media fallback, object pool reset, post-load validation, category import/export, auto-profile switching, safe profiler, and alert state machines.
 ```
 
 ```text
@@ -136,14 +135,16 @@ $qfx-wow-addon-ui Review this addon settings UI and architecture. Find release b
 
 The skill includes these references:
 
-- `modular-ui-runtime-performance-patterns.md`
+- `qfx-ui-architecture.md`
+- `modular-addon-architecture.md`
+- `refresh-performance-rules.md`
+- `event-onupdate-rules.md`
 - `wow-12-api-source-rules.md`
 - `deep-reference-addon-patterns.md`
 - `reference-addon-architecture-patterns.md`
 - `dandersframes-complex-settings-ui.md`
 - `plater-options-ui-patterns.md`
 - `blizzard-native-ui-checklist.md`
-- `qfx-ui-architecture.md`
 - `wow-12-secret-value-taint.md`
 - `ui-factory-dialog-mode-rules.md`
 - `compact-multilingual-layout.md`
@@ -151,10 +152,7 @@ The skill includes these references:
 - `complex-addon-ui-patterns.md`
 - `combat-lockdown-deferred-apply.md`
 - `packaging-release-checklist.md`
-- `modular-addon-architecture.md`
 - `safe-font-media-rules.md`
 - `savedvariables-migration.md`
-- `refresh-performance-rules.md`
-- `event-onupdate-rules.md`
 - `version-compat-boundaries.md`
 - `modification-traceability.md`
