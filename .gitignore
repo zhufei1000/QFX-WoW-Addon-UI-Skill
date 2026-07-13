@@ -1,4 +1,5 @@
 *.zip
+!skills/qfx-wow-addon-ui/references/api-snapshots/*.zip
 *.7z
 *.rar
 .DS_Store
