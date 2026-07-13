@@ -1,3 +1,8 @@
+---
+name: qfx-wow-addon-ui
+description: Design, review, refactor, and package World of Warcraft addon UIs and architectures, especially QFX-style addons. Use for Blizzard-native UI work, multilingual settings panels, Retail 12.x/Midnight API-safe code, version-specific addon development, secret-value and taint safety, compatibility layers, and release packaging. Require target-version API verification before creating or changing an addon for a named WoW version.
+---
+
 # QFX WoW Addon UI Skill
 
 Use this skill when reviewing, designing, refactoring, or packaging World of Warcraft addon user interfaces, addon architectures, and WoW API-safe code, especially QFX-style addons.
@@ -38,6 +43,7 @@ When this skill is active, prefer:
 16. Minimal-diff, traceable changes with clear rollback notes.
 17. Source-grounded WoW API usage over memory-based API guesses.
 18. Reference-addon patterns as design guidance, not asset or library copying.
+19. Target-version API verification as a release gate, not an optional review step.
 
 ## Mandatory WoW UI constraints
 
@@ -170,6 +176,22 @@ Rules:
 ## WoW 12.x API source-grounding rules
 
 For Retail 12.x / Midnight API correctness, read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs.
+
+### Mandatory target-version API gate
+
+When a user requests an addon for a named WoW version, read `references/wow-versioned-api-snapshots.md` and verify the code against that exact target before implementation.
+
+Required procedure:
+
+1. Record the target patch, client channel, build, and TOC/interface number when available.
+2. Use the matching bundled API snapshot for 12.0.7 or 12.1.0; use a current same-branch client export/source for any other build.
+3. Search every WoW API, event payload, enum, mixin, template, widget method, and FrameXML symbol added or changed by the work.
+4. Check the target patch's API-change notes and Blizzard UI usage when signatures, return values, security, secrets, or deprecation behavior could differ.
+5. For multi-version packages, repeat the check for every claimed version and put differences behind `Compat` wrappers or explicit capability gates.
+6. Do not implement an unverified call from memory. If verification is unavailable or conflicting, stop that code path, mark it unsupported, or request the missing target build information.
+7. Report the version/build sources checked and any remaining API assumptions in the final response.
+
+The bundled 12.1.0 snapshot is PTR build 68629. Treat it as a pinned reference, not proof of the final live API; recheck the latest matching PTR or live source before release.
 
 Key rules:
 - A GitHub search did not find a ready-made public `WoW 12.0 API Codex Skill`; use current source/resource repositories and API documentation instead.
@@ -377,7 +399,7 @@ Assume these preferences unless the user says otherwise:
 5. Inspect or draft English UI strings first, then size labels, buttons, dropdowns, tabs, and columns against English before checking Chinese.
 6. Preserve functionality and SavedVariables unless the user requests behavior changes.
 7. Centralize repeated UI logic into the existing factory/helpers.
-8. For WoW 12.x work, verify changed APIs against current source/resources/wiki, isolate risky calls in Compat wrappers, and report branch/build assumptions.
+8. For WoW 12.x work, pass the mandatory target-version API gate: verify every added or changed API/event/template against the matching build snapshot and current same-branch sources, isolate risky calls in Compat wrappers, and report the evidence and branch/build assumptions.
 9. For large option panels, apply tabs, option-table rows, delayed heavy tabs, searchable metadata, reusable scroll rows, page cache, widget refresh callbacks, and one global refresh/apply queue.
 10. For very complex settings, add DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages only when useful.
 11. Check combat-lockdown and secret-value risks if the UI applies live settings.
@@ -404,6 +426,7 @@ When a task involves a specific concern, read the matching reference:
 - Event/OnUpdate discipline, central dispatch, weak-table state: `references/event-onupdate-rules.md`
 - Compact multilingual and English-first layout: `references/compact-multilingual-layout.md`
 - WoW 12.x API source rules: `references/wow-12-api-source-rules.md`
+- Versioned 12.0.7/12.1.0 API snapshots and mandatory verification procedure: `references/wow-versioned-api-snapshots.md`
 - Deep reference addon supplements: `references/deep-reference-addon-patterns.md`
 - Reference addon architecture supplements: `references/reference-addon-architecture-patterns.md`
 - DandersFrames-style complex settings UI: `references/dandersframes-complex-settings-ui.md`

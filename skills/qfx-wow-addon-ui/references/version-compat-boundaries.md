@@ -22,6 +22,8 @@ When APIs differ by version:
 - Keep UI options disabled or hidden only when unsupported.
 - Document what behavior differs.
 
+For every claimed supported version, verify the relevant APIs against that version's API snapshot or same-branch client source. Do not infer compatibility from a newer or older patch. Multi-version support requires either the intersection of confirmed APIs or explicit capability gates in `Compat`.
+
 ## Reference addons
 
 When using another addon as a reference:
@@ -37,3 +39,4 @@ For each claimed supported version, test:
 - Toggle each option.
 - Reload UI.
 - Enter combat if combat-sensitive.
+- Confirm the TOC/interface number and rerun the target-version API verification gate from `wow-versioned-api-snapshots.md`.

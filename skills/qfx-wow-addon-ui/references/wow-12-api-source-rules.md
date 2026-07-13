@@ -33,6 +33,15 @@ Rules:
 - Record the build or interface number used for API decisions when the fix is sensitive.
 - If a user reports a version-specific bug, ask or infer the exact branch only when necessary; otherwise write guarded compatibility code.
 
+### Bundled version snapshots
+
+For 12.0.7 and 12.1.0 work, read `wow-versioned-api-snapshots.md` and inspect the matching archive under `api-snapshots/` before writing code.
+
+- 12.0.7: build 68453, pinned Retail snapshot.
+- 12.1.0: build 68629, pinned PTR snapshot; verify again against the latest matching PTR or live build before release.
+
+These snapshots are the local baseline. They do not remove the requirement to check patch API-change notes and current same-branch Blizzard UI usage.
+
 ## 3. Verify before using changed or risky APIs
 
 Before using an API that is likely to change, verify it in source/dumps first.
@@ -109,6 +118,16 @@ Before packaging an addon update for 12.x:
 - Are TTS, sound, and media APIs verified for the target client?
 - Are Classic/MoP/TBC/Titan branches kept separate from Retail 12.x logic?
 - Does final reporting mention any API assumptions or branch limitations?
+
+For a named target version, also require an API verification record containing:
+
+- target patch, channel, build, and TOC/interface number;
+- snapshot or same-branch source checked;
+- API-change page checked;
+- affected APIs, events, templates, mixins, and enums searched;
+- compatibility decisions and remaining unknowns.
+
+Do not call a version-specific addon complete without this record.
 
 ## 8. What to do when unsure
 
