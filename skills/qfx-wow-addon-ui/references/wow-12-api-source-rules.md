@@ -7,7 +7,7 @@ Use this reference whenever designing, reviewing, or modifying World of Warcraft
 Last verified: **2026-08-08**.
 
 - Retail `live`: **12.0.7.68974**.
-- Retail `ptr`: **12.1.0.69111**.
+- Retail `ptr`: **12.1.0.69189**.
 - Patch 12.1.0 is still PTR at this verification point, so PTR behavior is not a promise of final live behavior.
 
 Do not copy the build numbers above into addon runtime logic. They are documentation provenance only. When doing future work, re-check the target branch `version.txt` and generated API documentation first.
@@ -34,7 +34,7 @@ Recommended public references:
 
 ### Why generated API docs come first
 
-PTR wiki summaries can lag behind the current PTR build. For example, the consolidated Patch 12.1.0 wiki notes currently describe changes through PTR7 build 68914, while the current `ptr` source branch is already build 69111.
+PTR wiki summaries can lag behind the current PTR build. For example, the consolidated Patch 12.1.0 wiki notes may describe an earlier weekly PTR build while the current `ptr` source branch is already **12.1.0.69189**.
 
 Therefore:
 
@@ -118,6 +118,8 @@ For current 12.1 PTR work:
 - Prefer AuraContainer/ManagedAuraContainer display architecture when the addon only needs to present filtered auras.
 - Do not rebuild a 12.1 aura display around manual enumeration, diffing, or hidden-state inference merely because an older Retail implementation did so.
 - Keep Classic `SecureAuraHeaderTemplate` code behind a version boundary; it was removed from Mainline during the 12.1 PTR migration.
+
+For direct **12.0.7 live → 12.1 PTR** migration or compatibility review, also read `wow-12.0.7-to-12.1-api-migration-zhCN.md`. It separates genuinely new 12.1 restrictions from restrictions that already existed in 12.0.7, so old behavior is not incorrectly attributed to 12.1.
 
 Read `wow-12-secret-value-taint.md` before implementing or repairing any aura display or aura-driven combat logic.
 
