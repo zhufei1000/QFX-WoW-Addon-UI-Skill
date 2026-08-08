@@ -7,8 +7,10 @@ Use this reference when fixing Retail 12.x errors involving secret values, taint
 Last verified: **2026-08-08**.
 
 - Retail `live`: **12.0.7.68974**.
-- Retail `ptr`: **12.1.0.69111**.
+- Retail `ptr`: **12.1.0.69189**.
 - The 12.1.0 aura/forbidden-object rules below are PTR behavior at this verification point. Re-check the current `ptr` generated API documentation before coding against them.
+
+For a focused live-to-PTR change list, read `wow-12.0.7-to-12.1-api-migration-zhCN.md`. It distinguishes **new 12.1 restrictions** from Secret/Restriction behavior that was already present in 12.0.7.
 
 ## Recognize restriction errors
 
