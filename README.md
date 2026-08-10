@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.14.0
+Version: 1.15.0
 
 This package contains a Codex plugin with one skill:
 
@@ -8,7 +8,16 @@ This package contains a Codex plugin with one skill:
 
 It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
 
-## What v1.14.0 changes
+## What v1.15.0 changes
+
+- Re-verifies the WoW 12.1.0 PTR API migration reference against `Gethe/wow-ui-source` live 12.0.7.68974 vs ptr 12.1.0.69189 generated API documentation (2026-08-10).
+- Confirms `RequiresUnitAuraAccess` is new in 12.1 and records the full 16-API list (live 12.0.7 has 0).
+- Confirms `ForbiddenAspect` (11 values) is newly introduced in 12.1, and `SecretAspect` gains `RadialProgress`.
+- Confirms old Aura sound APIs (`AddPrivateAuraAppliedSound` / `RemovePrivateAuraAppliedSound` / `TriggerPrivateAuraShowDispelType`) are removed in 12.1 and replaced by `AddAuraSound` / `RemoveAuraSound`.
+- Adds verified detail for `CustomAuraButtonDispelTypeTextureOptions` fields, `UnitAuraSortRule`/`UnitAuraSortDirection` (not new), `RequiresValidUnitAuraInstance` precondition, and Unit identity secret predicate coverage.
+- Wires the 12.1 migration reference into `SKILL.md` reference loading and WoW 12.x API source-grounding sections.
+
+## Earlier v1.14.0 changes
 
 - Strengthens the multilingual UI rule: design layout from English first, then verify Simplified Chinese and Traditional Chinese.
 - Updates `compact-multilingual-layout.md` with an English-first layout baseline for labels, buttons, dropdowns, tabs, section titles, column widths, and card widths.

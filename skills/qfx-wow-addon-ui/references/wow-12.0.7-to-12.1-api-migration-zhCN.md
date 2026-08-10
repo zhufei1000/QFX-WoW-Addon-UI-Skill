@@ -4,10 +4,10 @@
 
 ## 当前核实基线
 
-最后核实：**2026-08-10**。
+最后核实：**2026-08-10**（当日基于 `Gethe/wow-ui-source` live/ptr 分支 generated docs 逐条复核，live 与 ptr 全部关键 API 已做 diff）。
 
 - 正式服 `live`：**12.0.7.68974**
-- PTR `ptr`：**12.1.0.69189**
+- PTR `ptr`：**12.1.0.69189**（截至 2026-08-10 仍是最新 PTR build，无 692xx 后续 build 公开）
 - PTR 当前 HEAD：`a520b6c27bb897e6be2333b6cc2be36d52c7c11b`
 
 截至本次核实，Gethe `live` 分支仍未切换到 12.1.0。本文描述的是 **12.1.0.69189 PTR 相对 12.0.7.68974 live 的当前差异**，不是对最终正式服 API 冻结状态的承诺。
@@ -135,19 +135,39 @@ SecretWhenUnitAuraRestricted = true
 RequiresUnitAuraAccess = true
 ```
 
-当前 69189 需要重点检查的典型接口包括：
+当前 69189 中带 `RequiresUnitAuraAccess = true` 的完整列表（16 个，经 live 12.0.7 与 ptr 12.1.0 生成文档逐条比对确认，live 中该标记数量为 0）：
 
 ```lua
+C_UnitAuras.CancelAuraByInstanceID
+C_UnitAuras.DoesAuraHaveExpirationTime
+C_UnitAuras.GetAuraApplicationDisplayCount
+C_UnitAuras.GetAuraBaseDuration
 C_UnitAuras.GetAuraDataByAuraInstanceID
 C_UnitAuras.GetAuraDataByIndex
 C_UnitAuras.GetAuraDataBySlot
+C_UnitAuras.GetAuraDispelTypeColor
+C_UnitAuras.GetAuraDuration
+C_UnitAuras.GetAuraSlots
 C_UnitAuras.GetBuffDataByIndex
 C_UnitAuras.GetDebuffDataByIndex
-C_UnitAuras.GetAuraSlots
+C_UnitAuras.GetRefreshExtendedDuration
 C_UnitAuras.GetUnitAuraInstanceIDs
 C_UnitAuras.GetUnitAuras
 C_UnitAuras.IsAuraFilteredOutByInstanceID
 ```
+
+注意：`GetAuraDuration` / `GetAuraBaseDuration` / `GetAuraApplicationDisplayCount` / `DoesAuraHaveExpirationTime` / `GetRefreshExtendedDuration` / `GetAuraDispelTypeColor` / `CancelAuraByInstanceID` 这类"读时长 / 读层数 / 取消光环"函数在 12.0.7 时**没有** `RequiresUnitAuraAccess`，12.1 全部纳入门禁。
+
+## 既有 precondition：`RequiresValidUnitAuraInstance`
+
+`RequiresValidUnitAuraInstance`（`FailureMode = "ReturnNothing"`）在 12.0.7 已存在，**不是** 12.1 新增。
+
+它和 `RequiresUnitAuraAccess` 是两层不同检查：
+
+- `RequiresUnitAuraAccess`：决定当前调用者/环境是否有 Aura 数据访问权；
+- `RequiresValidUnitAuraInstance`：决定传入的 `auraInstanceID` 是否是合法有效的 Aura 实例（无效时函数直接返回 nil，而不是抛错）。
+
+迁移时不要把这两个 precondition 混为一谈：前者是访问门禁，后者是参数合法性校验。
 
 ## 迁移含义
 
@@ -205,6 +225,35 @@ ConditionalSecretContents = true
 
 ```text
 RequiresUnitAuraAccess = true
+```
+
+`GetUnitAuras()` 的参数签名（`maxCount` / `sortRule` / `sortDirection`）在 12.0.7 已经存在，**不是** 12.1 新增，不要错误归因：
+
+```text
+unit: UnitTokenRestrictedForAddOns (NeverSecret)
+filter: AuraFilters
+maxCount: number | nil
+sortRule: UnitAuraSortRule = "Unsorted"
+sortDirection: UnitAuraSortDirection = "Normal"
+```
+
+`UnitAuraSortRule` 当前枚举值（7 个，12.0.7 已存在）：
+
+```text
+Unsorted
+Default
+BigDefensive
+Expiration
+ExpirationOnly
+Name
+NameOnly
+```
+
+`UnitAuraSortDirection` 当前枚举值（2 个，12.0.7 已存在）：
+
+```text
+Normal
+Reverse
 ```
 
 因此以下操作都不能默认安全：
@@ -354,12 +403,26 @@ CustomAuraButtonDispelTypeStealableFilter
 - NotStealable
 ```
 
-`CustomAuraButtonDispelTypeTextureOptions` 增加：
+`CustomAuraButtonDispelTypeTextureOptions` 当前完整字段（经 69189 生成文档逐条核实）：
 
 ```text
-showAlways: bool
+showAlways: bool = false            -- 忽略其他条件强制显示
+showWhenHarmful: bool = true
+showWhenHelpful: bool = false
+showWithoutDispelType: bool = false
 stealableFilter: CustomAuraButtonDispelTypeStealableFilter | nil
+style: CustomAuraButtonDispelTypeTextureStyle = "BorderWithIcon"
+customDispelAssetMap: table<string, CustomAuraButtonDispelTypeTextureAsset> | nil
+customDispelColorMap: table<string, colorRGB> | nil
+customDispelColorCurve: LuaColorCurveObject | nil
 ```
+
+含义要点：
+
+- `showAlways = true` 时忽略其他显示条件，强制显示 dispel type texture；
+- `stealableFilter` 可以限制只对可偷取或不可偷取 Aura 显示相应驱散/偷取视觉；
+- `style` 控制纹理风格（Border / BorderWithIcon / Icon / PreserveAsset / CustomAsset）；
+- `customDispelAssetMap` / `customDispelColorMap` / `customDispelColorCurve` 允许自定义各驱散类型的资产与着色曲线（仅 `CustomAsset` 风格生效）。
 
 这说明 Blizzard 继续增加“插件可以控制怎样显示”的能力，而不是恢复“插件任意读取原始 Aura 再自己判断”的模式。
 
@@ -385,27 +448,28 @@ Blizzard 跟踪/过滤/Assignment
 
 ---
 
-# 八、Aura Sound API 扩展
+# 八、Aura Sound API 发生替换/扩展
 
-12.0.7 有：
+12.0.7 生成文档中存在：
 
 ```lua
 C_UnitAuras.AddPrivateAuraAppliedSound
 C_UnitAuras.RemovePrivateAuraAppliedSound
+C_UnitAuras.TriggerPrivateAuraShowDispelType
 ```
 
-当前 12.1 PTR 出现新的通用 Aura Sound 路径：
+当前 12.1 PTR 中这三个旧 API **已从生成文档移除**（不是 Deprecated 别名，而是删除）：
 
 ```lua
 C_UnitAuras.AddAuraSound
 C_UnitAuras.RemoveAuraSound
 ```
 
-并使用新的 Aura sound trigger/info 结构。
+并使用新的 Aura sound trigger/info 结构（`AddAuraSound` 带 `HasRestrictions = true`，`SecretArguments = "AllowedWhenUntainted"`）。
 
 迁移注意：
 
-- 不要假设旧 PrivateAura sound API 是 12.1 唯一入口；
+- **不要继续调用 12.0.7 的 `AddPrivateAuraAppliedSound` / `RemovePrivateAuraAppliedSound` / `TriggerPrivateAuraShowDispelType`**，这些在 12.1 PTR 已不存在；
 - 声音/TTS 功能应按目标 build 重新确认结构和限制；
 - Aura Sound API 不代表 addon 重新获得受限 Aura 原始数据访问权。
 
@@ -423,6 +487,8 @@ C_UnitAuras.SetGroupBuffVisualAlerts
 C_UnitAuras.GetHiddenGroupBuffs
 C_UnitAuras.SetHiddenGroupBuffs
 ```
+
+`GetGroupBuffVisualAlerts` 返回 `GroupBuffVisualAlertInfo[]`（12.1 新增结构，字段以目标 build 生成文档为准）；`SetGroupBuffVisualAlerts` / `SetHiddenGroupBuffs` 带 `HasRestrictions = true`。
 
 对应事件：
 
@@ -487,14 +553,22 @@ flags
 category
 ```
 
-其中当前 generated docs 明确：
+其中当前 generated docs 明确（经 69189 逐字段核实）：
 
 ```text
 spellID: number | nil
 spellCategoryID: number | nil
 equipSlot: luaIndex | nil
 buffSlot: luaIndex | nil
+isInvisible: bool
+charges: bool            -- 注意：是 bool（是否带充能层数显示），不是充能数值
+flags: CooldownSetSpellFlags
+  - HideAura = 1
+  - HideByDefault = 2
+category: CooldownViewerCategory（9 个值，含 GroupBuff = 4）
 ```
+
+注意：`GetCooldownViewerCategorySet` 的 `allowUnlearned: bool = false` 参数在 12.0.7 已存在，不是 12.1 新增，不要错误归因。
 
 这意味着 12.1 不能再假设每个 CooldownViewer 条目都一定对应一个 `spellID`。
 
@@ -538,6 +612,28 @@ SecretWhenUnitIdentityRestricted
 ```
 
 12.1 的变化是更多 API 被纳入，或改成更细粒度 predicate。
+
+## 2026-08-10 复核结论
+
+本次用 live 12.0.7 与 ptr 12.1.0 的 `UnitDocumentation.lua` / `UnitRoleDocumentation.lua` 生成文档逐条 diff，确认下列函数在 12.0.7 **没有** `SecretWhenUnitIdentityRestricted`，12.1 全部新增该标记（live 仅有 `SecretArguments`，ptr 额外带 `SecretWhenUnitIdentityRestricted`）：
+
+```text
+UnitClass
+UnitClassBase
+UnitGroupRolesAssigned
+UnitGroupRolesAssignedEnum
+UnitGetAvailableRoles        -- 位于 UnitRoleDocumentation.lua
+UnitIsGroupAssistant
+UnitIsGroupLeader
+UnitIsRaidOfficer
+UnitLeadsAnyGroup
+UnitIsOwnerOrControllerOfUnit
+UnitIsPVP
+UnitPhaseReason
+UnitHonorLevel
+```
+
+`UnitIsCharmed` / `UnitIsPossessed` 则从 Aura secrecy 切到 `SecretWhenUnitPossessionRestricted`（详见第十四节）。`UnitIsUnit` 的限制（`RequiresComparableUnitTokens` / `SecretWhenUnitComparisonRestricted`）在 12.0.7 已存在，不是 12.1 新增。
 
 ## 职业
 
@@ -708,27 +804,35 @@ UnitIsUnit(a, b)
 
 # 十六、Forbidden Object → Forbidden Aspects
 
-12.1 当前 PTR 有更细粒度的：
+## ForbiddenAspect 是 12.1 全新引入
+
+12.0.7 live 生成文档中**不存在** `ForbiddenAspectConstantsDocumentation.lua`（live 分支该文件 404）；当前 PTR 新增该枚举，共 11 个取值（1..1024，bitmask 语义）：
 
 ```text
-ForbiddenAspect
+SetToDefaults            = 1     -- 限制重置对象默认状态（设置其他 aspect 时隐含）
+ScriptBindings           = 2     -- 限制查询/替换/hook 对象脚本
+UntrustedScriptExecution = 4     -- 限制执行全部脚本，传播到子对象
+UntrustedLayoutScriptExecution = 8  -- 限制 layout script（如 OnSizeChanged），传播到子对象与 anchor 对象
+EventRegistrations       = 16    -- 限制查询/修改已注册事件
+AlwaysPropagateInput     = 32    -- 强制鼠标/按键输入传播，传播到子对象
+ScriptedInput            = 64    -- 限制从 Lua 触发 synthetic input
+QueryFocus               = 128   -- 限制查询 input focus 状态
+ChangeAnimationTarget    = 256   -- 限制修改动画目标对象
+RemoveSecretAspects      = 512   -- 限制清除对象 secret aspects
+ChangeParent             = 1024  -- 限制修改对象 parent
 ```
 
-主要 Aspect 包括：
+## 12.1 SecretAspect 枚举扩展
+
+`SecretAspect` 枚举在 12.0.7 已存在（29 个取值），12.1 新增：
 
 ```text
-SetToDefaults
-ScriptBindings
-UntrustedScriptExecution
-UntrustedLayoutScriptExecution
-EventRegistrations
-AlwaysPropagateInput
-ScriptedInput
-QueryFocus
-ChangeAnimationTarget
-RemoveSecretAspects
-ChangeParent
+RadialProgress = 8388608
 ```
+
+（live 29 个 → ptr 30 个，`MaxValue` 从 4194304 提到 8388608。）
+
+## 与旧式 forbidden 思维的区别
 
 不要再把对象安全性简单理解成：
 
@@ -1180,10 +1284,11 @@ ForbiddenAspect
 截至 **2026-08-10 / PTR 12.1.0.69189**：
 
 - `live` 仍是 **12.0.7.68974**；
-- 当前公开 PTR UI/API 源码 HEAD 是 **12.1.0.69189**；
+- 当前公开 PTR UI/API 源码 HEAD 是 **12.1.0.69189**，且 69189 之后截至本日无更新 build；
 - 68914 后没有再次发生 Aura / Spell / Cooldown 核心架构大翻转；
 - 69111 补充了 Stealable Aura 显示过滤、Possession predicate、SecondsFormatter rounding、SVG 等；
 - 69189 补充 Browser / Delves API，并让 `UnitHonorLevel` 进入 Unit Identity Secret；
+- 2026-08-10 复核确认：`RequiresUnitAuraAccess` 全量 16 个 API（live 为 0）、`ForbiddenAspect` 11 值全为 12.1 新增、`SecretAspect` 新增 `RadialProgress`、`UNIT_AURA` Secret 标记与 `UNIT_AURA_BLOCKED` SecretValue 均与文档一致、Aura Sound 旧 API 在 12.1 移除；
 - 对一般战斗插件影响最大的仍是 **Aura access boundary + AuraContainer + Unit Identity Secret + CooldownViewer 数据结构扩展**。
 
 **正式服上线后必须重新以新的 `live` build 做最终全量 diff。**

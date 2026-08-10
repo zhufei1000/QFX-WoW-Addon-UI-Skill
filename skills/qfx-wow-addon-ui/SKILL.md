@@ -171,6 +171,8 @@ Rules:
 
 For Retail 12.x / Midnight API correctness, read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs.
 
+For migration or review of addons between 12.0.7 live and 12.1.0 PTR, read `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`; it documents verified Aura access gating, the AuraContainer display layer, Unit identity/possession secret predicates, ForbiddenAspect/SecretAspect changes, and CooldownViewer data extensions for the current PTR build.
+
 Key rules:
 - A GitHub search did not find a ready-made public `WoW 12.0 API Codex Skill`; use current source/resource repositories and API documentation instead.
 - Prefer current FrameXML/UI source, extracted interface resources/API dumps, Warcraft Wiki API notes, and same-branch addon examples in that order.
@@ -404,6 +406,7 @@ When a task involves a specific concern, read the matching reference:
 - Event/OnUpdate discipline, central dispatch, weak-table state: `references/event-onupdate-rules.md`
 - Compact multilingual and English-first layout: `references/compact-multilingual-layout.md`
 - WoW 12.x API source rules: `references/wow-12-api-source-rules.md`
+- WoW 12.0.7 → 12.1.0 PTR API migration (Aura/Unit/CDM secret changes): `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`
 - Deep reference addon supplements: `references/deep-reference-addon-patterns.md`
 - Reference addon architecture supplements: `references/reference-addon-architecture-patterns.md`
 - DandersFrames-style complex settings UI: `references/dandersframes-complex-settings-ui.md`
