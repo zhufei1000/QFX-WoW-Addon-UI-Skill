@@ -65,7 +65,33 @@ Rules:
 - If English overflows, fix the layout structure with a wider control, full-width row, shorter visible label, tooltip description, fewer columns, or more horizontal space.
 - Do not solve English overflow by shrinking fonts below the QFX standard unless there is no better layout option.
 
-For details, read `references/compact-multilingual-layout.md`.
+For details, read `references/compact-multilingual-layout.md` and `references/ui-typography-localization-zh.md`.
+
+### UI visual standards
+
+Every QFX panel should follow one pixel-level visual baseline so repeated work stays consistent. Read `references/ui-visual-standards.md` before building panels.
+
+Rules:
+- Use a 4px spacing grid; row heights of 24/28/32px.
+- Standard control sizes: buttons 22-24px high with min width 80px or measured EN text + 28px padding; checkbox 16px; color swatch 24-32px wide with no label inside.
+- Left label column 160-200px, sized from English text first and kept under 40% of panel width; numeric values right-align, text values left-align.
+- Keep a 3-level font hierarchy (title / label / desc) plus inherited template text; never shrink fonts below the QFX standard to fix overflow.
+- Define semantic colors by purpose (normal, muted, warning, danger, success, accent) and never convey state with color alone.
+- Dialogs use standard width tiers: narrow 320-400px, standard 640-720px, wide 800-960px; clamp to screen and respect UI scale.
+- Preserve scroll position across tab switches and reopen; scroll target rows into view after search/jump.
+
+### UI states and accessibility
+
+Panels must cover empty, loading, error, success, and confirm states, and stay usable without a mouse. Read `references/ui-states-accessibility.md` for details.
+
+Rules:
+- Empty lists show a localized hint plus one action button.
+- Long operations show the Blizzard spinner/progress and refresh only the affected region on completion.
+- Input errors are inline and non-modal, paired with text, not color alone.
+- Destructive actions (reset, delete, overwrite import) use a narrow confirm dialog with a verb-labeled danger button; Esc cancels.
+- Panels are fully keyboard-navigable: logical Tab order, arrow keys in lists/dropdowns, visible focus state, Esc closes popup then dialog.
+- Keep text contrast at Blizzard template levels; never go below 11px for user-facing text; test at 150%+ UI scale.
+- Animations stay short (150-300ms), non-looping, stoppable, and skipped when the player disables motion.
 
 ### Reference addon use
 
@@ -269,7 +295,9 @@ A project-local UI factory should centralize:
 - Font/color helpers.
 - Tooltip helpers.
 - Consistent spacing constants.
+- Semantic color and font-level constants matching `references/ui-visual-standards.md`.
 - Optional table-driven options row creation for large settings panels.
+- Optional empty-state, loading, inline-error, and confirm-dialog helpers for state-consistent panels.
 - Optional collapsible-section, banner, search-registration, setting-highlight, wizard, page-cache, and widget-refresh helpers for complex settings panels.
 - English-first sizing helpers for labels, buttons, tabs, dropdowns, and column widths.
 
@@ -366,6 +394,8 @@ Assume these preferences unless the user says otherwise:
 - Default language follows client unless a force-language option exists.
 - Compact panels that use available width.
 - Tooltips on section titles for explanations.
+- A consistent 4px spacing grid and standard control sizes across all pages.
+- Quiet state feedback: inline errors, spinner on long loads, confirm dialogs only for destructive actions.
 - No unnecessary ElvUI/NDui compatibility unless the addon actually interacts with their frames.
 - Release zips should include all sub-addons.
 - For architecture/performance conflicts after an EllesmereUI-style reference review, prefer its scalable primary method: small/medium/large architecture tiers, deferred options loading, page cache plus widget-refresh, central dispatch, coalesced refresh, temporary OnUpdate, and weak-table state.
@@ -382,8 +412,9 @@ Assume these preferences unless the user says otherwise:
 8. For WoW 12.x work, verify changed APIs against current source/resources/wiki, isolate risky calls in Compat wrappers, and report branch/build assumptions.
 9. For large option panels, apply tabs, option-table rows, delayed heavy tabs, searchable metadata, reusable scroll rows, page cache, widget refresh callbacks, and one global refresh/apply queue.
 10. For very complex settings, add DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages only when useful.
-11. Check combat-lockdown and secret-value risks if the UI applies live settings.
-12. Package and report changes clearly.
+11. Apply the pixel-level visual standards (4px grid, control sizes, label column widths, semantic colors) and check empty/loading/error/confirm states plus keyboard navigation before finishing any panel.
+12. Check combat-lockdown and secret-value risks if the UI applies live settings.
+13. Package and report changes clearly.
 
 ## What to do when asked to update this skill
 
@@ -405,6 +436,9 @@ When a task involves a specific concern, read the matching reference:
 - Refresh performance, page cache, widget callbacks: `references/refresh-performance-rules.md`
 - Event/OnUpdate discipline, central dispatch, weak-table state: `references/event-onupdate-rules.md`
 - Compact multilingual and English-first layout: `references/compact-multilingual-layout.md`
+- Typography and trilingual (EN/zhCN/zhTW) text quality: `references/ui-typography-localization-zh.md`
+- Pixel-level visual standards (spacing, sizes, colors, dialogs, scroll): `references/ui-visual-standards.md`
+- UI states, feedback, and accessibility: `references/ui-states-accessibility.md`
 - WoW 12.x API source rules: `references/wow-12-api-source-rules.md`
 - WoW 12.0.7 → 12.1.0 PTR API migration (Aura/Unit/CDM secret changes): `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`
 - Deep reference addon supplements: `references/deep-reference-addon-patterns.md`

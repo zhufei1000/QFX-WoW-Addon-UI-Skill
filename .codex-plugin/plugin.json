@@ -1,7 +1,7 @@
 {
   "name": "qfx-wow-addon-ui-plugin",
-  "version": "1.15.0",
-  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures using a primary scalable QFX design method inspired by EllesmereUI, with English-first multilingual layout sizing, Blizzard-native visuals, modular architecture, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, Plater/DandersFrames supplements, and WoW 12.x API source-grounding rules.",
+  "version": "1.16.0",
+  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures using a primary scalable QFX design method inspired by EllesmereUI, with English-first multilingual layout sizing, pixel-level visual standards, trilingual typography rules, UI state and accessibility patterns, Blizzard-native visuals, modular architecture, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, Plater/DandersFrames supplements, and WoW 12.x API source-grounding rules.",
   "author": {
     "name": "zhufei1000"
   },
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "QFX WoW Addon UI",
     "shortDescription": "WoW addon UI, architecture, and API-safe workflow",
-    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using a primary scalable QFX design method inspired by EllesmereUI: small/medium/large architecture tiers, English-first multilingual layout sizing, native Blizzard-style controls, compact multilingual layout, modular UI factory rules, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table state, Plater/DandersFrames supplements, WoW 12.x API source-grounding, branch/build checks, compatibility wrappers, secret-value/taint safety, import/export validation, diagnostics, release packaging checks, and performance discipline.",
+    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using a primary scalable QFX design method inspired by EllesmereUI: small/medium/large architecture tiers, English-first multilingual layout sizing, pixel-level visual standards (4px grid, control sizes, semantic colors, dialog tiers), trilingual typography rules, UI state and accessibility patterns, native Blizzard-style controls, compact multilingual layout, modular UI factory rules, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table state, Plater/DandersFrames supplements, WoW 12.x API source-grounding, branch/build checks, compatibility wrappers, secret-value/taint safety, import/export validation, diagnostics, release packaging checks, and performance discipline.",
     "developerName": "zhufei1000",
     "category": "Developer Tools",
     "capabilities": [

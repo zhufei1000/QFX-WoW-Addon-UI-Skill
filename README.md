@@ -1,12 +1,20 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.15.0
+Version: 1.16.0
 
 This package contains a Codex plugin with one skill:
 
 - `qfx-wow-addon-ui`
 
 It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
+
+## What v1.16.0 changes
+
+- Adds `ui-visual-standards.md`: a pixel-level visual baseline for QFX panels — 4px spacing grid, standard control sizes (buttons, checkboxes, color swatches, dropdowns), a 3-level font hierarchy, semantic color tokens, label-column width rules, dialog width tiers, scroll-area behavior, and interaction states.
+- Adds `ui-typography-localization-zh.md`: trilingual text quality rules for EN/zhCN/zhTW — full-width CJK width math with `GetStringWidth`, mixed-language composition, locale-correct punctuation, truncation rules, zhCN/zhTW terminology consistency, and runtime language switching.
+- Adds `ui-states-accessibility.md`: empty/loading/error/success/confirm state patterns, keyboard navigation, contrast and readability targets, focus visibility, and animation discipline.
+- Updates `SKILL.md` with two new mandatory constraint sections (UI visual standards; UI states and accessibility), new reference-loading entries, UI factory responsibilities for state helpers and semantic constants, and a new optimization-workflow step covering visual standards, states, and accessibility.
+- The skill now guides agents to produce pixel-consistent, state-complete, keyboard-usable panels, not just structurally correct ones.
 
 ## What v1.15.0 changes
 
@@ -161,7 +169,11 @@ The skill includes these references:
 - `refresh-performance-rules.md`
 - `event-onupdate-rules.md`
 - `compact-multilingual-layout.md`
+- `ui-typography-localization-zh.md`
+- `ui-visual-standards.md`
+- `ui-states-accessibility.md`
 - `wow-12-api-source-rules.md`
+- `wow-12.0.7-to-12.1-api-migration-zhCN.md`
 - `deep-reference-addon-patterns.md`
 - `reference-addon-architecture-patterns.md`
 - `dandersframes-complex-settings-ui.md`
