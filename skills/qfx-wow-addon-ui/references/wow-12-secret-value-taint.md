@@ -6,13 +6,15 @@ Use this reference when fixing Retail 12.x errors involving secret values, taint
 
 Last verified: **2026-08-11**.
 
-- Retail `live`: **12.0.7.68974**.
+- Retail `live`: **12.1.0.69214**.
+- Live HEAD: `057e2e1429765a2b9e9eb100889f2b7e50317307`.
 - Retail `ptr`: **12.1.0.69214**.
 - PTR HEAD: `9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`.
-- The 12.1.0 aura/forbidden-object rules below are PTR behavior at this verification point. Re-check the current `ptr` generated API documentation before coding against them.
-- `69189 → 69214` did **not** change `UnitAuraDocumentation.lua`, AuraContainer docs, `SecretPredicatesDocumentation.lua`, `UnitDocumentation.lua`, `UnitRoleDocumentation.lua`, ForbiddenAspect docs, Spell/Cooldown docs, or CombatLog docs. Therefore the Secret/Taint rules in this document remain valid for 69214.
+- Content-level Blob SHA verification confirms the Live/PTR 69214 versions of `UnitAuraDocumentation.lua`, AuraContainer docs, `SecretPredicatesDocumentation.lua`, `UnitDocumentation.lua`, `UnitRoleDocumentation.lua`, ForbiddenAspect docs, Spell docs, CombatLog docs, SpecializationInfo docs, and the generated API TOC are identical.
+- Therefore the 12.1 aura/forbidden-object rules below are now verified **Live behavior for Retail 12.1.0.69214**, not merely PTR assumptions.
 
-For a focused live-to-PTR change list, read `wow-12.0.7-to-12.1-api-migration-zhCN.md`. It distinguishes **new 12.1 restrictions** from Secret/Restriction behavior that was already present in 12.0.7.
+For the final Live verification matrix, read `wow-12.1.0-live-api-final-zhCN.md`.
+For historical 12.0.7 → 12.1 migration context, read `wow-12.0.7-to-12.1-api-migration-zhCN.md`.
 
 ## Recognize restriction errors
 
@@ -74,7 +76,7 @@ Blizzard's 12.1 design goal is to let addons customize **how filtered auras are 
 
 ## C_UnitAuras is no longer a general-purpose combat aura database
 
-In the current 12.1 PTR generated documentation:
+In the current 12.1 Live generated documentation:
 
 - `C_UnitAuras.GetAuraDataByAuraInstanceID` requires UnitAura access and is secret when UnitAura access is restricted.
 - `C_UnitAuras.GetAuraDataByIndex` requires UnitAura access and is secret when restricted.
@@ -89,7 +91,7 @@ Do not build combat logic by enumerating these APIs and then trying to distingui
 
 ## Spell ID/name lookup is not a bypass
 
-Current PTR APIs such as:
+Current Live APIs such as:
 
 - `C_UnitAuras.GetUnitAuraBySpellID`
 - `C_UnitAuras.GetPlayerAuraBySpellID`
@@ -113,7 +115,7 @@ This is a display boundary, not a new way to recover AuraData.
 
 ## Aura filters changed in 12.1
 
-Current 12.1 PTR notes include:
+Current 12.1 behavior includes:
 
 - support for negating most filters with `!`, for example `!PLAYER`;
 - `NOT_CANCELABLE` removed in favor of `!CANCELABLE`;
@@ -140,7 +142,7 @@ PTR behavior changed during testing:
 - an earlier PTR build intentionally rejected addon AuraContainer creation in combat;
 - a later PTR build changed this and allows addons to create AuraContainers during combat.
 
-This is exactly why old PTR workarounds must not be treated as permanent API truth. Verify the current build before preserving a workaround.
+The final 12.1 Live API/source matches the later PTR design. Do not preserve the earlier PTR workaround.
 
 # Forbidden Script Objects and Forbidden Aspects
 
@@ -193,7 +195,7 @@ Use supported container configuration APIs only.
 
 12.1 also expands secret handling beyond auras.
 
-Current generated Unit documentation marks many identity-sensitive APIs with `SecretWhenUnitIdentityRestricted`, including examples such as:
+Current Live Unit documentation marks many identity-sensitive APIs with `SecretWhenUnitIdentityRestricted`, including examples such as:
 
 - `UnitClass` / `UnitClassBase`
 - `UnitCreatureFamily` / `UnitCreatureID` / `UnitCreatureType`
@@ -220,9 +222,7 @@ This list is not exhaustive. Trust the current generated annotation on the funct
 
 Do not use a matrix of `UnitIsUnit` calls to identify secret units.
 
-`UnitIsCharmed` and `UnitIsPossessed` are marked `SecretWhenUnitPossessionRestricted` in the current PTR docs.
-
-PTR notes also changed `GetGuildInfo` so addons should not rely on compound unit tokens there.
+`UnitIsCharmed` and `UnitIsPossessed` are marked `SecretWhenUnitPossessionRestricted` in the current Live docs.
 
 # Common Risk Areas
 
