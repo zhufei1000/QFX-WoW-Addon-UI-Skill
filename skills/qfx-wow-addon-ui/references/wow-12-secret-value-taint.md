@@ -4,11 +4,13 @@ Use this reference when fixing Retail 12.x errors involving secret values, taint
 
 ## Current verified baseline
 
-Last verified: **2026-08-08**.
+Last verified: **2026-08-11**.
 
 - Retail `live`: **12.0.7.68974**.
-- Retail `ptr`: **12.1.0.69189**.
+- Retail `ptr`: **12.1.0.69214**.
+- PTR HEAD: `9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`.
 - The 12.1.0 aura/forbidden-object rules below are PTR behavior at this verification point. Re-check the current `ptr` generated API documentation before coding against them.
+- `69189 → 69214` did **not** change `UnitAuraDocumentation.lua`, AuraContainer docs, `SecretPredicatesDocumentation.lua`, `UnitDocumentation.lua`, `UnitRoleDocumentation.lua`, ForbiddenAspect docs, Spell/Cooldown docs, or CombatLog docs. Therefore the Secret/Taint rules in this document remain valid for 69214.
 
 For a focused live-to-PTR change list, read `wow-12.0.7-to-12.1-api-migration-zhCN.md`. It distinguishes **new 12.1 restrictions** from Secret/Restriction behavior that was already present in 12.0.7.
 
@@ -136,7 +138,7 @@ Rules:
 PTR behavior changed during testing:
 
 - an earlier PTR build intentionally rejected addon AuraContainer creation in combat;
-- PTR7 changed this and allows addons to create AuraContainers during combat.
+- a later PTR build changed this and allows addons to create AuraContainers during combat.
 
 This is exactly why old PTR workarounds must not be treated as permanent API truth. Verify the current build before preserving a workaround.
 
@@ -170,7 +172,7 @@ Do not rely on:
 - reparenting AuraButtons;
 - child-frame hooks that attempt to bypass the parent restrictions.
 
-PTR5 also made AuraButtons forbidden whenever auras are secret, after the supported initialization callback has run. Calls through tainted code can therefore Lua-error in restricted contexts even if similar calls worked outside combat.
+Calls through tainted code can Lua-error in restricted contexts even if similar calls worked outside combat.
 
 ## AuraContainer restrictions
 
