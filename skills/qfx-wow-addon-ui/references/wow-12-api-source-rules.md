@@ -4,11 +4,14 @@ Use this reference whenever designing, reviewing, or modifying World of Warcraft
 
 ## Current verified baseline
 
-Last verified: **2026-08-08**.
+Last verified: **2026-08-11**.
 
 - Retail `live`: **12.0.7.68974**.
-- Retail `ptr`: **12.1.0.69189**.
-- Patch 12.1.0 is still PTR at this verification point, so PTR behavior is not a promise of final live behavior.
+- Retail `ptr`: **12.1.0.69214**.
+- PTR HEAD: `9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`.
+- Patch 12.1.0 is still treated as PTR in the public Gethe `live` mirror at this verification point; PTR behavior is not a promise of final live behavior.
+
+`69189 → 69214` changed only two generated API files: `HousingBlueprintUIDocumentation.lua` and `RecentAlliesDocumentation.lua`. No new Aura, CooldownViewer, Spell, Unit Secret, SecretPredicate, ForbiddenAspect, or CombatLog generated API changes were found in 69214.
 
 Do not copy the build numbers above into addon runtime logic. They are documentation provenance only. When doing future work, re-check the target branch `version.txt` and generated API documentation first.
 
@@ -34,13 +37,14 @@ Recommended public references:
 
 ### Why generated API docs come first
 
-PTR wiki summaries can lag behind the current PTR build. For example, the consolidated Patch 12.1.0 wiki notes may describe an earlier weekly PTR build while the current `ptr` source branch is already **12.1.0.69189**.
+PTR wiki summaries can lag behind the current PTR build. For example, a consolidated Patch 12.1.0 wiki page may still describe an earlier weekly PTR build while the current `ptr` source branch is already **12.1.0.69214**.
 
 Therefore:
 
 - Use the wiki to understand *why* and *when* behavior changed.
-- Use the current generated documentation to determine the current signature and restriction metadata.
+- Use current generated documentation to determine current signatures and restriction metadata.
 - Use current FrameXML to confirm how Blizzard expects the API/object to be used.
+- Use direct PTR commit diff to catch late-build changes such as 69189 → 69214.
 
 ## 2. Branch and build discipline
 
@@ -55,7 +59,7 @@ Rules:
 - Record the branch and build in review notes when a decision is API-sensitive.
 - Keep build checks out of feature modules unless a real runtime compatibility requirement exists.
 
-PTR behavior can reverse between weekly builds. A concrete 12.1 example: an earlier PTR build intentionally errored when addons created an AuraContainer in combat, while PTR7 changed the design to allow addon AuraContainer creation during combat. Re-verify the current branch instead of preserving an older PTR workaround forever.
+PTR behavior can reverse between weekly builds. A concrete 12.1 example: an earlier PTR build intentionally errored when addons created an AuraContainer in combat, while a later PTR build changed the design to allow addon AuraContainer creation during combat. Re-verify the current branch instead of preserving an older PTR workaround forever.
 
 ## 3. Read restriction metadata as part of the API contract
 
@@ -86,7 +90,7 @@ Pay special attention to fields such as:
 
 Treat these annotations as functional API behavior, not as documentation decoration.
 
-A table marked `ConditionalSecretContents = true` may be a normal Lua table whose contents become secret under a restricted context. Do not assume that being able to receive the table means addon code may inspect, count, compare, sort, serialize, or make gameplay decisions from its contents.
+A table marked `ConditionalSecretContents = true` may be a normal Lua table whose contents become secret under a restricted context. Do not assume that receiving the table means addon code may inspect, count, compare, sort, serialize, or make gameplay decisions from its contents.
 
 ## 4. High-risk API categories
 
@@ -98,7 +102,7 @@ Before using an API in these areas, verify it in the current generated docs/sour
 - unit health/power/stats;
 - cast/interruptibility data;
 - tooltip aura/unit access;
-- C_ namespace APIs with restriction annotations;
+- `C_` namespace APIs with restriction annotations;
 - secure/protected/forbidden script objects;
 - frame creation, reparenting, anchors, scripts, events, and visibility in combat;
 - addon compartment/minimap APIs;
@@ -107,19 +111,20 @@ Before using an API in these areas, verify it in the current generated docs/sour
 
 ## 5. Patch 12.1 aura refactor: source-grounding rule
 
-Patch 12.1 introduces Aura Containers / Aura Buttons and tighter aura secrecy. Blizzard's stated goal is to let addons customize **display** without exposing underlying aura data that can be used for combat automation.
+Patch 12.1 introduces Aura Containers / Aura Buttons and tighter aura secrecy. Blizzard's stated direction is to let addons customize **display** without exposing underlying aura data that can be used for combat automation.
 
 For current 12.1 PTR work:
 
 - Treat `C_UnitAuras` index/slot/aura-instance access as restricted when `RequiresUnitAuraAccess` / `SecretWhenUnitAuraRestricted` applies.
-- `C_UnitAuras.GetUnitAuras` currently returns a table whose aura contents are marked `ConditionalSecretContents = true`.
+- `C_UnitAuras.GetUnitAuras` returns a table whose aura contents are marked `ConditionalSecretContents = true` and the call requires UnitAura access.
 - Spell-ID/name lookup APIs such as `GetUnitAuraBySpellID`, `GetPlayerAuraBySpellID`, and `GetAuraDataBySpellName` carry `RequiresNonSecretAura = true`; they are not a general bypass around aura restrictions.
 - `UNIT_AURA` is marked `SecretWhenAurasRestricted = true`.
+- `UNIT_AURA_BLOCKED.auraInstanceID` is a secret value.
 - Prefer AuraContainer/ManagedAuraContainer display architecture when the addon only needs to present filtered auras.
 - Do not rebuild a 12.1 aura display around manual enumeration, diffing, or hidden-state inference merely because an older Retail implementation did so.
 - Keep Classic `SecureAuraHeaderTemplate` code behind a version boundary; it was removed from Mainline during the 12.1 PTR migration.
 
-For direct **12.0.7 live → 12.1 PTR** migration or compatibility review, also read `wow-12.0.7-to-12.1-api-migration-zhCN.md`. It separates genuinely new 12.1 restrictions from restrictions that already existed in 12.0.7, so old behavior is not incorrectly attributed to 12.1.
+For direct **12.0.7 live → 12.1 PTR** migration or compatibility review, also read `wow-12.0.7-to-12.1-api-migration-zhCN.md`. It separates genuinely new 12.1 restrictions from restrictions already present in 12.0.7.
 
 Read `wow-12-secret-value-taint.md` before implementing or repairing any aura display or aura-driven combat logic.
 
@@ -161,6 +166,8 @@ Rules:
 
 For 12.1 aura displays, a compatibility layer should select the correct display architecture by client family/version rather than trying to normalize restricted AuraData back into the pre-12.1 model.
 
+For 12.1 CooldownViewer/CDM, never assume `CooldownViewerCooldown.spellID` is always non-nil; inspect `spellCategoryID`, `equipSlot`, and `buffSlot` as applicable.
+
 ## 8. Deprecation and replacement discipline
 
 When an API appears deprecated, renamed, removed, or replaced:
@@ -187,6 +194,7 @@ Before packaging a Retail 12.x addon update:
 - Are Mainline/Classic template differences isolated?
 - Are TTS, sound, tooltip, minimap, and secure-action APIs verified if touched?
 - Does the final report state API assumptions, current PTR-only behavior, and in-game test requirements?
+- Was the previous PTR HEAD compared directly to the current PTR HEAD for late-build changes?
 
 ## 10. What to do when unsure
 
@@ -197,7 +205,8 @@ If there is uncertainty about a WoW API:
 3. Search same-branch FrameXML for Blizzard usage.
 4. Read the latest Blizzard addon/PTR notes for intent.
 5. Use Warcraft Wiki for history and consolidated diffs, checking its documented build.
-6. Isolate uncertain behavior behind a capability/compatibility boundary.
-7. Mark PTR-only assumptions explicitly in the final report.
+6. Compare the previous known PTR commit against current `ptr` HEAD.
+7. Isolate uncertain behavior behind a capability/compatibility boundary.
+8. Mark PTR-only assumptions explicitly in the final report.
 
 Never invent a 12.x API signature or secrecy rule from memory.
