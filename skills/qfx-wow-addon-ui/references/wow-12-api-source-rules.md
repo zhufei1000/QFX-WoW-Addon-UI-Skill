@@ -6,12 +6,16 @@ Use this reference whenever designing, reviewing, or modifying World of Warcraft
 
 Last verified: **2026-08-11**.
 
-- Retail `live`: **12.0.7.68974**.
+- Retail `live`: **12.1.0.69214**.
+- Live HEAD: `057e2e1429765a2b9e9eb100889f2b7e50317307`.
 - Retail `ptr`: **12.1.0.69214**.
 - PTR HEAD: `9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`.
-- Patch 12.1.0 is still treated as PTR in the public Gethe `live` mirror at this verification point; PTR behavior is not a promise of final live behavior.
+- `live/version.txt` and `ptr/version.txt` both report `12.1.0.69214`.
+- Content-level Blob SHA verification confirms the high-risk generated API files are identical between Live and PTR 69214: UnitAura, AuraContainer, CooldownViewer, SecretPredicates, Unit, UnitRole, Spell, ForbiddenAspect, CombatLog, SpecializationInfo, and the generated documentation TOC.
+- Therefore the previously verified PTR 69214 rules in those areas are now treated as the **current Retail 12.1.0 Live API contract**.
 
-`69189 → 69214` changed only two generated API files: `HousingBlueprintUIDocumentation.lua` and `RecentAlliesDocumentation.lua`. No new Aura, CooldownViewer, Spell, Unit Secret, SecretPredicate, ForbiddenAspect, or CombatLog generated API changes were found in 69214.
+For the final Live verification matrix, read `wow-12.1.0-live-api-final-zhCN.md`.
+For historical 12.0.7 → 12.1 migration details and PTR build evolution, read `wow-12.0.7-to-12.1-api-migration-zhCN.md`.
 
 Do not copy the build numbers above into addon runtime logic. They are documentation provenance only. When doing future work, re-check the target branch `version.txt` and generated API documentation first.
 
@@ -37,14 +41,14 @@ Recommended public references:
 
 ### Why generated API docs come first
 
-PTR wiki summaries can lag behind the current PTR build. For example, a consolidated Patch 12.1.0 wiki page may still describe an earlier weekly PTR build while the current `ptr` source branch is already **12.1.0.69214**.
+Wiki and PTR summaries can lag behind the actual extracted client build. During 12.1, the public PTR source advanced through several late builds before Live switched to 12.1.0. Current Retail work must now use **Live 12.1.0.69214** generated docs as the primary source of truth.
 
 Therefore:
 
 - Use the wiki to understand *why* and *when* behavior changed.
 - Use current generated documentation to determine current signatures and restriction metadata.
 - Use current FrameXML to confirm how Blizzard expects the API/object to be used.
-- Use direct PTR commit diff to catch late-build changes such as 69189 → 69214.
+- Use direct PTR commit diff only for future pre-release changes after the current Live baseline.
 
 ## 2. Branch and build discipline
 
@@ -54,7 +58,7 @@ Rules:
 
 - For live Retail, use the `live` branch.
 - For PTR/Beta, use the matching `ptr`, `ptr2`, or `beta` branch.
-- Never treat an older PTR weekly note as newer than the current extracted PTR branch.
+- Never treat an older PTR weekly note as newer than the current extracted branch.
 - Do not mix Retail 12.x assumptions with Classic, MoP Classic, TBC Classic, Titan, or other clients.
 - Record the branch and build in review notes when a decision is API-sensitive.
 - Keep build checks out of feature modules unless a real runtime compatibility requirement exists.
@@ -111,9 +115,9 @@ Before using an API in these areas, verify it in the current generated docs/sour
 
 ## 5. Patch 12.1 aura refactor: source-grounding rule
 
-Patch 12.1 introduces Aura Containers / Aura Buttons and tighter aura secrecy. Blizzard's stated direction is to let addons customize **display** without exposing underlying aura data that can be used for combat automation.
+Patch 12.1 introduces Aura Containers / Aura Buttons and tighter aura secrecy. Blizzard's direction is to let addons customize **display** without exposing underlying aura data that can be used for combat automation.
 
-For current 12.1 PTR work:
+For current 12.1 Live work:
 
 - Treat `C_UnitAuras` index/slot/aura-instance access as restricted when `RequiresUnitAuraAccess` / `SecretWhenUnitAuraRestricted` applies.
 - `C_UnitAuras.GetUnitAuras` returns a table whose aura contents are marked `ConditionalSecretContents = true` and the call requires UnitAura access.
@@ -122,9 +126,9 @@ For current 12.1 PTR work:
 - `UNIT_AURA_BLOCKED.auraInstanceID` is a secret value.
 - Prefer AuraContainer/ManagedAuraContainer display architecture when the addon only needs to present filtered auras.
 - Do not rebuild a 12.1 aura display around manual enumeration, diffing, or hidden-state inference merely because an older Retail implementation did so.
-- Keep Classic `SecureAuraHeaderTemplate` code behind a version boundary; it was removed from Mainline during the 12.1 PTR migration.
+- Keep Classic `SecureAuraHeaderTemplate` code behind a version boundary; it was removed from Mainline during the 12.1 aura migration.
 
-For direct **12.0.7 live → 12.1 PTR** migration or compatibility review, also read `wow-12.0.7-to-12.1-api-migration-zhCN.md`. It separates genuinely new 12.1 restrictions from restrictions already present in 12.0.7.
+For direct **12.0.7 → 12.1 Live** migration or compatibility review, read `wow-12.0.7-to-12.1-api-migration-zhCN.md` together with `wow-12.1.0-live-api-final-zhCN.md`.
 
 Read `wow-12-secret-value-taint.md` before implementing or repairing any aura display or aura-driven combat logic.
 
@@ -193,8 +197,8 @@ Before packaging a Retail 12.x addon update:
 - Are protected/forbidden frame mutations deferred or avoided correctly?
 - Are Mainline/Classic template differences isolated?
 - Are TTS, sound, tooltip, minimap, and secure-action APIs verified if touched?
-- Does the final report state API assumptions, current PTR-only behavior, and in-game test requirements?
-- Was the previous PTR HEAD compared directly to the current PTR HEAD for late-build changes?
+- Does the final report state API assumptions and in-game test requirements?
+- For PTR work, was the previous PTR HEAD compared directly to the current PTR HEAD for late-build changes?
 
 ## 10. What to do when unsure
 
@@ -205,8 +209,8 @@ If there is uncertainty about a WoW API:
 3. Search same-branch FrameXML for Blizzard usage.
 4. Read the latest Blizzard addon/PTR notes for intent.
 5. Use Warcraft Wiki for history and consolidated diffs, checking its documented build.
-6. Compare the previous known PTR commit against current `ptr` HEAD.
+6. For PTR work, compare the previous known PTR commit against current `ptr` HEAD.
 7. Isolate uncertain behavior behind a capability/compatibility boundary.
-8. Mark PTR-only assumptions explicitly in the final report.
+8. Mark PTR-only assumptions explicitly; do not apply them to Live without verification.
 
 Never invent a 12.x API signature or secrecy rule from memory.
