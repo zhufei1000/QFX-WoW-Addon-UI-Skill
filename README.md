@@ -1,12 +1,18 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.16.0
+Version: 1.16.1
 
 This package contains a Codex plugin with one skill:
 
 - `qfx-wow-addon-ui`
 
 It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
+
+## What v1.16.1 changes
+
+- Re-verifies the WoW 12.1.0 live API baseline: `live` advanced to 12.1.0.69283 and `ptr` to 12.1.0.69273; blob-SHA content comparison of the 12 high-risk generated API documentation files shows zero changes vs the 69214 baseline (2026-08-13).
+- Updates `wow-12.1.0-live-api-final-zhCN.md` to the 69283 baseline and adds the `69214 → 69283 / 69273` re-verification section.
+- No addon API changes required; the updated build numbers are provenance only.
 
 ## What v1.16.0 changes
 
@@ -174,6 +180,7 @@ The skill includes these references:
 - `ui-states-accessibility.md`
 - `wow-12-api-source-rules.md`
 - `wow-12.0.7-to-12.1-api-migration-zhCN.md`
+- `wow-12.1.0-live-api-final-zhCN.md`
 - `deep-reference-addon-patterns.md`
 - `reference-addon-architecture-patterns.md`
 - `dandersframes-complex-settings-ui.md`

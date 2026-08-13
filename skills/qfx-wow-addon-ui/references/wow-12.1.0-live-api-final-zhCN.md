@@ -1,20 +1,26 @@
-# WoW 12.1.0 Live API 最终核实（69214）
+# WoW 12.1.0 Live API 最终核实（69283）
 
 用于 Retail 12.1.0 正式服插件开发、兼容性审查和 12.0.7 → 12.1.0 迁移后的最终 API 基线确认。
 
 ## 当前正式服基线
 
-最后核实：**2026-08-11**。
+最后核实：**2026-08-13**。
 
-- Retail `live`：**12.1.0.69214**
-- Live HEAD：`057e2e1429765a2b9e9eb100889f2b7e50317307`
-- Retail `ptr`：**12.1.0.69214**
-- PTR HEAD：`9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`
+- Retail `live`：**12.1.0.69283**
+- Live HEAD：`710f59e457317676c0f699e6addaf2c405c2a1a4`
+- Retail `ptr`：**12.1.0.69273**
+- PTR HEAD：`6e348870ed8f93d95f0cd16d299b51dbce500296`
 
-Gethe `live/version.txt` 与 `ptr/version.txt` 当前均为：
+Gethe `live/version.txt` 当前为：
 
 ```text
-12.1.0.69214
+12.1.0.69283
+```
+
+Gethe `ptr/version.txt` 当前为：
+
+```text
+12.1.0.69273
 ```
 
 ## Live 与 PTR 69214 的最终结论
@@ -45,6 +51,32 @@ Gethe `live/version.txt` 与 `ptr/version.txt` 当前均为：
 > **没有发现 PTR 12.1.0.69214 → Live 12.1.0.69214 的高风险 API 临时改动。**
 
 此前在 PTR 69214 中确认的 Aura、CooldownViewer/CDM、Secret Predicate、Unit Identity、ForbiddenAspect、Spell/Cooldown、CombatLog、Inspect specialization 等规则，可以正式视为 **12.1.0 Live 69214 当前 API 合同**。
+
+## 69214 → 69283 / 69273 复查结论（2026-08-13）
+
+Live 推进到 **12.1.0.69283**、PTR 推进到 **12.1.0.69273** 后，按同样的 generated API 文件 Blob SHA 内容级核对方法复查。
+
+以下高风险 API 文件在 Live 69283 与 PTR 69273 中 Blob SHA 与 69214 完全相同：
+
+| 文件 | Blob SHA（与 69214 一致） |
+|---|---|
+| `UnitAuraDocumentation.lua` | `e53a0aede84d369f78f63e8afde886421eab7cf4` |
+| `CooldownViewerDocumentation.lua` | `ec05eb25cef1b3ec6870e78a95d470d5ff4eda7e` |
+| `SecretPredicatesDocumentation.lua` | `97af2eb71809da82a1dfcdc6cccb147812bcc1fc` |
+| `UnitDocumentation.lua` | `a0d34f0e5379af2bb4fc6399684d51eaf0c00d57` |
+| `UnitRoleDocumentation.lua` | `194cc3ad91a328ce81491d77d732e49a920bd7fa` |
+| `SpellDocumentation.lua` | `096033af83dee399c1c6eb2b805a339b6e6da535` |
+| `ForbiddenAspectConstantsDocumentation.lua` | `434f6f61a487b471772387e88c128db2cb685718` |
+| `CombatLogDocumentation.lua` | `7b5db6fcd30cfcf8e3ff2b5c1d67843232aaf84c` |
+| `AuraContainerSharedDocumentation.lua` | `066832ee25b75f2924a887f60409b8104fc26a00` |
+| `AuraContainerUtilDocumentation.lua` | `6eac23d2f2c8a6b6f711e22de8e682e3aac05b43` |
+| `SpecializationInfoDocumentation.lua` | `2bd552e09e5d924610f22b18ba6d209d32b943e9` |
+| `Blizzard_APIDocumentationGenerated.toc` | `bdd65e77ef8b1426e028a9a5c1ffef0a8f102d20` |
+
+因此：
+
+> **没有发现 69214 → 69283（live）与 69214 → 69273（ptr）之间的高风险 API 改动。**
+> 此前确认的 Aura、CooldownViewer/CDM、Secret Predicate、Unit Identity、ForbiddenAspect、Spell/Cooldown、CombatLog、Inspect specialization 等规则，继续作为 **12.1.0 Live 当前 API 合同**。
 
 ---
 
@@ -356,7 +388,7 @@ cstring → string
 
 从现在起：
 
-- Retail 正式开发以 `live` **12.1.0.69214** 为当前基线；
+- Retail 正式开发以 `live` **12.1.0.69283** 为当前基线；
 - PTR 文件只用于追踪后续 hotfix / 12.1.x / 12.1.5 / 12.2 预发布变化；
 - 如果 `live` build 继续增加，即使仍叫 12.1.0，也必须重新比较 generated docs；
 - 不要用 build number 写业务 feature flag，build 只作为文档 provenance；
@@ -368,4 +400,4 @@ cstring → string
 - `wow-12-api-source-rules.md`：API 来源和核实规则。
 - `wow-12-secret-value-taint.md`：Secret / Taint / Forbidden Object 设计规则。
 
-**当前结论：PTR 69214 中已经确认的关键 12.1 API 规则，已被 Live 69214 正式保留。没有发现上线当天的高风险 API 临时改动。**
+**当前结论：PTR 69214 中已经确认的关键 12.1 API 规则，已被 Live 69214 正式保留；Live 69283 / PTR 69273 复查未发现任何高风险 API 改动，上述规则继续作为 12.1.0 当前 API 合同有效。**
