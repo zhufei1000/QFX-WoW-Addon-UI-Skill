@@ -1,26 +1,26 @@
-# WoW 12.1.0 Live API 最终核实（69283）
+# WoW 12.1.0 Live API 最终核实（69299）
 
 用于 Retail 12.1.0 正式服插件开发、兼容性审查和 12.0.7 → 12.1.0 迁移后的最终 API 基线确认。
 
 ## 当前正式服基线
 
-最后核实：**2026-08-13**。
+最后核实：**2026-08-15**。
 
-- Retail `live`：**12.1.0.69283**
-- Live HEAD：`710f59e457317676c0f699e6addaf2c405c2a1a4`
-- Retail `ptr`：**12.1.0.69273**
-- PTR HEAD：`6e348870ed8f93d95f0cd16d299b51dbce500296`
+- Retail `live`：**12.1.0.69299**
+- Live HEAD：`31c7f7b9cc79e56c986b365c06a6afbcf3c9177b`
+- Retail `ptr`：**12.1.0.69299**
+- PTR HEAD：`fe17d3e3bd5d6b5a35816d13f1941aa8927cd2be`
 
 Gethe `live/version.txt` 当前为：
 
 ```text
-12.1.0.69283
+12.1.0.69299
 ```
 
 Gethe `ptr/version.txt` 当前为：
 
 ```text
-12.1.0.69273
+12.1.0.69299
 ```
 
 ## Live 与 PTR 69214 的最终结论
@@ -50,7 +50,7 @@ Gethe `ptr/version.txt` 当前为：
 
 > **没有发现 PTR 12.1.0.69214 → Live 12.1.0.69214 的高风险 API 临时改动。**
 
-此前在 PTR 69214 中确认的 Aura、CooldownViewer/CDM、Secret Predicate、Unit Identity、ForbiddenAspect、Spell/Cooldown、CombatLog、Inspect specialization 等规则，可以正式视为 **12.1.0 Live 69214 当前 API 合同**。
+此前在 PTR 69214 中确认的 Aura、CooldownViewer/CDM、Secret Predicate、Unit Identity、ForbiddenAspect、Spell/Cooldown、CombatLog、Inspect specialization 等规则，可以正式视为 **12.1.0 Live 69214 API 合同**。
 
 ## 69214 → 69283 / 69273 复查结论（2026-08-13）
 
@@ -76,7 +76,107 @@ Live 推进到 **12.1.0.69283**、PTR 推进到 **12.1.0.69273** 后，按同样
 因此：
 
 > **没有发现 69214 → 69283（live）与 69214 → 69273（ptr）之间的高风险 API 改动。**
-> 此前确认的 Aura、CooldownViewer/CDM、Secret Predicate、Unit Identity、ForbiddenAspect、Spell/Cooldown、CombatLog、Inspect specialization 等规则，继续作为 **12.1.0 Live 当前 API 合同**。
+> 此前确认的 Aura、CooldownViewer/CDM、Secret Predicate、Unit Identity、ForbiddenAspect、Spell/Cooldown、CombatLog、Inspect specialization 等规则继续有效。
+
+## 69283 / 69273 → 69299 复查结论（2026-08-15）
+
+当前 `live` 与 `ptr` 均已推进到 **12.1.0.69299**。
+
+### Live 69283 → 69299
+
+Live 该次提交只修改 `version.txt`，没有任何 `Blizzard_APIDocumentationGenerated` 文件变化。
+
+因此：
+
+> **Live 69299 没有新增或修改插件 API 合同；69283 已确认的核心 12.1 规则原样继续有效。**
+
+### PTR 69273 → 69299
+
+PTR 69299 有两份 generated API 文档发生实际变化：
+
+```text
+Blizzard_APIDocumentationGenerated/DiscordDocumentation.lua
+Blizzard_APIDocumentationGenerated/DiscordConstantsDocumentation.lua
+```
+
+其中 `C_Discord` 补齐：
+
+```lua
+C_Discord.GetDiscordUserName(userID)
+```
+
+其 generated API 合同为：
+
+```text
+HasRestrictions = true
+SecretArguments = "AllowedWhenUntainted"
+
+Arguments:
+userID : DiscordID
+
+Returns:
+userName : KStringDiscordUserName
+```
+
+同时 `DiscordChatInfo` 结构中的：
+
+```text
+username
+```
+
+字段被移除。
+
+对应 FrameXML 的：
+
+```lua
+GetDiscordUserCommunityLink(
+    linkDisplayText,
+    bnetIDAccount,
+    discordUserID,
+    username,
+    clubId,
+    streamId,
+    epoch,
+    position
+)
+```
+
+变为：
+
+```lua
+GetDiscordUserCommunityLink(
+    linkDisplayText,
+    bnetIDAccount,
+    discordUserID,
+    clubId,
+    streamId,
+    epoch,
+    position
+)
+```
+
+即不再传入 `username` 参数。
+
+### 重要的版本归因
+
+这不是“Live 69299 新增 Discord API”。核对旧提交可确认：
+
+- **Live 69283 已经存在** `C_Discord.GetDiscordUserName`；
+- **Live 69283 已经移除** `DiscordChatInfo.username`；
+- PTR 69273 当时仍落后于 Live；
+- PTR 69299 才追平这一套 Discord 合同。
+
+当前 Live/PTR 69299 的 Discord generated docs 已一致：
+
+| 文件 | Live / PTR 69299 Blob SHA |
+|---|---|
+| `DiscordDocumentation.lua` | `2b429955f8a80ed8e53ddc9ebb96ded61b6cf176` |
+| `DiscordConstantsDocumentation.lua` | `62e946f0dfaeb7c6fc6156c6747a150332b324f0` |
+
+因此：
+
+> **69299 不要求重写现有 Aura、CooldownViewer/CDM、Secret Predicate、Unit Identity、ForbiddenAspect、Spell/Cooldown、CombatLog、Inspect specialization 规则。**
+> Discord 变化作为 12.1.0 当前合同补录；如果插件直接读取 `DiscordChatInfo.username` 或按旧签名调用 `GetDiscordUserCommunityLink`，需要改为当前合同。
 
 ---
 
@@ -388,7 +488,7 @@ cstring → string
 
 从现在起：
 
-- Retail 正式开发以 `live` **12.1.0.69283** 为当前基线；
+- Retail 正式开发以 `live` **12.1.0.69299** 为当前基线；
 - PTR 文件只用于追踪后续 hotfix / 12.1.x / 12.1.5 / 12.2 预发布变化；
 - 如果 `live` build 继续增加，即使仍叫 12.1.0，也必须重新比较 generated docs；
 - 不要用 build number 写业务 feature flag，build 只作为文档 provenance；
@@ -400,4 +500,4 @@ cstring → string
 - `wow-12-api-source-rules.md`：API 来源和核实规则。
 - `wow-12-secret-value-taint.md`：Secret / Taint / Forbidden Object 设计规则。
 
-**当前结论：PTR 69214 中已经确认的关键 12.1 API 规则，已被 Live 69214 正式保留；Live 69283 / PTR 69273 复查未发现任何高风险 API 改动，上述规则继续作为 12.1.0 当前 API 合同有效。**
+**当前结论：Live / PTR 均已推进到 12.1.0.69299。核心 Aura、CooldownViewer/CDM、Secret Predicate、Unit Identity、ForbiddenAspect、Spell/Cooldown、CombatLog、Inspect specialization 合同相对已确认基线没有变化；本次补录 Discord 合同，并确认 PTR 69299 已追平 Live。**
