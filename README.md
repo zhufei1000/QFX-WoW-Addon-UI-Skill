@@ -1,12 +1,20 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.16.1
+Version: 1.16.2
 
 This package contains a Codex plugin with one skill:
 
 - `qfx-wow-addon-ui`
 
 It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
+
+## What v1.16.2 changes
+
+- Re-verifies the WoW 12.1.0 API baseline against `Gethe/wow-ui-source`: both `live` and `ptr` are now 12.1.0.69299 (2026-08-15).
+- Confirms `live` 69283 → 69299 changes only `version.txt`; the existing Aura, CooldownViewer/CDM, Secret Predicate, Unit Identity, ForbiddenAspect, Spell/Cooldown, CombatLog, and Inspect specialization conclusions remain unchanged.
+- Records the PTR 69273 → 69299 Discord API catch-up: `C_Discord.GetDiscordUserName(userID)` is present, `DiscordChatInfo.username` is removed, and `GetDiscordUserCommunityLink` no longer takes the `username` parameter.
+- Clarifies provenance: these Discord changes were already present in `live` 69283; PTR 69299 catches up to the live contract rather than introducing a new live breaking change.
+- Updates `wow-12.1.0-live-api-final-zhCN.md` to the 69299 live/PTR baseline.
 
 ## What v1.16.1 changes
 
