@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Codex Skill
 
-Version: 1.16.2
+Version: 1.17.0
 
 This package contains a Codex plugin with one skill:
 
@@ -8,104 +8,69 @@ This package contains a Codex plugin with one skill:
 
 It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
 
-## What v1.16.2 changes
+## What v1.17.0 changes
 
-- Re-verifies the WoW 12.1.0 API baseline against `Gethe/wow-ui-source`: both `live` and `ptr` are now 12.1.0.69299 (2026-08-15).
-- Confirms `live` 69283 → 69299 changes only `version.txt`; the existing Aura, CooldownViewer/CDM, Secret Predicate, Unit Identity, ForbiddenAspect, Spell/Cooldown, CombatLog, and Inspect specialization conclusions remain unchanged.
-- Records the PTR 69273 → 69299 Discord API catch-up: `C_Discord.GetDiscordUserName(userID)` is present, `DiscordChatInfo.username` is removed, and `GetDiscordUserCommunityLink` no longer takes the `username` parameter.
-- Clarifies provenance: these Discord changes were already present in `live` 69283; PTR 69299 catches up to the live contract rather than introducing a new live breaking change.
-- Updates `wow-12.1.0-live-api-final-zhCN.md` to the 69299 live/PTR baseline.
+- Updates the current WoW 12.1.0 baseline to **Live 12.1.0.69497** and **PTR 12.1.0.69587** (verified 2026-09-01).
+- Separates **Live production contracts** from **PTR-only warnings**, so preview APIs are not treated as Retail-ready by default.
+- Records the Live 69404 `HookScript` / `SetScript` change for `SimpleAnimAPI`, `SimpleAnimGroupAPI`, and `SimpleScriptRegionAPI`: `SecretArguments = NotAllowed` became `AllowedWhenUntainted`, while assignable-script and `ForbiddenAspect.ScriptBindings` checks remain.
+- Records the Live 69465 `UnitCanAssist` signature extension, the new `UnitIsPlayerControlledOrGroupMember(unit)` API, and Blizzard's updated Aura identity-filter behavior.
+- Records Blizzard Private Aura behavior showing `visualAlert` can be secret because it derives from a secret spell ID; Blizzard's internal secure-environment `secretunwrap` use is explicitly not treated as an addon-accessible bypass.
+- Records the Live 69497 TTS contract change: `C_VoiceChat.SpeakText().text` and `VOICE_CHAT_TTS_PLAYBACK_BOOKMARK.bookmarkName` are now `ConditionalSecret`.
+- Records CooldownViewer equip-slot GCD filtering and CooldownBroadcaster's separate `InterruptSpellsBySpec` tracking model with six base cooldowns plus up to two interrupt cooldowns.
+- Adds the PTR 69587 warning for `C_LFGInfo.IsInMatchmadeRaidWithoutRoleRequirements()` and Blizzard CompactRaidFrames' use of it for Main Tank / Main Assist layout handling.
+- Updates `.codex-plugin/plugin.json` to version 1.17.0.
 
-## What v1.16.1 changes
+## Earlier API milestones
 
-- Re-verifies the WoW 12.1.0 live API baseline: `live` advanced to 12.1.0.69283 and `ptr` to 12.1.0.69273; blob-SHA content comparison of the 12 high-risk generated API documentation files shows zero changes vs the 69214 baseline (2026-08-13).
-- Updates `wow-12.1.0-live-api-final-zhCN.md` to the 69283 baseline and adds the `69214 → 69283 / 69273` re-verification section.
-- No addon API changes required; the updated build numbers are provenance only.
+### v1.16.2
 
-## What v1.16.0 changes
+- Re-verified WoW 12.1.0 at build 69299.
+- Recorded the PTR Discord catch-up: `C_Discord.GetDiscordUserName(userID)`, removal of `DiscordChatInfo.username`, and the current `GetDiscordUserCommunityLink` signature.
 
-- Adds `ui-visual-standards.md`: a pixel-level visual baseline for QFX panels — 4px spacing grid, standard control sizes (buttons, checkboxes, color swatches, dropdowns), a 3-level font hierarchy, semantic color tokens, label-column width rules, dialog width tiers, scroll-area behavior, and interaction states.
-- Adds `ui-typography-localization-zh.md`: trilingual text quality rules for EN/zhCN/zhTW — full-width CJK width math with `GetStringWidth`, mixed-language composition, locale-correct punctuation, truncation rules, zhCN/zhTW terminology consistency, and runtime language switching.
-- Adds `ui-states-accessibility.md`: empty/loading/error/success/confirm state patterns, keyboard navigation, contrast and readability targets, focus visibility, and animation discipline.
-- Updates `SKILL.md` with two new mandatory constraint sections (UI visual standards; UI states and accessibility), new reference-loading entries, UI factory responsibilities for state helpers and semantic constants, and a new optimization-workflow step covering visual standards, states, and accessibility.
-- The skill now guides agents to produce pixel-consistent, state-complete, keyboard-usable panels, not just structurally correct ones.
+### v1.16.1
 
-## What v1.15.0 changes
+- Re-verified Live 69283 / PTR 69273 against the 69214 high-risk API baseline.
 
-- Re-verifies the WoW 12.1.0 PTR API migration reference against `Gethe/wow-ui-source` live 12.0.7.68974 vs ptr 12.1.0.69189 generated API documentation (2026-08-10).
-- Confirms `RequiresUnitAuraAccess` is new in 12.1 and records the full 16-API list (live 12.0.7 has 0).
-- Confirms `ForbiddenAspect` (11 values) is newly introduced in 12.1, and `SecretAspect` gains `RadialProgress`.
-- Confirms old Aura sound APIs (`AddPrivateAuraAppliedSound` / `RemovePrivateAuraAppliedSound` / `TriggerPrivateAuraShowDispelType`) are removed in 12.1 and replaced by `AddAuraSound` / `RemoveAuraSound`.
-- Adds verified detail for `CustomAuraButtonDispelTypeTextureOptions` fields, `UnitAuraSortRule`/`UnitAuraSortDirection` (not new), `RequiresValidUnitAuraInstance` precondition, and Unit identity secret predicate coverage.
-- Wires the 12.1 migration reference into `SKILL.md` reference loading and WoW 12.x API source-grounding sections.
+### v1.15.0
 
-## Earlier v1.14.0 changes
+- Confirmed the 12.0.7 → 12.1 migration details around `RequiresUnitAuraAccess`, `ForbiddenAspect`, `SecretAspect.RadialProgress`, Aura sound API replacement, Unit identity predicates, and CooldownViewer data changes.
 
-- Strengthens the multilingual UI rule: design layout from English first, then verify Simplified Chinese and Traditional Chinese.
-- Updates `compact-multilingual-layout.md` with an English-first layout baseline for labels, buttons, dropdowns, tabs, section titles, column widths, and card widths.
-- Adds guidance that English overflow should be fixed by layout structure, not by shrinking fonts or designing a Chinese-tight layout first.
-- Adds a button-width helper pattern that measures English and current localized text, then uses the larger width plus padding.
-- Updates `SKILL.md` so English-first sizing is part of the core goals, mandatory UI constraints, UI factory responsibilities, slider review, common user preferences, and optimization workflow.
+## Core design guidance
 
-## Earlier v1.13.0 changes
+The skill uses one scalable QFX method for small, medium, and large addons:
 
-- Makes the EllesmereUI-style design method the primary QFX UI architecture baseline instead of a separate reference module.
-- Folds the new method into existing core references: `qfx-ui-architecture.md`, `modular-addon-architecture.md`, `refresh-performance-rules.md`, and `event-onupdate-rules.md`.
-- Removes the standalone `modular-ui-runtime-performance-patterns.md` reference to avoid parallel or competing design modules.
-- Defines one scalable method for small, medium, and large addons: small addons stay simple, medium addons use modules and lazy options, and large addons add settings shell, page cache, search registry, central dispatcher, diagnostics, import/export, and optional API boundaries.
-- Keeps previous QFX, Plater, DandersFrames, Blizzard-native UI, and WoW 12.x API rules as supplements. When they conflict with the primary method on UI lifecycle, refresh strategy, event dispatch, or runtime performance, the EllesmereUI-style method wins.
-- Keeps QFX Blizzard-native visuals as the default; the skill adopts the architecture and runtime behavior, not the reference addon's custom-drawn visual skin or assets.
+- Blizzard-native visuals by default.
+- English-first layout sizing, then zhCN / zhTW verification.
+- Shared UI factories and modular architecture.
+- Deferred heavy options initialization.
+- Page cache and targeted widget refresh where useful.
+- Centralized high-frequency event dispatch.
+- Coalesced refresh/apply queues.
+- Temporary active-only `OnUpdate` instead of permanent idle polling.
+- Combat-safe deferred apply.
+- Source-grounded WoW API verification before coding.
+- Secret / taint / ForbiddenAspect-aware design.
 
-## Earlier v1.12.0 additions
+## WoW API baseline
 
-- Added an EllesmereUI / EllesmereUIActionBars reference review covering registered settings shell, deferred options loading, page cache, widget refresh callbacks, central dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, and combat-safe deferred apply.
+For current Retail 12.1 development, read:
 
-## Earlier v1.11.0 additions
+- `skills/qfx-wow-addon-ui/references/wow-12.1.0-live-api-final-zhCN.md`
 
-- Adds `wow-12-api-source-rules.md` for WoW 12.x / Midnight API-source grounding.
-- Documents that no ready-made public `WoW 12.0 API Codex Skill` was found during the GitHub search, so this skill references current API/source repositories instead.
-- Adds source priority rules: current FrameXML/UI source, extracted interface resources/API dumps, Warcraft Wiki API notes, and same-branch addon examples.
-- Adds branch/build discipline for live, ptr, ptr2, beta, Retail, Classic, MoP, TBC, and Titan branches.
-- Adds high-risk API categories requiring verification before use: spell, aura, cast/interrupt, unit, tooltip, C_ namespace, secure frame, addon compartment, minimap, TTS, templates, mixins, and deprecated globals.
-- Adds compatibility-wrapper rules so version-sensitive APIs are isolated in `Compat` instead of scattered across modules.
-- Adds a source-grounded 12.x code-review checklist to reduce wrong API usage.
+Current baseline:
 
-## Earlier v1.10.0 additions
+```text
+Live: 12.1.0.69497
+PTR:  12.1.0.69587
+```
 
-- Adds a deep reference-addon pattern guide from a second pass over Plater and DandersFrames.
-- Adds controlled extension and scripting-system rules: fixed hook catalog, trigger registry, guarded dispatch, metadata, quarantine, and stable public API.
-- Adds Adapter / Resolver / Renderer pipeline rules for complex visual editors, text systems, aura/alert systems, minimap providers, and previews.
-- Adds capability gates and feature-flag rules for API availability, optional libraries, combat safety, and known taint risks.
-- Adds self-healing configuration rules for imported profiles that reference missing fonts, textures, sounds, or SharedMedia entries.
-- Adds object-pool reset discipline, including when not to pool stale-prone UI components.
-- Adds post-load validation, category-scoped import/export merging, explicit auto-profile switching, safe ownership-filtered profilers, foreign attachment scanning, alert state machines, option dependency graphs, and design-token rules.
+Rules:
 
-## Earlier v1.9.0 additions
-
-- Adds a reference-addon architecture pattern guide extracted from the two uploaded high-download reference addons: Plater and DandersFrames.
-- Adds deterministic TOC load-order rules covering libraries, locales, templates, defaults, DB/migration, utilities, UI factory, modules, options/tools, and final bootstrap.
-- Adds root namespace and public/private boundary rules using one addon table, private internals, and optional documented `API.lua`.
-- Adds architecture tiers for small, medium, and large QFX addons so small addons are not over-engineered.
-- Adds lifecycle phase guidance for `ADDON_LOADED`, `PLAYER_LOGIN`, `PLAYER_ENTERING_WORLD`, combat enter/leave, and logout.
-- Adds module registry rules, targeted event dispatcher guidance, refresh coalescing rules, and diagnostic counters.
-
-## Earlier v1.8.0 additions
-
-- Adds a DandersFrames-inspired complex settings UI reference extracted from the uploaded reference addon.
-- Adds persistent collapsible group rules with SavedVariables-backed state, group summaries, and automatic relayout.
-- Adds semantic banner rules for info/warning/caution/danger/success notices.
-- Adds `See Also` cross-page navigation guidance to avoid duplicate controls.
-- Adds a searchable settings registry model with stable IDs, breadcrumbs, aliases, widget types, and jump/highlight callbacks.
-- Adds guided setup wizard rules for first-run and multi-step batch configuration.
-- Adds profile/global/spec/mode override indicator rules with reset-to-parent behavior.
-
-## Earlier v1.7.0 additions
-
-- Adds a Plater-inspired reference pattern extracted from the uploaded reference addon.
-- Adds rules for table-driven options pages: localized option tables, shared templates, and one global change callback.
-- Adds tab-container guidance for many settings categories, including delayed creation for heavy pages.
-- Adds searchable settings guidance: collect option metadata, group matches by tab and section, and avoid duplicating real controls.
-- Adds reusable scroll-row guidance for spell/media/list editors using create-line plus refresh-line separation.
+- Live is the production contract.
+- PTR is warning/compatibility input only until the same API reaches `live`.
+- Never mix branches or infer API signatures from memory.
+- Re-check `Blizzard_APIDocumentationGenerated` whenever the build changes.
+- Treat Aura, Unit, Spell/Cooldown, TTS, secure frames, ScriptBindings, and Secret/Forbidden APIs as high risk.
 
 ## Install as a local personal plugin
 
@@ -147,8 +112,6 @@ Depending on your marketplace root, adjust `source.path` so it points to the plu
 
 ## Install as a raw skill only
 
-Copy the skill folder directly:
-
 ```bash
 mkdir -p ~/.agents/skills
 cp -R qfx-wow-addon-ui-plugin/skills/qfx-wow-addon-ui ~/.agents/skills/qfx-wow-addon-ui
@@ -176,31 +139,20 @@ $qfx-wow-addon-ui Review this addon settings UI and architecture. Find release b
 
 ## Reference files
 
-The skill includes these references:
+The skill includes references for:
 
-- `qfx-ui-architecture.md`
-- `modular-addon-architecture.md`
-- `refresh-performance-rules.md`
-- `event-onupdate-rules.md`
-- `compact-multilingual-layout.md`
-- `ui-typography-localization-zh.md`
-- `ui-visual-standards.md`
-- `ui-states-accessibility.md`
-- `wow-12-api-source-rules.md`
-- `wow-12.0.7-to-12.1-api-migration-zhCN.md`
-- `wow-12.1.0-live-api-final-zhCN.md`
-- `deep-reference-addon-patterns.md`
-- `reference-addon-architecture-patterns.md`
-- `dandersframes-complex-settings-ui.md`
-- `plater-options-ui-patterns.md`
-- `blizzard-native-ui-checklist.md`
-- `wow-12-secret-value-taint.md`
-- `ui-factory-dialog-mode-rules.md`
-- `large-list-collection-sound-ui.md`
-- `complex-addon-ui-patterns.md`
-- `combat-lockdown-deferred-apply.md`
-- `packaging-release-checklist.md`
-- `safe-font-media-rules.md`
-- `savedvariables-migration.md`
-- `version-compat-boundaries.md`
-- `modification-traceability.md`
+- QFX UI architecture and modular addon design.
+- Refresh/performance and event/OnUpdate rules.
+- English-first multilingual layout, typography, visual standards, and accessibility.
+- WoW 12.x API source-grounding.
+- 12.0.7 → 12.1 migration history.
+- Current 12.1 Live/PTR API baseline.
+- Secret-value / taint / ForbiddenAspect safety.
+- Blizzard-native UI review.
+- Plater / DandersFrames / EllesmereUI-inspired architecture patterns.
+- Combat-lockdown deferred apply.
+- Packaging, SavedVariables migration, version compatibility, and modification traceability.
+
+The authoritative current API file is:
+
+`skills/qfx-wow-addon-ui/references/wow-12.1.0-live-api-final-zhCN.md`
