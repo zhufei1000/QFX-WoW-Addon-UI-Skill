@@ -124,3 +124,42 @@ Rules:
 - Use layout helpers such as `PlaceModule`, `PlaceControl`, and `CreateFieldLabel`.
 - Do not scatter magic coordinates in business logic files.
 - Three-column rows such as ID / Name / Cooldown must use named constants.
+
+## 11. UI factory boundaries and dialog rules
+
+The UI factory centralizes repeated control creation: buttons, checkboxes, dropdowns, sliders, input boxes, section headers, card frames, font/color helpers, and tooltip helpers. Do not place addon business rules in the UI factory.
+
+Dialogs must:
+- Use consistent width and padding, aligned labels and controls.
+- Keep controls inside the card/module boundary.
+- Clamp to screen where needed.
+- Hide dropdowns and child popups when closing.
+- Avoid rebuilding unsaved editor state during language changes.
+
+## 12. Mode-specific controls
+
+If the UI supports multiple display modes:
+- Show controls only in the relevant mode.
+- Hide irrelevant controls instead of leaving disabled clutter.
+- Keep per-mode settings separate when behavior differs.
+- When an item is disabled/hidden, remove it from related sorting lists if appropriate.
+
+## 13. Combat lockdown deferred apply
+
+Use this when a setting may affect protected frames or combat-sensitive behavior.
+
+When a setting is changed:
+
+1. Save the setting immediately.
+2. If not in combat, apply it immediately.
+3. If in combat, mark apply pending and apply after `PLAYER_REGEN_ENABLED`.
+
+Do not:
+- Mutate protected frames in combat.
+- Rebuild protected frame layouts during combat.
+- Spam chat for every deferred setting change.
+- Lose the user's setting just because apply is delayed.
+
+Good feedback is one small status line such as `This change will apply after combat.` Avoid repeated warnings.
+
+Test: change the setting out of combat; change it in combat; leave combat and verify the pending apply happens once; reload after a deferred setting and verify the saved state remains correct.

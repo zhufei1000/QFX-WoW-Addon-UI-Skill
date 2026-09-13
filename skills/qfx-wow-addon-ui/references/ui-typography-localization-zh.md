@@ -19,7 +19,7 @@ Rules:
 
 - Prefer Blizzard stock fonts (`STANDARD_TEXT_FONT` and template fonts). Do not bundle CJK fonts unless the addon must guarantee identical glyphs across clients.
 - Blizzard handles locale-appropriate fallback for CJK glyphs automatically when using stock fonts; do not hardcode `Fonts\\ARKai_T.TTF`-style paths unless the project deliberately owns them.
-- Never call `FontString:SetFont` with symbolic presets such as `AUTO`, `DEFAULT`, `BLIZZARD`, empty string, or nil (see `safe-font-media-rules.md`).
+- Never call `FontString:SetFont` with symbolic presets such as `AUTO`, `DEFAULT`, `BLIZZARD`, empty string, or nil (see `lists-media-sound-ui.md`).
 - If the addon exposes a font picker (LibSharedMedia), missing fonts must fall back safely and never break the panel.
 - For custom-drawn text (rare), test the same string in all three locales; CJK glyphs can shift metrics between zhCN and zhTW fonts.
 

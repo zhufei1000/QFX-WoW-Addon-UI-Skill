@@ -1,39 +1,22 @@
-# QFX WoW Addon UI Codex Skill
+# QFX WoW Addon UI Skill
 
-Version: 1.17.0
+Version: 1.18.0
 
-This package contains a Codex plugin with one skill:
+This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
-- `qfx-wow-addon-ui`
+- `skills/qfx-wow-addon-ui/SKILL.md`
+- `skills/qfx-wow-addon-ui/references/*.md`
 
-It is designed for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions.
+## What v1.18.0 changes
 
-## What v1.17.0 changes
-
-- Updates the current WoW 12.1.0 baseline to **Live 12.1.0.69497** and **PTR 12.1.0.69587** (verified 2026-09-01).
-- Separates **Live production contracts** from **PTR-only warnings**, so preview APIs are not treated as Retail-ready by default.
-- Records the Live 69404 `HookScript` / `SetScript` change for `SimpleAnimAPI`, `SimpleAnimGroupAPI`, and `SimpleScriptRegionAPI`: `SecretArguments = NotAllowed` became `AllowedWhenUntainted`, while assignable-script and `ForbiddenAspect.ScriptBindings` checks remain.
-- Records the Live 69465 `UnitCanAssist` signature extension, the new `UnitIsPlayerControlledOrGroupMember(unit)` API, and Blizzard's updated Aura identity-filter behavior.
-- Records Blizzard Private Aura behavior showing `visualAlert` can be secret because it derives from a secret spell ID; Blizzard's internal secure-environment `secretunwrap` use is explicitly not treated as an addon-accessible bypass.
-- Records the Live 69497 TTS contract change: `C_VoiceChat.SpeakText().text` and `VOICE_CHAT_TTS_PLAYBACK_BOOKMARK.bookmarkName` are now `ConditionalSecret`.
-- Records CooldownViewer equip-slot GCD filtering and CooldownBroadcaster's separate `InterruptSpellsBySpec` tracking model with six base cooldowns plus up to two interrupt cooldowns.
-- Adds the PTR 69587 warning for `C_LFGInfo.IsInMatchmadeRaidWithoutRoleRequirements()` and Blizzard CompactRaidFrames' use of it for Main Tank / Main Assist layout handling.
-- Updates `.codex-plugin/plugin.json` to version 1.17.0.
-
-## Earlier API milestones
-
-### v1.16.2
-
-- Re-verified WoW 12.1.0 at build 69299.
-- Recorded the PTR Discord catch-up: `C_Discord.GetDiscordUserName(userID)`, removal of `DiscordChatInfo.username`, and the current `GetDiscordUserCommunityLink` signature.
-
-### v1.16.1
-
-- Re-verified Live 69283 / PTR 69273 against the 69214 high-risk API baseline.
-
-### v1.15.0
-
-- Confirmed the 12.0.7 → 12.1 migration details around `RequiresUnitAuraAccess`, `ForbiddenAspect`, `SecretAspect.RadialProgress`, Aura sound API replacement, Unit identity predicates, and CooldownViewer data changes.
+- Adds YAML frontmatter (`name` + `description`) to `SKILL.md` so the skill is discoverable by opencode and other `SKILL.md`-based agents.
+- Rewrites `SKILL.md` from 477 lines to a lean overview that delegates detail to references, removing duplicated architecture/refresh/supplement passages.
+- Consolidates small overlapping references:
+  - packaging, version compatibility, SavedVariables migration, and traceability → `references/release-and-compatibility.md`
+  - large lists, collections, sound/TTS, and font/media safety → `references/lists-media-sound-ui.md`
+  - UI factory/dialog/mode rules and combat-lockdown deferred apply → folded into `references/complex-addon-ui-patterns.md`
+- Documents the opencode install path alongside the Codex plugin install.
+- Syncs version numbers across `README.md`, `INSTALL.md`, and `.codex-plugin/plugin.json`.
 
 ## Core design guidance
 
@@ -72,9 +55,20 @@ Rules:
 - Re-check `Blizzard_APIDocumentationGenerated` whenever the build changes.
 - Treat Aura, Unit, Spell/Cooldown, TTS, secure frames, ScriptBindings, and Secret/Forbidden APIs as high risk.
 
-## Install as a local personal plugin
+## Install in opencode
 
-1. Copy `qfx-wow-addon-ui-plugin` to a local plugin folder, for example:
+Copy the skill folder into a scanned skill path:
+
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\opencode\skills" | Out-Null
+Copy-Item -Recurse -Force ".\skills\qfx-wow-addon-ui" "$env:USERPROFILE\.config\opencode\skills\qfx-wow-addon-ui"
+```
+
+Alternatively use the auto-loaded external path `~/.agents/skills/qfx-wow-addon-ui`. Restart opencode after copying; the skill loads from `SKILL.md` frontmatter and is not hot-reloaded.
+
+## Install as a Codex plugin
+
+1. Copy the plugin folder to a local plugin location, for example:
 
 ```bash
 mkdir -p ~/.codex/plugins
@@ -106,11 +100,9 @@ cp -R qfx-wow-addon-ui-plugin ~/.codex/plugins/qfx-wow-addon-ui-plugin
 }
 ```
 
-Depending on your marketplace root, adjust `source.path` so it points to the plugin folder.
+Depending on your marketplace root, adjust `source.path` so it points to the plugin folder. Restart Codex and install the plugin from Plugins.
 
-3. Restart Codex and install the plugin from Plugins.
-
-## Install as a raw skill only
+## Install as a raw skill only (Codex)
 
 ```bash
 mkdir -p ~/.agents/skills
@@ -122,19 +114,19 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
-$qfx-wow-addon-ui Use the primary QFX design method to review this addon: choose small/medium/large scale, preserve native visuals, size the layout from English first, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
+Use qfx-wow-addon-ui to review this addon with the primary QFX design method: choose small/medium/large scale, preserve native visuals, size the layout from English first, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
 ```
 
 ```text
-$qfx-wow-addon-ui Review this multilingual settings UI using English as the base layout language, then verify Simplified Chinese and Traditional Chinese for overflow, clipping, row balance, and runtime language switching.
+Use qfx-wow-addon-ui to review this multilingual settings UI with English as the base layout language, then verify Simplified Chinese and Traditional Chinese for overflow, clipping, row balance, and runtime language switching.
 ```
 
 ```text
-$qfx-wow-addon-ui Verify this addon against WoW 12.x API sources before coding: check current UI source/resources, branch/build, deprecated APIs, secret-value/taint risk, compatibility wrappers, and final API assumptions.
+Use qfx-wow-addon-ui to verify this addon against WoW 12.x API sources before coding: check current UI source/resources, branch/build, deprecated APIs, secret-value/taint risk, compatibility wrappers, and final API assumptions.
 ```
 
 ```text
-$qfx-wow-addon-ui Review this addon settings UI and architecture. Find release blockers, layout drift, architecture drift, localization gaps, taint risks, API risks, performance problems, and packaging completeness.
+Use qfx-wow-addon-ui to review this addon settings UI and architecture. Find release blockers, layout drift, architecture drift, localization gaps, taint risks, API risks, performance problems, and packaging completeness.
 ```
 
 ## Reference files
@@ -144,14 +136,12 @@ The skill includes references for:
 - QFX UI architecture and modular addon design.
 - Refresh/performance and event/OnUpdate rules.
 - English-first multilingual layout, typography, visual standards, and accessibility.
-- WoW 12.x API source-grounding.
-- 12.0.7 → 12.1 migration history.
-- Current 12.1 Live/PTR API baseline.
+- Complex UI patterns, lists, media, dialogs, and combat-safe apply.
+- Plater / DandersFrames / EllesmereUI-inspired architecture patterns.
+- WoW 12.x API source-grounding, the 12.0.7 → 12.1 migration history, and the current 12.1 Live/PTR baseline.
 - Secret-value / taint / ForbiddenAspect safety.
 - Blizzard-native UI review.
-- Plater / DandersFrames / EllesmereUI-inspired architecture patterns.
-- Combat-lockdown deferred apply.
-- Packaging, SavedVariables migration, version compatibility, and modification traceability.
+- Packaging, compatibility, SavedVariables migration, and modification traceability.
 
 The authoritative current API file is:
 

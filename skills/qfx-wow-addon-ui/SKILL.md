@@ -1,477 +1,204 @@
-# QFX WoW Addon UI Skill
+---
+name: qfx-wow-addon-ui
+description: Review, design, refactor, and package World of Warcraft addon UI, architecture, and API-safe Lua using QFX conventions. Use when working on WoW addons (Lua, .toc, SavedVariables, FrameXML), especially Blizzard-native settings panels, options pages, multilingual (English/Simplified Chinese/Traditional Chinese) layouts, EllesmereUI/Plater/DandersFrames-style modular architecture, combat lockdown, taint or secret-value safety, WoW 12.x (Midnight) API migration, and release packaging.
+license: MIT
+---
 
-Use this skill when reviewing, designing, refactoring, or packaging World of Warcraft addon user interfaces, addon architectures, and WoW API-safe code, especially QFX-style addons.
+# QFX WoW Addon UI
 
-This skill is optimized for:
-- Blizzard-native WoW UI style.
-- English-first layout sizing, then Simplified Chinese and Traditional Chinese verification, so English labels do not overflow and Chinese layouts remain safe.
-- Compact but readable settings panels.
-- English, Simplified Chinese, and Traditional Chinese localization.
-- WoW 12.x / Midnight API source-grounding and secret-value / taint safety.
-- Multi-version addon UI packaging.
-- QFX addon conventions: lightweight, modular, native-looking, minimal performance cost.
-- EllesmereUI-style primary design method: one scalable architecture for small, medium, and large addons using a registered settings shell when needed, deferred options creation, page cache where useful, widget refresh callbacks, central event dispatch, coalesced refresh/apply queues, temporary OnUpdate, weak-table frame state, and combat-safe deferred apply.
-- Plater-inspired option-panel supplements: tabbed categories, table-driven option rows, reusable templates, load-on-demand heavy tabs, searchable settings, reusable scroll rows, and one global change callback.
-- DandersFrames-inspired complex settings supplements: persistent collapsible groups, semantic banners, See Also navigation, searchable settings registry, guided setup wizard, profile override indicators, preview-safe editors, and advanced diagnostics.
-- Reference-addon architecture supplements from Plater and DandersFrames: deterministic TOC load order, root namespace boundaries, lifecycle phases, module registry, DB/profile migration, import/export validation, compatibility boundaries, public API separation, and lazy diagnostics.
-- Deep reference-addon supplements: controlled extension hooks, adapter/resolver/renderer pipelines, capability gates, self-healing media fallback, object-pool reset discipline, post-load validation, category-scoped imports, auto-profile switching, safe profiling, foreign attachment scans, alert state machines, option dependency graphs, and design tokens.
+Use this skill when reviewing, designing, refactoring, or packaging World of Warcraft addon UI, architecture, or API-safe code, especially QFX-style addons.
+
+Optimized for: Blizzard-native UI; English-first layout sizing verified in 简体中文 / 繁體中文; compact settings panels; trilingual localization; WoW 12.x / Midnight API source-grounding and secret-value / taint safety; multi-version packaging; QFX conventions (lightweight, modular, native-looking, minimal performance cost).
 
 ## Core goals
 
-When this skill is active, prefer:
+Prefer:
 
-1. The EllesmereUI-style scalable design method as the primary architecture baseline.
-2. Native Blizzard controls over custom-drawn controls unless the user explicitly requests a modern custom skin.
-3. English-first UI layout sizing over Chinese-first layouts that later overflow after translation.
+1. One scalable EllesmereUI-style architecture, scaled to addon size (see `references/qfx-ui-architecture.md`).
+2. Native Blizzard controls over custom-drawn controls, unless a custom skin is explicitly requested.
+3. English-first layout sizing over Chinese-first layouts that overflow after translation.
 4. Compact width-aware layout over tall sparse pages.
 5. Shared UI factory helpers over one-off widget code.
-6. Clear module boundaries over giant mixed UI files.
+6. Clear module boundaries over giant mixed files.
 7. Localized strings over hardcoded UI text.
-8. Deferred combat-safe apply over direct protected-frame changes in combat.
-9. Runtime modules that do not require options pages to be opened.
-10. Deferred heavy options initialization over startup-time settings construction.
-11. Widget refresh callbacks and targeted refresh over repeated full-page rebuilds.
-12. Central event dispatch and coalesced refresh over duplicate high-frequency event handlers.
-13. Temporary active-only OnUpdate over permanent idle polling.
-14. Weak-table state for Blizzard or foreign frames when ownership, lifecycle, or taint risk exists.
+8. Deferred combat-safe apply over direct protected-frame edits in combat.
+9. Runtime modules that work without opening any options page.
+10. Deferred heavy options init; widget refresh callbacks; coalesced refresh/apply.
+11. Central dispatch for high-frequency events; temporary active-only `OnUpdate`.
+12. Weak-table state for Blizzard/foreign frames when ownership or taint risk exists.
+13. Source-grounded WoW API use over recalled signatures.
+14. Minimal, traceable diffs with rollback notes.
 15. Release-ready packaging checks over code-only edits.
-16. Minimal-diff, traceable changes with clear rollback notes.
-17. Source-grounded WoW API usage over memory-based API guesses.
-18. Reference-addon patterns as design guidance, not asset or library copying.
+16. Reference-addon patterns as design guidance, never asset/library copying.
 
-## Mandatory WoW UI constraints
+## Required UI constraints
 
 ### Native first
 
-Prefer Blizzard templates and standard visual behavior:
-- `UIPanelButtonTemplate`
-- `UICheckButtonTemplate`
-- `UIDropDownMenuTemplate` or a project-local wrapper that mimics Blizzard dropdown behavior
-- `OptionsSliderTemplate` or native slider equivalents
-- `InputBoxTemplate`
-- `BackdropTemplateMixin` where required
-
-Do not mix many visual systems in the same panel unless the addon already does so and a migration is explicitly requested.
+Prefer Blizzard templates: `UIPanelButtonTemplate`, `UICheckButtonTemplate`, `UIDropDownMenuTemplate` (or a local wrapper that mimics it), `OptionsSliderTemplate`, `InputBoxTemplate`, `BackdropTemplateMixin`. Do not mix native, AceGUI, and custom-drawn systems in one panel unless the addon already does and migration is requested.
 
 ### English-first multilingual layout
 
-For any UI that supports English, Simplified Chinese, and Traditional Chinese, design width from English first.
+For EN + 简体中文 + 繁體中文 support, design width from English first, then verify the Chinese locales. English is the base because its strings are usually longer.
 
-Rules:
-- Treat English as the base layout language because English strings are usually longer than Chinese.
-- Size labels, buttons, dropdowns, tabs, section titles, and column widths against English strings first.
-- Then verify Simplified Chinese and Traditional Chinese.
-- Do not design a tight Chinese layout and translate it to English afterward.
-- If English overflows, fix the layout structure with a wider control, full-width row, shorter visible label, tooltip description, fewer columns, or more horizontal space.
-- Do not solve English overflow by shrinking fonts below the QFX standard unless there is no better layout option.
+- Size labels, buttons, dropdowns, tabs, section titles, and column widths against English strings.
+- If English overflows, fix the layout structure (wider control, full-width row, shorter visible label, tooltip description, fewer columns, more space) instead of shrinking fonts below the QFX standard.
+- Never design a tight Chinese layout and translate to English afterward.
 
-For details, read `references/compact-multilingual-layout.md` and `references/ui-typography-localization-zh.md`.
+Details: `references/compact-multilingual-layout.md`, `references/ui-typography-localization-zh.md`.
 
-### UI visual standards
+### Visual standards
 
-Every QFX panel should follow one pixel-level visual baseline so repeated work stays consistent. Read `references/ui-visual-standards.md` before building panels.
+Follow one pixel-level baseline so repeated work stays consistent. Read `references/ui-visual-standards.md` before building panels.
 
-Rules:
-- Use a 4px spacing grid; row heights of 24/28/32px.
-- Standard control sizes: buttons 22-24px high with min width 80px or measured EN text + 28px padding; checkbox 16px; color swatch 24-32px wide with no label inside.
-- Left label column 160-200px, sized from English text first and kept under 40% of panel width; numeric values right-align, text values left-align.
-- Keep a 3-level font hierarchy (title / label / desc) plus inherited template text; never shrink fonts below the QFX standard to fix overflow.
-- Define semantic colors by purpose (normal, muted, warning, danger, success, accent) and never convey state with color alone.
-- Dialogs use standard width tiers: narrow 320-400px, standard 640-720px, wide 800-960px; clamp to screen and respect UI scale.
+- 4px spacing grid; row heights of 24/28/32px.
+- Standard sizes: buttons 22-24px high, min width 80px or measured EN text + 28px padding; checkbox 16px; color swatch 24-32px wide with no label inside.
+- Left label column 160-200px, sized from English first and kept under 40% of panel width; numeric values right-align, text values left-align.
+- 3-level font hierarchy (title / label / desc) plus inherited template text.
+- Semantic colors by purpose (normal, muted, warning, danger, success, accent); never convey state with color alone.
+- Dialog width tiers: narrow 320-400px, standard 640-720px, wide 800-960px; clamp to screen and respect UI scale.
 - Preserve scroll position across tab switches and reopen; scroll target rows into view after search/jump.
 
 ### UI states and accessibility
 
-Panels must cover empty, loading, error, success, and confirm states, and stay usable without a mouse. Read `references/ui-states-accessibility.md` for details.
+Panels must cover empty, loading, error, success, and confirm states, and stay usable without a mouse. Read `references/ui-states-accessibility.md`.
 
-Rules:
 - Empty lists show a localized hint plus one action button.
-- Long operations show the Blizzard spinner/progress and refresh only the affected region on completion.
+- Long operations show a native spinner/progress and refresh only the affected region.
 - Input errors are inline and non-modal, paired with text, not color alone.
-- Destructive actions (reset, delete, overwrite import) use a narrow confirm dialog with a verb-labeled danger button; Esc cancels.
-- Panels are fully keyboard-navigable: logical Tab order, arrow keys in lists/dropdowns, visible focus state, Esc closes popup then dialog.
-- Keep text contrast at Blizzard template levels; never go below 11px for user-facing text; test at 150%+ UI scale.
+- Destructive actions use a narrow confirm dialog with a verb-labeled danger button; Esc cancels.
+- Panels are keyboard-navigable: logical Tab order, arrow keys in lists/dropdowns, visible focus, Esc closes popup then dialog.
+- Keep contrast at Blizzard template levels; never below 11px for user-facing text; test at 150%+ UI scale.
 - Animations stay short (150-300ms), non-looping, stoppable, and skipped when the player disables motion.
 
-### Reference addon use
+## Architecture by addon size
 
-When the user supplies a reference addon such as EllesmereUI, Plater, or DandersFrames, extract reusable design, architecture, and runtime rules only.
+Full structure and examples: `references/qfx-ui-architecture.md`, `references/modular-addon-architecture.md`.
 
-Use EllesmereUI-style rules as the primary design method for:
-- small-addon, medium-addon, and large-addon architecture scaling;
-- registered settings shells;
-- module metadata and page builders;
-- runtime/options separation;
-- deferred options initialization;
-- page cache and page invalidation;
-- widget refresh callbacks;
-- central high-frequency event dispatch;
-- coalesced refresh and apply queues;
-- temporary OnUpdate discipline;
-- weak-table state storage;
-- combat-safe deferred apply.
+- **Small**: simple root namespace, small DB/defaults, optional localization/options, one local event frame. Do not add a settings shell, page cache, search registry, or central dispatcher unless repeated settings, heavy lists, or high-frequency events exist.
+- **Medium**: `Core/` (Init, Events, DB, Migration, Localization), `UI/` (UIFactory, Skin, MainFrame, Options, Dialogs, Dropdown, Lists), `Modules/`, `Media/`, `Compat/` (Version, Blizzard). Runtime modules expose `Enable`, `Disable`, `Apply`, `Refresh`, optional `GetStatus`. Options pages call module APIs; they never own runtime state. Heavy options UI is created only when opened. Repeated refreshes use `RequestRefresh`.
+- **Large / suite**: add only needed boundaries — `ModuleRegistry`, `PageCache`, `RefreshRegistry`, `SearchRegistry`, `Dispatcher`, `RefreshQueue`, lazy `Diagnostics`, `ImportExport`, and `API.lua` for external access. One registered shell for module navigation; page cache with explicit invalidation; widget refresh callbacks; central dispatch; search indexes real setting metadata (no duplicate controls); diagnostics lazy-loaded.
 
-Use earlier QFX, Plater-inspired, DandersFrames-inspired, native-UI, and WoW API rules as supplements. If they conflict with the EllesmereUI-style method on UI lifecycle, refresh strategy, event dispatch, OnUpdate behavior, or runtime performance, prefer the EllesmereUI-style method.
+## Runtime and performance discipline
 
-This priority does not override the QFX visual preference. Keep QFX addons Blizzard-native by default unless the user explicitly asks for custom-drawn visuals.
+Details: `references/refresh-performance-rules.md`, `references/event-onupdate-rules.md`.
 
-Do not copy bundled fonts, textures, icons, sounds, third-party libraries, or brand-specific art from reference addons into QFX addons unless the user explicitly requests it and licensing is verified.
+- Coalesce refreshes via `RequestRefresh(reason, scope)`; merge repeated reasons and record the last reason for diagnostics.
+- Centralize high-frequency events in one dispatcher instead of many modules filtering the same global event.
+- Use widget refresh callbacks for value/status updates instead of full-page rebuilds.
+- Use temporary, active-only `OnUpdate`; never permanent idle polling.
+- Use weak-table side state for foreign/Blizzard frames; do not wrap secure frames.
 
-## Primary QFX design method
+## Combat lockdown and apply safety
 
-For all QFX addons, choose the right scale.
+Details: `references/complex-addon-ui-patterns.md`.
 
-### Small addon
+If a setting touches protected frames or frames likely to become protected: save immediately, apply immediately out of combat, and if in combat mark apply pending and apply once on `PLAYER_REGEN_ENABLED`. Never mutate protected frames in combat, never spam chat for each deferred change, and never lose the user's setting because apply was delayed.
 
-Use a simple root namespace, small DB/defaults, optional localization, optional options page, and one local event frame.
+## WoW 12.x API grounding and secret/taint safety
 
-Do not add a large settings shell, page cache, search registry, or central dispatcher unless the addon has repeated settings, heavy lists, or high-frequency events.
+Read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs. For 12.0.7 → 12.1.0 migration, read `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`. For the current live baseline, read `references/wow-12.1.0-live-api-final-zhCN.md`.
 
-### Medium addon
+- Prefer current FrameXML/UI source, extracted interface resources/API dumps, Warcraft Wiki notes, then same-branch addon examples.
+- Match the branch and build first (live, ptr, beta, Retail, Classic, MoP, TBC, Titan must not be mixed). Live is the production contract; PTR is warning-only.
+- Treat spell, aura, cast/interrupt, unit, tooltip, `C_` namespaces, secure frames, addon compartment, minimap, TTS, templates, mixins, and deprecated globals as high-risk until verified.
+- Isolate version-sensitive APIs in `Compat` wrappers; never scatter branch checks through feature modules.
+- Never invent a 12.x signature from memory. If unsure, search current sources, wrap the API, and report the assumption.
+- Do not compare, store, serialize, or do arithmetic on secret values; avoid combat decisions based on protected/secret results. Prefer event-driven approximations, fixed timers, cached safe values, or user configuration.
+- If an error mentions `a secret boolean value`, `a secret number value`, or `execution tainted by`, treat it as a taint/secret issue, not a normal Lua type bug.
 
-Use:
+Details: `references/wow-12-secret-value-taint.md`.
 
-```text
-Core/
-  Init.lua
-  Events.lua
-  DB.lua
-  Migration.lua
-  Localization.lua
-UI/
-  UIFactory.lua
-  Skin.lua
-  MainFrame.lua
-  Options.lua
-  Dialogs.lua
-  Dropdown.lua
-  Lists.lua
-Modules/
-  ModuleName.lua
-Media/
-  Media.lua
-Compat/
-  Version.lua
-  Blizzard.lua
-```
+## Options UI supplements
 
-Rules:
-- Runtime modules expose `Enable`, `Disable`, `Apply`, `Refresh`, and optional `GetStatus` functions.
-- Options pages call module APIs; they do not own runtime state.
-- Heavy options UI is created only when the settings panel is opened.
-- Repeated controls use the shared UI factory or table-driven option rows.
-- Repeated refreshes use `RequestRefresh` or equivalent.
-- Layout width is validated against English strings before Chinese localization is considered complete.
+Use the primary QFX method first; these are supplements for large settings panels.
 
-### Large addon or addon suite
+- **Plater-inspired** (`references/plater-options-ui-patterns.md`): tab container; one table of category definitions; load-on-demand for heavy tabs; table-driven option rows (`type`, `name`, `desc`, `get`, `set`, `values`, `min`, `max`, `step`); one global change callback; search as an index over existing metadata; split row creation from row refresh.
+- **DandersFrames-inspired** (`references/dandersframes-complex-settings-ui.md`): persistent collapsible groups; semantic banners (combat lockdown, destructive, secret limits, missing libs); `See Also` cross-page navigation; searchable metadata with stable IDs, breadcrumbs, aliases, jump/highlight; first-run wizards that write through the same DB/module APIs; profile/global/spec override indicators with safe reset-to-parent; preview-safe proxy editors; lazy advanced diagnostics.
+- **Reference-architecture** (`references/reference-addon-architecture-patterns.md`, `references/deep-reference-addon-patterns.md`): deterministic TOC load order; one root namespace; lifecycle phases (`ADDON_LOADED`, `PLAYER_LOGIN`, `PLAYER_ENTERING_WORLD`, combat enter/leave, logout); one module registry; DB defaults/schema/migrations/profiles separated; import/export validation pipeline (decode → decompress → deserialize → validate → migrate → preview → apply → refresh); graceful media fallbacks; stable public API in `API.lua`. Add controlled extension hooks, adapter/resolver/renderer pipelines, capability gates, object pools, auto-profile switching, and opt-in profilers only when the addon truly needs them.
 
-Add only the boundaries the addon needs:
+## Lists, media, and complex UI
 
-```text
-UI/
-  ModuleRegistry.lua
-  PageCache.lua
-  RefreshRegistry.lua
-  SearchRegistry.lua
-Core/
-  Dispatcher.lua
-  RefreshQueue.lua
-Debug/
-  Diagnostics.lua
-ImportExport/
-  ImportExport.lua      if needed
-API.lua                 if external access is needed
-```
+Details: `references/lists-media-sound-ui.md`, `references/complex-addon-ui-patterns.md`.
 
-Rules:
-- Use one registered settings shell for module navigation.
-- Modules register title, description, pages, page builders, refresh hooks, and reset hooks.
-- Page cache is allowed but must have invalidation rules.
-- Widget refresh callbacks handle value/status refreshes.
-- Central dispatch handles shared high-frequency events.
-- Search indexes real setting metadata and jumps to real controls; it does not duplicate controls.
-- Debug/profiling is lazy-loaded or explicitly enabled.
-- The settings shell, tabs, module list, buttons, dropdowns, and searchable metadata are sized from English first.
-
-## WoW 12.x API source-grounding rules
-
-For Retail 12.x / Midnight API correctness, read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs.
-
-For migration or review of addons between 12.0.7 live and 12.1.0 PTR, read `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`; it documents verified Aura access gating, the AuraContainer display layer, Unit identity/possession secret predicates, ForbiddenAspect/SecretAspect changes, and CooldownViewer data extensions for the current PTR build.
-
-Key rules:
-- A GitHub search did not find a ready-made public `WoW 12.0 API Codex Skill`; use current source/resource repositories and API documentation instead.
-- Prefer current FrameXML/UI source, extracted interface resources/API dumps, Warcraft Wiki API notes, and same-branch addon examples in that order.
-- Match the branch and build before trusting signatures: live, ptr, ptr2, beta, Retail, Classic, MoP, TBC, and Titan must not be mixed.
-- Treat spell, aura, cast/interrupt, unit, tooltip, C_ namespace, secure frame, addon compartment, minimap, TTS, template, mixin, and deprecated global APIs as high-risk until verified.
-- Isolate version-sensitive APIs in `Compat` wrappers; do not scatter raw branch checks through feature modules.
-- Never invent a 12.x API signature from memory. If unsure, search current source/dumps/wiki, wrap the API, and report the assumption.
-- Secret-value and taint errors require redesign around safe events, fixed timers, cached safe values, or user configuration, not only nil/boolean guards.
-
-## Secret value / taint safety
-
-For Retail 12.x and modern WoW builds:
-- Do not compare, store, serialize, or arithmetic secret values.
-- Avoid direct decisions based on protected/secret results during combat.
-- Be careful with APIs returning protected booleans, spell availability, cooldowns, unit health/power, aura internals, or interruptibility.
-- Prefer event-driven approximations, fixed timers, cached safe values, or user-provided configuration.
-
-If a reported error includes phrases like:
-- `a secret boolean value`
-- `a secret number value`
-- `execution tainted by`
-
-then treat it as a taint/secret-value issue, not a normal Lua type bug.
-
-## Plater-inspired options UI supplements
-
-For addons with many option categories, read `references/plater-options-ui-patterns.md` as a supplement to the primary QFX design method.
-
-Key rules:
-- Use a tab container when one scrolling page would become too long or mixed.
-- Put category definitions in one table with stable tab names and localized labels.
-- Use load-on-demand creation for heavy tabs such as search, profile, designer, media, import/export, or advanced pages.
-- Describe rows through option tables where possible: `type`, `name`, `desc`, `get`, `set`, `values`, `min`, `max`, and `step`.
-- Route option changes through one global callback that updates DB cache and applies only the required refresh.
-- Keep search as an index over existing option metadata, not a second duplicate settings UI.
-- For scroll lists, split line creation from line refresh and reuse row frames.
-- Show combat state clearly when live changes may be blocked or deferred.
-
-## DandersFrames-inspired complex settings supplements
-
-For large addons with many modules, profiles, visual editors, or first-run setup flows, read `references/dandersframes-complex-settings-ui.md` as a supplement to the primary QFX design method.
-
-Key rules:
-- Use persistent collapsible groups to keep large pages compact without losing setting context.
-- Use semantic banners for combat lockdown, destructive actions, secret-value limitations, missing libraries, and compatibility warnings.
-- Use `See Also` cross-page navigation instead of duplicating the same setting in several tabs.
-- Register searchable settings metadata with stable IDs, breadcrumbs, aliases, widget type, and jump/highlight callbacks.
-- Use guided setup wizards only for first-run or multi-step batch configuration; wizards must write through the same DB/module APIs as the real settings page.
-- Show profile/global/spec/mode override status when settings can come from multiple layers, and provide safe reset-to-parent behavior.
-- For visual editors, use preview-safe proxy data so Save commits and Cancel discards changes.
-- Advanced diagnostic pages should be lazy-loaded, hidden from normal users, and useful for bug reports without constantly running expensive scanners.
-
-## Reference-addon architecture supplements
-
-For plugin architecture ideas extracted from Plater and DandersFrames, read `references/reference-addon-architecture-patterns.md` and `references/deep-reference-addon-patterns.md` as supplements.
-
-Key rules:
-- Use deterministic TOC load order: libraries, locales, templates, defaults, DB/migration, utilities, UI factory, modules, options/tools, and final bootstrap.
-- Use one root namespace from `local addonName, ns = ...`; keep private internals file-local or under `Internal`.
-- Define lifecycle phases for `ADDON_LOADED`, `PLAYER_LOGIN`, `PLAYER_ENTERING_WORLD`, combat enter/leave, and logout.
-- Runtime modules must not require option pages to be opened.
-- Use one module registry; prevent duplicate module, DB, UI factory, locale, media, and event systems.
-- Use targeted or central event dispatchers for high-frequency unit/events; avoid many modules filtering the same global event independently.
-- Coalesce refreshes with `RequestRefresh(reason, scope)` and record last refresh reason for diagnostics.
-- Keep DB defaults, schema version, migrations, profiles, and per-character data clearly separated.
-- Import/export should use a validate pipeline: decode, decompress, deserialize, validate, migrate, preview/summary, apply, refresh.
-- Optional libraries and media must degrade gracefully and resolve to real asset paths before WoW API calls.
-- Public API and callbacks belong in `API.lua`; expose stable functions, not raw internal DB tables.
-
-## Deep architecture supplements
-
-For advanced larger-addon work, read `references/deep-reference-addon-patterns.md`.
-
-Key rules:
-- Add controlled extension/scripting systems only when the addon truly needs presets, user packs, external integrations, or user-defined logic.
-- Extension systems need a fixed hook catalog, trigger registry, metadata, guarded dispatch, error quarantine, and a small public API instead of raw DB access.
-- Use Adapter / Resolver / Renderer pipelines for complex visual editors, text systems, aura/alert systems, minimap providers, and preview pages.
-- Centralize capability gates and feature flags so missing APIs, optional libraries, combat safety, and known taint risks have clear reasons.
-- Imported profiles must self-heal missing media by resolving assets, falling back to stock paths, warning once, and exposing diagnostics.
-- Use object pools only with explicit reset/release discipline; rebuild small stale-prone components when pooling causes state leaks.
-- Auto-profile switching must be explicit, validated, combat-safe, and visible in diagnostics.
-- Profilers and debug hooks must be opt-in, ownership-filtered, and must never wrap Blizzard secure frames or foreign addon frames.
-- Alert engines should use explicit state machines and cleanup all timers/tickers on stop, profile switch, spec change, logout, or module disable.
-- Centralize option dependency graphs so enabling/disabling child controls is consistent and explainable.
-
-## UI factory rules
-
-A project-local UI factory should centralize:
-- Button creation.
-- Checkbox creation.
-- Dropdown creation.
-- Slider creation.
-- Section/card creation.
-- Font/color helpers.
-- Tooltip helpers.
-- Consistent spacing constants.
-- Semantic color and font-level constants matching `references/ui-visual-standards.md`.
-- Optional table-driven options row creation for large settings panels.
-- Optional empty-state, loading, inline-error, and confirm-dialog helpers for state-consistent panels.
-- Optional collapsible-section, banner, search-registration, setting-highlight, wizard, page-cache, and widget-refresh helpers for complex settings panels.
-- English-first sizing helpers for labels, buttons, tabs, dropdowns, and column widths.
-
-The UI factory should not know addon business rules. Business logic belongs in modules/controllers.
+- Reuse row frames; do not rebuild every row on every state change; keep selection state independent from row lifetime.
+- Split data building, row creation, row rendering, selection, drag/drop, and refresh.
+- Drag start records stable identity (`sourceKey`, `sourceType`, `sourceGroup`, optional `sourceIndex`); drop targets use stable keys.
+- Empty collections stay selectable if edit/delete applies to the collection itself.
+- Long sound/LibSharedMedia lists use a searchable/scrollable singleton dropdown; missing LibSharedMedia must not break the UI.
+- Resolve font/media presets to real asset paths before `SetFont`/media calls; never pass `AUTO`, `DEFAULT`, `BLIZZARD`, empty string, or nil.
 
 ## Slider layout standard
 
-For QFX addon sliders, use this layout unless the user says otherwise:
-- Slider track on the main row.
-- Minimum label under the left end of the slider.
-- Maximum label under the right end of the slider.
-- Current value centered under the slider.
-- Minimum, current, and maximum labels must be on the same horizontal line.
-- Do not place the current value to the right side of the slider in compact cards.
-- Validate the row with English min/current/max labels before accepting the Chinese layout.
+Unless the user says otherwise: track on the main row; min label under the left end, max under the right end, current value centered under the track, all three on the same line. Do not place the current value to the right in compact cards. If `OptionsSliderTemplate` is used, hide/clear its built-in `Text`, `Low`, and `High` labels. Validate with English min/current/max labels before accepting the Chinese layout.
 
-## Large list and collection UI rules
+## Packaging and reporting
 
-For saved sound lists, voice collections, addon lists, module lists, or large option lists:
-- Reuse row frames.
-- Do not rebuild every row for every tiny state change.
-- Keep selection state independent from row object lifetime.
-- Empty collections must still be selectable if edit/delete actions apply to the collection itself.
-- If an enabled/visible checkbox controls list membership, sorting rows must update immediately when the item is hidden/shown.
-- Dragging an item out of a collection must preserve the item identity until drop completes.
-- Split row creation from row refresh and refresh only visible rows when scrolling.
-- During import or bulk edits, update the data model first and refresh once at the end.
+Details: `references/release-and-compatibility.md`.
 
-## Sound, TTS, and media picker rules
-
-For sound/TTS addon UIs:
-- Built-in sound lists can be long; use searchable or scrollable dropdowns/lists.
-- LibSharedMedia integration should not break if the library is missing.
-- TTS test buttons must use the same playback path as real alerts where possible.
-- TTS channel controls should not be disabled unless WoW API limitations require it.
-- File path inputs should explain valid relative paths.
-- Do not assume every client locale has the same TTS voice behavior.
-
-## Combat lockdown deferred apply
-
-If a setting touches protected frames or frames likely to become protected:
-- If not in combat, apply immediately.
-- If in combat, save the setting, mark apply pending, show a small note if needed, and apply on `PLAYER_REGEN_ENABLED`.
-
-Never spam chat for every deferred setting change.
-
-## Packaging and release checklist
-
-Before returning a release zip or publishable package, verify:
-- TOC exists and points to files that exist.
-- SavedVariables are declared if used.
-- Libraries are present if referenced.
-- Media files are present if referenced.
-- No missing sub-addons were dropped from the package.
-- No debug-only test files are accidentally included unless requested.
-- Version number is updated consistently.
-- Version numbers use three-part decimal integer progression: `MAJOR.MINOR.PATCH`; for example, `1.1.10` is newer than `1.1.9`.
-- Zip root folder is correct.
-- Release zip name uses addon name plus official version only, for example `QFXToolBox_0.44.20.zip`.
-- English, Simplified Chinese, and Traditional Chinese localization files are included if the addon claims three-language support.
-
-## Modification traceability
-
-For any code or package modification, final responses should include:
-- Files changed.
-- Files added.
-- Files deleted.
-- TOC impact.
-- SavedVariables impact.
-- API assumptions or branch/build assumptions.
-- Risk level.
-- Rollback notes.
-- In-game test steps.
-
-Use this even for small UI-only changes unless the user asks for a very short response.
+- Before returning a release zip: TOC exists and references existing files; SavedVariables declared; libraries and media present; no sub-addons dropped; no debug files included; version updated consistently; correct zip root; zip name is `<Addon>_<version>.zip`; all claimed locale files included.
+- Versions are three-part decimal integers `MAJOR.MINOR.PATCH`; `1.1.10` is newer than `1.1.9`. PATCH for fixes/polish/localization, MINOR for features/modules, MAJOR for rewrites or incompatible SavedVariables changes.
+- Report changes with: files changed/added/deleted, TOC impact, SavedVariables impact, API or branch/build assumptions, risk level, rollback notes, and in-game test steps.
 
 ## Minimal-diff discipline
 
-When fixing a specific issue:
-- Do not reformat unrelated files.
-- Do not rename unrelated functions.
-- Do not migrate architecture unless requested.
-- Do not delete fallbacks unless you are sure they are obsolete and the user agrees.
-- Do not change feature behavior while doing UI-only work.
+When fixing a specific issue: do not reformat unrelated files, rename unrelated functions, migrate architecture, delete fallbacks, or change feature behavior during UI-only work. Do not add AI/date trace comments; put dev traces in a dev changelog kept out of release zips.
 
-## Common user preferences for QFX addons
+## Common QFX preferences
 
-Assume these preferences unless the user says otherwise:
-- Native Blizzard-style UI, not modern web-style UI.
-- Lightweight performance.
-- No unnecessary animation.
-- Three-language support: English, 简体中文, 繁體中文.
-- English is the base layout language; Chinese and Traditional Chinese are verified after English width passes.
-- Default language follows client unless a force-language option exists.
-- Compact panels that use available width.
-- Tooltips on section titles for explanations.
-- A consistent 4px spacing grid and standard control sizes across all pages.
-- Quiet state feedback: inline errors, spinner on long loads, confirm dialogs only for destructive actions.
-- No unnecessary ElvUI/NDui compatibility unless the addon actually interacts with their frames.
-- Release zips should include all sub-addons.
-- For architecture/performance conflicts after an EllesmereUI-style reference review, prefer its scalable primary method: small/medium/large architecture tiers, deferred options loading, page cache plus widget-refresh, central dispatch, coalesced refresh, temporary OnUpdate, and weak-table state.
+Assume unless told otherwise: native Blizzard-style UI; lightweight performance; no unnecessary animation; EN/zhCN/zhTW support with English as the base layout language; default language follows client unless a force-language option exists; compact panels using available width; tooltips on section titles; consistent 4px grid and control sizes; quiet state feedback (inline errors, spinner on long loads, confirm dialogs only for destructive actions); no unnecessary ElvUI/NDui compatibility unless the addon actually interacts with their frames; release zips include all sub-addons.
 
-## What to do when asked to optimize an addon UI, architecture, or API usage
+## Workflows
+
+When asked to optimize an addon UI, architecture, or API usage:
 
 1. Inspect existing UI, architecture, and API usage first.
-2. Identify whether the addon uses native controls, Ace, custom controls, or mixed controls.
-3. Choose the correct scale: small, medium, or large addon.
-4. Use the EllesmereUI-style method as the primary structure, scaled down when needed.
-5. Inspect or draft English UI strings first, then size labels, buttons, dropdowns, tabs, and columns against English before checking Chinese.
-6. Preserve functionality and SavedVariables unless the user requests behavior changes.
+2. Identify native vs Ace vs custom vs mixed controls.
+3. Choose the scale: small, medium, or large.
+4. Apply the EllesmereUI-style method as the primary structure, scaled down when needed.
+5. Inspect/draft English UI strings first; size labels, buttons, dropdowns, tabs, columns against English before checking Chinese.
+6. Preserve functionality and SavedVariables unless behavior changes are requested.
 7. Centralize repeated UI logic into the existing factory/helpers.
-8. For WoW 12.x work, verify changed APIs against current source/resources/wiki, isolate risky calls in Compat wrappers, and report branch/build assumptions.
-9. For large option panels, apply tabs, option-table rows, delayed heavy tabs, searchable metadata, reusable scroll rows, page cache, widget refresh callbacks, and one global refresh/apply queue.
-10. For very complex settings, add DandersFrames-style collapsible groups, semantic banners, See Also navigation, setting search registry, first-run wizard, profile override indicators, preview-safe editors, and lazy diagnostic pages only when useful.
-11. Apply the pixel-level visual standards (4px grid, control sizes, label column widths, semantic colors) and check empty/loading/error/confirm states plus keyboard navigation before finishing any panel.
+8. For 12.x work, verify changed APIs against current sources, isolate risky calls in `Compat` wrappers, and report branch/build assumptions.
+9. For large panels, apply tabs, option-table rows, delayed heavy tabs, searchable metadata, reusable scroll rows, page cache, widget refresh callbacks, and one global refresh/apply queue.
+10. For very complex settings, add DandersFrames-style groups/banners/search/wizard/override indicators/preview-safe editors/lazy diagnostics only when useful.
+11. Apply the visual standards and check empty/loading/error/confirm states plus keyboard navigation before finishing any panel.
 12. Check combat-lockdown and secret-value risks if the UI applies live settings.
 13. Package and report changes clearly.
 
-## What to do when asked to update this skill
+When asked to update this skill:
 
-1. Preserve the existing skill structure.
-2. Prefer integrating new primary design rules into existing core references instead of creating a separate competing reference file.
-3. Add new focused reference files only when the content is truly separate.
-4. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version if the skill version changes.
-5. Keep names generic unless a file is intentionally a case study.
-6. Avoid reference names that make a reusable rule look like it only applies to one addon.
-7. When using a reference addon or API source, document extracted rules and explicitly avoid copying assets/libraries unless requested and licensed.
-8. When the user explicitly says a supplied reference should win conflicts, add a priority note and summarize the scope of the override.
+1. Preserve the existing structure.
+2. Integrate new primary rules into existing references instead of creating competing files.
+3. Add a focused reference only when the content is truly separate.
+4. Keep names generic unless a file is intentionally a case study.
+5. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version when the skill version changes.
+6. When using a reference addon or API source, document extracted rules and do not copy assets/libraries unless requested and licensed.
 
 ## Reference loading guide
 
-When a task involves a specific concern, read the matching reference:
-
-- Architecture and UI factory / primary QFX method: `references/qfx-ui-architecture.md`
-- Modular architecture scale tiers: `references/modular-addon-architecture.md`
-- Refresh performance, page cache, widget callbacks: `references/refresh-performance-rules.md`
-- Event/OnUpdate discipline, central dispatch, weak-table state: `references/event-onupdate-rules.md`
-- Compact multilingual and English-first layout: `references/compact-multilingual-layout.md`
-- Typography and trilingual (EN/zhCN/zhTW) text quality: `references/ui-typography-localization-zh.md`
-- Pixel-level visual standards (spacing, sizes, colors, dialogs, scroll): `references/ui-visual-standards.md`
-- UI states, feedback, and accessibility: `references/ui-states-accessibility.md`
+- Primary architecture and UI factory: `references/qfx-ui-architecture.md`
+- Modular scale tiers: `references/modular-addon-architecture.md`
+- Refresh, page cache, widget callbacks: `references/refresh-performance-rules.md`
+- Events, OnUpdate, dispatch, weak-table state: `references/event-onupdate-rules.md`
+- Compact multilingual / English-first layout: `references/compact-multilingual-layout.md`
+- Typography and trilingual text quality: `references/ui-typography-localization-zh.md`
+- Visual standards (spacing, sizes, colors, dialogs, scroll): `references/ui-visual-standards.md`
+- UI states and accessibility: `references/ui-states-accessibility.md`
+- Native UI consistency and duplicate controls: `references/blizzard-native-ui-checklist.md`
+- Complex UI, lists, dialogs, combat-safe apply: `references/complex-addon-ui-patterns.md`
+- List, collection, sound/TTS, and media safety: `references/lists-media-sound-ui.md`
+- Plater-style options model: `references/plater-options-ui-patterns.md`
+- DandersFrames-style settings: `references/dandersframes-complex-settings-ui.md`
+- Reference-addon architecture supplements: `references/reference-addon-architecture-patterns.md`
+- Deep advanced architecture: `references/deep-reference-addon-patterns.md`
 - WoW 12.x API source rules: `references/wow-12-api-source-rules.md`
-- WoW 12.0.7 → 12.1.0 PTR API migration (Aura/Unit/CDM secret changes): `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`
-- Deep reference addon supplements: `references/deep-reference-addon-patterns.md`
-- Reference addon architecture supplements: `references/reference-addon-architecture-patterns.md`
-- DandersFrames-style complex settings UI: `references/dandersframes-complex-settings-ui.md`
-- Plater-style options UI model: `references/plater-options-ui-patterns.md`
-- Native UI consistency: `references/blizzard-native-ui-checklist.md`
 - Secret values and taint: `references/wow-12-secret-value-taint.md`
-- Dialog/dropdown/popup rules: `references/ui-factory-dialog-mode-rules.md`
-- Large saved lists / collections / sounds: `references/large-list-collection-sound-ui.md`
-- Complex addon UI patterns: `references/complex-addon-ui-patterns.md`
-- Combat lockdown apply: `references/combat-lockdown-deferred-apply.md`
-- Packaging/release: `references/packaging-release-checklist.md`
-- Safe font/media handling: `references/safe-font-media-rules.md`
-- SavedVariables migration: `references/savedvariables-migration.md`
-- Version compatibility: `references/version-compat-boundaries.md`
-- Modification traceability: `references/modification-traceability.md`
+- 12.0.7 → 12.1 PTR migration: `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`
+- Current 12.1 Live API baseline: `references/wow-12.1.0-live-api-final-zhCN.md`
+- Packaging, compatibility, SavedVariables, reporting: `references/release-and-compatibility.md`
 
 ## Output expectations
 
-When reviewing UI, architecture, or API safety, return:
-- Priority issues.
-- Suggested fixes.
-- Files likely involved.
-- API assumptions or source checks needed.
-- Risk level.
-- Test steps.
-
-When modifying files, return:
-- Download link or commit summary.
-- Changed/added/deleted files.
-- What changed.
-- What did not change.
-- API assumptions or branch/build assumptions.
-- Test steps.
-- Rollback notes.
+- **Review**: priority issues, suggested fixes, files likely involved, API/source checks needed, risk level, test steps.
+- **File changes**: download link or commit summary, changed/added/deleted files, what changed and did not change, API/branch assumptions, test steps, rollback notes.

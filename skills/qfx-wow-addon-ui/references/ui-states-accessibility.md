@@ -9,7 +9,7 @@ An empty state must explain what is missing and what to do next.
 Rules:
 - Use a compact layout: one muted icon or small texture, one short line of text, and one clear action button (for example `Add first voice`, `Import a profile`).
 - The empty text must be localized; it is a UI string, not debug output.
-- If an empty collection is still editable (edit/delete applies to the collection itself), keep it selectable and show the collection row, not a dead empty area (see `large-list-collection-sound-ui.md`).
+- If an empty collection is still editable (edit/delete applies to the collection itself), keep it selectable and show the collection row, not a dead empty area (see `lists-media-sound-ui.md`).
 - Do not show a full-screen placeholder for a small inline list; an inline empty row is enough.
 - After the user's first add/import, remove the empty state and show the real list; no flicker between the two.
 
