@@ -56,11 +56,10 @@ Core/
   Migration.lua
   Localization.lua
 UI/
-  UIFactory.lua
+  QFXWidgets.lua      -- shared factory, skin, menus, lists (copy verbatim)
   MainFrame.lua
   Options.lua
   Dialogs.lua
-  Dropdown.lua
 Modules/
   ChatBar.lua
   FocusInterrupt.lua
@@ -79,7 +78,7 @@ Rules:
 
 - Use one module registry owned by Core.
 - Each module exposes `:OnInitialize()`, `:OnEnable()`, `:OnDisable()`, and targeted refresh/apply functions only when needed.
-- Module files should not create their own DB layer, locale resolver, or UI factory.
+- Module files should not create their own DB layer, locale resolver, or widget code; settings rows use the embedded QFXWidgets factory.
 - Options UI calls module APIs; it should not duplicate module business rules.
 
 ### Large complex addon
@@ -142,10 +141,8 @@ Core\Util.lua
 Core\Events.lua
 Core\Scheduler.lua
 
-# UI factory before UI pages
-UI\UIFactory.lua
-UI\Skin.lua
-UI\Dropdown.lua
+# Shared widget factory (and its skin/menus/lists) before UI pages
+UI\QFXWidgets.lua
 UI\Dialogs.lua
 
 # Runtime modules
@@ -166,7 +163,7 @@ Rules:
 
 - Defaults must load before DB initialization.
 - Localization must load before any UI is created.
-- UI factory must load before UI pages.
+- `QFXWidgets.lua` must load before any options page builder (it also carries the skin, menus, and list helpers).
 - Runtime modules should not depend on option pages.
 - Final bootstrap may register load-on-demand factories and run post-load validation.
 - Keep TOC comments useful; they are architecture documentation.

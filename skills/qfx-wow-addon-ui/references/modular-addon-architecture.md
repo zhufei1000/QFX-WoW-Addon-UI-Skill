@@ -40,11 +40,9 @@ Core/
   Migration.lua
   Localization.lua
 UI/
-  UIFactory.lua
+  QFXWidgets.lua      -- shared factory, skin, menus, lists (copy verbatim)
   MainFrame.lua
   Options.lua
-  Dropdown.lua
-  Lists.lua
 Modules/
   ModuleName.lua
 Compat/
@@ -55,11 +53,11 @@ Media/
 
 Rules:
 - One module registry.
-- One UI factory.
+- One QFXWidgets copy for all settings controls (embed it; never write a local factory).
 - One DB/default/migration layer.
 - Runtime modules expose APIs to options pages.
 - Options UI is lazy-created.
-- Repeated controls use factory helpers or table-driven option rows.
+- Repeated controls use QFXWidgets cfgs and helpers; do not hand-build widget rows.
 - Repeated refreshes use `RequestRefresh` or equivalent.
 
 ### Large addon or addon suite
@@ -125,7 +123,7 @@ DB / Migration
 Compat
 Core utilities
 Event dispatcher / refresh queue
-UI factory
+UI factory (QFXWidgets.lua)
 Runtime modules
 Options page builders
 Final bootstrap
@@ -135,7 +133,7 @@ Runtime modules must not require option pages to be opened.
 
 ## Rules
 
-- Do not create duplicate module registries, DB layers, locale tables, UI factories, media resolvers, refresh queues, search registries, or event buses.
+- Do not create duplicate module registries, DB layers, locale tables, widget factories or skins (embed QFXWidgets), media resolvers, refresh queues, search registries, or event buses.
 - Child addons should not become independent unless explicitly requested.
 - Defaults must load before DB initialization.
 - Localization must load before UI creation.
@@ -150,7 +148,8 @@ Runtime modules must not require option pages to be opened.
 
 Use these as supplements to the baseline method:
 
-- `references/qfx-ui-architecture.md` for UI shell, UI factory, page cache, and option-row rules.
+- `references/qfx-ui-architecture.md` for UI shell, page cache, and option-row rules.
+- `references/qfxwidgets-factory.md` for the settings-control factory contract.
 - `references/refresh-performance-rules.md` for refresh queues, widget callbacks, page cache, and bulk import refresh.
 - `references/event-onupdate-rules.md` for central dispatch, temporary OnUpdate, and weak-table state.
 - `references/reference-addon-architecture-patterns.md` for broader reference-addon architecture.

@@ -10,7 +10,7 @@ This means:
 - one root namespace;
 - one DB/default/migration boundary;
 - one localization boundary;
-- one UI factory;
+- one QFXWidgets factory copy for all settings controls (never a second local factory);
 - one module registry when modules exist;
 - one settings shell when the addon has more than a trivial options page;
 - runtime modules that do not depend on options pages being opened;
@@ -24,7 +24,7 @@ This means:
 
 Previous QFX, Plater-inspired, DandersFrames-inspired, native-UI, and WoW 12.x rules are supplements to this base method. Use them when they improve the result, but if they conflict with this method on UI lifecycle, refresh strategy, event dispatch, or runtime performance, prefer this method.
 
-This priority rule does not require copying modern custom-drawn visuals. Unless the user explicitly asks otherwise, keep QFX Blizzard-native appearance while using this architecture.
+Settings UI visuals come from QFXWidgets/QFXUI (see `qfxwidgets-factory.md`), not from this architecture model. Do not copy reference-addon assets or custom skins.
 
 ## Scale by addon size
 
@@ -43,7 +43,7 @@ Rules:
 - Do not over-engineer.
 - One event frame is usually enough.
 - A full settings shell is optional.
-- Use a small UI factory only if multiple controls repeat.
+- Build settings rows with an embedded `QFXWidgets.lua` (add it to the Config `.toc`; in a core + load-on-demand Config host, load it lazily there — see `qfxwidgets-factory.md`); do not write local widget helpers.
 - Add `RequestRefresh` only when repeated refresh is visible or likely.
 - Avoid permanent OnUpdate.
 
@@ -59,13 +59,10 @@ Core/
   Migration.lua
   Localization.lua
 UI/
-  UIFactory.lua
-  Skin.lua
+  QFXWidgets.lua      -- shared controls, skin, menus, lists (copy verbatim)
   MainFrame.lua
   Options.lua
-  Dialogs.lua
-  Dropdown.lua
-  Lists.lua
+  Dialogs.lua         -- host-specific dialogs only; confirms use W:Confirm
 Modules/
   ModuleName.lua
 Media/
@@ -167,59 +164,50 @@ end
 
 Do not defer DB migration, localization required at startup, compatibility wrappers required by runtime modules, or module event setup.
 
-## UIFactory responsibilities
+## QFXWidgets factory
 
-UIFactory may create and style:
-- Buttons
-- Checkboxes
-- Sliders
-- Dropdowns
-- Input boxes
-- Section cards
-- Tooltip helpers
-- Font/color helpers
-- Shared spacing constants
-- Table-driven option rows
-- Collapsible groups if used
-- Banners if used
-- Search registration hooks if used
-- Widget refresh registration helpers
+QFXWidgets is the standard settings-control factory for QFX addons. Read `qfxwidgets-factory.md` for the full contract (tokens, cfg types, extra controls, refresh/page model, combat rules, media helpers).
 
-UIFactory must not contain module-specific business logic.
+It may create and style:
+- Buttons, toggle switches, sliders, dropdowns, segmented pills, inputs, keybind capture
+- Color swatches and color-mode rows, color grids
+- Section headers, notes, spacers, wide buttons, status and reset rows
+- Tabs and tab panels, checkbox grids, multiline boxes, confirm dialogs
+- Scrollable pages, searchable dropdowns, icon pickers, list and reorder rows
+- Menus, shared skin tokens, tooltip and refresh helpers
+
+The factory must not contain addon business logic; `getValue`/`setValue` closures own meaning.
 
 ## Option row definitions
 
-For repeated settings, describe rows with data where practical:
+Describe rows with QFXWidgets cfgs and keep the metadata that search and diagnostics need:
 
 ```lua
-{
-    id = "chatbar.scale",
-    type = "slider",
-    label = L["Scale"],
-    desc = L["Adjust the chat bar scale."],
-    min = 0.7,
-    max = 1.5,
-    step = 0.05,
-    get = function(db) return db.chatBar.scale end,
-    set = function(db, value)
-        db.chatBar.scale = value
-        QFX.Modules.ChatBar:RequestApply("scale")
-    end,
-    refresh = "targeted",
-}
+-- metadata (for search/jump and docs)
+-- id = "chatbar.scale", desc = "Adjust the chat bar scale."
+
+local row, h = W:DualRow(parent, y,
+    { type = "label", text = L["Scale"] },
+    { type = "slider",
+      min = 0.7, max = 1.5, step = 0.05,
+      getValue = function() return db.chatBar.scale end,
+      setValue = function(value)
+          db.chatBar.scale = value
+          QFX.Modules.ChatBar:RequestApply("scale")
+      end,
+      tooltip = L["Adjust the chat bar scale."] })
 ```
 
-The UI factory creates the control; the module handles meaning.
+The factory creates the control; the module handles meaning.
 
 ## Skin layer responsibilities
 
-Skin should be a lightweight visual normalization layer:
-- Apply Blizzard-native look consistently.
-- Normalize button/dropdown/slider/checkbox visuals.
-- Keep external skin friendliness.
-- Avoid taking ownership of business behavior.
+The QFXUI skin ships inside QFXWidgets; hosts do not own a skin layer.
+- Override tokens globally with `W:SetSkin{...}` / `W:SetTheme{...}` when an addon truly needs a variation; restore with `W:SetSkin()`.
+- Use `W:SkinFrame`, `W.Surface`, and `W:Border` for host window chrome instead of `SetBackdrop` or custom border code.
+- Never restyle individual factory controls outside the skin, and never take ownership of business behavior.
 
-Do not move alert logic, saved-list logic, drag/drop logic, cooldown logic, or module runtime logic into Skin.
+Do not move alert logic, saved-list logic, drag/drop logic, cooldown logic, or module runtime logic into the skin tokens or the factory.
 
 ## Dialog grid constants
 
@@ -239,7 +227,7 @@ Do not create a second:
 - Database layer
 - Localization table
 - Module registry
-- UI factory
+- Widget factory or skin (embed QFXWidgets verbatim; do not fork it)
 - Media resolver
 - Event dispatcher
 - Refresh queue

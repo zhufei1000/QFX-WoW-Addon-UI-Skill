@@ -1,11 +1,20 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.18.0
+Version: 1.19.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
+
+## What v1.19.0 changes
+
+- Makes the QFXWidgets control factory (QFXUI skin) the standard settings UI: `SKILL.md` replaces the "native first" rules with a "QFXWidgets first" section, and the slider anatomy, visual standards, UI states, keyboard conventions, and workflow steps now follow the factory's tokens and behaviour.
+- Adds `references/qfxwidgets-factory.md`: the factory contract (control cfgs, tokens, refresh/page model, combat rules, media helpers, extra controls) plus the lazy loading rules for core + load-on-demand Config hosts.
+- Adds `references/qfxwidgets-ui-checklist.md` and refreshes `references/ui-visual-standards.md`, `qfx-ui-architecture.md`, `complex-addon-ui-patterns.md`, and the remaining references to the QFXWidgets/QFXUI baseline.
+- Adds the lazy factory loading rule: a core addon keeps `QFXWidgets.lua` out of its startup `.toc`, resolves the factory at use time (`rawget(_G, "QFXWidgets")`, then `EnsureConfigLoaded()`), lets a standalone factory addon win when installed, and applies skin/media where it actually loads.
+- Removes the superseded `references/blizzard-native-ui-checklist.md`; the QFXWidgets checklist replaces it.
+- Updates the example prompts, plugin metadata, and reference list for the factory standard.
 
 ## What v1.18.0 changes
 
@@ -22,7 +31,7 @@ This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of
 
 The skill uses one scalable QFX method for small, medium, and large addons:
 
-- Blizzard-native visuals by default.
+- QFXWidgets factory controls (QFXUI skin) as the standard settings UI.
 - English-first layout sizing, then zhCN / zhTW verification.
 - Shared UI factories and modular architecture.
 - Deferred heavy options initialization.
@@ -114,7 +123,7 @@ Restart Codex if the skill does not appear.
 ## Example prompts
 
 ```text
-Use qfx-wow-addon-ui to review this addon with the primary QFX design method: choose small/medium/large scale, preserve native visuals, size the layout from English first, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
+Use qfx-wow-addon-ui to review this addon with the primary QFX design method: choose small/medium/large scale, build settings with the QFXWidgets factory, size the layout from English first, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.
 ```
 
 ```text
@@ -140,7 +149,7 @@ The skill includes references for:
 - Plater / DandersFrames / EllesmereUI-inspired architecture patterns.
 - WoW 12.x API source-grounding, the 12.0.7 → 12.1 migration history, and the current 12.1 Live/PTR baseline.
 - Secret-value / taint / ForbiddenAspect safety.
-- Blizzard-native UI review.
+- QFXWidgets factory contract, lazy factory loading, and the settings UI checklist.
 - Packaging, compatibility, SavedVariables migration, and modification traceability.
 
 The authoritative current API file is:

@@ -1,4 +1,4 @@
-# Install QFX WoW Addon UI Skill v1.18.0
+# Install QFX WoW Addon UI Skill v1.19.0
 
 This package contains one skill, `qfx-wow-addon-ui`, usable from opencode, Codex, or any agent that reads `SKILL.md` frontmatter:
 

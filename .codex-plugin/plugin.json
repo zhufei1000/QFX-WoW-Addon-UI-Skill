@@ -1,7 +1,7 @@
 {
   "name": "qfx-wow-addon-ui-plugin",
-  "version": "1.18.0",
-  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures using a primary scalable QFX design method inspired by EllesmereUI, with English-first multilingual layout sizing, pixel-level visual standards, trilingual typography rules, UI state and accessibility patterns, Blizzard-native visuals, modular architecture, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, Plater/DandersFrames supplements, and WoW 12.x API source-grounding rules.",
+  "version": "1.19.0",
+  "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures using a primary scalable QFX design method inspired by EllesmereUI, with QFXWidgets factory controls (QFXUI skin), English-first multilingual layout sizing, pixel-level visual standards, trilingual typography rules, UI state and accessibility patterns, modular architecture, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, Plater/DandersFrames supplements, and WoW 12.x API source-grounding rules.",
   "author": {
     "name": "zhufei1000"
   },
@@ -14,7 +14,7 @@
     "architecture",
     "api",
     "localization",
-    "blizzard-native",
+    "qfxwidgets",
     "performance",
     "qfx"
   ],
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "QFX WoW Addon UI",
     "shortDescription": "WoW addon UI, architecture, and API-safe workflow",
-    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using a primary scalable QFX design method inspired by EllesmereUI: small/medium/large architecture tiers, English-first multilingual layout sizing, pixel-level visual standards (4px grid, control sizes, semantic colors, dialog tiers), trilingual typography rules, UI state and accessibility patterns, native Blizzard-style controls, compact multilingual layout, modular UI factory rules, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table state, Plater/DandersFrames supplements, WoW 12.x API source-grounding, branch/build checks, compatibility wrappers, secret-value/taint safety, import/export validation, diagnostics, release packaging checks, and performance discipline.",
+    "longDescription": "Guides Codex to design, review, and refactor World of Warcraft addon interfaces and architectures using a primary scalable QFX design method inspired by EllesmereUI: small/medium/large architecture tiers, QFXWidgets factory controls (QFXUI skin) as the standard settings UI, English-first multilingual layout sizing, pixel-level visual standards (4px grid, control sizes, semantic colors, dialog tiers), trilingual typography rules, UI state and accessibility patterns, compact multilingual layout, modular UI factory rules, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table state, Plater/DandersFrames supplements, WoW 12.x API source-grounding, branch/build checks, compatibility wrappers, secret-value/taint safety, import/export validation, diagnostics, release packaging checks, and performance discipline.",
     "developerName": "zhufei1000",
     "category": "Developer Tools",
     "capabilities": [
@@ -30,9 +30,9 @@
       "Write"
     ],
     "defaultPrompt": [
-      "Use QFX WoW Addon UI to review this addon with the primary QFX design method: choose small/medium/large scale, preserve native visuals, size layout from English first, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.",
+      "Use QFX WoW Addon UI to review this addon with the primary QFX design method: choose small/medium/large scale, build settings with the QFXWidgets factory, size layout from English first, defer heavy options, use page cache and widget refresh where useful, centralize high-frequency events, coalesce refreshes, avoid permanent OnUpdate, and keep combat-safe applies.",
       "Use QFX WoW Addon UI to review this multilingual settings UI using English as the base layout language, then verify Simplified Chinese and Traditional Chinese for overflow, clipping, row balance, and runtime language switching.",
-      "Use QFX WoW Addon UI to refactor this add-on settings panel into a Blizzard-native unified layout using the existing UI factory.",
+      "Use QFX WoW Addon UI to refactor this add-on settings panel onto the QFXWidgets factory with the QFXUI skin.",
       "Use QFX WoW Addon UI to redesign this addon architecture using the primary scalable QFX method plus Plater/DandersFrames supplements where useful.",
       "Use QFX WoW Addon UI to verify this addon against WoW 12.x API sources before coding: check current UI source/resources, branch/build, deprecated APIs, secret-value/taint risk, compatibility wrappers, and final API assumptions.",
       "Use QFX WoW Addon UI to compact this settings page, account for English/zhCN/zhTW label length, and fully use the available template width without overflow.",

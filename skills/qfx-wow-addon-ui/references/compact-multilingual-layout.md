@@ -27,6 +27,16 @@ Use this workflow for QFX settings panels:
 5. If Chinese still overflows, fix that specific text or row without shrinking the whole design.
 6. Re-check after runtime language switching.
 
+## QFXWidgets already implements the English-first baseline
+
+When the addon uses QFXWidgets, the factory enforces these rules; do not hand-roll width logic on top:
+
+- Labels live in the left column and controls are right-anchored, so the control lane keeps its width in every locale.
+- `DualRow` labels ellipsize with `...` when a translation runs long and show the full text plus tooltip on hover (the clamp retries one frame later if the row was not sized yet). Do not shorten the string or shrink the font to avoid the ellipsis.
+- Segmented pills and tabs measure their localized labels with `GetStringWidth` (secret-value guarded) and size themselves; dropdown widths come from the cfg `width`, so size them against the longest common English option.
+- Slider rows reserve space for the value box and stepper column, so the track label has a fixed budget in all three locales.
+- Language changes are handled by `W:Refresh(owner)`: it re-reads `getValue` and re-renders labels without rebuilding the page.
+
 ## General rules
 
 - Use the full available panel width instead of wasting horizontal space.
@@ -48,6 +58,8 @@ Rules:
 - For cramped panels, use full-width rows before reducing font size.
 
 ## Button width
+
+QFXWidgets buttons use the fixed `buttonMinW` (88px) and segmented/tab controls measure their own labels. Use the helper below only for custom host chrome (footer/toolbar buttons) outside the factory.
 
 Toolbar and dialog buttons should:
 - Have a safe minimum width.
@@ -75,7 +87,8 @@ Runtime language switching must:
 - Recalculate widths after text changes.
 - Preserve unsaved editor drafts, import/export text, file paths, and selected values.
 - Prefer `RefreshLocale()` over destroying and recreating the editor.
-- Re-run English-width-sensitive layout checks where buttons, tabs, and dropdowns auto-size.
+- With QFXWidgets, call `W:Refresh(owner)` (labels, dropdown text, and tooltips re-render; ellipsis re-clamps on the next frame) instead of rebuilding the page.
+- Re-run English-width-sensitive layout checks where buttons, tabs, and dropdowns auto-size outside the factory.
 
 ## Layout choices
 
@@ -100,10 +113,11 @@ Use full-width rows for:
 When reviewing a multilingual QFX UI, check:
 
 - Was the row width designed from English first?
-- Do English labels clip, wrap, or overlap controls?
+- Do English labels clip, wrap, or overlap controls? (QFXWidgets must ellipsize them instead.)
 - Do English dropdown values fit the closed dropdown button?
-- Do English tab labels fit without cramped spacing?
+- Do English tab and segmented labels fit without cramped spacing?
 - Are long explanations moved into tooltips?
 - Does Chinese still look compact and not overly sparse?
 - Does switching language recalculate widths without rebuilding the entire page unnecessarily?
 - Are buttons sized from the larger of English and current localized text?
+- Are factory rows refreshed with `W:Refresh(owner)` after a locale change?

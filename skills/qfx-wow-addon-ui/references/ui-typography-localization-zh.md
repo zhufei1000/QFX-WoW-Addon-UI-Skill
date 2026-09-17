@@ -17,7 +17,7 @@ Consequences:
 
 Rules:
 
-- Prefer Blizzard stock fonts (`STANDARD_TEXT_FONT` and template fonts). Do not bundle CJK fonts unless the addon must guarantee identical glyphs across clients.
+- Use `W.Theme.font` (defaults to `STANDARD_TEXT_FONT`) and do not bundle CJK fonts unless the addon must guarantee identical glyphs across clients.
 - Blizzard handles locale-appropriate fallback for CJK glyphs automatically when using stock fonts; do not hardcode `Fonts\\ARKai_T.TTF`-style paths unless the project deliberately owns them.
 - Never call `FontString:SetFont` with symbolic presets such as `AUTO`, `DEFAULT`, `BLIZZARD`, empty string, or nil (see `lists-media-sound-ui.md`).
 - If the addon exposes a font picker (LibSharedMedia), missing fonts must fall back safely and never break the panel.
@@ -47,9 +47,9 @@ Rules:
 When text cannot fit:
 
 1. Shorten the visible label and move the full explanation to the tooltip — never silently drop information.
-2. Truncate with the locale-appropriate ellipsis; do not let text clip mid-glyph.
+2. With QFXWidgets, let the factory ellipsize: `DualRow` labels clamp with `...` and show the full text plus tooltip on hover; do not pre-truncate strings in Lua or clip with fixed sizes.
 3. Never truncate critical values (numbers, paths, cooldown times, channel names). Give those rows full width or wrap them.
-4. Dropdowns: truncate display text in the closed button, but show the full option text in the popup and tooltip.
+4. Dropdowns: the factory truncates the closed button text, and the popup/tooltip shows the full option; size the dropdown from the longest common EN option.
 5. Do not use `SetFixedSize`-style clipping as a substitute for layout fixes; treat clipping as a layout bug (see `compact-multilingual-layout.md`).
 
 ## 6. zhCN / zhTW terminology consistency

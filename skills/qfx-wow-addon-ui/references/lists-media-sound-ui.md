@@ -68,6 +68,13 @@ Check:
 - Paths use WoW-compatible separators.
 - Missing LibSharedMedia does not break the UI.
 
+Bundled shapes and icons only look sharp when the raster matches the draw size:
+
+- Rounded controls: ship the art at roughly 2x the on-screen pixel size with a real coverage ramp (supersample, then downsample). TGA/PNG never get a mip chain, so anything drawn below half its native size aliases; a `.blp` twin sampled with `TRILINEAR` is the fix for large art.
+- Monochrome icon sets: 96x96 covers the common 20-50px display range and high UI scales. DXT5 (`compression 2, alpha_depth 8, alpha_type 7, has_mips 1`) is the format Blizzard and most addons use; a flat-colour icon set can be encoded exactly by writing one constant colour block per 4x4 block and letting the alpha block carry coverage.
+- Keep per-icon crop texcoords valid: regenerate from the same source geometry (same viewBox and padding) or verify the ink bounding box stays inside the existing crop, otherwise the coords clip the art.
+- Rebuild tooling belongs in `tools/` next to the addon and must stay out of release zips; the shipped PNG/BLP files are generated artefacts.
+
 ## User paths
 
 For custom sound paths:

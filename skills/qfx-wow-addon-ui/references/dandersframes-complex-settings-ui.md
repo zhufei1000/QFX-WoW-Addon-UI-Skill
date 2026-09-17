@@ -2,7 +2,7 @@
 
 This reference is extracted from the uploaded DandersFrames addon as a reusable design model for complex QFX-style World of Warcraft addon settings panels.
 
-Use it as a structural reference only. DandersFrames uses a custom modern dark UI and bundled assets; QFX addons should normally remain Blizzard-native, lightweight, compact, and multilingual. Do not copy its fonts, textures, icons, libraries, brand assets, or full custom visual system unless the user explicitly asks and licensing is verified.
+Use it as a structural reference only. DandersFrames uses a custom modern dark UI and bundled assets; QFX addons build with QFXWidgets/QFXUI instead and stay lightweight, compact, and multilingual. Do not copy its fonts, textures, icons, libraries, brand assets, or visual system.
 
 ## 1. What to absorb
 
@@ -230,7 +230,7 @@ Rules:
 
 When applying these patterns to QFX addons:
 
-- Keep Blizzard-native visual style unless the user asks for custom skinning.
+- Build rows and sections with QFXWidgets; keep the QFXUI tokens instead of a custom skin.
 - Add collapsible sections before adding more tabs if the page is already category-specific.
 - Add search only when the addon has enough settings to justify it.
 - Use banners for warnings and compatibility notes instead of oversized descriptions.

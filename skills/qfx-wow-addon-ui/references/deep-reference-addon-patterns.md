@@ -274,10 +274,10 @@ Reference addons often have consistent visual systems. QFX can absorb the token 
 
 Rules:
 
-- Define spacing, row height, card padding, section gap, label width, control width, and disabled alpha as constants.
-- Define semantic colors by purpose, not by copied brand palette: normal, muted, warning, danger, success, accent.
-- Use Blizzard-native textures and fonts unless the project explicitly owns custom assets.
-- A Skin layer may apply tokens to native controls, but should not own business logic.
+- The token source is QFXWidgets (`W.Theme` / `W.Skin`); do not define a second spacing, size, or color table in the addon.
+- Semantic colors come from the QFXUI skin tokens: accent, text, textMuted, danger, good; do not copy a reference addon's palette.
+- Do not add custom textures or fonts; QFXUI draws with solid color textures and `W.Theme.font`.
+- Token variations are global (`W:SetSkin` / `W:SetTheme`) and must not own business logic.
 
 ## 15. Documentation as part of architecture
 

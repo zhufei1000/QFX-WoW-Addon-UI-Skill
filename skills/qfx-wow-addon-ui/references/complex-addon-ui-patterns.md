@@ -4,16 +4,16 @@ These patterns are reusable for complex World of Warcraft addon configuration UI
 
 Use this reference for addons with saved entries, collections, drag-and-drop sorting, sound/TTS pickers, long dropdowns, import/export panels, or language-switchable editor dialogs.
 
-## 1. Lightweight Skin layer
+## 1. Factory and skin boundaries
 
-A Skin layer may normalize the look of native controls, but it must not become a business-logic layer.
+QFXWidgets owns settings-control creation and the QFXUI look; hosts own logic.
 
 Rules:
 - Keep business logic in modules/controllers.
-- Keep widget creation in UIFactory or layout helpers.
-- Keep Skin focused on fonts, borders, highlight textures, checkbox/button/dropdown visual normalization, and Blizzard-native compatibility.
-- Do not forcefully redraw every control if Blizzard templates are already good enough.
-- Allow external skins such as ElvUI/NDui to skin native controls naturally when the addon does not own those frames.
+- Keep widget creation in QFXWidgets (`W:DualRow` and the documented helpers), not in page files.
+- Skin tokens belong to `W.Skin`/`W.Theme`; override globally with `W:SetSkin`/`W:SetTheme` only when an addon needs a variation.
+- Do not redraw factory controls per addon, and do not mix Blizzard templates or AceGUI into a QFXUI panel.
+- Host windows use `W:SkinFrame`, `W:Surface`, and `W:Border`; external skins such as ElvUI/NDui are not expected to skin QFXUI controls.
 
 ## 2. Singleton scrollable dropdown popup
 
@@ -106,14 +106,13 @@ Rules:
 - Re-run layout on `OnShow` and after language changes.
 - Avoid hardcoding widths based only on Chinese text.
 
-## 9. Native slider wrapper
+## 9. Slider rows
 
-For QFX sliders:
-- Prefer native slider templates.
-- If using `OptionsSliderTemplate`, hide or clear the template's default `Low`, `High`, and `Text` labels.
-- Create min/current/max labels through the UI factory or layout helper.
-- Put min under the left end, max under the right end, and current value centered under the track.
-- Use one helper to enable/disable slider labels and update disabled colors.
+For QFX sliders, use the QFXWidgets row slider (`{ type = "slider" }`) or full-width `W:Slider`:
+- Track on the row; min under the left end and max under the right end (10px muted), value box (44px) at the right edge, `+`/`-` steppers flush right of the box.
+- Dragging commits once on release and refreshes the page once; steppers nudge one clamped step and dim at the ends; `steppers = false` drops the column.
+- Value formatting follows `step` (one decimal, or two below 0.1) with optional `valueSuffix`; Esc in the value box reverts, Enter commits.
+- For media sliders with previews, pair the slider with a `StatusRow` or `SearchableDropdown` action instead of a second value display.
 
 ## 10. Editor dialog grid constants
 
@@ -125,16 +124,17 @@ Rules:
 - Do not scatter magic coordinates in business logic files.
 - Three-column rows such as ID / Name / Cooldown must use named constants.
 
-## 11. UI factory boundaries and dialog rules
+## 11. QFXWidgets boundaries and dialog rules
 
-The UI factory centralizes repeated control creation: buttons, checkboxes, dropdowns, sliders, input boxes, section headers, card frames, font/color helpers, and tooltip helpers. Do not place addon business rules in the UI factory.
+QFXWidgets centralizes control creation: toggles, sliders, dropdowns, segmented pills, inputs, keybinds, colors, section headers, notes, grids, tabs, lists, scroll pages, menus, and confirms. Do not place addon business rules in the factory; `getValue`/`setValue` closures call module APIs and the factory only builds UI.
 
 Dialogs must:
+- Use `W:Confirm` for confirmations and `W:MakeMenu`/`W:SearchableDropdown` for pickers instead of custom popups.
 - Use consistent width and padding, aligned labels and controls.
-- Keep controls inside the card/module boundary.
+- Keep controls inside the module boundary.
 - Clamp to screen where needed.
-- Hide dropdowns and child popups when closing.
-- Avoid rebuilding unsaved editor state during language changes.
+- Close menus, dropdowns, and cog popups when the dialog closes or the outside is clicked.
+- Avoid rebuilding unsaved editor state during language changes; refresh labels through `W:Refresh(owner)` instead.
 
 ## 12. Mode-specific controls
 

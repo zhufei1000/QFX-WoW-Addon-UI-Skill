@@ -64,26 +64,20 @@ Rules:
 - Use `blank` or section labels for spacing instead of scattered magic Y offsets.
 - Put tooltip detail in `desc`; do not make rows too tall to explain everything inline.
 
-## 4. Shared templates and UI factory
+## 4. Shared templates and the QFXWidgets factory
 
-The reference addon normalizes controls through shared templates. For QFX addons, do the same with native controls:
+The reference addon normalizes controls through shared templates. For QFX addons, QFXWidgets is that shared layer:
 
-- one button helper;
-- one checkbox/switch helper;
-- one dropdown helper;
-- one slider helper;
-- one editbox helper;
-- one section/card helper;
-- one tooltip helper;
-- one color swatch helper.
+- toggle, slider, dropdown, segmented, input, keybind, and button cfgs through `W:DualRow`;
+- section headers, notes, buttons, grids, tabs, lists, scroll pages, confirm dialogs, and menus through the documented helpers.
 
 Rules:
 
-- Templates define visual defaults only: size, font, padding, borders, highlight, disabled colors.
-- Business logic stays in modules/controllers.
-- Do not create several button styles in the same page unless each style has a clear meaning.
-- Avoid copying DetailsFramework if the addon is otherwise lightweight and Blizzard-native.
-- If an addon already has a local UIFactory, extend it instead of creating another parallel factory.
+- The factory defines visual defaults only: size, font, padding, borders, highlight, disabled colors (see `qfxwidgets-factory.md`).
+- Business logic stays in modules/controllers; `setValue` calls the module API.
+- Do not create several control styles in the same page; use the factory cfg variants.
+- Do not copy Plater or DetailsFramework widgets into a QFX addon.
+- Never create a parallel factory or fork the QFXUI skin.
 
 ## 5. Global option change callback
 
@@ -156,24 +150,7 @@ Rules:
 
 For long spell, aura, media, saved voice, or module lists, split row creation from row refresh.
 
-Pattern:
-
-```lua
-local function CreateLine(parent, index)
-  local line = CreateFrame("Button", nil, parent, BackdropTemplateMixin and "BackdropTemplate")
-  line.icon = line:CreateTexture(nil, "ARTWORK")
-  line.name = line:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-  line.remove = CreateFrame("Button", nil, line, "UIPanelCloseButton")
-  return line
-end
-
-local function RefreshLine(line, data, index)
-  line.key = data.key
-  line.name:SetText(data.name)
-  line.icon:SetTexture(data.icon)
-  line.remove:SetEnabled(data.canRemove)
-end
-```
+Preferred pattern with QFXWidgets: `W:ListRows(parent, y, { items, rowH, columns, header, rowBuilder, rowUpdate })` already separates one-time row construction (`rowBuilder`) from the per-render update (`rowUpdate`, called by `api.Render()`). Use `W:ReorderList` when rows can be dragged. Drop to manual row frames only when the row needs controls the factory does not cover, and build those controls through QFXWidgets helpers.
 
 Rules:
 
@@ -211,8 +188,8 @@ Rules:
 When applying this pattern to a QFX addon:
 
 - Preserve the addon’s existing architecture; do not introduce DetailsFramework unless already used.
-- Add or extend a native `UIFactory.lua` instead of hand-copying Plater widgets.
-- Convert repeated controls into table-driven rows gradually.
+- Build rows with QFXWidgets instead of hand-copying Plater widgets or writing a local UIFactory.
+- Convert repeated controls into QFXWidgets rows (table-driven metadata feeding `DualRow` cfgs) gradually.
 - Keep small addons simple; do not add a tab framework for three settings.
 - Use Plater-style delayed creation only for genuinely heavy pages.
 - Add search only when the addon has enough options to justify it.

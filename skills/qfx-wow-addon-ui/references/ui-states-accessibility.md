@@ -18,7 +18,7 @@ Rules:
 Long operations (first tab open, import, media scan, search index build) need feedback.
 
 Rules:
-- Use the Blizzard spinner/loading template or a compact progress bar; do not invent custom animated logos.
+- Use a compact spinner or status line (a native spinner is acceptable); do not invent custom animated logos.
 - Show a short localized text next to the indicator: `Loading...`, `Importing profile...`, `Scanning sounds...`.
 - Keep the panel interactive where possible; block only the region being loaded.
 - After loading completes, refresh only the affected region; never rebuild the whole page (see `refresh-performance-rules.md`).
@@ -45,44 +45,45 @@ Rules:
 
 ## 5. Confirmation for destructive actions
 
-Use a confirm dialog (narrow, 320-400px) for: reset, delete, clear list, overwrite import, profile switch that loses data.
+Use `W:Confirm` (360px default) for: reset, delete, clear list, overwrite import, profile switch that loses data.
 
 Rules:
 - The confirm title and button use the real verb: `Delete voice?` / `Delete`, not generic `OK`.
-- Default focus is on Cancel; Enter confirms the primary action only when the dialog is designed for it.
-- Esc closes and cancels.
+- Esc and backdrop clicks cancel; the accept button runs only in `onAccept`.
 - If the action is irreversible, the dialog body states what will be lost and where a backup exists.
-- Destructive confirmations use the danger color token plus an icon, and the button text repeats the destructive verb.
+- Destructive confirmations pass `danger = true` (red accept button), and the button text repeats the destructive verb.
 - Do not add a confirm step for reversible actions (slider changes, toggles) — those are undoable by changing the value back.
 
-## 6. Keyboard navigation
+## 6. Keyboard behavior
 
-WoW panels are keyboard-reachable; keep them usable without a mouse.
+The QFXWidgets baseline is what the factory implements; do not claim more than the controls actually do, and extend the factory if an addon truly needs full keyboard navigation.
 
-Rules:
-- Tab order follows visual order: header → label/control pairs left-to-right, top-to-bottom; focus moves into the content area, then to footer buttons.
-- Arrow keys navigate inside lists and dropdown popups; Enter selects; Esc closes the popup.
-- Esc hierarchy: close open dropdown → close dialog → return focus to the opener.
-- Every interactive control (button, checkbox, dropdown, slider, input) must be reachable by Tab and activate by Enter/Space.
-- Keep a visible focus state on the active control (template focus ring or 1px highlight); never remove it.
-- When a panel opens, put initial focus on the first useful control or the panel itself, not on a random footer button.
-- Sliders: left/right arrows adjust by one step; PageUp/PageDown jump by a larger step; keep the value text updated while adjusting.
+Factory keyboard behavior:
+- Edit boxes: Enter commits, Esc reverts and clears focus; slider value boxes follow the same convention.
+- Menus and popups: Esc closes; the searchable dropdown focuses its search box on open and Enter picks the first match.
+- Keybind capture: click to capture, Esc cancels, right-click clears (unless `clearOnRightClick = false`).
+- `W:Confirm`: Esc and backdrop cancel.
+
+Host responsibilities:
+- Do not remove the factory's Esc handling; route page-level Esc (close popup first, then page) through the host frame.
+- Keep focus states visible on host-built chrome; the factory shows `borderHi` focus on edit boxes.
+- If a page uses custom controls, match the factory's Esc/Enter conventions instead of inventing new ones.
 
 ## 7. Contrast and readability
 
 Rules:
-- Aim for 4.5:1 contrast on normal text and 3:1 on large text where the custom palette allows; Blizzard template text is the fallback baseline and usually passes for primary text.
-- Muted/disabled text must stay readable on the panel background; if a gray is too low contrast, lighten it and rely on state, not on color alone.
+- Aim for 4.5:1 contrast on normal text and 3:1 on large text; the QFXUI `text` token on `controlBg`/`menuBg` is the baseline, and `textMuted` is the floor for secondary text.
+- Muted/disabled text must stay readable on the panel background; if a token is too low contrast, adjust the skin globally rather than recoloring one control.
 - Never use color alone to communicate status: pair with icons and/or text (`✔ Saved`, `! Deferred until combat ends`).
-- Keep minimum label size at template defaults; do not go below 11px for any user-facing text.
-- Test the panel at 150%+ UI scale; layout must not break, only scale.
+- Keep the QFXWidgets font scale: 12px labels/notes, 11px section titles, no smaller than the 10px slider min/max labels for any user-facing text.
+- Test the panel at 150%+ UI scale; the factory disables pixel snapping on 1px lines so they must not disappear, and layout must only scale.
 
 ## 8. Motion and animation discipline
 
 QFX default: no unnecessary animation.
 
 Rules:
-- Allowed micro-motion: short hover highlight, focus ring, highlight pulse for searched/jumped settings, fade-in of dialogs (template default), slider thumb movement.
+- Allowed micro-motion: hover highlight, `borderHi` focus outline, highlight pulse for searched/jumped settings, the factory toggle slide (75ms; disable with `W.Skin.toggleAnim = false`), slider thumb movement.
 - Keep animations short (150-300ms) and non-essential; content must be readable mid-animation.
 - Never loop animation on idle; stop all timers/OnUpdate on panel close, module disable, profile switch, and logout (see `event-onupdate-rules.md`).
 - Respect players who disable animations: if the client-level motion setting is available, skip decorative animation.
@@ -94,7 +95,7 @@ Rules:
 - Do long operations show progress and refresh only the affected region on completion?
 - Are input errors inline, non-modal, and paired with text (not color alone)?
 - Are saves quiet and batched; do imports show a summary?
-- Do destructive actions use a confirm dialog with a verb-labeled danger button and Esc-to-cancel?
-- Is the panel fully navigable by keyboard with a visible focus state?
+- Do destructive actions use `W:Confirm` with a verb-labeled danger accept button and Esc-to-cancel?
+- Do Esc/Enter behaviors follow the factory conventions (menu Esc, input commit/revert, keybind cancel)?
 - Do primary texts meet contrast targets; is state never communicated by color alone?
 - Are animations short, non-looping, stoppable, and skipped when the player disables motion?

@@ -14,13 +14,14 @@ Check:
 - Required libraries are included or declared correctly.
 - Sub-addons are included when the user expects a complete package.
 - SavedVariables are declared in the TOC if used.
+- Changelog documents are excluded: `CHANGELOG.md`, `CHANGELOG*.md`, `docs/CHANGELOG*`, release notes, dev logs. QFX release zips never carry a changelog; it stays in the dev workspace/repo as the release-notes source.
 
 ## Versioning
 
 Check:
 
 - TOC version is updated.
-- README/changelog version matches when present.
+- README/changelog version matches when present in the workspace (the changelog file itself is updated in the repo but never zipped).
 - Zip name follows the requested naming style.
 - Use three-part decimal addon versions: `MAJOR.MINOR.PATCH`, for example `1.1.1`.
 - Treat each part as a decimal integer, not a floating-point number: `1.1.10` is newer than `1.1.9`.
@@ -44,7 +45,7 @@ Do not include:
 - Temporary files.
 - Debug dumps.
 - Old backup folders.
-- Unrequested dev changelogs.
+- Changelog documents of any kind: `CHANGELOG.md`, `CHANGELOG*.md`, `docs/CHANGELOG*`, release notes. Update them in the workspace before packaging, then exclude them from the zip.
 - OS metadata like `__MACOSX`.
 
 ## Version compatibility boundaries
@@ -83,6 +84,16 @@ Per-mode settings:
 
 Report for DB migration changes: new SavedVariables keys, removed/renamed keys, migration path, rollback risk, and `/reload` test steps.
 
+## Deploying to the game client
+
+Use this when copying built addon files into the game or syncing a modified module to a running install.
+
+- Back up the files being overwritten to a local workspace folder first (for example `archive/<Addon>_client_backup_YYYYMMDD/`). Never place backups inside the game installation directory or inside `Interface/AddOns/` — those locations must stay clean so the game only sees loadable addon files, and wide `*.lua`/`*.bak` sweeps or addon managers can otherwise pick up stray files.
+- Sync only the files that actually changed; do not overwrite player-generated client files (companion-app config such as rule/config Lua files, SavedVariables, `.wtf` data) unless the task explicitly requires it.
+- When syncing an embedded `QFXWidgets.lua`, replace the whole file with the canonical copy; never merge diverging versions by hand.
+- After copying, verify each synced file by hash against the release payload or source; report which files were synced and where the backup lives.
+- Update the installed `.toc` only when its contents (file list, interface version) changed; a version-line-only difference does not require touching the client copy.
+
 ## Modification traceability and minimal diff
 
 Use this for every addon code/package change.
@@ -106,6 +117,6 @@ Minimal diff when fixing a focused issue:
 - Do not rewrite architecture unless requested.
 - Do not change feature behavior during UI-only work.
 
-Runtime comments: do not add `modified by AI`, date-stamped edit markers, or noisy trace comments. Comments should explain real WoW API behavior, taint risk, migration logic, compatibility, or performance decisions. If the user wants edit traces, put them in a dev changelog such as `docs/CHANGELOG_DEV.md`, kept out of release zips unless requested.
+Runtime comments: do not add `modified by AI`, date-stamped edit markers, or noisy trace comments. Comments should explain real WoW API behavior, taint risk, migration logic, compatibility, or performance decisions. If the user wants edit traces, put them in a dev changelog such as `docs/CHANGELOG_DEV.md`, never shipped in release zips.
 
 Rollback notes should say which files to restore and whether SavedVariables migration makes rollback risky.
