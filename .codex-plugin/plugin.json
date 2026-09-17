@@ -1,6 +1,6 @@
 {
   "name": "qfx-wow-addon-ui-plugin",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "description": "Reusable Codex skill for designing and refactoring World of Warcraft addon UIs and architectures using a primary scalable QFX design method inspired by EllesmereUI, with QFXWidgets factory controls (QFXUI skin), English-first multilingual layout sizing, pixel-level visual standards, trilingual typography rules, UI state and accessibility patterns, modular architecture, deferred options loading, page cache, widget refresh callbacks, central event dispatch, coalesced refresh, temporary OnUpdate, weak-table frame state, Plater/DandersFrames supplements, and WoW 12.x API source-grounding rules.",
   "author": {
     "name": "zhufei1000"

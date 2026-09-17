@@ -180,9 +180,10 @@ When asked to update this skill:
 2. Integrate new primary rules into existing references instead of creating competing files.
 3. Add a focused reference only when the content is truly separate.
 4. Keep names generic unless a file is intentionally a case study.
-5. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version when the skill version changes.
+5. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version when the skill version changes, and push the change to the repository (rule 8).
 6. When using a reference addon or API source, document extracted rules and do not copy assets/libraries unless requested and licensed.
 7. Treat `QFXWidgets.lua` as the factory source of truth: when its API or tokens change (its internal `VERSION` bump), update `references/qfxwidgets-factory.md` and any affected rows in this skill in the same pass.
+8. Repository sync is mandatory after every local skill change: commit and push to `https://github.com/zhufei1000/QFX-WoW-Addon-UI-Skill` (`main`), bump the version across `README.md`, `INSTALL.md`, and `.codex-plugin/plugin.json`, refresh the local plugin package copy, and rebuild its release zip. The installed skill must never stay ahead of the repository, and a local change is not complete until the repository holds it.
 
 ## Reference loading guide
 

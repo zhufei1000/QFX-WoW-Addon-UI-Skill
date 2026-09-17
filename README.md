@@ -1,11 +1,16 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.19.0
+Version: 1.20.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
+
+## What v1.20.0 changes
+
+- Adds the mandatory repository sync rule to `SKILL.md` ("When asked to update this skill", rule 8): after every local skill change, commit and push to `https://github.com/zhufei1000/QFX-WoW-Addon-UI-Skill` (`main`), bump the version across `README.md`, `INSTALL.md`, and `.codex-plugin/plugin.json`, refresh the local plugin package copy, and rebuild its release zip. The installed skill must never stay ahead of the repository, and a local change is not complete until the repository holds it.
+- Rule 5 now points at the sync rule so a version bump and the push always happen in the same pass.
 
 ## What v1.19.0 changes
 
