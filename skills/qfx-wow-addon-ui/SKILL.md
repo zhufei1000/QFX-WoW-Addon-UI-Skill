@@ -173,6 +173,7 @@ When asked to optimize an addon UI, architecture, or API usage:
 11. Apply the QFXWidgets visual standards and check empty/loading/error/confirm states plus the factory keyboard conventions before finishing any panel.
 12. Check combat-lockdown and secret-value risks if the UI applies live settings.
 13. Package and report changes clearly.
+14. After changing addon files, check the game client's `Interface/AddOns/` for the addon folder: if it is installed, back up and sync the changed files immediately; if it is not installed, sync only when the user asks. See `references/release-and-compatibility.md`.
 
 When asked to update this skill:
 

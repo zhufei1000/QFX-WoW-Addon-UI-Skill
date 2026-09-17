@@ -1,11 +1,16 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.20.0
+Version: 1.21.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
+
+## What v1.21.0 changes
+
+- Adds the mandatory game-client sync check to `SKILL.md` (addon workflow step 14) and `references/release-and-compatibility.md`: after any WoW addon code change, check the game's `Interface/AddOns/` for the addon folder. If it is installed, back up and sync the changed files immediately without waiting for a request; if it is not installed, do not create it and sync only when the user explicitly asks.
+- Documents locating the game installation from the Blizzard registry key (`InstallPath`) or the known `_retail_` / `_classic_` folders, and matching addon folder names exactly so a similarly named folder is never treated as the same addon.
 
 ## What v1.20.0 changes
 

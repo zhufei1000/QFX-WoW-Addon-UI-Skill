@@ -88,6 +88,8 @@ Report for DB migration changes: new SavedVariables keys, removed/renamed keys, 
 
 Use this when copying built addon files into the game or syncing a modified module to a running install.
 
+- After any WoW addon code change, check the game client before finishing: look for the addon folder (and its sub-addon folders) under the game's `Interface/AddOns/`. If the addon is installed there, sync the changed files immediately without waiting for a request; if it is not installed, do not create it and sync only when the user explicitly asks.
+- Locate the game installation from the Blizzard registry key (`InstallPath`) or the known `_retail_` / `_classic_` folders, and match the addon folder names exactly — a differently named folder is not the same addon.
 - Back up the files being overwritten to a local workspace folder first (for example `archive/<Addon>_client_backup_YYYYMMDD/`). Never place backups inside the game installation directory or inside `Interface/AddOns/` — those locations must stay clean so the game only sees loadable addon files, and wide `*.lua`/`*.bak` sweeps or addon managers can otherwise pick up stray files.
 - Sync only the files that actually changed; do not overwrite player-generated client files (companion-app config such as rule/config Lua files, SavedVariables, `.wtf` data) unless the task explicitly requires it.
 - When syncing an embedded `QFXWidgets.lua`, replace the whole file with the canonical copy; never merge diverging versions by hand.
