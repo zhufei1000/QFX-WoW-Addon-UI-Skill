@@ -1,11 +1,21 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.21.0
+Version: 1.22.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
+
+## What v1.22.0 changes
+
+- Updates the WoW API reference baseline to **Live 12.1.0.69933** and **PTR2 12.1.5.69952** (re-verified 2026-09-25; no newer Gethe build was present).
+- Records Live 69933 `ForbiddenAspect.SetTexture` / `QueryRotation`, the corresponding `SimpleTextureBaseAPI` checks, and `IsRaidMarkerActive` becoming secret during Chat Messaging Lockdown.
+- Promotes `C_LFGInfo.IsInMatchmadeRaidWithoutRoleRequirements()` from the older PTR warning to a Live contract.
+- Documents PTR2 69952 `C_UnitAuras.GetRefreshCarryOverDuration()` in detail, including Blizzard CooldownViewer/AuraContainer Pandemic-window usage and its difference from `GetRefreshExtendedDuration()`.
+- Documents PTR2 69952 `GetArenaOpponentSpec(index)` as a Secret-returning API, not a normal addon-readable specialization ID.
+- Records `CooldownSetSpellFlags.SelectHighestLevelLinkedSpell` and the animation ForbiddenAspects `QueryAnimationProgress` / `AddAnimations`.
+- Bumps the skill/plugin package metadata to v1.22.0.
 
 ## What v1.21.0 changes
 
