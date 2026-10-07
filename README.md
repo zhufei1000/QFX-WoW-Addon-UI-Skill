@@ -1,12 +1,16 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.25.0
+Version: 1.25.1
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
 - `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
+
+## What v1.25.1 changes
+
+- Uses the white GitHub mark so the icon stays readable on dark settings panels (the black variant was nearly invisible there).
 
 ## What v1.25.0 changes
 

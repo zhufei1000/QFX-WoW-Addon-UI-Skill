@@ -226,7 +226,7 @@ Official brand icons ship with this skill in `assets/`:
 
 - `assets/DiscordIcon.tga` / `assets/DiscordIcon.png` - official Discord mark.
 - `assets/QQGroupIcon.tga` / `assets/QQGroupIcon.png` - official QQ penguin, extracted from the local QQ client (`QQNT\QQ.exe` associated icon).
-- `assets/GitHubIcon.tga` / `assets/GitHubIcon.png` - official GitHub mark; its copy target is the addon's repository address.
+- `assets/GitHubIcon.tga` / `assets/GitHubIcon.png` - official GitHub mark in white, so it stays readable on dark settings panels; its copy target is the addon's repository address.
 
 Usage in an addon: copy the `.tga` files into the addon's `Media/` folder and reference them without extension (`Interface\AddOns\<Addon>\Media\DiscordIcon`, `...\Media\QQGroupIcon`, `...\Media\GitHubIcon`); use the `.png` files only for previews and docs. Put the icons next to the author line (for example at the bottom of the settings navigation column, above the author text) or in the relevant settings section. The three icons sit in one row, each opening the copy dialog with its own text: Discord invite link, QQ group number, and the addon's GitHub repository URL.
 
