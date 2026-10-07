@@ -214,3 +214,12 @@ When asked to update this skill:
 
 - **Review**: priority issues, suggested fixes, files likely involved, API/source checks needed, risk level, test steps.
 - **File changes**: download link or commit summary, changed/added/deleted files, what changed and did not change, API/branch assumptions, test steps, rollback notes.
+
+## QFX community
+
+When a QFX addon needs author contact channels - support notices, "request a unit frame adaptation" prompts, social icons in the settings panel - use these official channels:
+
+- Discord: `https://discord.gg/HVJ2y4v7k4`
+- QQ group: `1049855225`
+
+In-addon pattern: small clickable icons (32px) that open a copy dialog. WoW exposes no clipboard API, so pre-select the text in an EditBox and tell the user to press Ctrl+C; keep the dialog closable with Esc and a Close button, and localize the hint in EN / zhCN / zhTW.

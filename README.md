@@ -1,11 +1,16 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.22.0
+Version: 1.23.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
+
+## What v1.23.0 changes
+
+- Adds the official QFX community channels (Discord invite and QQ group) to `SKILL.md` and this README, so addon support notices and "request a unit frame adaptation" prompts always use the same contacts.
+- Documents the recommended in-addon pattern for contact channels: small clickable icons that open a copy dialog, because WoW exposes no clipboard API (pre-select the text and instruct the user to press Ctrl+C).
 
 ## What v1.22.0 changes
 
@@ -175,3 +180,8 @@ The skill includes references for:
 The authoritative current API file is:
 
 `skills/qfx-wow-addon-ui/references/wow-12.1.0-live-api-final-zhCN.md`
+
+## Community
+
+- Discord: https://discord.gg/HVJ2y4v7k4
+- QQ group: 1049855225
