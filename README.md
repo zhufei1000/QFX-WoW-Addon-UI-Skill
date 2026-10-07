@@ -1,12 +1,16 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.25.1
+Version: 1.25.2
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
 - `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
+
+## What v1.25.2 changes
+
+- Documents the hover feedback for the contact icons: reuse the icon texture as an ADD highlight so the whole icon lights up; the default round mouse-hilight reads as a small dot on 20px icons.
 
 ## What v1.25.1 changes
 
