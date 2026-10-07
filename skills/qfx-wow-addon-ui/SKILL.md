@@ -222,4 +222,11 @@ When a QFX addon needs author contact channels - support notices, "request a uni
 - Discord: `https://discord.gg/HVJ2y4v7k4`
 - QQ group: `1049855225`
 
-In-addon pattern: small clickable icons (32px) that open a copy dialog. WoW exposes no clipboard API, so pre-select the text in an EditBox and tell the user to press Ctrl+C; keep the dialog closable with Esc and a Close button, and localize the hint in EN / zhCN / zhTW.
+Official brand icons ship with this skill in `assets/`:
+
+- `assets/DiscordIcon.tga` / `assets/DiscordIcon.png` - official Discord mark.
+- `assets/QQGroupIcon.tga` / `assets/QQGroupIcon.png` - official QQ penguin, extracted from the local QQ client (`QQNT\QQ.exe` associated icon).
+
+Usage in an addon: copy the `.tga` files into the addon's `Media/` folder and reference them without extension (`Interface\AddOns\<Addon>\Media\DiscordIcon`, `...\Media\QQGroupIcon`); use the `.png` files only for previews and docs. Put the icons next to the author line (for example at the bottom of the settings navigation column, above the author text) or in the relevant settings section.
+
+In-addon pattern: small clickable icons (20-32px) that open a copy dialog. WoW exposes no clipboard API, so pre-select the text in an EditBox and tell the user to press Ctrl+C; keep the dialog closable with Esc and a Close button, and localize the hint in EN / zhCN / zhTW.

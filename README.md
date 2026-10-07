@@ -1,11 +1,18 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.23.0
+Version: 1.24.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
+- `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
+
+## What v1.24.0 changes
+
+- Ships the official brand icons in `skills/qfx-wow-addon-ui/assets/`: `DiscordIcon.tga` / `QQGroupIcon.tga` (64x64, WoW-ready) plus `.png` previews.
+- The QQ penguin is the official icon extracted from the local QQ client (`QQNT\QQ.exe` associated icon); the Discord mark comes from the GitHub Explore topic icon.
+- Documents in-addon usage: copy the TGAs into the addon's `Media/`, reference them without extension, place them next to the author line (bottom of the settings navigation) or in the relevant settings section, and pair them with the copy-dialog pattern.
 
 ## What v1.23.0 changes
 
