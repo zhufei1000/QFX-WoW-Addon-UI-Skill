@@ -1,12 +1,21 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.25.2
+Version: 1.26.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
 - `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
+
+## What v1.26.0 changes
+
+- Moves the official WoW API baseline to **Live 12.1.5.70391** and records PTR2 **12.1.5.70340** as the current warning branch.
+- Promotes the former PTR2-only 12.1.5 contracts to Live: `C_UnitAuras.GetRefreshCarryOverDuration()`, `CooldownSetSpellFlags.SelectHighestLevelLinkedSpell`, Secret-returning `GetArenaOpponentSpec(index)`, and the animation ForbiddenAspects `QueryAnimationProgress` / `AddAnimations`.
+- Records the Live Aura Sound contract: `C_UnitAuras.AddAuraSound` is restricted, playback stops after five seconds, and `throttleSeconds` must stay within 0–5 seconds.
+- Adds the Live SocialRestrictions / Age Verification / VoiceChat Chat Messaging Lockdown rules and updates the TTS ConditionalSecret guidance.
+- Notes that the key high-risk generated API files currently match between Live 70391 and PTR2 70340; Live 70391 itself only advances `version.txt` over 70340.
+- Refreshes CombatLog guidance for the current split ordinary/Shared/Internal/Secure documentation model.
 
 ## What v1.25.2 changes
 
