@@ -79,6 +79,7 @@ C_UnitAuras.GetAuraDuration
 C_UnitAuras.GetAuraSlots
 C_UnitAuras.GetBuffDataByIndex
 C_UnitAuras.GetDebuffDataByIndex
+C_UnitAuras.GetRefreshCarryOverDuration
 C_UnitAuras.GetRefreshExtendedDuration
 C_UnitAuras.GetUnitAuraInstanceIDs
 C_UnitAuras.GetUnitAuras
@@ -1069,4 +1070,4 @@ ConditionalSecret = true
 - `wow-12-api-source-rules.md`：API 来源和核实规则。
 - `wow-12-secret-value-taint.md`：Secret / Taint / Forbidden Object 设计规则。
 
-**当前结论：Live 12.1.0.69497 是正式开发基线；PTR 12.1.0.69587 只用于预警。69404、69465、69497 已产生实际 API/安全合同变化，PTR 69587 新增 LFG API。Aura、Secret、Unit、TTS、CooldownViewer 与 secure/forbidden 仍是 WoW 12.1 插件开发最需要持续核实的高风险区域。**
+**当前结论：Live 12.1.5.70391 是当前正式开发基线。PTR2 12.1.5.70340 的重点高风险 generated API 合同与 Live 当前一致；此前 PTR2 的 Aura carry-over、CooldownViewer linked-spell、ArenaOpponentSpec Secret、Texture/Animation ForbiddenAspect、SocialRestrictions、VoiceChat/Chat Lockdown 与 Aura Sound 5 秒规则均已正式进入 Live。Aura、Secret、Unit、CooldownViewer、TTS/Voice、CombatLog 与 secure/forbidden 仍是 WoW 12.1.5 插件开发最需要持续核实的高风险区域。**
