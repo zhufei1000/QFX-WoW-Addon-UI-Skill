@@ -1,62 +1,58 @@
-# WoW 12.1 当前 API 基线（Live 12.1.0.69933 / PTR2 12.1.5.69952）
+# WoW 12.1 当前 API 基线（Live 12.1.5.70391 / PTR2 12.1.5.70340）
 
-用于 Retail 12.1.0 正式服插件开发、兼容性审查，以及对 PTR / PTR2 后续 API 变化进行预警。
+用于 Retail 12.1.5 正式服插件开发、兼容性审查，以及对 PTR / PTR2 后续 API 变化进行预警。
 
 > 本文件严格区分 **Live 正式合同** 与 **PTR / PTR2 预警**。除非明确写明已进入 Live，否则 PTR / PTR2 API 不应直接作为正式服可用接口。
 
 ## 当前基线
 
-最后核实：**2026-09-25**。
+最后核实：**2026-10-14**。
 
-- Retail `live`：**12.1.0.69933**
-- Live HEAD：`09b9db7948abc9b9648dedaab51eb0cf3ee67b31`
-- Retail `ptr`：**12.1.0.69587**
-- PTR HEAD：`a89e9d0ceb7f6cd31e8fc5ca7df1a338ac0b1b58`
-- Retail `ptr2`：**12.1.5.69952**
-- PTR2 HEAD：`5c9363cc1b4e80b98963e3fcc87ab460fa911a94`
+- Retail `live`：**12.1.5.70391**
+- Live HEAD：`18c6d677b605b312f3d813d498404631fb941977`
+- Retail `ptr`：**12.1.0.69587**（已明显落后于当前 Live）
+- Retail `ptr2`：**12.1.5.70340**
+- PTR2 HEAD：`12380f8cdc541b7f0963f74cbe0874c21a857fbb`
 - `beta`：12.0.1.66220（当前不作为 12.1 主参考）
 
 Gethe 当前版本：
 
 ```text
-live  = 12.1.0.69933
+live  = 12.1.5.70391
 ptr   = 12.1.0.69587
-ptr2  = 12.1.5.69952
+ptr2  = 12.1.5.70340
 beta  = 12.0.1.66220
 ```
+
+关键判断：
+
+- Live 已正式进入 **12.1.5**；
+- Live 70391 相比 70340 的最新提交仅修改 `version.txt`；
+- 当前重点高风险 generated API 文档（UnitAura / Unit / Spell / CombatLog / CooldownViewer / ForbiddenAspect / SecretPredicates / PvP / SocialRestrictions / VoiceChat / RaidMarkers）在 Live 70391 与 PTR2 70340 内容一致；
+- 因此此前 69952 / 70077 阶段标记为 PTR2-only 的主要 12.1.5 API，现在应按 **Live 正式合同**处理。
 
 ---
 
 # 1. 当前结论
 
-截至 **Live 12.1.0.69933**：
+截至 **Live 12.1.5.70391**：
 
-- 12.1 的 Aura 访问限制、Secret Predicate、Unit Identity Secret、Spell/Cooldown、TTS 与 CombatLog 基础规则继续有效；
-- Live 69587 已正式加入 `C_LFGInfo.IsInMatchmadeRaidWithoutRoleRequirements()`，不再是 PTR-only；
-- Live 69933 将 `ForbiddenAspect` 从 11 项扩展到 13 项，新增 `SetTexture` 与 `QueryRotation`；
-- `SimpleTextureBaseAPI` 已对 `ClearSVG`、`SetColorTexture`、`SetSVG`、`GetRotation` 应用新的 ForbiddenAspect 检查；
-- `IsRaidMarkerActive(index)` 新增 `SecretInChatMessagingLockdown = true`；
-- Live 69875 只是版本号推进，没有新的 generated API 合同变化。
-
-截至 **PTR2 12.1.5.69952**：
-
-- 新增 `C_UnitAuras.GetRefreshCarryOverDuration(unit, auraInstanceID, spellID?)`；
-- 新增全局 `GetArenaOpponentSpec(index)`，但其返回值是 Secret；
-- `CooldownSetSpellFlags` 新增 `SelectHighestLevelLinkedSpell = 4`；
-- `ForbiddenAspect` 进一步扩展到 15 项，并加入动画查询/创建限制 `QueryAnimationProgress`、`AddAnimations`；
-- 这些 12.1.5 内容仍是 **PTR2-only**，只能作为兼容预警，不能默认写入 Live 代码路径。
+- 12.1 的 Aura 访问限制、Secret Predicate、Unit Identity Secret、Spell/Cooldown、TTS、CombatLog 与 ForbiddenAspect 基础规则继续有效；
+- `C_UnitAuras.GetRefreshCarryOverDuration(unit, auraInstanceID, spellID?)` 已进入 Live，可作为 Pandemic / Aura 刷新继承时间的正式接口；
+- `CooldownSetSpellFlags.SelectHighestLevelLinkedSpell = 4` 已进入 Live，CDM / CooldownViewer 解析器不能再默认只认基础 `spellID` 或 `linkedSpellIDs[1]`；
+- 全局 `GetArenaOpponentSpec(index)` 已进入 Live，但 `SecretReturns = true`，不能当普通 specializationID 做 Lua 比较、查表、缓存或自动决策；
+- `ForbiddenAspect` 正式包含 `SetTexture`、`QueryRotation`、`QueryAnimationProgress`、`AddAnimations`，Texture / Animation 状态不能再被当作稳定 side channel；
+- `C_SocialRestrictions.CanSendChat()`、Age Verification 相关 API 与 VoiceChat Chat Messaging Lockdown 限制均已进入 Live；
+- `C_UnitAuras.AddAuraSound` 正式文档明确：声音最多播放 5 秒，`throttleSeconds` 必须位于 0～5 秒（含）；
+- Live 70391 与 PTR2 70340 的重点高风险 generated API 合同当前一致。
 
 正式开发默认基线：
 
 ```text
-Live 12.1.0.69933
+Live 12.1.5.70391
 ```
 
-预发布兼容观察基线：
-
-```text
-PTR2 12.1.5.69952
-```
+PTR2 目前主要用于后续变化预警，而不是当前 12.1.5 API 的“更先进版本”。
 
 ---
 
@@ -520,7 +516,7 @@ anchor/layout 变化
 
 ---
 
-# 13. Aura Sound 当前路径
+# 13. Aura Sound 当前正式路径
 
 12.0.7 的：
 
@@ -532,14 +528,42 @@ C_UnitAuras.TriggerPrivateAuraShowDispelType
 
 在 12.1 generated docs 中已移除。
 
-当前路径：
+当前 Live 12.1.5 路径：
 
 ```lua
 C_UnitAuras.AddAuraSound
 C_UnitAuras.RemoveAuraSound
 ```
 
-`AddAuraSound` 带 restrictions，不是读取 Secret Aura 原始数据的后门。
+`AddAuraSound` 当前合同包含：
+
+```text
+HasRestrictions = true
+SecretArguments = "AllowedWhenUntainted"
+```
+
+并明确规定：
+
+```text
+声音播放最多 5 秒；
+throttleSeconds 必须在 0～5 秒（含）范围内。
+```
+
+### 对插件的影响
+
+适合：
+
+- 短提示音；
+- “驱散”“危险”“宠物死亡”“技能好了”等短语音；
+- 由 Aura 事件直接驱动的短声音提醒。
+
+不适合：
+
+- 超过约 5 秒的长 TTS；
+- 依赖 Aura Sound 播完整说明句；
+- 试图通过 Aura Sound 读取或还原 Secret Aura。
+
+`AddAuraSound` 仍不是读取 Secret Aura 原始数据的后门。
 
 ---
 
@@ -572,9 +596,16 @@ iconID, originalIconID, conditionalIconID = C_Spell.GetSpellTexture(spellID)
 
 # 15. CombatLog
 
-当前没有发现 Live 69497 对核心 CombatLog API 进行新的重大合同重构。
+12.1.5 的 generated API 已明确拆分出 CombatLog 普通、Shared、Internal、Secure 等合同层。
 
-已有 restriction 继续遵守，但普通战斗日志统计仍不是本轮最高风险迁移区。
+截至 Live 70391 / PTR2 70340：
+
+- 重点 CombatLog generated API 内容在两个分支当前一致；
+- 最近的 70340 → 70391 推进没有新增 CombatLog 合同变化；
+- 普通战斗日志统计仍可继续，但不能把 Internal / Secure 能力视为普通 AddOn 可用；
+- 涉及 Secret / Restricted 数据时，仍必须逐函数读取当前 metadata，而不是仅凭“CombatLog 以前能用”推断安全性。
+
+因此 CombatLog 当前不是本轮需要大规模重写的区域，但仍应保持高版本核验习惯。
 
 ---
 
@@ -695,9 +726,7 @@ SecretArguments = "AllowedWhenUntainted"
 
 ---
 
-# 20. PTR2 69952：C_UnitAuras.GetRefreshCarryOverDuration
-
-> **PTR2-only：Live 12.1.0.69933 不应直接调用。**
+# 20. Live 12.1.5：C_UnitAuras.GetRefreshCarryOverDuration
 
 新增合同：
 
@@ -732,7 +761,7 @@ SecretArguments = "AllowedWhenTainted"
 
 ### Blizzard 已经怎么用
 
-PTR2 CooldownViewer 直接使用：
+Live 12.1.5 CooldownViewer 已直接使用：
 
 ```lua
 local carriedOverDuration =
@@ -789,9 +818,7 @@ GetRefreshExtendedDuration - GetAuraBaseDuration
 
 ---
 
-# 21. PTR2 69952：GetArenaOpponentSpec(index)
-
-> **PTR2-only。**
+# 21. Live 12.1.5：GetArenaOpponentSpec(index)
 
 新增全局 API：
 
@@ -849,7 +876,7 @@ end
 
 ---
 
-# 22. PTR2 69952：CooldownSetSpellFlags.SelectHighestLevelLinkedSpell
+# 22. Live 12.1.5：CooldownSetSpellFlags.SelectHighestLevelLinkedSpell
 
 `CooldownSetSpellFlags` 新增：
 
@@ -881,7 +908,7 @@ HideByDefault = 2
 
 ### 建议
 
-如果它进入 Live，你的解析器应至少认识这个 flag，不要继续假设：
+它已经进入 Live。正式服解析器应至少认识这个 flag，不要继续假设：
 
 ```text
 永远 cooldown.spellID
@@ -892,9 +919,9 @@ HideByDefault = 2
 
 ---
 
-# 23. PTR2 69952：动画状态也进入 ForbiddenAspect
+# 23. Live 12.1.5：动画状态也进入 ForbiddenAspect
 
-PTR2 的 `ForbiddenAspect` 已扩展到 15 项，并包含：
+Live 12.1.5 的 `ForbiddenAspect` 已扩展到 15 项，并包含：
 
 ```text
 QueryAnimationProgress = 8192
@@ -936,7 +963,76 @@ AnimationGroup:CreateAnimation(...)
 
 ---
 
-# 24. 正式服插件审查优先级
+# 24. Live 12.1.5：SocialRestrictions / VoiceChat / Chat Lockdown
+
+此前 PTR2 70077 阶段出现的社交限制已经进入 Live。
+
+当前可用：
+
+```lua
+C_SocialRestrictions.CanSendChat()
+C_SocialRestrictions.CanReceiveChat()
+C_SocialRestrictions.IsAgeVerificationRestricted()
+C_SocialRestrictions.IsAgeVerificationRestrictedMinor()
+C_SocialRestrictions.AcknowledgeAgeVerificationRestriction()
+```
+
+其中：
+
+```text
+C_SocialRestrictions.IsAgeVerificationRestrictedMinor()
+HasRestrictions = true
+```
+
+### 对聊天/自动密语插件的意义
+
+发送失败不能只判断：
+
+- 是否被禁言；
+- 是否 combat/chat lockdown；
+- 是否频道本身不允许。
+
+还应考虑账号级：
+
+- Age Verification restriction；
+- 其他 SocialRestrictions。
+
+对自动密语、组队喊话、聊天条、Whisper、语音频道类插件，优先使用：
+
+```lua
+C_SocialRestrictions.CanSendChat()
+```
+
+作为“当前是否具备发送聊天条件”的统一入口之一。
+
+### VoiceChat
+
+Live 12.1.5 中大量 VoiceChat API / Event 已带：
+
+```text
+SecretInChatMessagingLockdown = true
+```
+
+`C_VoiceChat.SpeakText()` 当前仍允许 tainted 调用链传递文本，但：
+
+```text
+text
+ConditionalSecret = true
+```
+
+因此对可能来源于 Secret 的文本，优先直接传递给支持 ConditionalSecret 的 API，不要先：
+
+- 比较；
+- 拼接；
+- 打印；
+- 序列化；
+- 用作普通 Lua 条件分支。
+
+这说明 Blizzard 正在把 Chat / Voice / STT / TTS 统一纳入更严格的消息自动化边界。
+
+---
+
+# 25. 正式服插件审查优先级
 
 | 功能类型 | 风险 |
 |---|---|
@@ -953,18 +1049,19 @@ AnimationGroup:CreateAnimation(...)
 
 ---
 
-# 25. 后续维护规则
+# 26. 后续维护规则
 
 从现在起：
 
-- Retail 正式开发以 `live` **12.1.0.69933** 为当前基线；
-- `ptr` **12.1.0.69587** 目前落后于 Live；`ptr2` **12.1.5.69952** 是 12.1.5 主要预警来源；
-- PTR-only API 必须明确标记，不能默认写进 Live 代码路径；
-- 如果 `live` build 继续增加，即使仍叫 12.1.0，也必须重新比较 `Blizzard_APIDocumentationGenerated`；
+- Retail 正式开发以 `live` **12.1.5.70391** 为当前基线；
+- `ptr` **12.1.0.69587** 已明显落后，不作为当前 Retail 12.1.5 主参考；
+- `ptr2` **12.1.5.70340** 当前重点高风险 API 合同与 Live 70391 一致，主要用于后续预警；
+- 旧文档中 69952 / 70077 的 PTR2-only 结论已经转为 Live 正式合同；
+- 如果 `live` 或 `ptr2` build 继续增加，必须重新比较 `Blizzard_APIDocumentationGenerated`，不能只看版本号；
 - 不要用 build number 写业务 feature flag，build 只作为文档 provenance；
-- 所有 Aura、Unit、Spell/Cooldown、TTS、secure/forbidden API 决策必须读取当前目标 build 的 restriction metadata；
+- 所有 Aura、Unit、Spell/Cooldown、CombatLog、TTS/Voice、secure/forbidden API 决策必须读取当前目标 build 的 restriction metadata；
 - Blizzard FrameXML 内部可用能力不自动等于普通 AddOn 可调用能力；
-- 对 Secret 值的正确策略是重新设计数据流，而不是通过 side channel 或 secure 内部函数绕过限制。
+- 对 Secret 值的正确策略是重新设计数据流，而不是通过 UI side channel、动画、Texture 状态或 secure 内部函数绕过限制。
 
 ## 相关参考
 
