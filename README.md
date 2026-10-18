@@ -1,6 +1,6 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.26.2
+Version: 1.27.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
@@ -8,7 +8,7 @@ This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of
 - `skills/qfx-wow-addon-ui/references/*.md`
 - `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
 
-## What v1.26.2 changes
+## What v1.27.0 changes
 
 - Adds a **Detect and handle secrets** section to the secret/taint reference: `issecretvalue`, `canaccessvalue`, `issecrettable`, `canaccesstable`, the `C_Secrets.*` and `C_RestrictedActions.*` queries, `Enum.SecretAspect` widget checks, a canonical guard pattern for secret health/power, and the rule never to `pcall` a restriction error as a probe. Previously the skill described the restrictions but named none of the detection APIs.
 - Adds **Client branches and interface versions** to `SKILL.md`: the current interface number for each client family (120105 / 50504 / 11509 / 38002 / 20506), multi-client TOC gating, the 12.x TOC directives that matter for UI work, and the restricted Blizzard-facing directive list.
