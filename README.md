@@ -1,12 +1,19 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.26.0
+Version: 1.26.1
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
 - `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
+
+## What v1.26.1 changes
+
+- Refreshes the authoritative Live WoW API provenance from **12.1.5.70391** to **12.1.5.70448** (verified 2026-10-18): no `Blizzard_APIDocumentationGenerated` change in that Live commit.
+- Documents the five-second BonusRollFrame UI refresh ticker and cancellation in GroupLootFrame, with QFXBeggar compatibility notes; this is not an API contract change.
+- Records new **PTR 12.1.7.70424** API previews (PTR-only): `GroupBuffItem.displaySpellID`, `C_ActionBar.EnableActionCombatActionRangeCheck` and event, `C_Spell.IsActiveSpell` / `GetItemCooldown`, `C_SpellBook.IsSpellBookItemLowRank`, and new Unit interaction APIs, retaining Secret restrictions and return semantics.
+- Updates branch provenance and maintains existing Live 12.1.5 Secret/Aura/CooldownViewer safety rules.
 
 ## What v1.26.0 changes
 
