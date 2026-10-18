@@ -1,12 +1,22 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.26.1
+Version: 1.26.2
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
 - `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
+
+## What v1.26.2 changes
+
+- Adds a **Detect and handle secrets** section to the secret/taint reference: `issecretvalue`, `canaccessvalue`, `issecrettable`, `canaccesstable`, the `C_Secrets.*` and `C_RestrictedActions.*` queries, `Enum.SecretAspect` widget checks, a canonical guard pattern for secret health/power, and the rule never to `pcall` a restriction error as a probe. Previously the skill described the restrictions but named none of the detection APIs.
+- Adds **Client branches and interface versions** to `SKILL.md`: the current interface number for each client family (120105 / 50504 / 11509 / 38002 / 20506), multi-client TOC gating, the 12.x TOC directives that matter for UI work, and the restricted Blizzard-facing directive list.
+- Adds `C_AddOns` runtime metadata guidance (`GetAddOnMetadata`, `IsAddOnLoaded`, `LoadAddOn`, `GetNumAddOns`, `GetAddOnInfo`) and retires the deprecated bare globals.
+- Marks the 12.0.7 → 12.1.0 migration reference as a **historical archive** and retires its "redo the live diff" closeout requirement; the current contract lives in the live API baseline.
+- Refreshes the `wow-12-api-source-rules` and `wow-12-secret-value-taint` baselines from **12.1.0.69214** to **12.1.5.70448**, and records branch `ptr` as **12.1.7.70424**.
+- Documents the API-verification fallback when a client install does not expose `Blizzard_APIDocumentationGenerated`: installed-addon usage first, then the Warcraft Wiki `API:` page, then `Gethe/wow-ui-source`.
+- Changes the "update this skill" workflow: repository sync is **opt-in** (no forced push), and the version files live in the repository root, not in an installed copy.
 
 ## What v1.26.1 changes
 

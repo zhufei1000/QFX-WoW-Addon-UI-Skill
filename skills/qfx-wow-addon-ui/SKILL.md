@@ -52,7 +52,7 @@ For EN + 简体中文 + 繁體中文 support, design width from English first, t
 - If English overflows, fix the layout structure (wider control, full-width row, shorter visible label, tooltip description, fewer columns, more space) instead of shrinking fonts below the QFX standard.
 - Never design a tight Chinese layout and translate to English afterward.
 
-Details: `references/compact-multilingual-layout.md`, `references/ui-typography-localization-zh.md`.
+Details: `references/compact-multilingual-layout.md`, `references/ui-typography-localization-zh.md`. For the translation workflow itself — string inventory, locale-layer refactor, placeholder and escape preservation, client-side game-data localization, glossary — use the `wow-addon-localization` skill; this one covers layout and typography.
 
 ### Visual standards
 
@@ -101,9 +101,48 @@ Details: `references/complex-addon-ui-patterns.md`.
 
 If a setting touches protected frames or frames likely to become protected: save immediately, apply immediately out of combat, and if in combat mark apply pending and apply once on `PLAYER_REGEN_ENABLED`. Never mutate protected frames in combat, never spam chat for each deferred change, and never lose the user's setting because apply was delayed.
 
+## Client branches and interface versions
+
+One TOC can ship to several clients, but the interface number must match each of them or the addon
+is flagged out of date. Verified 2026-10-18:
+
+| Client | Game type | Folder | Interface |
+|---|---|---|---|
+| Retail / Midnight 12.1.5 | `standard` | `_retail_` | **120105** |
+| Mists of Pandaria Classic 5.5.4 | `mists` | `_classic_` | 50504 |
+| Classic Era 1.15.9 | `vanilla` | `_classic_era_` | 11509 |
+| Titan Reforged (Wrath) | `wrath` | `_classic_titan_` | 38002 |
+| TBC Anniversary 2.5.6 | `tbc` | `_anniversary_` | 20506 |
+
+Rules:
+
+- Prefer one folder with a comma list — `## Interface: 120105, 50504, 11509` — over a separate TOC
+  per game type.
+- Gate whole files instead of forking the manifest:
+  `Retail\MidnightOnly.lua [AllowLoadGameType standard]`.
+- Never let a Classic branch inherit a Retail-only `C_*` call without a `Compat` wrapper.
+- Re-check with `/dump select(4, GetBuildInfo())` after a patch, or read `## Interface:` from any
+  recently updated addon in that client's `Interface\AddOns`.
+
+12.x TOC directives that matter for UI and layout work:
+
+| Directive | Use |
+|---|---|
+| `## AllowLoadGameType:` / `## ExcludeLoadGameType:` | addon-level game type gate; repeats append |
+| `[AllowLoadGameType …]` / `[ExcludeLoadGameType …]` | per-file gate inside the TOC |
+| `[AllowLoadTextLocale enUS, zhCN]` | load a locale file only for the locales you ship |
+| `## LoadSavedVariablesFirst: 1` | load saved variables before any script file |
+| `[Bootstrap]` / `[LoadIntoEnvironment Global]` | 12.x load-phase control for LoadOnDemand addons |
+| `## AddonCompartmentFunc:` (+ `OnEnter` / `OnLeave`) | minimap addon compartment entry |
+| `[RegionalTextLocale]` | 12.1.7+ regional locale — PTR only, do not rely on it in Live |
+
+`AllowAddOnTableAccess`, `LoadFirst`, `EscalateErrorDuringLoad`, `SavedVariablesMachine`, and
+`UseSecureEnvironment` are restricted Blizzard-facing directives; do not use them in a third-party
+addon.
+
 ## WoW 12.x API grounding and secret/taint safety
 
-Read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs. For 12.0.7 → 12.1.0 migration, read `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`. For the current live baseline, read `references/wow-12.1.0-live-api-final-zhCN.md`.
+Read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs. The current Live contract is **12.1.5.70448** (PTR preview branch: **12.1.7.70424**); read `references/wow-12.1.0-live-api-final-zhCN.md` for it (the file name kept its old 12.1.0 label, the content is 12.1.5). `references/wow-12.0.7-to-12.1-api-migration-zhCN.md` is a historical archive — use it for migration context only.
 
 - Prefer current FrameXML/UI source, extracted interface resources/API dumps, Warcraft Wiki notes, then same-branch addon examples.
 - Match the branch and build first (live, ptr, beta, Retail, Classic, MoP, TBC, Titan must not be mixed). Live is the production contract; PTR is warning-only.
@@ -111,6 +150,8 @@ Read `references/wow-12-api-source-rules.md` before writing or changing code tha
 - Isolate version-sensitive APIs in `Compat` wrappers; never scatter branch checks through feature modules.
 - Never invent a 12.x signature from memory. If unsure, search current sources, wrap the API, and report the assumption.
 - Do not compare, store, serialize, or do arithmetic on secret values; avoid combat decisions based on protected/secret results. Prefer event-driven approximations, fixed timers, cached safe values, or user configuration.
+- Detect secrets at runtime instead of discovering them through a failed operation: `issecretvalue`, `canaccessvalue`, `issecrettable`, `canaccesstable`, and gate behaviour up front with `C_Secrets.*` / `C_RestrictedActions.*`. Never `pcall` a restriction error to probe whether a call works.
+- Read addon metadata and load state through `C_AddOns` — `C_AddOns.GetAddOnMetadata(addon, "Version")`, `C_AddOns.IsAddOnLoaded`, `C_AddOns.LoadAddOn`, `C_AddOns.GetNumAddOns`, `C_AddOns.GetAddOnInfo`. The bare globals are deprecated or removed in 12.x; cache the version once at `ADDON_LOADED`.
 - If an error mentions `a secret boolean value`, `a secret number value`, or `execution tainted by`, treat it as a taint/secret issue, not a normal Lua type bug.
 
 Details: `references/wow-12-secret-value-taint.md`.
@@ -181,10 +222,10 @@ When asked to update this skill:
 2. Integrate new primary rules into existing references instead of creating competing files.
 3. Add a focused reference only when the content is truly separate.
 4. Keep names generic unless a file is intentionally a case study.
-5. Update `README.md`, `.codex-plugin/plugin.json`, and `INSTALL.md` version when the skill version changes, and push the change to the repository (rule 8).
+5. When the change is a formal skill release, bump the version in `README.md`, `INSTALL.md`, and `.codex-plugin/plugin.json`. Those files live in the **repository root**, not in an installed skill folder — an installed copy contains only `SKILL.md`, `references/`, and `assets/`.
 6. When using a reference addon or API source, document extracted rules and do not copy assets/libraries unless requested and licensed.
 7. Treat `QFXWidgets.lua` as the factory source of truth: when its API or tokens change (its internal `VERSION` bump), update `references/qfxwidgets-factory.md` and any affected rows in this skill in the same pass.
-8. Repository sync is mandatory after every local skill change: commit and push to `https://github.com/zhufei1000/QFX-WoW-Addon-UI-Skill` (`main`), bump the version across `README.md`, `INSTALL.md`, and `.codex-plugin/plugin.json`, refresh the local plugin package copy, and rebuild its release zip. The installed skill must never stay ahead of the repository, and a local change is not complete until the repository holds it.
+8. Repository sync is **opt-in, never automatic**: only commit and push to `https://github.com/zhufei1000/QFX-WoW-Addon-UI-Skill` (`main`) when the user explicitly asks to publish. A local edit is a complete, valid state on its own — do not push, and do not create or update repository-only files, as a side effect of editing the skill.
 
 ## Reference loading guide
 
@@ -206,8 +247,8 @@ When asked to update this skill:
 - Deep advanced architecture: `references/deep-reference-addon-patterns.md`
 - WoW 12.x API source rules: `references/wow-12-api-source-rules.md`
 - Secret values and taint: `references/wow-12-secret-value-taint.md`
-- 12.0.7 → 12.1 PTR migration: `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`
-- Current 12.1 Live API baseline: `references/wow-12.1.0-live-api-final-zhCN.md`
+- 12.0.7 → 12.1 PTR migration (historical archive): `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`
+- Current 12.1.5 Live API baseline (file keeps the 12.1.0 name): `references/wow-12.1.0-live-api-final-zhCN.md`
 - Packaging, compatibility, SavedVariables, reporting: `references/release-and-compatibility.md`
 
 ## Output expectations

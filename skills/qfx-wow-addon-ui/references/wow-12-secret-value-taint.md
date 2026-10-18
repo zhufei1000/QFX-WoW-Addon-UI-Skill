@@ -4,16 +4,15 @@ Use this reference when fixing Retail 12.x errors involving secret values, taint
 
 ## Current verified baseline
 
-Last verified: **2026-08-11**.
+Last verified: **2026-10-18**.
 
-- Retail `live`: **12.1.0.69214**.
-- Live HEAD: `057e2e1429765a2b9e9eb100889f2b7e50317307`.
-- Retail `ptr`: **12.1.0.69214**.
-- PTR HEAD: `9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`.
-- Content-level Blob SHA verification confirms the Live/PTR 69214 versions of `UnitAuraDocumentation.lua`, AuraContainer docs, `SecretPredicatesDocumentation.lua`, `UnitDocumentation.lua`, `UnitRoleDocumentation.lua`, ForbiddenAspect docs, Spell docs, CombatLog docs, SpecializationInfo docs, and the generated API TOC are identical.
-- Therefore the 12.1 aura/forbidden-object rules below are now verified **Live behavior for Retail 12.1.0.69214**, not merely PTR assumptions.
+- Retail `live`: **12.1.5.70448**.
+- Live HEAD: `b9be9379719047977fca4dba1bb1d9988e8840b3`.
+- Retail `ptr`: **12.1.7.70424** — next-version preview only; its new secret-annotated APIs are not Live contracts.
+- The 12.1 aura/forbidden-object rules below remain the Live contract under 12.1.5; additions that
+  change them are tracked in `wow-12.1.0-live-api-final-zhCN.md`.
 
-For the final Live verification matrix, read `wow-12.1.0-live-api-final-zhCN.md`.
+For the current Live verification matrix, read `wow-12.1.0-live-api-final-zhCN.md`.
 For historical 12.0.7 → 12.1 migration context, read `wow-12.0.7-to-12.1-api-migration-zhCN.md`.
 
 ## Recognize restriction errors
@@ -44,6 +43,91 @@ Do not:
 - copy secret values into another table/frame/object in an attempt to make them non-secret.
 
 A secret value is intentionally unreadable addon state. The correct fix is normally to stop requiring the protected information.
+
+## Detect and handle secrets instead of guessing
+
+Secrecy is a runtime property of a value, not a syntax error. Detect it, then choose the rendering
+path — do not discover it by letting the operation fail.
+
+### Value and table predicates
+
+| Function | Answers |
+|---|---|
+| `issecretvalue(v)` | is this value secret? |
+| `canaccessvalue(v)` | may the current caller inspect it? |
+| `issecrettable(t)` | is this table marked secret? |
+| `canaccesstable(t)` | may the current caller index it? |
+
+`type(secret)` still returns the real type (`"number"`, `"string"`, …). The predicate never errors;
+the forbidden operation does.
+
+### Restriction state and secret predicates
+
+```lua
+-- C_RestrictedActions: is a restriction system active right now?
+C_RestrictedActions.IsAddOnRestrictionActive(restriction)
+C_RestrictedActions.GetAddOnRestrictionState(restriction)
+C_RestrictedActions.CheckAllowProtectedFunctions()
+
+-- C_Secrets: will this specific query be secret?
+C_Secrets.HasSecretRestrictions()
+C_Secrets.ShouldUnitHealthMaxBeSecret(unit)
+C_Secrets.ShouldUnitPowerBeSecret(unit, powerType)
+C_Secrets.ShouldAurasBeSecret()
+C_Secrets.ShouldSpellAuraBeSecret(spellID)
+C_Secrets.ShouldCooldownsBeSecret()
+C_Secrets.ShouldUnitComparisonBeSecret(unit1, unit2)
+C_Secrets.ShouldUnitIdentityBeSecret(unit)
+C_Secrets.ShouldUnitSpellCastBeSecret(unit)
+```
+
+Use these to pick a UI path *before* the guarded API returns a secret, instead of crashing into a
+restriction error mid-combat.
+
+### What tainted code may still do
+
+- store secrets in variables, upvalues, or table values;
+- pass them to Lua functions and to native APIs documented with `SecretArguments`;
+- concatenate strings/numbers and call `string.format` / `string.join` / `string.concat`;
+- hand them to secret-aspect-aware widget setters (`StatusBar:SetValue`, `FontString:SetText`).
+
+Everything else — comparison, arithmetic, `#`, table keys, indexing, calling as a function — errors
+immediately on tainted paths.
+
+### Canonical guard pattern
+
+```lua
+local health, maxHealth = UnitHealth(unit), UnitHealthMax(unit)
+
+if issecretvalue(health) or not canaccessvalue(health) then
+    bar:SetMinMaxValues(0, 1)   -- unknown scale: keep the bar usable, never divide
+    bar:SetValue(health)        -- the widget accepts the secret as-is
+    return
+end
+
+if health <= 0 then ... end     -- normal arithmetic is safe on this path
+```
+
+### Widgets and secret aspects
+
+A widget that accepts a secret may stamp `Enum.SecretAspect` onto the object; afterwards other calls
+on that widget can start returning secrets. Query with:
+
+```lua
+widget:HasSecretValues()
+widget:HasSecretAspect(Enum.SecretAspect.ObjectName)
+widget:HasAnyForbiddenAspect()
+```
+
+A frame that received secret text or values must not be read back for logic. Treat `SetText(secret)`
+as a one-way write.
+
+### Do not do this
+
+- `pcall`-wrapping a restriction error to "check whether it works": the error is deterministic for
+  the current restriction state, and the wrapper hides a real combat-time failure.
+- caching a secret into SavedVariables, profile strings, or an export payload;
+- deriving the value through `#table`, iteration counts, frame width, timing, or error/no-error.
 
 ## Read generated restriction annotations literally
 

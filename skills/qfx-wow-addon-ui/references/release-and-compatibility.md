@@ -30,6 +30,25 @@ Check:
 - Major rewrites, architecture changes, or intentionally incompatible SavedVariables changes increment MAJOR and reset MINOR/PATCH: `1.9.9 -> 2.0.0`.
 - Release zip names use only the addon name and official version, for example `QFXToolBox_0.44.20.zip`. Keep notes like `secret_value_fix` or `ui_optimized` in the changelog, not the filename.
 
+### Reading metadata at runtime
+
+Never read `## Version` or another addon's state through the legacy globals — use `C_AddOns`:
+
+```lua
+local version = C_AddOns.GetAddOnMetadata(ADDON, "Version")
+local loaded  = C_AddOns.IsAddOnLoaded("SomeOtherAddon")
+local count   = C_AddOns.GetNumAddOns()
+local name, title, notes, enabled = C_AddOns.GetAddOnInfo(index)
+```
+
+- Bare `GetAddOnMetadata`, `IsAddOnLoaded`, `LoadAddOn`, `GetNumAddOns`, and `GetAddOnInfo` are
+  deprecated or removed in 12.x; the `C_AddOns` namespace is the contract.
+- Cache the version string once at `ADDON_LOADED`; never query it inside a refresh or `OnUpdate`.
+- For an optional dependency, check `C_AddOns.IsAddOnLoaded` before touching its API and degrade
+  quietly — `## OptionalDeps` does not guarantee presence.
+- A `## Interface:` value that does not match the running client is surfaced by the client's addon
+  list, not by an API; never use "is my addon out of date" as a runtime capability check.
+
 ## Localization
 
 If the addon claims EN/zhCN/zhTW support:

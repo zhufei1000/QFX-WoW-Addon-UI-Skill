@@ -1,14 +1,18 @@
-# WoW 12.0.7 → 12.1.0 PTR API 迁移参考
+# WoW 12.0.7 → 12.1.0 PTR API 迁移参考（历史归档）
 
-用于把 Retail 12.0.7 插件迁移、审查或适配到 12.1.0 PTR。
+> **状态：历史归档。** 2026-10-18 标注。Live 早已切换到 12.1.x，当前正式基线是
+> **12.1.5.70448**（PTR 预览为 12.1.7.70424）。本文只用于理解 12.0.7 → 12.1.0 的差异演化，
+> **不再作为"当前 PTR"依据**。现行合同请读 `wow-12.1.0-live-api-final-zhCN.md`。
 
-## 当前核实基线
+用于把 Retail 12.0.7 插件迁移、审查或适配到 12.1.0。
 
-最后核实：**2026-08-11**。
+## 当前核实基线（历史值，已过期）
 
-- 正式服 `live`：**12.0.7.68974**（Gethe live 当前仍未切到 12.1.0）
-- PTR `ptr`：**12.1.0.69214**
-- PTR 当前 HEAD：`9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`
+最后核实：**2026-08-11**（当时的 PTR 状态）。
+
+- 当时正式服 `live`：**12.0.7.68974**
+- 当时 PTR：**12.1.0.69214**
+- PTR 当时 HEAD：`9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`
 
 本文描述的是 **12.1.0.69214 PTR 相对 12.0.7.68974 live 的当前差异**。PTR 不是最终正式服 API；正式服 `live` 更新到 12.1.0 后仍必须重新做一次 `live → live` 最终 diff。
 
@@ -986,4 +990,6 @@ ForbiddenAspect
 - 69214 将 `RecentAlliesSearchInfo.searchText` 从 `cstring` 改为 `string`；
 - 对战斗插件影响最大的仍是 **Aura access boundary + AuraContainer + Unit Identity Secret + CooldownViewer 数据结构扩展**。
 
-**正式服 `live` 分支切到 12.1.0 后，必须再做最终 `12.0.7 live → 12.1.0 live` 全量 diff。**
+**该收尾动作已完成并作废本条：** 正式服 `live` 随后切到 12.1.5（当前 **12.1.5.70448**），
+`live → live` 的最终 diff 已在 `wow-12.1.0-live-api-final-zhCN.md` 完成。本文自此仅作历史参考，
+不要再按"当前 PTR"引用其中的 build 号与 PTR-only 结论。

@@ -4,17 +4,22 @@ Use this reference whenever designing, reviewing, or modifying World of Warcraft
 
 ## Current verified baseline
 
-Last verified: **2026-08-11**.
+Last verified: **2026-10-18**.
 
-- Retail `live`: **12.1.0.69214**.
-- Live HEAD: `057e2e1429765a2b9e9eb100889f2b7e50317307`.
-- Retail `ptr`: **12.1.0.69214**.
-- PTR HEAD: `9eb0468a36ff0fd9f51d74ae179b201f5b2e8326`.
-- `live/version.txt` and `ptr/version.txt` both report `12.1.0.69214`.
-- Content-level Blob SHA verification confirms the high-risk generated API files are identical between Live and PTR 69214: UnitAura, AuraContainer, CooldownViewer, SecretPredicates, Unit, UnitRole, Spell, ForbiddenAspect, CombatLog, SpecializationInfo, and the generated documentation TOC.
-- Therefore the previously verified PTR 69214 rules in those areas are now treated as the **current Retail 12.1.0 Live API contract**.
+- Retail `live`: **12.1.5.70448** — the working contract for all current addon work.
+- Live HEAD: `b9be9379719047977fca4dba1bb1d9988e8840b3`.
+- Retail `ptr`: **12.1.7.70424** — the next-version preview branch; its additions are not Live APIs.
+- Retail `ptr2`: **12.1.5.70340** — kept only for 12.1.5 historical comparison.
+- `live` **70391 → 70448** touched only `version.txt` and `Blizzard_UIPanels_Game/Mainline/GroupLootFrame.lua`; `Blizzard_APIDocumentationGenerated` did not change, so this round carries **no API contract delta**.
+- Content-level Blob SHA verification of the high-risk generated API files (UnitAura, AuraContainer,
+  CooldownViewer, SecretPredicates, Unit, UnitRole, Spell, ForbiddenAspect, CombatLog,
+  SpecializationInfo, generated documentation TOC) confirmed identical between Live 70448 and
+  PTR2 70340.
+- The 12.1.5 APIs that earlier notes marked PTR2-only have **entered Live**; treat them as the
+  formal contract, not as previews. `C_UnitAuras.GetRefreshCarryOverDuration` is the clearest
+  example and is already used by shipping addons.
 
-For the final Live verification matrix, read `wow-12.1.0-live-api-final-zhCN.md`.
+For the current Live verification matrix, read `wow-12.1.0-live-api-final-zhCN.md`.
 For historical 12.0.7 → 12.1 migration details and PTR build evolution, read `wow-12.0.7-to-12.1-api-migration-zhCN.md`.
 
 Do not copy the build numbers above into addon runtime logic. They are documentation provenance only. When doing future work, re-check the target branch `version.txt` and generated API documentation first.
@@ -31,6 +36,17 @@ When API correctness matters, use this order:
 6. Existing addon examples only after checking they target the same client branch.
 7. Memory/internal knowledge last, and never as the only source for changed APIs.
 
+> **Local availability.** `Blizzard_APIDocumentationGenerated` ships inside the CASC store, so a
+> normal client install does **not** expose `Interface\AddOns\Blizzard_APIDocumentationGenerated`.
+> When that dump is absent, do not stall — fall back in this order:
+> 1. grep the addons actually installed on this machine for real call sites of the symbol
+>    (`Get-ChildItem <AddOns> -Recurse -Filter *.lua | Select-String '<Symbol>'`), which proves what
+>    the live client accepts today;
+> 2. the Warcraft Wiki `API:<Name>` page (signature, game-type badges, secret predicates);
+> 3. the `Gethe/wow-ui-source` branch matching the target build.
+>
+> Treat "no local dump" as a sourcing change, never as permission to recall a signature.
+
 Recommended public references:
 
 - `Gethe/wow-ui-source`: current WoW UI source with separate `live`, `ptr`, `ptr2`, and `beta` branches.
@@ -41,7 +57,7 @@ Recommended public references:
 
 ### Why generated API docs come first
 
-Wiki and PTR summaries can lag behind the actual extracted client build. During 12.1, the public PTR source advanced through several late builds before Live switched to 12.1.0. Current Retail work must now use **Live 12.1.0.69214** generated docs as the primary source of truth.
+Wiki and PTR summaries can lag behind the actual extracted client build. During 12.1, the public PTR source advanced through several late builds before Live switched to 12.1.5. Current Retail work must now use **Live 12.1.5.70448** generated docs as the primary source of truth.
 
 Therefore:
 
