@@ -1,12 +1,18 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.27.0
+Version: 1.27.1
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
 - `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
+
+## What v1.27.1 changes
+
+- Documents texture-based close X icons and non-text line fallbacks to prevent global localization hooks from translating the symbol as an axis label.
+- Records `SetCloseTexture`, white-alpha media and licensing, existing hover/click compatibility, and additive `CLOSE_BUTTON_REVISION=1` installation for already-loaded factory singletons.
+- Updates the dropdown artwork description and adds focused translation-isolation and factory-reuse checks. WoW API baselines and addon versions remain unchanged.
 
 ## What v1.27.0 changes
 

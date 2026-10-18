@@ -4,15 +4,15 @@ QFXWidgets is the single settings-control factory for QFX addons. When a task in
 
 This file is the factory contract. If it disagrees with a host addon's older widget code, QFXWidgets wins; migrate the host.
 
-The factory source of truth is `QFXWidgets.lua` (one file, kept in the QFXWidgets addon folder and embedded in consumer Config addons). Re-read that file before changing a host, and update this reference when its `VERSION` changes.
+The factory source of truth is the project's maintained `QFXWidgets.lua` provider, which may live in a load-on-demand Config addon and be embedded in other consumers. Check the project's source mapping before using a standalone copy as a baseline. Re-read the maintained file before changing a host, and update this reference when its API or capability revisions change.
 
 ## 1. What it is
 
 - One drop-in file, `QFXWidgets.lua`, global `QFXWidgets` plus `ns.QFXWidgets`.
 - Pure library: no SavedVariables, no events, no permanent `OnUpdate`. It only builds frames. All state lives in the host's `getValue` / `setValue` closures.
-- One custom-drawn renderer (the QFXUI blue/navy skin). Every control is drawn with solid color textures. Blizzard assets are used only for `ColorPickerFrame` and the options gear glyph; the dropdown arrow is the drawn white V and the rounded-control art (switch capsule, circle knob, slider thumb) ships in `QFXWidgets\Media\` with drawn fallbacks.
+- One custom-drawn renderer (the QFXUI blue/navy skin). Controls use solid-color layers and bundled artwork. Blizzard assets are used for `ColorPickerFrame` and the options gear glyph; dropdowns use the bundled white chevron, and window close buttons use a white-alpha X texture tinted by the factory. Rounded-control art (switch capsule, circle knob, slider thumb) ships with the provider and has drawn fallbacks.
 - Rounded-control media ships in two formats: the `.blp` twins are the default and carry 2x resolution plus a pre-baked mip chain sampled with `TRILINEAR`, so the capsule/knob/thumb stay crisp at fractional UI scales; the PNG twins of the same names are the explicit fallback (`W:SetMediaFormat("png")`) and for hosts that ship only the PNG art.
-- When the media is unavailable (the library addon is not installed and nothing else ships it), the factory falls back to white textures masked with Blizzard's portrait alpha mask: correct but visibly rougher at compact sizes, so ship or require the media wherever the QFXUI skin matters.
+- When rounded-control media is unavailable (the library addon is not installed and nothing else ships it), the factory falls back to white textures masked with Blizzard's portrait alpha mask: correct but visibly rougher at compact sizes, so ship or require the media wherever the QFXUI skin matters.
 - Version-guarded singleton: the file keeps a `VERSION` number and reuses a newer already-loaded copy, so embedding it in several addons never duplicates tables or frames.
 - No AceGUI, no external libraries, no external media required.
 
@@ -85,6 +85,16 @@ page:SetContentHeight(-y + W.Theme.pad)
 - One brand for every QFX addon: `W:SetBrand{ logo = path, watermark = path, watermarkTint, watermarkFit, glow }` declares the shared art once, and `W:Banner` inherits whatever the caller does not pass. Ship the brand art with the factory (`QFXWidgets\Media\`) so hosts only pass `height`.
 - The watermark fade uses `SetGradient` over the art, so the same rule applies as for the section bar: a base colour/vertex colour must exist first or the fade shows nothing.
 
+### Close icons and translation isolation
+
+Use `W:CloseButton(parent, opts)` for window close chrome. Render its X as an icon, not a `FontString` containing `"X"`: a third-party localization addon can hook the shared FontString / Button / EditBox methods and translate that string to an axis label even when the host's own strings are correct. This protects the symbol; it does not isolate other UI text from third-party hooks.
+
+- The current provider supplies `close-x.blp` (64×64 BGRA8888 BLP2, 8-bit alpha, all seven mip levels) and an optional `close-x.png` twin, converted from the [Lucide X](https://lucide.dev/icons/x). Preserve the upstream source and redistribution license; Lucide's X is derived from Feather, so retain both applicable notices. Sample BLP media with `CLAMP`, `CLAMP`, `TRILINEAR` and validate every mip after conversion.
+- `W:SetCloseTexture(path)` selects host media. Passing `false`, having no media provider, or a failed texture load draws the X with two `Line` regions. Neither the normal path nor the fallback creates or sets a text glyph. Do not work around pollution by hooking global text methods or adding per-window close renderers.
+- Preserve `size`, `insetX`, `insetY`, `anchor=false`, `onClick`, `tooltip`, default parent hiding, and the existing background/border/hover colors. The returned texture is `button._icon`; callers must not expect the former private `button._glyph` FontString. Tooltips remain localizable text.
+- The current additive capability is `CLOSE_BUTTON_REVISION=1` on factory singleton `VERSION=51`. Install it both before the existing-singleton early return and after full helper initialization. Keep the singleton table identity, avoid repeated wrapping, and do not add polling or animation drivers. This compatible addition does not require an addon TOC version bump.
+- Verify with a simulated global `X`→axis-label translation hook, default and compact button sizes, hover/leave, default close and custom callbacks, unavailable/failed media, an older already-loaded factory, and repeated factory loads. Use the project's supported locales and inspect the converted icon at actual UI sizes.
+
 ## 4. Theme and skin (the QFX visual standard)
 
 `W.Theme` (layout tokens, overridable with `W:SetTheme(t)`):
@@ -106,7 +116,7 @@ page:SetContentHeight(-y + W.Theme.pad)
 
 - accent `#4a9cfa` (0.290, 0.610, 0.980); `controlBg` dark blue fill, `controlBgHi` hover; `border` / `borderHi` steel-blue frame; `trackBg` / `trackFill` / `knob`; `selectedFill` / `selectedLine` / `selectedText`; `danger` / `good`; `buttonBg` / `buttonBgHi` / `buttonBorder`; `text` / `textMuted`; `menuBg` / `rowHover`; `sectionText`; `line`; `warmAccent` / `warmAccentHi` (the orange used by the check mark, tab underline, logo arc and perimeter).
 - Stock section title bars use the warm amber hand-off (`sectionBarFrom` 0.62/0.32/0.07, `sectionBarTo` 0.10/0.05/0.02, `sectionBarEdge` 0.86/0.52/0.16) and the zebra rows a raised blue wash (`rowBgOdd` 7% / `rowBgEven` 1.8%); both are plain skin tokens a host may override.
-- The dropdown arrow defaults to the drawn white V (legible at the compact row height); `W:SetArrowTexture(path)` installs PNG art, `W:SetArrowTexture(false)` restores the V.
+- The dropdown arrow defaults to the bundled white chevron; `W:SetArrowTexture(path)` selects host BLP/PNG artwork, and `W:SetArrowTexture(false)` restores the existing V fallback. `W:SetCloseTexture(path)` selects the close X artwork; its fallback is drawn lines, never a text X.
 - Warm accents: the check-mark fill (`checkFill`) resolves to `warmAccent`, and the dropdown arrow (`arrowHi`) turns warm only while hovered. The toggle knob and slider thumb stay neutral (`toggleKnobOn/Off`, `thumb` / `knob`) because a permanently warm knob read as noisy in the compact QFXUI skin. All of these are `W:SetSkin{...}` overrides; a host wanting the blue mark sets `checkFill = S.accent`.
 - Control sizes: toggle 40x20 (knob 16, 2px pad, 75ms slide, `toggleAnim = false` to disable), track height 4, thumb 16x16, value box 44 wide, row control height 20, button height 20 / min width 88, stepper column 18, segmented pill min width 38 + 16 text padding, menu row 20.
 - Rounded shapes come from the media above and are never combined with a second mask; a mask path is only for clients without the art. Knobs and thumbs stay white/gray art tinted through `SetVertexColor`, so a skin change needs no new files.

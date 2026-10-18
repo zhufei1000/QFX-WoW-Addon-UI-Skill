@@ -23,6 +23,8 @@ Check:
 - Dropdown menu width matches the closed dropdown by default; long menus scroll and clamp to screen.
 - Text uses `text` / `textMuted`; danger and success use their tokens; state is never color-only.
 - Tooltips explain long content instead of crowding rows; disabled and combat-blocked controls show `disabledTooltip` / `combatTooltip`.
+- Close X symbols use `W:CloseButton` textures, including a non-text fallback when media is unavailable; a global localization hook must not turn the symbol into a translated axis label. Keep tooltips localized and check compact sizes, hover, and close callbacks.
+- Additive factory capabilities work when an older singleton has already loaded, preserve its table identity, and do not stack wrappers on repeated loads.
 
 ## Duplicate controls
 

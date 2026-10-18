@@ -42,6 +42,7 @@ QFXWidgets (`QFXWidgets.lua`, global `QFXWidgets` / `ns.QFXWidgets`) is the stan
 - Drive combat safety with `blockInCombat` / `combatTooltip` and refresh on `PLAYER_REGEN_ENABLED`.
 - Keep hosts state-only: `getValue`/`setValue` closures call module APIs; no business logic and no DB writes inside the factory.
 - Never mix QFXWidgets with AceGUI, Blizzard option templates, or hand-drawn controls in the same settings panel. Extend QFXWidgets itself when a control is missing.
+- Use the factory's texture-based `CloseButton` for the close X, with a non-text drawing fallback and a localized tooltip; a globally hooked `SetText("X")` can mistranslate it as an axis label. See the window-chrome contract in `references/qfxwidgets-factory.md`.
 - Copy `QFXWidgets.lua` into the addon (or its Config sub-addon) before the page files and keep it verbatim; it is a version-guarded singleton, so embedded copies never duplicate. In a core addon plus load-on-demand Config host, prefer lazy loading: put the factory only in the Config `.toc`, resolve it at use time (`rawget(_G, "QFXWidgets")`, then `EnsureConfigLoaded()`), and apply skin/media where it actually loads (see `references/qfxwidgets-factory.md`).
 
 ### English-first multilingual layout
