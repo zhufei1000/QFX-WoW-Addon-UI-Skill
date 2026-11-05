@@ -1,6 +1,6 @@
 ---
 name: qfx-wow-addon-ui
-description: Review, design, refactor, and package World of Warcraft addon UI, architecture, and API-safe Lua using QFX conventions. Use when working on WoW addons (Lua, .toc, SavedVariables, FrameXML), especially QFXWidgets-built settings panels (QFXUI skin), options pages, multilingual (English/Simplified Chinese/Traditional Chinese) layouts, EllesmereUI/Plater/DandersFrames-style modular architecture, combat lockdown, taint or secret-value safety, WoW 12.x (Midnight) API migration, and release packaging.
+description: Review, design, refactor, and package World of Warcraft addon UI, architecture, and API-safe Lua using QFX conventions. Use when working on WoW addons (Lua, .toc, SavedVariables, FrameXML), especially QFXWidgets-built settings panels (QFXUI skin), options pages, multilingual (English/Simplified Chinese/Traditional Chinese) layouts, EllesmereUI/Plater/DandersFrames-style modular architecture, combat lockdown, taint or secret-value safety, WoW 12.x (Midnight) API migration, WoW Forever 1.60.1 (interface 16001) support, and release packaging.
 license: MIT
 ---
 
@@ -105,22 +105,30 @@ If a setting touches protected frames or frames likely to become protected: save
 ## Client branches and interface versions
 
 One TOC can ship to several clients, but the interface number must match each of them or the addon
-is flagged out of date. Verified 2026-10-18:
+is flagged out of date. Verified 2026-11-05:
 
-| Client | Game type | Folder | Interface |
-|---|---|---|---|
-| Retail / Midnight 12.1.5 | `standard` | `_retail_` | **120105** |
-| Mists of Pandaria Classic 5.5.4 | `mists` | `_classic_` | 50504 |
-| Classic Era 1.15.9 | `vanilla` | `_classic_era_` | 11509 |
-| Titan Reforged (Wrath) | `wrath` | `_classic_titan_` | 38002 |
-| TBC Anniversary 2.5.6 | `tbc` | `_anniversary_` | 20506 |
+| Client | Game type | Folder | Interface | Verified build |
+|---|---|---|---|---|
+| Retail / Midnight 12.1.5 | `standard` | `_retail_` | **120105** | 12.1.5.70783 |
+| WoW Forever 1.60.1 | `forever` (alias `camelot`) | `_forever_` | **16001** | 1.60.1.70790 |
+| Mists of Pandaria Classic 5.5.4 | `mists` | `_classic_` | 50504 | 5.5.4.70631 |
+| Classic Era 1.15.9 | `vanilla` | `_classic_era_` | 11509 | 1.15.9.70576 |
+| Titan Reforged (Wrath) | `wrath` | `_classic_titan_` | 38002 | 3.80.2.70522 |
+| TBC Anniversary 2.5.6 | `tbc` | `_anniversary_` | 20506 | 2.5.6.70577 |
 
 Rules:
 
-- Prefer one folder with a comma list — `## Interface: 120105, 50504, 11509` — over a separate TOC
+- Prefer one folder with a comma list — `## Interface: 120105, 16001, 50504, 11509` — over a separate TOC
   per game type.
 - Gate whole files instead of forking the manifest:
   `Retail\MidnightOnly.lua [AllowLoadGameType standard]`.
+- Forever is its own branch: the TOC game type is `forever`, equivalent to `camelot`. Older 12.1.5
+  and Classic clients do not recognize `forever`, so list the `forever` metadata line first or pair
+  it with `[ExcludeLoadGameType standard, classic]`. At runtime use
+  `WOW_PROJECT_ID == WOW_PROJECT_CAMELOT` (18), not the interface number alone.
+- Forever runs on the modern client and inherits its secret/taint restrictions, but its API surface
+  is not Retail 12.1.5. Verify Forever calls against 1.60.1 / `forever` generated docs; do not reuse
+  a 12.1.5 signature or the bundled Retail API snapshot.
 - Never let a Classic branch inherit a Retail-only `C_*` call without a `Compat` wrapper.
 - Re-check with `/dump select(4, GetBuildInfo())` after a patch, or read `## Interface:` from any
   recently updated addon in that client's `Interface\AddOns`.
@@ -145,10 +153,12 @@ addon.
 
 Read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs. The verified Live snapshot is **12.1.5.70783** (PTR preview: **12.1.7.70740**, checked 2026-11-05); read `references/wow-12.1.0-live-api-final-zhCN.md` for it (the file name kept its old 12.1.0 label, the content is 12.1.5). `references/wow-12.0.7-to-12.1-api-migration-zhCN.md` is a historical archive — use it for migration context only.
 
+The bundled index covers Retail `live` only. **WoW Forever 1.60.1** (interface **16001**, `_forever_`, game type `forever` / `camelot`) is a separate branch; verify its APIs against 1.60.1 generated docs, never against the Retail 12.1.5 snapshot.
+
 For exact signatures, events, structures, enums, widget methods, and restrictions, query the bundled snapshot with `python <skill-dir>/scripts/wow_api.py search <symbol> --exact`. Read `references/wow-api-lookup.md` for refresh/diff commands and `references/wow-api-common-topics.md` for everyday API topics. The index covers generated documentation, not every handwritten FrameXML API; never load the entire JSONL into context. Re-check the target branch before treating this snapshot as current.
 
 - Prefer generated API documentation from the exact target build, then same-build FrameXML/UI source and extracted resources, followed by explanatory Wiki notes and same-branch addon examples.
-- Match the branch and build first (live, ptr, beta, Retail, Classic, MoP, TBC, Titan must not be mixed). Live is the production contract; PTR is warning-only.
+- Match the branch and build first (live, ptr, beta, Retail, Classic, MoP, TBC, Titan, Forever must not be mixed). Live is the production contract; PTR is warning-only; Forever is its own client branch despite sharing the modern client runtime.
 - Treat spell, aura, cast/interrupt, unit, tooltip, `C_` namespaces, secure frames, addon compartment, minimap, TTS, templates, mixins, and deprecated globals as high-risk until verified.
 - Isolate version-sensitive APIs in `Compat` wrappers; never scatter branch checks through feature modules.
 - Never invent a 12.x signature from memory. If unsure, search current sources, wrap the API, and report the assumption.

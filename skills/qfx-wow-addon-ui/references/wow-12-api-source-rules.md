@@ -10,6 +10,7 @@ Last verified: **2026-11-05**.
 - Live HEAD: `297d7aaaa736f346b3e036f38ee088eaf7f8c07f`.
 - Retail `ptr`: **12.1.7.70740**, HEAD `e927c305f67ed6b3b460bc00d0c39055747b9119` — preview only; its additions are not Live APIs.
 - Retail `ptr2`: last recorded **12.1.5.70340** (2026-10-18; historical, not re-verified this pass).
+- WoW Forever `forever`: **1.60.1.70790** (interface **16001**), verified 2026-11-05 from the local `_forever_` client. Forever is a separate branch with its own generated docs; the bundled index does not cover it. It runs on the modern client and inherits the secret/taint model, but its API surface differs from Retail 12.1.5 (patch 1.60.1 documents 176 added and 10 removed globals versus 12.1.5). Detect it with `WOW_PROJECT_ID == WOW_PROJECT_CAMELOT` (18) or `16001 < select(4, GetBuildInfo()) < 20000`, never with the `standard` game type.
 - `live` **70448 → 70783** changes four generated documentation files and six contracts: `UNIT_COMBAT.amount` gains `SecretValue = true`; `C_Roleset.ApplyRolesetFilters` gains `HasRestrictions = true` and documents combat-lockdown blocking for tainted callers; `BNetGameAccountInfo` gains optional `subIcon`; three `C_Texture` title-icon functions gain an optional `subIcon` argument.
 - The previous **70391 → 70448** no-contract-delta result is historical. Do not extend the old Live/PTR2 equality claim to 70783; Unit restriction metadata has changed.
 - The bundled machine index covers **622 Lua documentation files / 10,603 records** from the pinned Live commit, with signatures, nested restriction metadata, source locations and checksums. Use `wow-api-lookup.md` and `scripts/wow_api.py` to query or refresh it; consult `wow-api-common-topics.md` for functional entry points.
@@ -46,7 +47,7 @@ When API correctness matters, use this order:
 
 Recommended public references:
 
-- `Gethe/wow-ui-source`: current WoW UI source with separate `live`, `ptr`, `ptr2`, and `beta` branches.
+- `Gethe/wow-ui-source`: current WoW UI source with separate `live`, `ptr`, `ptr2`, `beta`, and `forever` branches.
 - `Ketho/BlizzardInterfaceResources`: extracted globals, templates, mixins, atlas data, enums, and build resources.
 - Blizzard PTR/UI Engineering posts: intended behavior and migration direction.
 - Warcraft Wiki API pages: signatures, patch history, examples, and consolidated diffs.
@@ -71,8 +72,9 @@ Rules:
 
 - For live Retail, use the `live` branch.
 - For PTR/Beta, use the matching `ptr`, `ptr2`, or `beta` branch.
+- For WoW Forever, use the `forever` branch at interface **16001**; never substitute the Retail `live` snapshot or treat `standard` as Forever.
 - Never treat an older PTR weekly note as newer than the current extracted branch.
-- Do not mix Retail 12.x assumptions with Classic, MoP Classic, TBC Classic, Titan, or other clients.
+- Do not mix Retail 12.x assumptions with Classic, MoP Classic, TBC Classic, Titan, Forever, or other clients.
 - Record the branch and build in review notes when a decision is API-sensitive.
 - Keep build checks out of feature modules unless a real runtime compatibility requirement exists.
 

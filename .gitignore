@@ -6,3 +6,5 @@ Thumbs.db
 __MACOSX/
 *.tmp
 *.bak
+__pycache__/
+*.pyc

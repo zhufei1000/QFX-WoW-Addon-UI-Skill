@@ -1,12 +1,22 @@
 # QFX WoW Addon UI Skill
 
-Version: 1.27.1
+Version: 1.28.0
 
 This package contains one reusable agent skill, `qfx-wow-addon-ui`, for World of Warcraft addon UI design, architecture review, API-safe refactoring, and release packaging with QFX conventions. It works as a **Codex plugin** and as an **opencode skill** (or any agent that reads `SKILL.md` frontmatter).
 
 - `skills/qfx-wow-addon-ui/SKILL.md`
 - `skills/qfx-wow-addon-ui/references/*.md`
+- `skills/qfx-wow-addon-ui/references/api-index/*` (pinned API manifest + symbol index)
+- `skills/qfx-wow-addon-ui/scripts/*.py` (offline API lookup and diff tooling)
 - `skills/qfx-wow-addon-ui/assets/*` (official contact icons)
+
+## What v1.28.0 changes
+
+- Adds the bundled **WoW API snapshot** for Live **12.1.5.70783**: `scripts/wow_api.py` for offline symbol lookup and contract diffs, `references/api-index/` for the machine index, `references/wow-api-lookup.md` for usage, and `references/wow-api-common-topics.md` for everyday API topics.
+- Records the Live **70448 → 70783** contract delta: `UNIT_COMBAT.amount` gains `SecretValue = true`, `C_Roleset.ApplyRolesetFilters` gains `HasRestrictions = true` with combat-lockdown blocking, and `BNetGameAccountInfo` / three `C_Texture` title-icon functions gain an optional `subIcon`.
+- Adds **WoW Forever 1.60.1** to the client matrix: interface **16001**, `_forever_`, game type `forever` (alias `camelot`), runtime detection via `WOW_PROJECT_CAMELOT` (18), and TOC gating that excludes `standard`/`classic` because older clients do not recognize `forever`.
+- Separates Forever from Retail 12.1.5 for API verification: Forever runs on the modern client with secret/taint restrictions, but its generated API surface is its own and must not be inferred from the Retail snapshot.
+- Adds `wow-api-lookup.md` and `wow-api-common-topics.md` to the reference loading guide and documents the snapshot refresh/diff validation workflow.
 
 ## What v1.27.1 changes
 
@@ -129,14 +139,16 @@ For current Retail 12.1 development, read:
 Current baseline:
 
 ```text
-Live: 12.1.0.69497
-PTR:  12.1.0.69587
+Live:    12.1.5.70783
+PTR:     12.1.7.70740
+Forever: 1.60.1.70790 (interface 16001)
 ```
 
 Rules:
 
 - Live is the production contract.
 - PTR is warning/compatibility input only until the same API reaches `live`.
+- Forever is a separate modern-client branch; verify it against 1.60.1 generated docs, not the Retail snapshot.
 - Never mix branches or infer API signatures from memory.
 - Re-check `Blizzard_APIDocumentationGenerated` whenever the build changes.
 - Treat Aura, Unit, Spell/Cooldown, TTS, secure frames, ScriptBindings, and Secret/Forbidden APIs as high risk.
@@ -225,6 +237,7 @@ The skill includes references for:
 - Complex UI patterns, lists, media, dialogs, and combat-safe apply.
 - Plater / DandersFrames / EllesmereUI-inspired architecture patterns.
 - WoW 12.x API source-grounding, the 12.0.7 → 12.1 migration history, and the current 12.1 Live/PTR baseline.
+- Offline generated-API lookup, pinned snapshots, and contract diffs (`references/wow-api-lookup.md`, `references/wow-api-common-topics.md`).
 - Secret-value / taint / ForbiddenAspect safety.
 - QFXWidgets factory contract, lazy factory loading, and the settings UI checklist.
 - Packaging, compatibility, SavedVariables migration, and modification traceability.
