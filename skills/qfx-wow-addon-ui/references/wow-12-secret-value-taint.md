@@ -4,11 +4,13 @@ Use this reference when fixing Retail 12.x errors involving secret values, taint
 
 ## Current verified baseline
 
-Last verified: **2026-10-18**.
+Last verified: **2026-11-05**.
 
-- Retail `live`: **12.1.5.70448**.
-- Live HEAD: `b9be9379719047977fca4dba1bb1d9988e8840b3`.
-- Retail `ptr`: **12.1.7.70424** — next-version preview only; its new secret-annotated APIs are not Live contracts.
+- Retail `live`: **12.1.5.70783**.
+- Live HEAD: `297d7aaaa736f346b3e036f38ee088eaf7f8c07f`.
+- Retail `ptr`: **12.1.7.70740** — next-version preview only; its new secret-annotated APIs are not Live contracts.
+- Since Live 70448, `UNIT_COMBAT` Payload field `amount` is marked `SecretValue = true`; inspecting only the event's top-level metadata misses this change. `C_Roleset.ApplyRolesetFilters` now has `HasRestrictions = true` and documents that tainted callers are blocked during combat lockdown. Saving a setting and deferring its protected apply remains necessary for affected features.
+- Use the machine index described in `wow-api-lookup.md` to inspect nested Payload / Fields / Returns metadata from the same pinned commit; a documentation snapshot does not replace in-game combat/taint testing.
 - The 12.1 aura/forbidden-object rules below remain the Live contract under 12.1.5; additions that
   change them are tracked in `wow-12.1.0-live-api-final-zhCN.md`.
 

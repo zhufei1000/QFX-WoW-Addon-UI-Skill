@@ -143,14 +143,16 @@ addon.
 
 ## WoW 12.x API grounding and secret/taint safety
 
-Read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs. The current Live contract is **12.1.5.70448** (PTR preview branch: **12.1.7.70424**); read `references/wow-12.1.0-live-api-final-zhCN.md` for it (the file name kept its old 12.1.0 label, the content is 12.1.5). `references/wow-12.0.7-to-12.1-api-migration-zhCN.md` is a historical archive — use it for migration context only.
+Read `references/wow-12-api-source-rules.md` before writing or changing code that calls WoW APIs. The verified Live snapshot is **12.1.5.70783** (PTR preview: **12.1.7.70740**, checked 2026-11-05); read `references/wow-12.1.0-live-api-final-zhCN.md` for it (the file name kept its old 12.1.0 label, the content is 12.1.5). `references/wow-12.0.7-to-12.1-api-migration-zhCN.md` is a historical archive — use it for migration context only.
 
-- Prefer current FrameXML/UI source, extracted interface resources/API dumps, Warcraft Wiki notes, then same-branch addon examples.
+For exact signatures, events, structures, enums, widget methods, and restrictions, query the bundled snapshot with `python <skill-dir>/scripts/wow_api.py search <symbol> --exact`. Read `references/wow-api-lookup.md` for refresh/diff commands and `references/wow-api-common-topics.md` for everyday API topics. The index covers generated documentation, not every handwritten FrameXML API; never load the entire JSONL into context. Re-check the target branch before treating this snapshot as current.
+
+- Prefer generated API documentation from the exact target build, then same-build FrameXML/UI source and extracted resources, followed by explanatory Wiki notes and same-branch addon examples.
 - Match the branch and build first (live, ptr, beta, Retail, Classic, MoP, TBC, Titan must not be mixed). Live is the production contract; PTR is warning-only.
 - Treat spell, aura, cast/interrupt, unit, tooltip, `C_` namespaces, secure frames, addon compartment, minimap, TTS, templates, mixins, and deprecated globals as high-risk until verified.
 - Isolate version-sensitive APIs in `Compat` wrappers; never scatter branch checks through feature modules.
 - Never invent a 12.x signature from memory. If unsure, search current sources, wrap the API, and report the assumption.
-- Do not compare, store, serialize, or do arithmetic on secret values; avoid combat decisions based on protected/secret results. Prefer event-driven approximations, fixed timers, cached safe values, or user configuration.
+- Do not compare, serialize, persist, or do arithmetic on secret values; opaque in-memory storage/forwarding is distinct from reading or declassifying them. Use only target-build-supported display paths; avoid combat decisions based on protected/secret results. Prefer non-secret events, fixed timers, cached non-secret values, or user configuration without inferring hidden state.
 - Detect secrets at runtime instead of discovering them through a failed operation: `issecretvalue`, `canaccessvalue`, `issecrettable`, `canaccesstable`, and gate behaviour up front with `C_Secrets.*` / `C_RestrictedActions.*`. Never `pcall` a restriction error to probe whether a call works.
 - Read addon metadata and load state through `C_AddOns` — `C_AddOns.GetAddOnMetadata(addon, "Version")`, `C_AddOns.IsAddOnLoaded`, `C_AddOns.LoadAddOn`, `C_AddOns.GetNumAddOns`, `C_AddOns.GetAddOnInfo`. The bare globals are deprecated or removed in 12.x; cache the version once at `ADDON_LOADED`.
 - If an error mentions `a secret boolean value`, `a secret number value`, or `execution tainted by`, treat it as a taint/secret issue, not a normal Lua type bug.
@@ -223,7 +225,7 @@ When asked to update this skill:
 2. Integrate new primary rules into existing references instead of creating competing files.
 3. Add a focused reference only when the content is truly separate.
 4. Keep names generic unless a file is intentionally a case study.
-5. When the change is a formal skill release, bump the version in `README.md`, `INSTALL.md`, and `.codex-plugin/plugin.json`. Those files live in the **repository root**, not in an installed skill folder — an installed copy contains only `SKILL.md`, `references/`, and `assets/`.
+5. When the change is a formal skill release, bump the version in `README.md`, `INSTALL.md`, and `.codex-plugin/plugin.json`. Those files live in the **repository root**, not in an installed skill folder — an installed copy contains `SKILL.md` and its `references/`, `assets/`, and `scripts/` resources. Local edits and test builds preserve versions.
 6. When using a reference addon or API source, document extracted rules and do not copy assets/libraries unless requested and licensed.
 7. Treat `QFXWidgets.lua` as the factory source of truth: when its API or tokens change (its internal `VERSION` bump), update `references/qfxwidgets-factory.md` and any affected rows in this skill in the same pass.
 8. Repository sync is **opt-in, never automatic**: only commit and push to `https://github.com/zhufei1000/QFX-WoW-Addon-UI-Skill` (`main`) when the user explicitly asks to publish. A local edit is a complete, valid state on its own — do not push, and do not create or update repository-only files, as a side effect of editing the skill.
@@ -247,6 +249,8 @@ When asked to update this skill:
 - Reference-addon architecture supplements: `references/reference-addon-architecture-patterns.md`
 - Deep advanced architecture: `references/deep-reference-addon-patterns.md`
 - WoW 12.x API source rules: `references/wow-12-api-source-rules.md`
+- API symbol lookup, pinned snapshots, and contract diffs: `references/wow-api-lookup.md` (tool: `scripts/wow_api.py`; machine index: `references/api-index/manifest.json` and `symbols.jsonl`, query instead of reading the entire index)
+- Common API topics (bags, items, quests, maps, chat, settings, timers, widgets): `references/wow-api-common-topics.md`
 - Secret values and taint: `references/wow-12-secret-value-taint.md`
 - 12.0.7 → 12.1 PTR migration (historical archive): `references/wow-12.0.7-to-12.1-api-migration-zhCN.md`
 - Current 12.1.5 Live API baseline (file keeps the 12.1.0 name): `references/wow-12.1.0-live-api-final-zhCN.md`

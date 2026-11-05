@@ -1,4 +1,4 @@
-# WoW 12.1 当前 API 基线（Live 12.1.5.70448 / PTR 12.1.7.70424）
+# WoW 12.1 当前 API 基线（Live 12.1.5.70783 / PTR 12.1.7.70740）
 
 用于 Retail 12.1.5 正式服插件开发、兼容性审查，以及对 PTR / PTR2 后续 API 变化进行预警。
 
@@ -6,36 +6,34 @@
 
 ## 当前基线
 
-最后核实：**2026-10-18**。
+最后核实：**2026-11-05**。
 
-- Retail `live`：**12.1.5.70448**
-- Live HEAD：`b9be9379719047977fca4dba1bb1d9988e8840b3`
-- Retail `ptr`：**12.1.7.70424**（新版本预警分支；其新增接口不能当作 Live API）
-- Retail `ptr2`：**12.1.5.70340**
+- Retail `live`：**12.1.5.70783**
+- Live HEAD：`297d7aaaa736f346b3e036f38ee088eaf7f8c07f`
+- Retail `ptr`：**12.1.7.70740**（预警分支；HEAD `e927c305f67ed6b3b460bc00d0c39055747b9119`；不能当作 Live API）
+- Retail `ptr2`：最后记录 **12.1.5.70340**（2026-10-18；本次未重新核验，作历史对照）
 - PTR2 HEAD：`12380f8cdc541b7f0963f74cbe0874c21a857fbb`
-- `beta`：12.0.1.66220（当前不作为 12.1 主参考）
+- `beta`：最后记录 12.0.1.66220（2026-10-18；本次未重新核验，不作为当前主参考）
 
-Gethe 当前版本：
+本次核验的 Gethe 分支：
 
 ```text
-live  = 12.1.5.70448
-ptr   = 12.1.7.70424
-ptr2  = 12.1.5.70340
-beta  = 12.0.1.66220
+live  = 12.1.5.70783
+ptr   = 12.1.7.70740
 ```
 
 关键判断：
 
 - Live 已正式进入 **12.1.5**；
-- Live **70391 → 70448** 的最新提交只调整 `GroupLootFrame.lua` 与 `version.txt`，**没有修改 `Blizzard_APIDocumentationGenerated`**；
-- 当前重点高风险 generated API 文档（UnitAura / Unit / Spell / CombatLog / CooldownViewer / ForbiddenAspect / SecretPredicates / PvP / SocialRestrictions / VoiceChat / RaidMarkers）在 Live 70448 与 PTR2 70340 内容一致；
+- Live **70448 → 70783** 的生成文档有 **4 个文件、6 条合同变化**，详见下节；旧的“无 API 变化”结论只适用于 **70391 → 70448**；
+- 旧的 Live 70448 / PTR2 70340 高风险 API 一致结论不应延伸到 70783，尤其 `UNIT_COMBAT.amount` 的 Secret 标记已改变；
 - 因此此前 69952 / 70077 阶段标记为 PTR2-only 的主要 12.1.5 API，现在应按 **Live 正式合同**处理。
 
 ---
 
 # 1. 当前结论
 
-截至 **Live 12.1.5.70448**：
+截至 **Live 12.1.5.70783**：
 
 - 12.1 的 Aura 访问限制、Secret Predicate、Unit Identity Secret、Spell/Cooldown、TTS、CombatLog 与 ForbiddenAspect 基础规则继续有效；
 - `C_UnitAuras.GetRefreshCarryOverDuration(unit, auraInstanceID, spellID?)` 已进入 Live，可作为 Pandemic / Aura 刷新继承时间的正式接口；
@@ -44,15 +42,34 @@ beta  = 12.0.1.66220
 - `ForbiddenAspect` 正式包含 `SetTexture`、`QueryRotation`、`QueryAnimationProgress`、`AddAnimations`，Texture / Animation 状态不能再被当作稳定 side channel；
 - `C_SocialRestrictions.CanSendChat()`、Age Verification 相关 API 与 VoiceChat Chat Messaging Lockdown 限制均已进入 Live；
 - `C_UnitAuras.AddAuraSound` 正式文档明确：声音最多播放 5 秒，`throttleSeconds` 必须位于 0～5 秒（含）；
-- Live 70448 与 PTR2 70340 的重点高风险 generated API 合同当前一致；70391 → 70448 不存在新增/删除/签名/Secret/Restriction 合同变更。
+- `UNIT_COMBAT.amount` 新增 `SecretValue = true`；`C_Roleset.ApplyRolesetFilters` 新增限制标记；Battle.net 图标结构和相关 Texture 接口新增可空 `subIcon`。
 
 正式开发默认基线：
 
 ```text
-Live 12.1.5.70448
+Live 12.1.5.70783
 ```
 
-PTR2 目前主要用于后续变化预警，而不是当前 12.1.5 API 的“更先进版本”。**PTR 12.1.7.70424** 则已经有一批新增接口，必须单独按预警处理。
+PTR2 的旧记录用于历史对照。**PTR 12.1.7.70740** 为当前已核验的预览分支；下方保留的 70424 七项预警是早期重点，不能视为新版 PTR 的完整差异。
+
+### Live 70448 → 70783：生成文档合同变化
+
+对两个固定提交的全部生成文档执行结构化 diff：**0 新增、0 删除、6 条变化、4 个源文件变化**。查询工具默认忽略说明文字变化，同时单独保留源文件变化清单。
+
+| 符号 | 已核实变化 | 开发影响 |
+|---|---|---|
+| `UNIT_COMBAT` | `Payload.amount.SecretValue = true` | 不可按普通数值比较、累加、格式化为可读统计或序列化；核对支持不透明显示的消费路径 |
+| `C_Roleset.ApplyRolesetFilters` | 新增 `HasRestrictions = true`；说明明确 tainted 调用者在 combat lockdown 中被阻止 | 受影响的过滤应用需要脱战再执行；不能只判断函数存在 |
+| `BNetGameAccountInfo` | 新增 `subIcon: string`、`Nilable = true` | 消费该结构时允许字段不存在 |
+| `C_Texture.GetTitleIconTexture` | 尾部新增可空 `subIcon` 参数 | 根据新的声明选择图标变体；原有 callback 参数位置不变 |
+| `C_Texture.IsTitleIconTextureReady` | 尾部新增可空 `subIcon` 参数 | readiness 检查与请求使用同一图标标识 |
+| `C_Texture.SetTitleIconTexture` | 尾部新增可空 `subIcon` 参数 | 设置纹理时采用同一变体参数 |
+
+固定来源：[Unit](https://github.com/Gethe/wow-ui-source/blob/297d7aaaa736f346b3e036f38ee088eaf7f8c07f/Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitDocumentation.lua)、[RolesetSystem](https://github.com/Gethe/wow-ui-source/blob/297d7aaaa736f346b3e036f38ee088eaf7f8c07f/Interface/AddOns/Blizzard_APIDocumentationGenerated/RolesetSystemDocumentation.lua)、[BattleNet](https://github.com/Gethe/wow-ui-source/blob/297d7aaaa736f346b3e036f38ee088eaf7f8c07f/Interface/AddOns/Blizzard_APIDocumentationGenerated/BattleNetDocumentation.lua)、[TextureUtils](https://github.com/Gethe/wow-ui-source/blob/297d7aaaa736f346b3e036f38ee088eaf7f8c07f/Interface/AddOns/Blizzard_APIDocumentationGenerated/TextureUtilsDocumentation.lua)。
+
+离线索引记录该 Live 提交的 **622 个 Lua 文档文件、10,603 条记录**，包含全部 Arguments / Returns / Payload / Fields 及限制元数据。检索和复现 diff 见 `wow-api-lookup.md`；日常功能入口见 `wow-api-common-topics.md`。
+
+本次另已生成 PTR 70740 快照。Live 70783 → PTR 70740 的文档比较为 **388 新增、29 删除、157 条变化、150 个文件变化**，仅说明两个分支的文档差异，不能解释为自旧 PTR 70424 以来的变化，也不能据此声称功能已进入 Live。
 
 ### Live 70448：额外拾取 UI 行为变化（非 API 合同）
 
@@ -75,7 +92,7 @@ Gethe 的 Live 70448 提交只修改 `version.txt` 与 `Blizzard_UIPanels_Game/M
 6. `UnitIsInInteractRange(unit)`、`UnitHasLootInteraction(unit)`：用于交互距离状态和拾取交互状态判断；均有 `SecretArguments="AllowedWhenUntainted"`。
 7. `UnitHasEffectivelyTankAura(unit?)`：查看有效坦克 Aura 状态，带 `SecretWhenUnitIdentityRestricted=true` 和 `SecretArguments="AllowedWhenUntainted"`，不可据此绕过 unit identity 限制。
 
-以上仅是 **12.1.7 PTR** 合同预览。当前正式服仍以 Live 70448 为准。相关来源：
+以上为 **12.1.7 PTR 70424 阶段**保留的七项重点预警，不是 70740 的完整新增清单。当前正式服以 Live 70783 为准。相关来源：
 - `Gethe/wow-ui-source` `ptr/Interface/AddOns/Blizzard_APIDocumentationGenerated/CooldownViewerDocumentation.lua`
 - `ActionBarFrameDocumentation.lua`、`SpellDocumentation.lua`、`SpellBookDocumentation.lua`、`UnitDocumentation.lua`
 
@@ -1079,9 +1096,9 @@ ConditionalSecret = true
 
 从现在起：
 
-- Retail 正式开发以 `live` **12.1.5.70448** 为当前基线；
-- `ptr` **12.1.7.70424** 为下一版本的 API 预警来源；其新增内容未经 Live 确认前不能直接用于正式服；
-- `ptr2` **12.1.5.70340** 当前重点高风险 API 合同与 Live 70448 一致，主要用于 12.1.5 历史对照；
+- Retail 正式开发以本次核验的 `live` **12.1.5.70783** 快照为基线；后续任务仍需核对目标分支；
+- `ptr` **12.1.7.70740** 为本次核验的预警来源；其新增内容未经 Live 确认前不能直接用于正式服；
+- `ptr2` **12.1.5.70340** 是上次记录的历史对照，不继续声称它与 Live 70783 合同一致；
 - 旧文档中 69952 / 70077 的 PTR2-only 结论已经转为 Live 正式合同；
 - 如果 `live` 或 `ptr2` build 继续增加，必须重新比较 `Blizzard_APIDocumentationGenerated`，不能只看版本号；
 - 不要用 build number 写业务 feature flag，build 只作为文档 provenance；
@@ -1094,5 +1111,7 @@ ConditionalSecret = true
 - `wow-12.0.7-to-12.1-api-migration-zhCN.md`：12.0.7 → 12.1 的历史迁移差异与 PTR build 演进。
 - `wow-12-api-source-rules.md`：API 来源和核实规则。
 - `wow-12-secret-value-taint.md`：Secret / Taint / Forbidden Object 设计规则。
+- `wow-api-lookup.md`：完整生成文档索引的离线检索、固定快照与合同差异工具。
+- `wow-api-common-topics.md`：常用功能领域的 API 入口与开发要点。
 
-**当前结论：Live 12.1.5.70448 是当前正式开发基线；与 70391 相比，本轮只有 GroupLootFrame 额外拾取窗口的 UI 行为变化，没有 generated API 合同变化。PTR 12.1.7.70424 已新增 GroupBuffItem.displaySpellID、ActionBar 距离事件、Spell/SpellBook/Unit 等接口，仍只能预警。PTR2 12.1.5.70340 的重点高风险 generated API 合同与 Live 当前一致；此前 PTR2 的 Aura carry-over、CooldownViewer linked-spell、ArenaOpponentSpec Secret、Texture/Animation ForbiddenAspect、SocialRestrictions、VoiceChat/Chat Lockdown 与 Aura Sound 5 秒规则均已正式进入 Live。Aura、Secret、Unit、CooldownViewer、TTS/Voice、CombatLog 与 secure/forbidden 仍是 WoW 12.1.5 插件开发最需要持续核实的高风险区域。**
+**当前核验快照为 Live 12.1.5.70783；70448 → 70783 有 6 条生成文档合同变化，其中 UNIT_COMBAT.amount 的 Secret 标记和 Roleset 战斗限制需要优先检查。PTR 12.1.7.70740 单独用于预警。精确签名、事件字段与限制请查询同提交机器索引，并结合 FrameXML 和游戏内行为验证。**

@@ -1,0 +1,3140 @@
+{
+  "schema": 1,
+  "client": "retail",
+  "branch": "live",
+  "build": "12.1.5.70783",
+  "commit": "297d7aaaa736f346b3e036f38ee088eaf7f8c07f",
+  "repository": "https://github.com/Gethe/wow-ui-source",
+  "generated_at_utc": "2026-11-05T07:24:25+00:00",
+  "scope": "All Lua documentation tables in Blizzard_APIDocumentationGenerated; not a complete runtime API inventory or proof of addon access.",
+  "counts": {
+    "callbacktype": 21,
+    "constants": 60,
+    "enumeration": 856,
+    "event": 1784,
+    "function": 4970,
+    "method": 1470,
+    "precondition": 37,
+    "secret": 23,
+    "structure": 760,
+    "system": 622
+  },
+  "files": [
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AbbreviateConfigAPIDocumentation.lua",
+      "git_blob": "6d2250acd3be64f4b4950a9b2f6d39ee4b83b41f",
+      "sha256": "da151b0b3bc0178e8b94e50bfb7819940b827ecb240173a2c86e884264c16afc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AbbreviatedNumberFormatterAPIDocumentation.lua",
+      "git_blob": "8b98f45eb75e560deee0e179358628ad55299344",
+      "sha256": "004f88f6e524d72079c6a6915aaeaea35369cc1ce8bbe49acdaee00de54182d9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AccessibilityOptionsDocumentation.lua",
+      "git_blob": "ade4601e750f6fcc6cea9aea02b93ff546f5701f",
+      "sha256": "a49a5fe05d491323f1d6b40581b5051c0ddfc4262e6dd4c4c808ff76c6113fc3"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AccountConstantsDocumentation.lua",
+      "git_blob": "124880ebb41b740d1a86698eef73cfb6563ff77c",
+      "sha256": "76e2669132db5f1302adedf1a66292cb19b704e40459a9974b49043b30d324d4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AccountInfoDocumentation.lua",
+      "git_blob": "783b7944d8dcd75425bab3116e8956e3da07c73f",
+      "sha256": "2686d4ac95adb680f2e06ea878898e9ae7739f867e18766f13213e67396ba56b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AccountStoreDocumentation.lua",
+      "git_blob": "8039f939147b02bba1be46dc3f8dde07ff0dcc92",
+      "sha256": "44bf3e32017987b9f462a5bfb1a24ca63d295d6fc3a6f865b0e7c201e9ab6233"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AchievementInfoDocumentation.lua",
+      "git_blob": "3b0359fca41ce31f5aa4b78a83217ec58f804333",
+      "sha256": "991771384f644a439eed28251b896044cbe565a6fe9c4a85f99737d5cbcb1dce"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AchievementTelemetryDocumentation.lua",
+      "git_blob": "18d446d6bfff29badacb8bd3c8393e103dff7ca7",
+      "sha256": "1141127eda9d7ec2594ecaadf264810521f212585241e328837a902c23be5e31"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ActionBarFrameDocumentation.lua",
+      "git_blob": "d3ddd5eed3b1d1b0efe997f0ff9e7ff6724265a8",
+      "sha256": "3e45f2a249d9094bd156daa5d1926f27b17de83c490d0587cf685bb23f109350"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ActionBarSharedDocumentation.lua",
+      "git_blob": "39604a03313daf80fdd34bd2224579f4289400d9",
+      "sha256": "c510217a6aa2613f556491546c1a49efa49b7603aae6c55f4cf3c8174f6ab210"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ActionDocumentation.lua",
+      "git_blob": "f0f7cddf9ca66a7e005bbfaa695b2f128e4ef381",
+      "sha256": "55771647d1f8fdd07255d94fa10bc9913b9edcc37f9beae3192faf668b3b6fcc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AddOnProfilerConstantsDocumentation.lua",
+      "git_blob": "f3191442995310d7d7fc7e183648b0d23145e37a",
+      "sha256": "14c7da0f68d272ad0b4271995bbd2783ea7362b59f74a0537a3f9a1cdbb9ef0c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AddOnProfilerDocumentation.lua",
+      "git_blob": "f1fe480a2a00e8e280532aac062e373fc4f41e01",
+      "sha256": "a43d1e6dcf099c9118ef1c01fdeaab66787feb4adb8daf897888f73f24545489"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AddOnsDocumentation.lua",
+      "git_blob": "6c77f1966a830c92e5ad9766396c2d6b32144fd6",
+      "sha256": "8f63ed0b7b9e70092f12a584d2e9b570a3b84eefaa3c498b522f56c6a67904e6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AdventureJournalDocumentation.lua",
+      "git_blob": "2a251ee9348396314378c8346f8ece7cf6ce7bee",
+      "sha256": "51304ab43a8e69031d557e489d064ddfc5a73516927b272442f76eb4c5bdc9a2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AdventureMapDocumentation.lua",
+      "git_blob": "53d690ff52417bff06bec51567c48a5419a01d62",
+      "sha256": "35024bd02927e8b1cdc53ad73890cb2b8acab172bf7c6ef7ea9ca1af7e4ec370"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AlliedRacesFrameDocumentation.lua",
+      "git_blob": "98ffb062e5acba18eb583033f63ceb947ccbcc8f",
+      "sha256": "ad09f532dd683c073ec65cae5ff9569026811cbed131cfb081c9d5854c805b97"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AnimaDiversionUIDocumentation.lua",
+      "git_blob": "3caf09bbb539db10388d783bfe145636a81c0c02",
+      "sha256": "de253dd08ff081a728f52c079fb49f10aa5a089e5af80cf12fe4bde42ad5edce"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AppearanceSourceDocumentation.lua",
+      "git_blob": "1dbaf1e1d1be80e78a008e80ba7b77ba05ae264d",
+      "sha256": "e8a4aaeb1ffa567dc3490240b5911d2dfac8f2ec9c0fd13296657d92f68ae20c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ArdenwealdGardeningDocumentation.lua",
+      "git_blob": "e626779b40a599756a8b188530c85ae03500a7d5",
+      "sha256": "faf481a888f71275a3908473d8f1d2d81d6697cb2811f0c1daebb3a5a5b1435d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AreaPoiInfoDocumentation.lua",
+      "git_blob": "933ab9a06229fa501402bd3b9b64cb7d375bc6da",
+      "sha256": "249786849deef611fc32be1c54de4be425fb29c0c2701318a540101484c24d17"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ArrowCalloutConstantsDocumentation.lua",
+      "git_blob": "953f785669979c395bf6e8e955129c5ebfb1053e",
+      "sha256": "07fc863f8fcbb2f17202b6b148968c09682605c319c9d81a25980796b031cb8b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ArtifactUIDocumentation.lua",
+      "git_blob": "9f9a7b071ab26d5817b2ffd4236013e9afc5c047",
+      "sha256": "50669cb3a5e20c12ce1966c81be9f3c0bc83de6bcb11c3ea6b2b03f94f488568"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AssistedCombatDocumentation.lua",
+      "git_blob": "c331dbf1820553364437dee6b644c0d8863f0aa9",
+      "sha256": "a627eaac71e171d98fa002be2611ca3e2f1ea61b1f47a4495e737eacb1972791"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AsyncAssistActionsConstantsDocumentation.lua",
+      "git_blob": "fcb8879f6cc87e851bfd95a61fa82b5419a2b65e",
+      "sha256": "d9a200370232a3706e36e91ff62287c792b0f2912715d10230816e3258b3fa52"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AuctionHouseConstantsDocumentation.lua",
+      "git_blob": "1ee85704d93e0ab8b336c36e792c76623b142ce3",
+      "sha256": "23b162903f187c41879fb60c16e7e88703b0dc488a3e7aefe873bf4f275eb531"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AuctionHouseDocumentation.lua",
+      "git_blob": "be435881532a9ebda13806aad5ef2b2feeeea34f",
+      "sha256": "88a03f9a1f999c7648cf89e9b66b04e83af904b09099f3a2f18d5b6ba66ab884"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AuctionHouseEnumsDocumentation.lua",
+      "git_blob": "01ce7732849a8e992b8b739c9ed5f3043977acb5",
+      "sha256": "7ba96e85aba77f284f402a2169d6130eb0b3b16ce688a46e1deb3582f3c6a5ca"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AuraContainerSharedDocumentation.lua",
+      "git_blob": "845a062934848ec13265caf7403b325052cf3b9f",
+      "sha256": "5f80332ae37d5690413bb43e68f14a278b080f42807ecc2da9b635e57058b29c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AuraContainerUtilDocumentation.lua",
+      "git_blob": "a28788fd0e14df2ecbb77e9170f099ac4b6a8a52",
+      "sha256": "a87c322d2c43da359381d76fdda7f900e6980c5cf5115701d2ad70e1676f6380"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AutoCompleteDocumentation.lua",
+      "git_blob": "b37b10e2fb9781562978171f593e1163b3af958a",
+      "sha256": "693fe6627e43e01647f1767305b6df2d7042107a902c486861a6cf03cb81dc36"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AutoCompleteSharedDocumentation.lua",
+      "git_blob": "ac5b98c93e419846884f4c0fd569d7e4ff601105",
+      "sha256": "a700d3e0e2ec883c2641e071899fc7ed3bce7301f46ea790068bea2fc3e551e6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AzeriteConstantsDocumentation.lua",
+      "git_blob": "9c4f2cd355ce94080af8edd567770377f33f3e72",
+      "sha256": "14305d62668bdf031490ffd1db0a9eb9e13747ff7035e8723db16d51adfe7382"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AzeriteEmpoweredItemDocumentation.lua",
+      "git_blob": "cfdaf12852e4bd6294815db3c3d8c72770f4403f",
+      "sha256": "06747e918bdf2059f88825c6d58dded13999c3b4c134a30dc7297c5adccb1ebf"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AzeriteEssenceDocumentation.lua",
+      "git_blob": "f2daf45c85dfbebc8b1d79e7d6792dc5b0865d65",
+      "sha256": "1a4649941da714e176a5f54bd9166b302b2138999b8aac0252a306d778ff04e4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/AzeriteItemDocumentation.lua",
+      "git_blob": "99c94c6513b75cab335719070b8e8ec33da40ce2",
+      "sha256": "cac4d3b4cfd8017a46963d13099b114c39603be2ba8aa213734712842f43a532"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BNetOutageDocumentation.lua",
+      "git_blob": "13085b64dbc135ee31d41b6ea5da0fff92aaeb32",
+      "sha256": "426d44ed23a9feac8118926b1cb9e21de17fc533d2e15d53c217178a1742b7a1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BagConstantsDocumentation.lua",
+      "git_blob": "cdd88742b1c6f62e709253089ab46d72e85b1f8d",
+      "sha256": "bafed7a2bed70563de1ee326585583147316e230d933ea2fe6599fbca72efe76"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BagIndexConstantsDocumentation.lua",
+      "git_blob": "ac2c7ba23c01256ccc23544fbe2e239729b6ba5b",
+      "sha256": "3f7b1d910d10792d8f0eb0639d3282b5474d9c4be118f16f8786581ad0d41ac1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BankDocumentation.lua",
+      "git_blob": "07ec23c5eabef0fe7e3ac8d32d0e4a6d95b6f18e",
+      "sha256": "b6c7f74f4a522943d4a1671bd3e96873afbba3ec92063ffdd3c9b1ba0d3b8c20"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BarberShopDocumentation.lua",
+      "git_blob": "1cd93f227734254699a4b0fc84c058be18d0a17f",
+      "sha256": "809073800a5a2358649d6456625a35ba0fc85ce1468e36e4486278ad62abdcd7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BarberShopInternalDocumentation.lua",
+      "git_blob": "9d7836932aa7920de4fd9d48139997079153d2c6",
+      "sha256": "a65b5734833c9647af4132aeb66f36102f4d7cb79729f1e12f19d82f2d22ea24"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BaseDocumentation.lua",
+      "git_blob": "d70833c149ecbbef0dea9c441265404eba4cc504",
+      "sha256": "60a977121d3dd65d0e923d93ca237df4a2762d520e0ff4571e23f738c24109d8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BattleNetDocumentation.lua",
+      "git_blob": "8f86b49fb9b7a4a924400988b859bbd6728e21da",
+      "sha256": "4c418946440e07b5d8d80703d9c3a9166973158ba36866eaca3f593128cf5884"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BattleNetSharedDocumentation.lua",
+      "git_blob": "c9282a8952c8f041b8adaf7693a7a78781985f52",
+      "sha256": "4a05743de8d1fe962e44b0948dd7f93350f6610d1339c905237178d2a8aca2d8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BattlePetConstantsDocumentation.lua",
+      "git_blob": "aa816bc98a696dc3ebe2324aa9846959a1fdf60a",
+      "sha256": "b31a2717f467b58d777e83eba86d2d7f10bef33e4d7bfa49ca9f453f5b88a60d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BattlePetDocumentation.lua",
+      "git_blob": "5fdf4ec1b108ff8585c53d64907ef91a80efea93",
+      "sha256": "77796e44425c0e72449b01ca98d006d5d046a86e1254606e845a8e4c4e0bbc36"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BattlepayConstantsDocumentation.lua",
+      "git_blob": "0dd3477e4aadaf23836df94d8bf3f9b2d0edbfaa",
+      "sha256": "6042e1b04588d07eb982a1178d481d8c98154db39a4550259f588f7fb7bba0e2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BehavioralMessagingDocumentation.lua",
+      "git_blob": "e7d9b277e5ee2d3a01fcfc41515aba0e2ab9cfba",
+      "sha256": "f7b738d2143a83d9ff4a1dfe80554b8a5e9208cb901a9a60c4b5da4e4ef13f3b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BlackMarketInfoDocumentation.lua",
+      "git_blob": "0061588e2496a2efaf7f498a39aff59af3b27db4",
+      "sha256": "067f98395b355835bad88074315fe05be4ae66500ace713427ba5a835a35eca8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/Blizzard_APIDocumentationGenerated.toc",
+      "git_blob": "29b62e616771d6f0ee8392ef7e6868123fbde976",
+      "sha256": "73986e5ed8a9f618531a5868779870197e1805e51c7a7b7430a9f4ebe098c9bf"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BountySharedDocumentation.lua",
+      "git_blob": "23e7d4770765f065fa145e9b73595f3b46680bf6",
+      "sha256": "389c7872271c319498286f0a03f932ee9363266e691cdb960d3dff40b9934cf6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BrowserDocumentation.lua",
+      "git_blob": "bcba7f6de60972d37b11f738e691857b92c879f5",
+      "sha256": "eaf902445deb6f6e116bd5b895a01eacc8308a1be0666867869567561b909b75"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/BuildDocumentation.lua",
+      "git_blob": "d2504efb85075852978d7f3fbca64787be25d268",
+      "sha256": "3ecce82ac9cfd7a5140b2278f753a55756cd961d39205745efe9aaf1609ffea6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ButtonStateDocumentation.lua",
+      "git_blob": "8ec2f276e53b915bed538214be0d5252afa84806",
+      "sha256": "b82edbe992a2414b1b9ac3b13b8fe0f8ebb39713aaeba63184eb74e009d1f91c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CVarDocumentation.lua",
+      "git_blob": "b71c94878c8dca929ed567a2112d66407d4a1328",
+      "sha256": "0f473d5e664130bf1068769034901076ea49b019d545912b23ce4ffafb989bb2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CalendarConstantsDocumentation.lua",
+      "git_blob": "5d75f44b62b2004ac5dd3be30e0ec0e8bd312b24",
+      "sha256": "fe9441e1efeb2e275fbfa8ffbea1bc612b58673ea3a1afa1e561999336acf620"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CalendarDocumentation.lua",
+      "git_blob": "cc8f7006d7096ebc7386ede428efc6959190e9f6",
+      "sha256": "f54af0893aad9f93f1057384bde8ac9e5ef11c63db33fd165d499802c59da47f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CameraConstantsDocumentation.lua",
+      "git_blob": "e38a321e105cf1fd39f599770640e4c121849bda",
+      "sha256": "0000a91e0f5689e5b932b315c5d14d6be3d6008a3aaad5beab976bc6e9b7e049"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CameraDocumentation.lua",
+      "git_blob": "8c83a16032e78d78d04df863c6061cfa1ef5af5d",
+      "sha256": "eaba723983d0857089f92c0a113afc0324acf9c22f6b41251bc5d839cf453181"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CatalogShopConstantsDocumentation.lua",
+      "git_blob": "3966c54e6b735fa103945d5c8d45000af3bf11c7",
+      "sha256": "2a0d6ccb28b1d47b4c1161b3052023f58b5d7e861245c13018f8802822a67abe"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CatalogShopDocumentation.lua",
+      "git_blob": "390068c8cd158ab5fa212d9480ec242c5a8d95ad",
+      "sha256": "225994a9db4a41abefc4e1745dafb5c8aec82710eb5be39d776cee82f6d83ebe"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ChallengeModeInfoDocumentation.lua",
+      "git_blob": "daa9b0b173a58f8f8da9b41ecb949ff69d000b43",
+      "sha256": "746327cb41189e6be33e91df4b8dfdc8adbf6738d94842e698989e2e06a7ec5e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CharacterCreationConstantsDocumentation.lua",
+      "git_blob": "977de11b6f79b88473e336d0cf8c048ced676498",
+      "sha256": "44e186d01f03e1aa9d510cf50dbc122a5b9622229d46768bf56e9b4c1acf00d1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CharacterCustomizationSharedDocumentation.lua",
+      "git_blob": "096be6e4a1baa73caeea04c86ea213a371e45194",
+      "sha256": "5573a79fe975fd79c1255bc0cd77296338331c852f9a941eb779cafdd567d7ec"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CharacterSelectionConstantsDocumentation.lua",
+      "git_blob": "8bbbe8cd6dd7cdcdbaa9bd0d5215e5a109e47c3e",
+      "sha256": "9590ef25e17922110f7851da85e787d9616dff4acb9678d0d62a0d5efa92113d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CharacterServicesConstantsDocumentation.lua",
+      "git_blob": "9099390918cc5a73fb9906b3aa10b100549105cf",
+      "sha256": "2a930fb50dece19b4c48062cedf20a60adfbad8fdf92dc725a1d87aea668170a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ChatBubblesDocumentation.lua",
+      "git_blob": "027a80e410fd8794b648586c8172fc26693b2519",
+      "sha256": "685122cc1690883f9c871c1674d90631c59951aa0b0eedfba24ecff495742bda"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ChatConstantsDocumentation.lua",
+      "git_blob": "fdb111e11cc27cddda6e1b2471d2c36599fe93b6",
+      "sha256": "f6ef12e4d1d1a0e2c38fd033c34030b7f133d43e64b830e95290a41d94797db1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ChatInfoDocumentation.lua",
+      "git_blob": "2e3d0108ace702494034d057d57039dc16bf1b27",
+      "sha256": "7251bafdc9762362fbeb7326f3cbb42d629ad405a810acfa12cb5037f66264bb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ChatSharedDocumentation.lua",
+      "git_blob": "8a5409591337a125bacbed20bdb31150d8f55cbc",
+      "sha256": "3ba4a6d01baca1a62ddf8c627e1aac5d0eab4f0ff27b2654313b3cb05bf58b96"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ChromieTimeUIDocumentation.lua",
+      "git_blob": "31a093b8562e249f3bbdf4699fc4d51b86f24c55",
+      "sha256": "d381adc21a8e8a3ca5435c01ee5ef0a9ca32c042ca31c4cd7e3500ec7cff0d6c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CinematicConstantsDocumentation.lua",
+      "git_blob": "4c67984d2eaf1cc17a48f718fd1a9477b05362aa",
+      "sha256": "3e1e89d1472ab5ad21ae80d840e3fa2f70053a07a211ffb548684d091164f461"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CinematicDocumentation.lua",
+      "git_blob": "3a5ecd2c7e4f169138277c0ba5637fa9cf3663c4",
+      "sha256": "c954bb5ca97fcba01d04b439ec3f35adf063d8d20671fb8b0156a08f62a6bf75"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CinematicListDocumentation.lua",
+      "git_blob": "cf2c9693c48e7897c7af307e24500235b0bbd621",
+      "sha256": "ee6fd069922bc5c7826b13fdd956abccaf5364542190f74303c591ae217103df"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClassColorDocumentation.lua",
+      "git_blob": "d8244d7b4d64530ae166ef7b722bf746af93cf16",
+      "sha256": "3cfeaf9430b38cf97f2895941d4b133524e1c1652aa968a4a1ef3040c5cb852b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClassTalentsDocumentation.lua",
+      "git_blob": "dc4120dd1b568a49f19de43d3b0e21e31abdeb24",
+      "sha256": "6276873b0503b59bb238dbfe11ef13d864c6af6208b872f773f6f654ec9580f7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClassTrialDocumentation.lua",
+      "git_blob": "5aeb645897460e04d3fb6a0262066708f9c990fc",
+      "sha256": "82d144a536dcd39e4d0fe18cabaabd5d0c49aade0a3b731d5d6c139c299e7eba"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClickBindingsConstantsDocumentation.lua",
+      "git_blob": "f3ad8892c26a04f96d89f5c885bcf1151fe0b8a5",
+      "sha256": "fa4904ab947abb1b7edd05eb47a6cf9290e65ac40d0137ad8d45148b19b984b4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClickBindingsDocumentation.lua",
+      "git_blob": "5a308f45854ab102b1d2b2088b44acb4665c17ef",
+      "sha256": "c1d047b56353ea0bb725bdfeb3b5989901dd7f20656f09e9c16b567b4276254b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClientDocumentation.lua",
+      "git_blob": "c18288e83fe4c0864ea5c0f58c9ddd0aa2938311",
+      "sha256": "51de15ba5d5e0243d9a0920c7a00db5ee5dfdc5896044d3f95fa2de2276f20a2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClientSceneDocumentation.lua",
+      "git_blob": "0794c490b64115c4e684689895726f35542e1506",
+      "sha256": "0ac6a369cb56819002d4913435565101e3a6d910735e281f18185dffec9893c5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClientSettingsDocumentation.lua",
+      "git_blob": "ef539978aa71e99608a5afd5e4710f4b779b03ee",
+      "sha256": "45901e44d749ef0482f2526b63d9dd43716ee0526a6b6293e010205deb95edb0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClubDocumentation.lua",
+      "git_blob": "8af97a418e7bf42eb888f9903c156b61f068a5ee",
+      "sha256": "4f60c27a462fa7c919df1cb399d5fc939bf4d3ea31d71e4bdc0c4efb6546ce3c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClubFinderDocumentation.lua",
+      "git_blob": "d3cfa85e819f20d0ed3b0beb9c2dcb980173f37d",
+      "sha256": "ad7e4a0bb654f3e6e692864a9703b83ef5ea124d8125e2c32ac2bd027a68a82e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClubSharedDocumentation.lua",
+      "git_blob": "28b1696693f792cdd038878fb29e8f4c7aa1a759",
+      "sha256": "527418345a8f49a1ef14147981729b8f3962666b400cb0a9f183b17a93bc7ef0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ColorDocumentation.lua",
+      "git_blob": "b20f7a0bd6834c4180e0ca96094f96cecf389224",
+      "sha256": "8dd6044feeb765114b8298d74a458706cd8c87f9d380a71f5bb0bae61415ec07"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ColorOverrideConstantsDocumentation.lua",
+      "git_blob": "75bdf3c1a20002096ac56b36723c056987d6bea5",
+      "sha256": "962de48edef5ad0c7a2980894f6624147dbdbe692553556c8ab3f441aaeacb42"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ColorOverridesDocumentation.lua",
+      "git_blob": "e718bc7ea1c12ac6565d83beca081f753227d2b2",
+      "sha256": "31c28a74598bda11e3dda7e3fe5398977e0bab41afcfe6753f007e4c4e67e892"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ColorUtilDocumentation.lua",
+      "git_blob": "dcbb88c479e4533933ba6f87e717bf57303b124b",
+      "sha256": "2448e97efd550f445a106b5cfa695b8e59e97eb84bd04e6d2d8dba2d8ea76c83"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatAudioAlertConstantsDocumentation.lua",
+      "git_blob": "4b34d08d3cd8686517a921037144469d68f57308",
+      "sha256": "af742414e0def78418d43f3fe3e5787df22edbbb7741412d438db65c5dcba492"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatAudioAlertDocumentation.lua",
+      "git_blob": "22e98eb4e4f767a1bcd9d967739ee03d203ac57d",
+      "sha256": "9d6b02a7aab2a4dfcf3974febb727ab4e0342885cf1708fd291020333527241b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatAudioAlertSharedDocumentation.lua",
+      "git_blob": "d0b7898cb124cceb9b88f1ddb36475dcf6ae5efe",
+      "sha256": "36c8343c18653369d58204b06b4e47201d02598f409b57f0e7e58a8607bc748c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatLogConstantsDocumentation.lua",
+      "git_blob": "d5bbd3adb73e4254fb2c1ec65906084cae4a71e6",
+      "sha256": "dc794c0da501955b08b63cf0f77a90568e0d4ac0fabf9484d00a70aab29a8d6c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatLogDocumentation.lua",
+      "git_blob": "0d5844ffd9eda8513a2b5f723ad9d8e45b0e3c48",
+      "sha256": "bfd85196ca5a5644f3598c9ae1b08f6f97483b5ad2d49c920039a24fcf66786a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatLogInternalDocumentation.lua",
+      "git_blob": "3bc1d6782a48e75c093f98bd5df893eb9d8fe06a",
+      "sha256": "0f428b4552c157175e5d2595010be4f9c25a83447f5d561fb181c408394a6e82"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatLogSecureDocumentation.lua",
+      "git_blob": "ae8290fa2bb432ecddc1921d972827ab12ff5940",
+      "sha256": "e3e590f92eb9b59c0720bbce437703ca153ed0c657155490816c0509d007b66b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatLogSharedDocumentation.lua",
+      "git_blob": "9c2ca5ff1e8e9b9e553c1c369f70431792e711ee",
+      "sha256": "ecaac62be6f8bf82e205c3c8cd0a45ad1022f1df6d88549d8a82a3ed9c6c34d5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatTextDocumentation.lua",
+      "git_blob": "8af96fe3aa952942e22dc8992ab5f51c64e7d251",
+      "sha256": "7d9fde63c86193b826f497ac36ec635be3a124dd36231524f5e352ffb192b33b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CombatTextSharedDocumentation.lua",
+      "git_blob": "ccccdb73873b29a80007ac7c96e8548a6de94193",
+      "sha256": "11837c71c8c62fd65464e17ac72f03e78717d9ef5817b2b4f78c53504961da36"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CommentatorFrameDocumentation.lua",
+      "git_blob": "f708e7ca4249c8d26d69f09fc816d3cdb80d21d3",
+      "sha256": "c6de966278eb97a6ed198ede6805bc6abbeee3752862bb3cf557de4dc253978f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CommentatorSharedDocumentation.lua",
+      "git_blob": "91abf1ec05c5f3b51b31d762e8a3c6c827146d87",
+      "sha256": "cf01156f16e684e707cbe3e1531600b5f55293b700089a3ff92e9eb05ab3e192"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CompactUnitFramesDocumentation.lua",
+      "git_blob": "c7426e718df8dbf996200fa961430f914943397d",
+      "sha256": "b1e804994784631de235350c3b957466a71f336d35fbfb7d185baf02ca8d1085"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ConfigurationWarningConstantsDocumentation.lua",
+      "git_blob": "755ebe5a03632148aa8a3a33636c742f2879b9bd",
+      "sha256": "9334091b8e53eec8dd701e7b09df7dd1ee6efdefe86e91db69281454d5ce6207"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ConfigurationWarningsDocumentation.lua",
+      "git_blob": "a1c2c30c1013e9e0a79f41067019f7f3042fad14",
+      "sha256": "af60cc25fe353119c853c20da1513dbcda28307aae5cd35f2cdb10a740bdd661"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ConnectionDocumentation.lua",
+      "git_blob": "3df3bebcc83c30dcc03e0d431ef262ea591a9b5c",
+      "sha256": "2bdbb8febaf7948297e30a2cab898bbb70efe163387d9b1500b8184354085f95"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ConsoleDocumentation.lua",
+      "git_blob": "c6f7bdec38cabd46597400801cbd4371fb937452",
+      "sha256": "9479a19903d4430da915bceef3754b86c114442c241f68c3445274ed6cb7ae59"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ConsoleScriptCollectionDocumentation.lua",
+      "git_blob": "214f22f7b9379a1298eaf8637078674d361bde7f",
+      "sha256": "08a552542e488bc25fad8029a6607acfa12bd2b7d2eb10c312eae96b7828abe2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ContainerDocumentation.lua",
+      "git_blob": "d8ccac7e60f0a575d5ca27fda9b6900a92f1c709",
+      "sha256": "dd3e4741d45720384f814d3f78ce975dab3951458ae894e728ed3aedc8ae56b3"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ContentTrackingDocumentation.lua",
+      "git_blob": "a2db4eff9e049b562e751db1e0a1a7c1f1155397",
+      "sha256": "4981409462bc6821c970cc60a050c4daefd0a90a1828ba57c6f5999490c48fda"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ContentTrackingTypesDocumentation.lua",
+      "git_blob": "bf41a525d1f71e229a6bf5cb4349d1ee16c76f9b",
+      "sha256": "bfd958e2ed1c1254c82bfbabb38bcf70b5719deb25d442cdb4b6c604ccf10dc8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ContributionCollectorDocumentation.lua",
+      "git_blob": "97ae5df89026e123a1bcf2c4b379e26ad04ea1ca",
+      "sha256": "ca3cedaa38d5003cc241351f773754262ec6e7548c2939126374b218a461860d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CooldownFrameConstantsDocumentation.lua",
+      "git_blob": "0350b8fb834d6d013d92d631bec2a6701eda21d3",
+      "sha256": "b029cd438cc06f74e173b2dd0e2b00c289caa03ac83cfb1780a93ba4c4cfa099"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CooldownViewerConstantsDocumentation.lua",
+      "git_blob": "37a1383338fd66531e22f2d4c40880c485c68ac8",
+      "sha256": "914295bcc67f3163d2a2351aa77aa5dc9880ff00a3290c0609f21394a50cc693"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CooldownViewerDocumentation.lua",
+      "git_blob": "3332eccbe4ea083921c2e80b9ef83be49834339d",
+      "sha256": "4c8b5bbf4051efde65b4e062f39184ca9339c0e970759c733fa06103640d5503"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CovenantCallingsConstantsDocumentation.lua",
+      "git_blob": "bfacfaca956613e6a0a70f23b17cbeeeba3909e7",
+      "sha256": "ad161f80830d1f3bbf94f60e8eea2efd763232f927c581c275b87e60f6dfba48"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CovenantCallingsDocumentation.lua",
+      "git_blob": "b6abb936d4084436942cdc5ab44da581950a9f7b",
+      "sha256": "9770ca5f4911783e0302acf710be24519e41b0f502375815ceb869360ed6d6bf"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CovenantPreviewDocumentation.lua",
+      "git_blob": "c877e4c59a8485d12e7daf54ecb1c56d33441b8c",
+      "sha256": "08f85f0cbff12fe99e52bf9b7ab43b49242612c26cf67e8156ee6823d32c63b5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CovenantSanctumConstantsDocumentation.lua",
+      "git_blob": "3fcde0aa5d6a431ef7aa8995c39e2b163710b470",
+      "sha256": "dff47e3e113e4881ad07bcdba2b299003e8d7f138de3845423bbefd9b3b1a341"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CovenantSanctumDocumentation.lua",
+      "git_blob": "56b3820b3bff8edc39308dbfa1779c9c4cd2ae0f",
+      "sha256": "0a30b076c7dd47c18ada6ac3500ed166c7b29430ff16eff123ba5eed3c05f8cc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CovenantsConstantsDocumentation.lua",
+      "git_blob": "cf979f1913861c457fbaf4f90afcfd59a600046e",
+      "sha256": "827d6524cab8d78910f57fe9989a0d74c445610156fc80b8bd55174f294ff74d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CovenantsDocumentation.lua",
+      "git_blob": "7b9fede7f31ce6b2e29d889a62a1118e66f320e5",
+      "sha256": "ab663b893196beb6b07de1f960c24c605fd6fef48d6abc81b6111fe64b35cd14"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CraftingOrderUIConstantsDocumentation.lua",
+      "git_blob": "09d794dcb782ab2f6aa0731f2f4ef73f547e71c5",
+      "sha256": "c17fa3285221e890d47f55669f5fd9f8878b657e32ba3e2545f1b72daf8e3e7f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CraftingOrderUIDocumentation.lua",
+      "git_blob": "ef4b0b42408a74c65708a3a641467c5f3364d8c0",
+      "sha256": "0231eb92bbe7940ee9f8470593e2cd21aa9d72218c94d96ce8fa2a8ca34e5a5e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CraftingOrderUISharedDocumentation.lua",
+      "git_blob": "f299d79ed403f55394e75507f3865016be3be2a2",
+      "sha256": "21f6a624fe4e55f6f932827740a1d413381503fabaa9f10877709ff54b7a5f31"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CreatureInfoDocumentation.lua",
+      "git_blob": "225e3f9c1f575bd07aaae5087cf79e94d8a4cc3e",
+      "sha256": "38354e440e4bd4978a6ce895f9da3feb1f0630ad22b4dd3354eb948d97f02ac0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CurrencyConstantsDocumentation.lua",
+      "git_blob": "f6ac995b3b9a36033743771653424c071f83b233",
+      "sha256": "93ab4671c3f19a992816addb57477bc39095a1b6f41ed9199bea3ba556255940"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CurrencyConstants_MainlineDocumentation.lua",
+      "git_blob": "d64d323ca1b0e74cd9975e33596fdb12a81bdb4a",
+      "sha256": "f4726767d2d7e5711950fd6d1b22b22606ad9f6fff06ead03e9b8705a166c948"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CurrencyInfoDocumentation.lua",
+      "git_blob": "da1b31f9c6694bcc1beb25ae7d1df81907dc5944",
+      "sha256": "4469ef929c58223c45371876e4364478be0397578f72cc24415f31fa060b47a1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CursorConstDocumentation.lua",
+      "git_blob": "88312c6efc915b952213f1881619eb415c8d8190",
+      "sha256": "a8576571378ffba53b59cebf019a75830da819a20db5a8991987bd1587133445"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CursorDocumentation.lua",
+      "git_blob": "208585d79989a608d1ed435676005d45f40f3d4a",
+      "sha256": "509579c7cc270afd395c251c6a03284c67c86593d190e5c3798c8c71e75b678f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CursorUtilDocumentation.lua",
+      "git_blob": "6ab9f9e6e702658ca3c9babc12c8ac1393fb9749",
+      "sha256": "22cf63f35fed0c473358bdf6c760974f0f93a4a335507f02425e741580ff75c4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CurveUtilDocumentation.lua",
+      "git_blob": "e6ddae258fbcf69fd65bf0b0c0949bac263d97c7",
+      "sha256": "cc9f435e7a6609301a6b315c49ddcfc7fe494cce698101d9edf9b41fa384fd5f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DamageConstantsDocumentation.lua",
+      "git_blob": "9996e9d8942d85d089feb69f182dae5ccceebd31",
+      "sha256": "a2ef98c64142528b1d635926e24dcea52f2a6aa56b3acab43f8ccdbc856d56f1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DamageMeterConstantsDocumentation.lua",
+      "git_blob": "8b2410fb13638d067843b986b0a4e45bcd4618a4",
+      "sha256": "d1433275d0268dec98052604fed95ad0fcd63f0f37f515b23cce3a5bc9a41a88"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DamageMeterDocumentation.lua",
+      "git_blob": "a2c91e624db922e9e43c7b9ef966daa3912ad0b2",
+      "sha256": "0cd8c6dab1618c88a8a460b983331132f9a844a8a6a8eaf5dbd3ad99249d211c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DateAndTimeDocumentation.lua",
+      "git_blob": "e9e5b4a7bdba93547ec84a808444c455262002b0",
+      "sha256": "43e5b39185a7679f4ef3d7cafc5c5a473d708ef8d07a92fd52732f92dc87f143"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DeathAlertDocumentation.lua",
+      "git_blob": "489e616d0bb4fa73db1a37fe3f12cf176c3e4002",
+      "sha256": "708804de6c8159d702568ff0d69c5aa5ffb4caab4fefbe739009401bde90fb26"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DeathInfoDocumentation.lua",
+      "git_blob": "4fbbdcca339b58abc3d30a51a193aa656fa4b99a",
+      "sha256": "2f7679bdecf2f458c48ddeb49c7dd2f2ba86ce28ce7cc2573224713bc8bedadd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DeathRecapDocumentation.lua",
+      "git_blob": "85c0b6d33c2c4dfb75f6d383223fccf46a67838c",
+      "sha256": "24836a813f5df75e5c6928588daa49468bcc28ba3c6ad93bea277cf6e346e705"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DebugToggleDocumentation.lua",
+      "git_blob": "476240f421db77102e963a6100957f7ba4414d36",
+      "sha256": "e3560ea51e9eefb341a01e8ec23b380e35a17bb21adf5d2fdea138b68f2dd2f1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DelvesConstantsDocumentation.lua",
+      "git_blob": "ec3d540ec8187520d2fdb3342a101b9835bbeddd",
+      "sha256": "d91dd80fe344eef7558e2df83cf55e5741be45776fd998ff672dff33b93ebdf9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DelvesUIDocumentation.lua",
+      "git_blob": "6aaeaba3fcb216314c9274e6633885310d466132",
+      "sha256": "86928fc08c34beddf5fc1e0ee1b4c0412d190844dcb6ff64dbe2119f6f4b030b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DiscordConstantsDocumentation.lua",
+      "git_blob": "1b1cc75fc6715d6ec25b680b888af06931febdbc",
+      "sha256": "2f41f7bdad6632897f7e293f462cce1c85dffc61a4d2f4d4322f8db125092704"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DiscordDocumentation.lua",
+      "git_blob": "327050517a8b0f71e7775b1350f321d5efcd8cdf",
+      "sha256": "3c16c31bf35e440603dfd4b7aa49765a1ed33c515d068386745892c6367671f8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DuelInfoDocumentation.lua",
+      "git_blob": "02d101b82dabfcb8278e1245ec0ebeb3bf037ae5",
+      "sha256": "e14184eaf7922cb08e8c01125606d983da1cfe6d2eba4deb4cec660976efa3b8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DungeonEncounterConstantsDocumentation.lua",
+      "git_blob": "3ef37df42296ce4765921044988b35646cc5b86e",
+      "sha256": "44990b5db1bfb68de3864140737192f2f5975e2e04fb73c134e89757a6ff8fad"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DurationTextBindingObjectAPIDocumentation.lua",
+      "git_blob": "36e42b7973b80c6cf51f5d6f830c4c500f5cf7e5",
+      "sha256": "8494c4190860ea529885006016e9e61d41689551f362aa913b7054453e062f18"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DurationTextBindingSharedDocumentation.lua",
+      "git_blob": "3b347fdd7a16afd5bb83bb6a9b7542316d66b081",
+      "sha256": "328bc4135f319f6a49e09f62da29404e38a8462212797cd76ca1ef71159aded6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DurationUtilDocumentation.lua",
+      "git_blob": "0d59939fe755488bbb33a6c609d07e919a50890b",
+      "sha256": "d3f9e8029b52a518a3f5a8fb6c3e1a11af55b436e89858991418c097624644fc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DyeColorInfoDocumentation.lua",
+      "git_blob": "4df633ca0f2eb48247b10ff81f8ce3d08946002a",
+      "sha256": "84c80a4729472c5dcb545c799f731f82d73ad59dacd466dfdcdccd2917b0a87c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/DyeColorInfoSharedDocumentation.lua",
+      "git_blob": "e195eaaca4c9ac203a1e0746aff955b3185f0193",
+      "sha256": "496478ac3e797367d6041d6b9231afdfd9bb585408f7e79dc70ae801725f8ad6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EditModeManagerConstantsDocumentation.lua",
+      "git_blob": "7d77a96aa5109e3b2308e548f5354b0a1cfd05a2",
+      "sha256": "33f4d704782586df0473b91901fe777e3c43412aa0c1dec42ee9105d77ea5a53"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EditModeManagerConstants_MainlineDocumentation.lua",
+      "git_blob": "7b062481f887fef15e2e9419ea2fc23cb7a5e140",
+      "sha256": "d50a165e0eea952d0d7b4e3e2790bb99016dbc8bc3161e10856274efb9dfcee8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EditModeManagerDocumentation.lua",
+      "git_blob": "a34a47f4bf7c49827fdec2410db418e4bf1c9c3e",
+      "sha256": "2cb9e960d6cb7259ca60a8550dabe686a38b3583d16b34aa7aba1032cb41c17b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncodingUtilConstantsDocumentation.lua",
+      "git_blob": "18b1e07536e62372d0ca1bf50dde7aea04e059cd",
+      "sha256": "f21f8ff7078a3ef9070d26d9104a1fa66730c3672ca6c377ab1e349f4e8530b8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncodingUtilDocumentation.lua",
+      "git_blob": "25c1b60ac9f255e68ea2df6fe18aae215aa81112",
+      "sha256": "325d34637f5d99ac120714f0eab0907e8647ff85af2c61a75619faeb0832f5b1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncounterEventsDocumentation.lua",
+      "git_blob": "fed8dc5c9358e8ae03b48130a1958e5205bf4dea",
+      "sha256": "5780f708123c15eb9f5742af6070db5e5b1f9e7c057534d95780b42b3fc403b6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncounterEventsSharedDocumentation.lua",
+      "git_blob": "814e3d77e1d78c1eeb9ea71d04647f204705b889",
+      "sha256": "1a54354bdba5c850d641fdf1cac90cd73194d9007fa17998cdb5bca3ec28da37"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncounterInfoDocumentation.lua",
+      "git_blob": "33451dabcd3812d147e279c0b70c3955484e3b87",
+      "sha256": "4a92f2ad537b1811bc371750e3277bfa159029f750c69403bab1c63787cae8a9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncounterJournalConstantsDocumentation.lua",
+      "git_blob": "3e4dbc83337a3918ab50687cba727a79f8fa2879",
+      "sha256": "2bf06d651e5b1f7f492998d41d64d55ac113232b5315c787d3f2302f8c3fc937"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncounterJournalDocumentation.lua",
+      "git_blob": "58d83832277663cd20c349e8e4b1a16f48af0010",
+      "sha256": "aa16d0aef562b74167174bdff95672b284c1a55c6caf61ee6d5a0905d38acc4c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncounterTimelineConstantsDocumentation.lua",
+      "git_blob": "5c5bb1840764b83729b06900915b0e4218f5d387",
+      "sha256": "519cad0c1a85c52fe62c625b1d957b693031b0b365b2a1e441a4977c742f0987"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncounterTimelineDocumentation.lua",
+      "git_blob": "4434ea98ccea13a93d937d58d8c933729643dc78",
+      "sha256": "7757358116a3e68d5b96e4e58e83f0438943efacb2a5a21a4c1c7f338e4c0bbb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EncounterWarningsDocumentation.lua",
+      "git_blob": "ba9512e45b73b37344a02ba075ae12eb19eed0ae",
+      "sha256": "ba0112c2b3b7e681d4190e3df416a38b4d8079e8fea4fc59a6c9f99d43c2aa9a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EndOfMatchUIDocumentation.lua",
+      "git_blob": "1a93e8f26aef8268a3611ce636d0aa5c2d03c12c",
+      "sha256": "0ded0f5eff699931fa8d684041f59078ed1c49c282ef835050ad7d5bb0013f6b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EquipmentManagerDocumentation.lua",
+      "git_blob": "f4bff3737ea6725096416b644188f6f39171935f",
+      "sha256": "283be31870b0d173801424399ed63db82cc4e51d299f688d6bc5fa9ec3a4bf9c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EventSchedulerConstantsDocumentation.lua",
+      "git_blob": "c851eef17f26f49cb2da233c9437e701c4b26418",
+      "sha256": "d9cb492bd8c67d854881e365092d422baca7feca617b5bf7c4b38cb9db4908c5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EventSchedulerUIDocumentation.lua",
+      "git_blob": "06f446fb90a16ff1a599a6749aadfdf0496dd87c",
+      "sha256": "c984cc0cfc51bf7bd2122ca7a816acb881114b9b69b638b757adfedddfdf0b7f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EventUtilsDocumentation.lua",
+      "git_blob": "abcf8828ce8a348bcb2e2cda71c6f0dec3f476e1",
+      "sha256": "628b8f5f2475ef4d0981580cfe7c321450aaf4b125c6489ba665389f9b98f41d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ExpansionConstantsDocumentation.lua",
+      "git_blob": "7563bfc80b705db879cc630d897beaccfd104ec6",
+      "sha256": "97e21876ab8a21498fd573c36e76da6089fb478c631667bd2dbca007da3e67a2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ExpansionDocumentation.lua",
+      "git_blob": "71e08a7bac41816dc8a63ea7ff782cb86ad2d1af",
+      "sha256": "bc6340cb566fbda868f560a64dad8096b125f891ee49b5e43ee09090b810def8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ExpansionInfoDocumentation.lua",
+      "git_blob": "4bbc64e6a95e141ec4afdc4855ad6b32603114d8",
+      "sha256": "948c870a3f8948a79d131b3584b3300796ed0f8e2382c6c7c1cb8685fae9a503"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ExpansionLandingPageConstantsDocumentation.lua",
+      "git_blob": "df5f08f7afd414a1ec1e670fe6d78659b4fe2582",
+      "sha256": "9066c7a5b993d66354d82a6f2475cff193b1093e2d7ba58b941e3236e4cd3e60"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ExpansionLevelConstantsDocumentation.lua",
+      "git_blob": "536e64a1fd8091fbd4b3542a1a7865e0d3042aca",
+      "sha256": "ba7b5d10bf22733dc275450471bbc571526947a2d6e946e6aa03430a80457cc2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ExpansionTrialDocumentation.lua",
+      "git_blob": "bb6bb5d85e23331ba3bdecb203f297fd9b6bda50",
+      "sha256": "0b70f4697a54a828840ccf1106512ecbced955a1dc0978c9f3ffaaea92261b2a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ExternalEventURLDocumentation.lua",
+      "git_blob": "27133f48980b0b93f2ae6bc5e17e1d7a6f4ffc36",
+      "sha256": "d18f55cb2d4a4b51004615bae172c6d5699a8d92d9bb9a5db131e34ce6425dd2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FogOfWarDocumentation.lua",
+      "git_blob": "af758c47d887a2cd6e919b009cc93a8d20239a3b",
+      "sha256": "72f2863cc551604c3039b5e92a17546f85c8d54da546f49945aba2952885e4dc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FontDocumentation.lua",
+      "git_blob": "a49bd36fefe0b11b3cd924a613b00a70d882006a",
+      "sha256": "346d98e9a536daf10dc9d16440db58ede4d84afe314c13572ea99ea4c71fda4b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ForbiddenAspectConstantsDocumentation.lua",
+      "git_blob": "627a9c24114a4a2939b1be47e1fbaaedd7879ac6",
+      "sha256": "5d00b7ca64bcd48423134bc36a7069ec898bad6895ffdb397391e05daa7e54ee"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIArchaeologyDigsiteDocumentation.lua",
+      "git_blob": "77c85463957824bc7ae2bd3e8871d03081d7146c",
+      "sha256": "3ff8df2505aeab77d9080f5454bfe5eedccfe1ddd0b06f16552742942199d2e3"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIBlobDocumentation.lua",
+      "git_blob": "58e772fb68ba14d37a4a12856a9ad2ab473779e8",
+      "sha256": "ca8b81d55fb74582ddc1960cb5cba8049f3460697d299d2cd7a2488ea9299989"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPICharacterModelBaseDocumentation.lua",
+      "git_blob": "81164d2b9d0712181d7a8335ae4d17315ad5c5fa",
+      "sha256": "52091b62605941c7d137bad054762d30e9a99ee9a30caaa7fb38b786a1abace6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPICinematicModelDocumentation.lua",
+      "git_blob": "6f1580dc4bdba47987b7006bbc6f2871078bf8cb",
+      "sha256": "47f91f6c1f008f5b2fdeaf4a3b487d6e47120656f06224cc1d15d07103072337"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPICooldownDocumentation.lua",
+      "git_blob": "6d5dde57d7cc36efcdbd7ae96795c64d03d22e7f",
+      "sha256": "f4b117e888a1f7535dec1c720edaceef4b984e5d9c4af3be19c9cf499d757279"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIDressUpModelDocumentation.lua",
+      "git_blob": "58071ee587579c516365aeb15b11b8e88695e947",
+      "sha256": "17beb79edece97bfb9799203a9345ffd3ca4e6451a2e3ec80c925ada46ad75f7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIFogOfWarFrameDocumentation.lua",
+      "git_blob": "7ed2293066974457e2130485526aa5d8cc26cb64",
+      "sha256": "9e540acf315edc7150e5b484c16628e61a72b2f2617f3d2b43fc46f74ef63ec1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIModelSceneFrameActorBaseDocumentation.lua",
+      "git_blob": "6d0430e9ee0b9cbe0afb6756f2db61a8ad7ba32d",
+      "sha256": "a4b3e38d4ea98e542e0999e49e96711f2583dbcd2db87d7ef98b0bdbbbd94a3d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIModelSceneFrameActorDocumentation.lua",
+      "git_blob": "3cbf36effd72a3031516806a901d61f465f44ce7",
+      "sha256": "9b30a79110029e908cf9b1a215c5171a39fad2baec743592e14cc53ce46416bd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIModelSceneFrameDocumentation.lua",
+      "git_blob": "24beb3d8b31e018a82606841f0556dfe98f279f5",
+      "sha256": "f01a639987f62c8a78dc8362a11416c3a024481bab67e33b17975b79bf155df9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIModelSceneFrameSharedDocumentation.lua",
+      "git_blob": "3adf63376fc34cbc4435a7a6295fd87f0197fc6a",
+      "sha256": "a6afd5bcb23996bbc22183c55c5edeab41218d55e8c4c4a41934c1389c15f678"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPINamePlateDocumentation.lua",
+      "git_blob": "95e5a5a919426aa1140a3ef31bf3babc242bd25c",
+      "sha256": "f0f7568dbe39cc0eca2dac21dad311b3fd6e1eb4eed00e7cc36b6acadc63d66c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIQuestPOIDocumentation.lua",
+      "git_blob": "c4a2d9fb965a1c5367039d01319251c03488f97b",
+      "sha256": "0476ced6d99dcf54813d888c27399c4f864594d3677462d9516f4ff031277fa1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIScenarioPOIDocumentation.lua",
+      "git_blob": "b6f3f27fa6eecc3773370d7d2b036c26f223a674",
+      "sha256": "0ea5d8d4eac77cb8bf21e4c984632ad0f838e31822478e97b992fa2396a4f456"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPISimpleCheckoutDocumentation.lua",
+      "git_blob": "fe7d89222dec65225d3bccab7412a5f20755236a",
+      "sha256": "257c19716709f8a74652ef67cd523030f8c75c91451844dc176dedb37c3e83bb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPITabardModelBaseDocumentation.lua",
+      "git_blob": "7391306fab20a5b75de11a5b411b76507c22c7cb",
+      "sha256": "de54e7445c3757c9df194601a16cfb59cf297cb4a05ad921e45e08baf9da8dcc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPITabardModelDocumentation.lua",
+      "git_blob": "4a8f6574ad3f6bf1a4e2ce96198eeea032bb1b76",
+      "sha256": "3452ef71f0f7f66fd1fdd8aedff7dd9d92f48a5ac2e4c79f1e9b08fe07992370"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPITooltipDocumentation.lua",
+      "git_blob": "1f740d432a0466bdd19ef06b8abffa0578b6e5e3",
+      "sha256": "fb5c54b1524b83aeeef3f5d4545670c3d9d9cffa321ec786feaa1d720af939f0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameAPIUnitPositionFrameDocumentation.lua",
+      "git_blob": "ca7a5ccadcff634c18bd617a6e8ef6c9ea205494",
+      "sha256": "7bb85c79b33a5553556c4c462e088a758c83eedc893d1edf6bdb2d9b8eb2fb38"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FrameScriptDocumentation.lua",
+      "git_blob": "37a45d72e916329c17f393de7e586a1516205440",
+      "sha256": "945c09648a60fe90271ed5fc092608af85774fd24daa615d1410263593de7c2c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/FriendListDocumentation.lua",
+      "git_blob": "4eabb093fb7099303e582c1b4a7088cdde3ffc19",
+      "sha256": "79ab7ff20b38dd4c9e094d30e7f9d14ba5eb754cca8ee747dfe4c96b96f9c9da"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GARRISON_FOLLOWER_TYPEConstantsDocumentation.lua",
+      "git_blob": "a719b2136fbdb465f17d72ce9ef939df2ed67ab6",
+      "sha256": "2f0d06ab77ef33081298fd7e5226d1f53e0760f3709dc8d55eaa4c49dc199036"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GARRISON_TYPEConstantsDocumentation.lua",
+      "git_blob": "b2ef7503bd7fd2b4f04e61ad4ea55fa0cd00eccc",
+      "sha256": "9597d926b52486a2baa01ae5c96573664b4e8c6f5cb39cac2c3a1dc39188fc38"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GMTicketInfoDocumentation.lua",
+      "git_blob": "639a6e8795ac49e49590f37ac820c2077107c560",
+      "sha256": "1d692d57b86c5cb55e0a6be61b403b2eb09b734df892a3d87a423850d5583c2a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GameCursorDocumentation.lua",
+      "git_blob": "1e8b2d2a8e2f20f65d06a32890f9e3831404996b",
+      "sha256": "2e23295a8ba6a3637560848b92266763598d098e546041f080f0e42e732e63fd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GameErrorDocumentation.lua",
+      "git_blob": "c8bda7737f22af9635e0fa299357eeb5fe997339",
+      "sha256": "a0b55773b091db911c0f992d4727ac47e62832a83154586931e18aabd1a4d2a2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GamePadConstDocumentation.lua",
+      "git_blob": "0a882ab24116d7d91cdee51d772b50c256d0d3c4",
+      "sha256": "82bb6642a8647b1fc2adef12644382df0d7746c4ae4e08adee4d72defd6a8fef"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GamePadDocumentation.lua",
+      "git_blob": "742657d6da45115e71dc45b43e8fc0a2b447ecdb",
+      "sha256": "c356d4131e239d797823d7eead25c762a726b63a5851a6ebe6d40c60faba6cca"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GameRulesConstantsDocumentation.lua",
+      "git_blob": "1189de0c800e6270839c5eb027aae708a2942601",
+      "sha256": "d82367a9a16df6e7185b1a53c658b9f2f4bd2ae8cacc909ac3a610b50dfe1ed5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GameRulesDocumentation.lua",
+      "git_blob": "52fbe87d4ff0bf34d23c54f1049315c328d7405e",
+      "sha256": "002440ffd917054ec95ad12e0b7246e3319baa2caff17d19529efc4a8a43bbf7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GameUIDocumentation.lua",
+      "git_blob": "c7faf70df864bcfaf48149ab93a72859ac954117",
+      "sha256": "8231920e9f2299bf72449be245d78b36e97fbc71421bd47a2e98292bae296200"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GarrisonConstantsDocumentation.lua",
+      "git_blob": "9c4594db97c9b583e15656228f16482317c2b3d0",
+      "sha256": "598b37ed0322331875b87180734aa336dda6b6b88f38d277e82b1a75e9ba66ff"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GarrisonInfoDocumentation.lua",
+      "git_blob": "db0e12e72102790aca37e3b4002d487a6643bcac",
+      "sha256": "94ca8d4e647b887301d286e2cb01eeb6b2a5f229a1d990fec72cd0b91f70c89d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GarrisonSharedDocumentation.lua",
+      "git_blob": "d6cbc31d2ceec9b5ad30ac801e441a462006effa",
+      "sha256": "b14ba83c9e6c463da522f2c11d08169983fd2405d26c6a9d6e138407cf2b6cf5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GlueDocumentation.lua",
+      "git_blob": "9c613dfbc4580a24d8744277eb01eec96cc6a2ec",
+      "sha256": "a1ba66433c6ed1a1e4d9942910aff8d5bfac5e5622183adf87292387b729bf03"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GlyphConstantsDocumentation.lua",
+      "git_blob": "7e074dfaf2d5acfa7d81862ee09ad5cf76a2f76f",
+      "sha256": "f457232d128a20d215dbbbe19178cb84c70e05c8f57379736ffcc7ff0c856861"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GlyphInfoDocumentation.lua",
+      "git_blob": "c39451f4ce58090fdbefd97b5cce3e1dbd77abe2",
+      "sha256": "ebf21edb7b5fabae98f860d7d86df67b64cbbd1db84bbcfe31c4663969f85e72"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GossipConstantsDocumentation.lua",
+      "git_blob": "a8e242ed9cba7c4da75ce2a1feaaa018933dd8f2",
+      "sha256": "952eaca1f4015331a94cde03db734e59aa58295e23a6055e358456bae6e898f3"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GossipInfoDocumentation.lua",
+      "git_blob": "16929e1ed1539cc6b574d49992ba89de3165951b",
+      "sha256": "22cd6a48eded91316753af2e40624e542a91c728c713636549b7d3a6ef7916a5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GroupFinderConstantsDocumentation.lua",
+      "git_blob": "0acaccc86664b8cdf662fe0fbeb3f957a7a552f7",
+      "sha256": "e296ff182d7e65f4ff3629ce5bef4524f374a4cf3a32d807c6d7ec6b954619ab"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GuildBankDocumentation.lua",
+      "git_blob": "5b5c7cf81851b9814f806399a656879808c5b454",
+      "sha256": "c94abc920c39938cbd31d0f4db03e15f07a9f48d67de7e579ac8b7b701037438"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GuildConstantsDocumentation.lua",
+      "git_blob": "cacb13e4990e0cac8b84e3ad56ab49d991fd3e11",
+      "sha256": "6f8dd139f76a1a9b4fa60ad1c308bf821defa7412a15066e3f972969def96609"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GuildInfoDocumentation.lua",
+      "git_blob": "dd9190d015390329128f5933d7baf1fa283639cf",
+      "sha256": "ab361fb8397bb534ff5c0a6e98cd5cfe7cbbf1e6f66b45dc042ebaad13ed7e71"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/GuildInfoSharedDocumentation.lua",
+      "git_blob": "4f77ddafb7e02bd24a0b4768cae49ac3968fde63",
+      "sha256": "0183ad92031653c8b3d03fa044d2237a4efccea9c6b00b034f9b550ca326bd47"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HeirloomInfoDocumentation.lua",
+      "git_blob": "f513d14c693652f30ca6bf28728719af564f53bd",
+      "sha256": "9ad8f44ddcb0346089b67592955b1509c8b533f8e433d09cdd1ea80f792c84dd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HouseEditorUIDocumentation.lua",
+      "git_blob": "1d3d84d48a7c37f8ccb36b0dde45e1bdc611749e",
+      "sha256": "ebe270ed396c21ac0526dd5c2018e0754f04b8fe69ca777f3f97188516a9cbac"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HouseExteriorConstantsDocumentation.lua",
+      "git_blob": "7c3ccfd3bd3e0ab9c9163488d96c423c460bc825",
+      "sha256": "98caad541fb0b1a2e488054d43ddef8cce4951c93bdb81063479bc9a9cbc770c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HouseExteriorUIDocumentation.lua",
+      "git_blob": "5d514c5e831795525d9d443fc56aaa492bdb2ad1",
+      "sha256": "6ab585df5e9c3920a528908428f2f7f6079f9b308fca19ff362bb96b858d0778"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingBasicModeUIDocumentation.lua",
+      "git_blob": "a589655e303e4c895450124250a9e8608cf1e862",
+      "sha256": "a478e14b018ce25d1e752ff0c4ec82e984c1394b9b05e188265463ccdb3beeb8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingBlueprintConstantsDocumentation.lua",
+      "git_blob": "87299a0024c784306c101d797a446ff950677ad7",
+      "sha256": "7e8c6140e73f2dc206d917548c413d89227f6b4fb70b52c82bd86aff6d19a7b4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingBlueprintUIDocumentation.lua",
+      "git_blob": "07eb79e258b0c9d68269c4ec11ec073b5dc50bff",
+      "sha256": "d10050f78c962b2a12b695c72799c495a82970de8b64c7d38dd2102175e0aedb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingCatalogConstantsDocumentation.lua",
+      "git_blob": "af0c8235d8998601efcde233d83053967b1a89b9",
+      "sha256": "c21e567c03c6e10328b24d8de9ef8ebe1a1500e63a92e71e4da5397a985808dc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingCatalogSearcherAPIDocumentation.lua",
+      "git_blob": "e9f026589e66dadb582ea58774f79c2a068dc23d",
+      "sha256": "b7983b22732f1a84887f883b42cc622e5f52828d2f8fd985706a35f99b97553e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingCatalogUIDocumentation.lua",
+      "git_blob": "ad6a1384a21480d6258973ee35b78a44680046ca",
+      "sha256": "6132e7628df7942498062341f9ed6254407391a5ce3b82b7ea3ad0f8dee8296c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingCleanupModeUIDocumentation.lua",
+      "git_blob": "6cdcd86c79c25aa0cf290d67adc34bc081a25cb3",
+      "sha256": "7684b1a3a4fc3acf8ddaf66be60e813d4c84bce0cb192cb8b31efb1e54b46152"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingCustomizeModeUIDocumentation.lua",
+      "git_blob": "6e447bf19c5a9721e76752f2072659d6b6340a44",
+      "sha256": "7766dc924c9c391041b69ff8b685cea370e576271ab4c46c2d0920b1e4c5bd95"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingDecorSharedDocumentation.lua",
+      "git_blob": "9bb89cfaa221853e095da9b7e0967fe34bcb0682",
+      "sha256": "59fd20bdabe2a85d1c1b0323064b641aa81a931464ade22f39857a0a1b8fc8ce"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingDecorUIDocumentation.lua",
+      "git_blob": "d5739c54bbb95d32e5f4d3229276fd8a0f0caf80",
+      "sha256": "1ee639e06035102c45e362f637c83b2a228b24cffb3697ade561f9ea94095645"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingExpertModeUIDocumentation.lua",
+      "git_blob": "b4d537617296e9938373ddfbd6522b2dfb100a94",
+      "sha256": "4c8c58fbed54b9b4e10ea8f1c9a5d215236cc54cd1d011401311fb014578b82f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingFixturePointFrameAPIDocumentation.lua",
+      "git_blob": "eedf75cd3a45ba95ed470afea31ef2f141d97727",
+      "sha256": "dc0363905a2da8afda48a6946b026e0d6ac733933aa8274647ea033428b57bac"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingInspectModeUIDocumentation.lua",
+      "git_blob": "b90da5ecec21cdd9f8ece266d302e2ef5e1dd39b",
+      "sha256": "bce42abf8d8b72108b8101b89702271b18d7e21c32565439ba3aaf01e18f3d11"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingLayoutPinFrameAPIDocumentation.lua",
+      "git_blob": "a3e6c26f52d58dafb0b976a168026041f3e5eb27",
+      "sha256": "16001b8dcc33a2f1ba8c8c287e68d0a6981766a3d77c1a79ab91cf19a27448bf"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingLayoutUIDocumentation.lua",
+      "git_blob": "54fb0aabf0d1e2b990623f82317fc948238bd18b",
+      "sha256": "efa3a85bd180524d694ef97756a9f788b23a6760eeec9381f75c3a0ecbdf572e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingLayoutUITypesDocumentation.lua",
+      "git_blob": "7d1a77c84b017444b81ad74187115dd60803adf1",
+      "sha256": "abb74fd5a23b4e97b63144546e15dfe83ac61dc37e78303816abcf508ddf256c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingNeighborhoodUIDocumentation.lua",
+      "git_blob": "4d1a54291f2e61a88a66d8f21c91fd692182d450",
+      "sha256": "47e6987ef476d739bf47f648f26d0587f57d65d1befb83045b3b8bcfdb1b5239"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingUIDocumentation.lua",
+      "git_blob": "d3ce755f499919613b9f5f69c265b37607469b5b",
+      "sha256": "7d393b9457622b520528beb29ee23244529275442117312359de9d8ddcd3af26"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/HousingUISharedDocumentation.lua",
+      "git_blob": "45596cd0032397fbfa8bde9d1e117361511d4c97",
+      "sha256": "cd18b0651b3ac055e2342ad1b432e7909473bc13293cfeddc0527f1a5d547b11"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ImageSharingConstantsDocumentation.lua",
+      "git_blob": "3e096b23814b8599c0b2a92b9cb54f7400826c5c",
+      "sha256": "c48ae238596ac18ee36b36f947bf02da1f5d6e9819d68eba011a6dac84b663a7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ImmersiveInteractionManagerDocumentation.lua",
+      "git_blob": "74ad09e0af9c3bfe2533346c50bae7e3752a68ca",
+      "sha256": "fa536cce5dd9edaeb55b54825ba7fda7948244e19ec1556c561a53ac5be02512"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/InGameNavigationDocumentation.lua",
+      "git_blob": "0422806b788cbd20757b47eeba38a30f3a54877f",
+      "sha256": "a654bf24a5b1eee74fee09e7531b13c36e6383bd85c03894f0345d832f2a01c7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/IncomingSummonDocumentation.lua",
+      "git_blob": "3e378b32a813fad784b89ae16c2553ad1c1d4a2a",
+      "sha256": "13879e899c8589c68e2ea2c51aa21ea5d5353b8bc5c6c774a894d6195282efbb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/InputConstantsDocumentation.lua",
+      "git_blob": "85288be6a38cd7f56c995a92d104972b89ab6bac",
+      "sha256": "c8840118e19a1143ae2842ec7edd9a5733ea43474a66014477b7847d9ece989f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/InputDocumentation.lua",
+      "git_blob": "7cb9b2c4cd07bc63f2c7f3002c560440c666d33e",
+      "sha256": "b3ddbcbc1f5aead47aa00ae76bf77f2b2bc6d39824bfe4cde9d78bce4446a041"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/InstanceDocumentation.lua",
+      "git_blob": "2bee732e6de3c3ff6cf7aa70049bf3375956b8e3",
+      "sha256": "136d6554c346ce090324ac905e086a149a7b7f6a23193c03262a17a0ee85719f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/InstanceEncounterDocumentation.lua",
+      "git_blob": "2abf1d3f0b80fbc364c0d5641696b4676e9f110c",
+      "sha256": "f2d6ce4aa5030c93c7e5fa59576564ae020f3be5f052c4ff2529c51b4395d4e7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/InstanceLeaverInfoDocumentation.lua",
+      "git_blob": "425ca1af7ca362f009046ec4f5a7725559dbc56e",
+      "sha256": "37b8964442787d815b6d2487e8b12bdefe43591cfc079c1dda2c0dce3b6e7ea6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/InterfaceFileManifestDocumentation.lua",
+      "git_blob": "09ba900f4f5ccc650799423b2785da2e7767c085",
+      "sha256": "853852a0e4ded0c91a5c975312754d85bbf57bc63fadedbb597469ce80697dc2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/IntlDocumentation.lua",
+      "git_blob": "d1dd337f2d59e3b877b10b7751629d48d8a1eb67",
+      "sha256": "fb99d7619d289f62ac47949f14f4820fb1add459ef1defa49dde836f812323e1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/IntlSharedTypesDocumentation.lua",
+      "git_blob": "da0de2c4e8a36d09b5f0501a87a2f85ee95daf2f",
+      "sha256": "31f96168cbb1d917c4d3dded292d81701935b1c2a35a86ccbfcfb6512a7ecdfc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/InvasionInfoDocumentation.lua",
+      "git_blob": "d869bb40b3b0cddf804cef0cb95df84dc209e038",
+      "sha256": "32ac371a908d8ec51083ed708a8578d86c323884e807da1a24ea27080314f7b1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/IslandsInfoDocumentation.lua",
+      "git_blob": "cfb02ad14a3b2a4344738ae19c0c06e1e4f8a839",
+      "sha256": "204e74e66e02ddd3a1597f9b2985599caa2abbf5a8238d709cff0e3fdc1bca1e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/IslandsQueueUIDocumentation.lua",
+      "git_blob": "a6efc7226968f23a671bb3d8b1d2c23f01cee5c5",
+      "sha256": "8b4fc91b58601c47ec5cc47c47b76dcb8c255fd4201ae07f9521da4def8a6343"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemConstantsDocumentation.lua",
+      "git_blob": "00ca64c3466081679757070025f689e14c4e50f3",
+      "sha256": "44d6a932466a19b62730cf8442ba5b8b0a98e2c45099b32fda20073d53281e18"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemConstants_MainlineDocumentation.lua",
+      "git_blob": "17f10c09331925c29d9dd09fb4a3d99d2fdede7b",
+      "sha256": "4622e7f876cac9ddb446c1c3c1e827b136883f801ba1e37e8e1d2a1607a676d6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemConstants_SharedDocumentation.lua",
+      "git_blob": "ae1078f955e576a776b49f0a438d600efd9663dc",
+      "sha256": "4a3a2937594e8e20e8ffeff74b6ef86a934404e391776bb75fa9b65c65bda292"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemDocumentation.lua",
+      "git_blob": "4955484268741dfe40991520d6c04edffb6d8d75",
+      "sha256": "56970512d088ad07f3a143bd5959789ced40546ad4f6992ee0824509fdcc10fb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemInteractionUIDocumentation.lua",
+      "git_blob": "2fb7cbaff0b2acdfaf931fc2476d17cb36334beb",
+      "sha256": "9503f1c9cea6eb9aea963b867846fd4e8f1773904798433cbe4df5766a43a0fd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemQualitiesDocumentation.lua",
+      "git_blob": "3eefe208130074f62a7a5b834917a7a01efc01a1",
+      "sha256": "7701303be7ddf4b0176c3fc04ccb0a51357d3c8e65e9faa8732738f4e523a1f3"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemSharedDocumentation.lua",
+      "git_blob": "364ac734deaf38724502c90e27a2f9bf5b2fdfa3",
+      "sha256": "4c073990a7e70b3fdd915daa91ced0ec19145e8f7bfce2d33cf7d29a296b0cfa"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemSocketInfoDocumentation.lua",
+      "git_blob": "f2ad0503ded6ea1e30fa8379b485ad852d6487ed",
+      "sha256": "a871d6a31ec4070afe13d388fe1d5e2bfba187638c7483bb7cd8f9c7d9cee9cf"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemTextDocumentation.lua",
+      "git_blob": "12360aba783f58c53a7d7763d609c0a4e2d37748",
+      "sha256": "f028ac4c60bc34b750a6871f9f4cc37546828b4bd09dc3ebcc19e27f097e8310"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemUpgradeDocumentation.lua",
+      "git_blob": "821983a0e8eff10281cdd2d9b1fa1a6184a25200",
+      "sha256": "c4fc16556d173fd9252d16ee24e1d5c1e83ecc822506a89b7192b4693378afb5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/KeyBindingsDocumentation.lua",
+      "git_blob": "1925378e3e3a2303bdce322ed0442f737b14cbec",
+      "sha256": "2e67cae3fe3c15e05efc936e1f411443bd2b934d87336d4af0128ab9a1886aaa"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LFGConstantsDocumentation.lua",
+      "git_blob": "a914c6200a991e0fa40b0e800c86d279c85cef08",
+      "sha256": "7d6bc405492fc6d2b3c5c702f98e5589f8f8e4fe11d988c48a36c1b78ea64de9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LFGInfoDocumentation.lua",
+      "git_blob": "d9fd0535c87234a0f98affae705c70818b88984b",
+      "sha256": "b10084b9bcdade75f07971ccb35627007d89b65fd757559bfc3ba8e08e42718a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LFGListInfoDocumentation.lua",
+      "git_blob": "c17ae979fb77c7b03b8d315b0a4b22047073b09b",
+      "sha256": "e5113f4e7240607fc87002d7dc97b8e34936774c744919dee64be515950a6fa6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LegendaryCraftingDocumentation.lua",
+      "git_blob": "55235044b97dcc040604b2a99f3d37a4519b577f",
+      "sha256": "bba7713e940170fe985c4af4ae5cf9ea469d368ccdff2e1eed2839401c8367fe"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LegendaryCraftingTypesDocumentation.lua",
+      "git_blob": "52de66d57122b354893b4388fc8ad1d1fd64ff3a",
+      "sha256": "f7605d00db477e594a0a15463be8c9d739ff02370fca48de94156dc06136d634"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LevelConstantsDocumentation.lua",
+      "git_blob": "c32916f1f82d18bb0d0709b283721db1c21358e1",
+      "sha256": "d2d84a11debb24ab8a61df9aa61595c1b6e819ba307d02211db52433009ae15b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LevelLinkDocumentation.lua",
+      "git_blob": "66c4a2983e12686bced72e06bf2c4c53be65a0c0",
+      "sha256": "8febd708efa8d887658b995821d836abe837241b57744a881a670a4a3f18ab1a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LevelSquishDocumentation.lua",
+      "git_blob": "5be0f968746c8f42ddcb311c56fea9e930554049",
+      "sha256": "1b154e8a3efb17e1b69bb37a69c2e2738747880ef9b66566a9e09ccde7a035e8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LimitedInputDocumentation.lua",
+      "git_blob": "f4daaf1a1743466fec1ce2e3eebae464118cf926",
+      "sha256": "0820da251d7042966d9fbdb0e9314e89b2a89fe6f8229c67c2facbda36f673d4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LiveEventDocumentation.lua",
+      "git_blob": "d3a9b7a7de9a9926422fb746372f19d1eaeaab67",
+      "sha256": "fa96799fa3e609f6f2169776b4466be52b3c490154901bb86d913ac6fbc9d550"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LoadingScreenDocumentation.lua",
+      "git_blob": "eaea788bf4d48b3ee4ac07d950be2f792bb567f7",
+      "sha256": "b14ad5a95fd73a7403397bd77f797ab07f27dc38c0ae340ca08088c8770cfe1f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LobbyMatchmakerInfoDocumentation.lua",
+      "git_blob": "3c3d5d460c68f4b6aceee627ea82e5025a2b0a6a",
+      "sha256": "2f22598242f56d955e2f4be07979045dcc38cad2478e71117facb3f7022abf85"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LocaleDocumentation.lua",
+      "git_blob": "5619701c82f271b270989ea6acf66b574c2efced",
+      "sha256": "0031a714d88e05097aca8c721cb787fb995a11f3247858c7959f320a6c545cb7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LocalizationDocumentation.lua",
+      "git_blob": "ee60a882dbba031a77c558df2ac14d75b563f939",
+      "sha256": "54367e286a5c703dc989499060bb2926b4987a1d009bceff216f1742ab6e15cd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LocalizationSharedDocumentation.lua",
+      "git_blob": "e8d0de92ca387741145ec431765168b3e30c20db",
+      "sha256": "69cfd97bf29327adc41873559aea70859913073882237ef73ff4f22bd3e6521c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LogConstantsDocumentation.lua",
+      "git_blob": "ffb30b404d27b440bdc20849c2e6eb0426371bdc",
+      "sha256": "f7dfa32abae78286108dd7999413827415c3fe7c4daf46fc8f86388d2310531c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LogDocumentation.lua",
+      "git_blob": "faf7dd018c384014950be457b2232c675d61e248",
+      "sha256": "07d8ce20a7bac353479075f8a615ff62d9676e1396852ac26736db804e115681"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LogicConstantsDocumentation.lua",
+      "git_blob": "1439812f6ab78b7b3e163d3a6a7b42383c0f9cd3",
+      "sha256": "0244f6c3e9c6c05507c4f5072e082c1973d74528d9a79983b7423b91163e7267"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LootConstantsDocumentation.lua",
+      "git_blob": "3571f176f7c5b3f8f4efdbc8359a594657294026",
+      "sha256": "f7222c34586003aaa77e2af6582b76d9b4a6fdca7422ac83a48c10db552b77fc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LootDocumentation.lua",
+      "git_blob": "00fc3dd960267d69577b931e0eb32e625720c7ea",
+      "sha256": "09a2ad19fb155772d17c33fc0fea4cfb63f867ad96de4e1b9472d436b65cda01"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LootHistoryDocumentation.lua",
+      "git_blob": "cf6e04be9d7336e983f8958a1e954453dc0093aa",
+      "sha256": "4bf6c5db08d0da1bb868c6d090b7330b51169784fdacedbfc66a8a54f77b8b4e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LootJournalDocumentation.lua",
+      "git_blob": "c255f5171a9e99006c9e1cd7f2641f54003d91b5",
+      "sha256": "4e169016fa0de08c6ae84e59680921343fb08059720e47b750d16af0ee0b01f8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LoreTextDocumentation.lua",
+      "git_blob": "6fd64e652afd12cb1583d2a77d0466577ed49423",
+      "sha256": "d6e06fe1643e56b3ef1cad440a3e5475fb42fbfaa45beeaf80256860bb8f82e6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LossOfControlConstantsDocumentation.lua",
+      "git_blob": "a4ee537919c83819281939c3f72fcc912cb8bc0e",
+      "sha256": "68b7f7e582a62ffa714410ef520394c3eb4716a94a4857bdf107b12c5933c4b8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LossOfControlDocumentation.lua",
+      "git_blob": "bf519912bd794ff9059287ea274a495c202152f9",
+      "sha256": "6ed6bc9d488e96ee5818862d65181790c0a4f28dd9093cb22f7314232f28c489"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaColorCurveObjectAPIDocumentation.lua",
+      "git_blob": "7c7c2601284eb0ad577fed1155937bee1b26fbaa",
+      "sha256": "092c4bde4eb27079bdf7f5498f2a30bea21d11fe32ce17ae726b7ddba406e150"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaCurveObjectAPIDocumentation.lua",
+      "git_blob": "2b9fa34363b721fe6a80dbc1d63bfbdfb196fd1e",
+      "sha256": "bb512ee362b56f7bf014511518eedffae67d03d3ed75339f4111afa53f4981f5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaCurveObjectBaseAPIDocumentation.lua",
+      "git_blob": "4d3ec5783b9ea0d7e271b2bc60721cbc4b4f2b3f",
+      "sha256": "e642258428901e843bc4508d4fe87a814db5acc93740dc9ce7bf8ba249bd189b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaCurveObjectConstantsDocumentation.lua",
+      "git_blob": "f5bca00b02aecb5ad655f56108a3982483a5ac9b",
+      "sha256": "89616cb878bc05735e86ba2ea8b5534516d9538c8b8791c0b84e5618586e8e2b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaDurationClockAPIDocumentation.lua",
+      "git_blob": "e57cc19c3c590762655bddcd41922ac5aaba0aaf",
+      "sha256": "a688ff973ea460dfa6150f4a19647e69d77105b5019fb44522ec3750d41372e7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaDurationManualClockAPIDocumentation.lua",
+      "git_blob": "43f3747aed3d69b4a6ba4e900d19bb8bbcc385bd",
+      "sha256": "94ed4dde28ab601732ee1957fb608eabd4a54ca209b9e01a26c7c14bd2d324ec"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaDurationObjectAPIDocumentation.lua",
+      "git_blob": "55d2520fa63e058f0c32685bb77d7fd34cfb50db",
+      "sha256": "107a28259bc87162370afef60e297dac95ec318ffb32e516f1ea5cdd2a140352"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaDurationObjectSharedDocumentation.lua",
+      "git_blob": "df98218afe4670510c3d7a42c9b1c97e23960eba",
+      "sha256": "edf6dad79281427008f6a2c5af73100e5bc8617481827f504c2c70ee6218232d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaLocaleContextAPIDocumentation.lua",
+      "git_blob": "476d41e3a05c422a5a0066af6758050ae41391c6",
+      "sha256": "b4045a5dc766767cc01c622af0960ea8c80dd8ef225def695b488f77e65a695e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaMathExtensionsDocumentation.lua",
+      "git_blob": "81ffc9c027dd10c1bab138a71afc8422080a1625",
+      "sha256": "1028bbe768544ccc0b1df56438fb44af962ca4656d20c37747b7262113115c5f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaStringExtensionsDocumentation.lua",
+      "git_blob": "2c204ec0dc185952860538961e9a7c38f4c6625e",
+      "sha256": "739d983e3bc4fb1484e76f7f8301feba11d3355be5cd281dfc107d0abc8d4973"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaTableExtensionsDocumentation.lua",
+      "git_blob": "d55ee6b270fa97da3d48ee7e172980ac09e27c34",
+      "sha256": "3df49d15de648ee6d9edd645538ee5add15581af24c7bc51b12912ec15f6e66a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/LuaValuePredicatesDocumentation.lua",
+      "git_blob": "277055bbe0e793f5e12d46caeb64d869708e3a4e",
+      "sha256": "af369fe40df5b2c28063456a0520629322023f44338257aa06d04b76a7bdca9f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MacOptionsDocumentation.lua",
+      "git_blob": "d3ca997d7bea27f3f6f1973b76e39caf631ad755",
+      "sha256": "3d402346893fcce32845427d0c7f75203cd5346cd31aaf6f9e9c5ccb1110297c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MacroConstantsDocumentation.lua",
+      "git_blob": "0abe0cd778eaffca7600eed6127050376fc98fc1",
+      "sha256": "1f2db5bb01c53390be8a1fc113bd7e62ae0fb05dcefc9cc4506a225003b82d3f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MailInfoDocumentation.lua",
+      "git_blob": "b695c1c5b6769da5167b3995e44ce56921290ac0",
+      "sha256": "31f7dd4a22380561b76fea1fbcc65a0ab49121a5b807fbccfd0474e902d47751"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MajorFactionsConstantsDocumentation.lua",
+      "git_blob": "b92a8c0b59a704a61c570c705fa55badbce6fd12",
+      "sha256": "405f8c578256ecd2b35dc27b3a1d5b26b7720a3ff416529ebb2e4ecaadd182a2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MajorFactionsDocumentation.lua",
+      "git_blob": "9318d10e8f0f2cd4a088ed0ff8cdba7f99d8f7d5",
+      "sha256": "db2a4cda24d13870d70f67493b0be30b9907cedd42f51320931864a28de7e069"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MapConstantsDocumentation.lua",
+      "git_blob": "7aa00421a305c6a9e0109cc913f95665f2914f0a",
+      "sha256": "90b33376f977155e3f06f5a5e2431ed450c22236096de05b0cafe0a5bb31f859"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MapDocumentation.lua",
+      "git_blob": "247a3b2ddfbc4ecca0667fd5bacfeaeea7cfffae",
+      "sha256": "b73a2ed1d1552c1b38bc59df0a586a0986dfad54991efc905abc87799cecce57"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MapExplorationDocumentation.lua",
+      "git_blob": "393cb1c0128fb0fd819262607f9ae2d6567bac4b",
+      "sha256": "1ac354a853977e081c5a1a39c80a0d9b83c78e46e9c132d556dbbed7bc16cf2e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MatrixSharedDocumentation.lua",
+      "git_blob": "86fe6fd8ee6717dc2c485d8903c387b21bcff8d9",
+      "sha256": "29daae99cd5a7319f0c8484267aae51c43242e7c4aa878ad784e3174df38a390"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MerchantFrameDocumentation.lua",
+      "git_blob": "1ec65dfdd66bc2d6bad8b1d903add9a844953551",
+      "sha256": "c3d078c8b0667d63094a265f21480e270f9f2cdf75cdc4616f053b587b9847c1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MinimapConstantsDocumentation.lua",
+      "git_blob": "9f27b5604b98768819d41e29c1f7851816164c2f",
+      "sha256": "8e5bdef9349f5e2b9d960fe39c61c4357256b21484e49feee5f48955c2bd722e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MinimapDocumentation.lua",
+      "git_blob": "04dd0ed59833d3e70fdb83c19757fd9221f95a65",
+      "sha256": "64e244af5149ad0e3c578fc4c07795c8bdc09a2e4014138236485acffffa6ebd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MinimapFrameAPIDocumentation.lua",
+      "git_blob": "cbe87128c55098a5933b73003b99b3ec60a58513",
+      "sha256": "21df06afa6a811b62cd489285cc1f2e08939e8e2871f0d3f7e282f00fab29a2b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MirrorTimerDocumentation.lua",
+      "git_blob": "c8d80912d5132e2c3be8bdb2bff9d7b3d63ebd3f",
+      "sha256": "1f27e63c4c98a97fb6db1303f72c23069d523040674d80a6a11069206d45546f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ModelAnimationSharedDocumentation.lua",
+      "git_blob": "ff535ca675111f5353bca1f798cb766d0a67014d",
+      "sha256": "db85cf48b729dd96ea7b4c7c80b097df377c0459134bf9696a744162b4c96091"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MoneyConstantsDocumentation.lua",
+      "git_blob": "3bc6c9f9f23ab724a84fca8bf2f08888318e2afa",
+      "sha256": "867250d28faa69f4570d3855bb075c205902e8332780b1fbe8507d4018c4c7e4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MountConstantsDocumentation.lua",
+      "git_blob": "27d5529591933c8b79b970ed28752f9e59a05a6c",
+      "sha256": "1d78a5c00684a73969c02c43faf20e0bb8ce616eab453de9b33427216448daa5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MountJournalDocumentation.lua",
+      "git_blob": "0d1b60c6e9a43d954c5de447979367216283174d",
+      "sha256": "8a1543d82c3272ed5c36a39b3bf6879b6a1e56290746647446ab7b76acb26a08"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MovieDocumentation.lua",
+      "git_blob": "26d7d7622cb54e4cca6bc931f61107b56b1409c9",
+      "sha256": "973ebe5036fab5ade0926691aeab1e962f0a8bb99b5b3ff723128abf3fb01bbd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MythicPlusInfoDocumentation.lua",
+      "git_blob": "fc7f51901d6965b02d71689462295804eb8ba941",
+      "sha256": "84eefff26ee0ec990a4924aef8e73b14f96e447e92319132849f3a9c038f6b7e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/MythicPlusInfoSharedDocumentation.lua",
+      "git_blob": "71407ceb131f4240dc13ce525488761c371e6375",
+      "sha256": "acede291e46445854b4bbad27e8bd825cf9fb758a0205bee41d77beb3c48d89e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NamePlateConstantsDocumentation.lua",
+      "git_blob": "1b19e282f2474213d0f5d3aab446280bfc9fbfcf",
+      "sha256": "b372d7dfb773dd3c0926ad0aed21ae28e4222bc69f0bf354bde221bcc19e3fce"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NamePlateDocumentation.lua",
+      "git_blob": "745926c485b8c54805f784ebbc1adef6046cddb3",
+      "sha256": "1af6fb8f2428211ce696b2af18d09503116a12920d28ca76231bedb72a88292c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NamePlateManagerDocumentation.lua",
+      "git_blob": "f65e4d15c75aaa071a179a02012856476201d8e2",
+      "sha256": "f578c27a202373b896ae15469e3800dafac55f7e1382ae5a0ab42bd253444c22"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NeighborhoodInitiativeDocumentation.lua",
+      "git_blob": "5e7c354880bfe32f3fa157ec4239974745f899ee",
+      "sha256": "6c8635b65dd07bff9de328e59d8d74c573b5e0558e2361cf8b7cb9a43716e66f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NeighborhoodInitiativesConstantsDocumentation.lua",
+      "git_blob": "0d99dd932f5413dd0124fe82cc5117b22937aa15",
+      "sha256": "ede19b4bcbaa506c782288b51086e1d1b388522981ebcd9c128fae7f1b41f886"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NewItemsDocumentation.lua",
+      "git_blob": "cf33d62a2c6e39f265b72710a4cb8bc45557cc76",
+      "sha256": "1c1a821c598404a2e09f2633446f121a0fe11fec49d108878a3e7cb7c695804e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NumericFormatterAPIDocumentation.lua",
+      "git_blob": "00adc21f6840cff98491308f98e177f7dfb25690",
+      "sha256": "acd8970bc2885ed668cf725e8ed373798bfb2dfd658dc7ff366aa32ca5cb87e0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NumericRuleFormatterAPIDocumentation.lua",
+      "git_blob": "49c6ed989f695789ee430cab22046335e9b1fd42",
+      "sha256": "1917f8194b809c3e3312dd8cb967e647346788544a906df7eb5fe6cbc6132a69"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/NumericRuleFormatterSharedDocumentation.lua",
+      "git_blob": "0e8a5774db7605e96e2dc358dd8cfbe4ae01bdda",
+      "sha256": "8b86556ebad65721635db3513aa941057248e101864ff0e74776b6f1380c45c2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/OsDocumentation.lua",
+      "git_blob": "596fb8acf2341c95fcc0e5ede8cafeaca1364fdd",
+      "sha256": "2dc9cd61fb5bcccf7349206f525c7374ff54363aa13a28314da47d6ca78d09d9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PVPMgrConstantsDocumentation.lua",
+      "git_blob": "00041d0eca7af34a75628b697b9b8c837c824f12",
+      "sha256": "c7601ef59e7096ffe9473ca50a5f0d7f9eb7858e561febbf0dd23b0a1d8f2fc4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PaperDollInfoDocumentation.lua",
+      "git_blob": "a68571d5c37fe3e404412f05b5c7926d6fbc1d86",
+      "sha256": "fd7cdfc02b316b56d71d484e09bf54dbfa66504a1025ae00c78d9245b56e04c0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ParentalControlsDocumentation.lua",
+      "git_blob": "8eccf259d525ac42e82a07f860da9fd2ed57e257",
+      "sha256": "5d3bbfeffb56fa3e43a3ddccb5f466025cafed4a486588ab6c5044de21d429ec"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PartyConstantsDocumentation.lua",
+      "git_blob": "24e6046fc875e8d61dc73e0d0d23278e431584aa",
+      "sha256": "ef71b3a28017332bea1edc20d53be38de051480a1e0a3ee386bcc2782399c8ac"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PartyInfoDocumentation.lua",
+      "git_blob": "cc72140499585c97572252528934a49923168907",
+      "sha256": "8bcc5fed8ddc03c06163da0bcd5a70fcc31afbdc53d21dbd3e9300ce7e3f89ef"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PartyPoseUIConstantsDocumentation.lua",
+      "git_blob": "a8b1d844b0399865ff861246cf71dc9dd040d394",
+      "sha256": "35dfcbcfbe16eaa88198e031fb556afb53f40fd5ee3b214561df1c0ed0bc7fb3"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PartyPoseUIDocumentation.lua",
+      "git_blob": "e600371af8e6ca8460a549ab539a94c200787db1",
+      "sha256": "a72b9b57ee2707be49f56cfc7e978deeb7de7f5e716bac5ee6bf86de7fd54d27"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PerformanceDocumentation.lua",
+      "git_blob": "bf722a7c496e0ed95d14efce57d64aeb4a76ee08",
+      "sha256": "c430b72bb5bf09be9ecafc52ad2cdfe8b4383773177c82258a1a94015e4eaa52"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PerksActivitiesDocumentation.lua",
+      "git_blob": "9c797cf1d2554450080b551fc0d8f1947c2f9ebc",
+      "sha256": "1baa5a6c64a9c0c391edbd543a3b10a8c851bc531b98384fa5fafca1110f39f8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PerksProgramDocumentation.lua",
+      "git_blob": "b2854f8d0826d80c197f65bafd5ccd434903038b",
+      "sha256": "456bcb0779d3ad68009c5470b80594d460e1b02c859ed532a13bb82ad3524eca"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PerksVendorConstantsDocumentation.lua",
+      "git_blob": "b7a836c51f37def2eaeff5daeb67c7cb0442ad0e",
+      "sha256": "750831da7573cddd7f1b24d8171890f1837bd32ddbdcde7be2a77f6e4ee7c812"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PetBattleConstantsDocumentation.lua",
+      "git_blob": "ee4788d08164c1a0b86e53dba4784ae48959fe9d",
+      "sha256": "890a1022e2651fbbaab927579061579ed482bf764adba59e767261091350a84d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PetBattlesDocumentation.lua",
+      "git_blob": "264f2959ebb58ab1d295960f92deca4259dcf2bf",
+      "sha256": "f6330871830504cc79e8bbc0e19fd5f3a400a0e4d49c1b0ae4df61de8f880e3b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PetConstantsDocumentation.lua",
+      "git_blob": "8e1b9c7141edefa286ccdeaa1bd674bc87f231d8",
+      "sha256": "573795037ceb1e0c9cb0a042278cd7fe3da5f2d89cef8966f3e50aadeaeff403"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PetInfoDocumentation.lua",
+      "git_blob": "eb5328c48263bada37616bc307a6d07a162f3ce8",
+      "sha256": "eeab5854a0e24b59b4c8f96942678ae81af8ebd2aa1e5beaf619ee88a4fb2d5d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PetJournalInfoDocumentation.lua",
+      "git_blob": "0ec1f9e204b0f3b3dce28a5a5b357557ef990cb0",
+      "sha256": "9d9ebf504da3aee364741fb021084c39107caef1c19465b308aadbc2363076e2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PetScalingConstantsDocumentation.lua",
+      "git_blob": "0ae7cd703e59cc26f39fae79198041f0f77f4689",
+      "sha256": "473f742f1ade43ecd42e50620e2cdf50f238b57a3bd9e0c6da6263d43a3f6fe9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PhotoSharingUIDocumentation.lua",
+      "git_blob": "bb691066bef47163c532e04cd2b8f8f0c2ab0e08",
+      "sha256": "410ae528c6bdd1916b173b2fd84f51ff9e4944b6e0fc85ce925c7a7b95596941"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PingConstantsDocumentation.lua",
+      "git_blob": "6c057223edcdccea9335b9a149298fe52bbfe411",
+      "sha256": "c6549bc7500854030fd1e10017458d1e7aa2758fa8fe980639a360fa243e0353"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PingManagerDocumentation.lua",
+      "git_blob": "53e2af379e7e61d294820540aad94c2b247bb905",
+      "sha256": "e1c8d7eea56de9e3b09456994e54523279ccdfb3cb766ed06c3d7d4bc42f0197"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PingManagerSecureDocumentation.lua",
+      "git_blob": "574b2107fbf08dc0592ad6d5bb66f5cdd0fbce81",
+      "sha256": "f43dfe9ff47d202da263db6f2a6a185f0ae6adc45041606f35d2859cb716ba25"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PingManagerSharedDocumentation.lua",
+      "git_blob": "c50f664f08f6a758d8d7ef691e98441c37eb5f34",
+      "sha256": "dd404221824c36bbab8bf234e2a3660a0c55c90b58756e11532b5fa078dfda87"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PingPinFrameAPIDocumentation.lua",
+      "git_blob": "57e3a480254c439f1f5b195979c85326897b487e",
+      "sha256": "b75a14cfbe1021c164c896128f5fc22ff823643a470dd7c0fdf4b8d71420294e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlatformDocumentation.lua",
+      "git_blob": "76f44a6b33c398e7730fdde6108534dabda2b4c3",
+      "sha256": "9c74dac3f6549dd15b0ff13170f8006cc4b76e56a55977e1af1cf584d40fefb0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerChoiceConstantsDocumentation.lua",
+      "git_blob": "1bb3aea97c8e70b62117dfdde6d097af267ca119",
+      "sha256": "add440aaf7c47816252fb5ed991763d39199adc231a0fb8ce9763a3d47974f39"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerChoiceDocumentation.lua",
+      "git_blob": "2eb2343830fa46dd65773683114e3d28df397e4d",
+      "sha256": "3baf96d8698eebd9e0f1811deb7d0017f28c69d17c16c50612f65ab1191de406"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerDataConstantsDocumentation.lua",
+      "git_blob": "5eddbd94443e832f9bfaa72e1a830a1bf551a3d1",
+      "sha256": "200612530891f404a8c4bd0b803a806d84e72ff3717f2b5787bf0816ea2dfc7f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerDocumentation.lua",
+      "git_blob": "2509c4c5b23fb3a354e02be1dc7f338416a67e88",
+      "sha256": "db061985e2cee0f01fd45b935a119ee7b4c509179688e508ee46dc7f6bcfb93a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerHousingConstantsDocumentation.lua",
+      "git_blob": "549f02507db3b23cf0215b3aee7c65e3b7ebdea6",
+      "sha256": "1e03fe2b6b556b16344748423c00d4b6638e88fcdd81c07f9aabbadc6ea657fb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerInfoDocumentation.lua",
+      "git_blob": "ab51b238ea0bc2f7561cd10a2a49e953b9e685de",
+      "sha256": "0e81c713ff82cdd0aba17d51228b47604c549264a021404be66f50e0806cfafc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerInfoSharedDocumentation.lua",
+      "git_blob": "e105fe70eeaa765f4cef846562699e394949cc87",
+      "sha256": "6b1f5bd40076b6a8814c077dd851ef0cebe12373b7f373deb4b5405697238ec4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerInteractionManagerConstantsDocumentation.lua",
+      "git_blob": "544844200a8b8688eb0ec00e32602b7057e460a9",
+      "sha256": "423e3d1c975e8f5fe1d420a3a43b119a583b304d36cfce372202ddbf909be5d0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerInteractionManagerDocumentation.lua",
+      "git_blob": "6a58a991f0f28c42ab2644600a5df27e203927ab",
+      "sha256": "61f61faee405e89befcd7e81264817a633e496a97507b2682346c6c62020cb92"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerLocationDocumentation.lua",
+      "git_blob": "d4a2e57f6b02e2791070e9f3f7dd71d516465455",
+      "sha256": "6233af13de7f5c8856566ab46cb6f28edd55ac68f6dc94af8da0031c504675d4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerMentorshipConstantsDocumentation.lua",
+      "git_blob": "1c578f602bd341d0fdb222e8369b9ba889a5ed3e",
+      "sha256": "59c15aa22cdde7a088e2677a154fbef6d9c279d28db2a8fb8372f7857ff86a0d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerMentorshipDocumentation.lua",
+      "git_blob": "1bd93be1fdb6f0d8fae1ee102432204a4a68268b",
+      "sha256": "d42c5bacd49e7f71e8e02f823137f2248a7df587a6af324fbd7b692ef841fe9c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerScriptDocumentation.lua",
+      "git_blob": "e00006d8dba2b9f61ea463604047460a8d502cc8",
+      "sha256": "1a559f191db6c5692807a4fa7ae95684967515820c573a0feeb9b16352ab4c9d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PonyDocumentation.lua",
+      "git_blob": "e4644be050a52eabcb32abac0e41c0acec423198",
+      "sha256": "be09674ce67a3ae7a1a633b768b8248eefceca0d445e1dd659b5db35146d8439"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PowerTypeConstantsDocumentation.lua",
+      "git_blob": "c550220f976db39521c6aa280e792f465dc32a14",
+      "sha256": "a5c95aec886bfc31d27bc1c4e6d1b561ecdb36a505a635bccc42a65241235281"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ProceduralSpawnConstantsDocumentation.lua",
+      "git_blob": "1883f10d3cfd75be44525c175e0358caebb717a0",
+      "sha256": "bcd21894fcdc055594324ca25e5b9b1cf456a396ba28548fb1d6b18f01b249b7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ProfessionConstantsDocumentation.lua",
+      "git_blob": "800f5f8dcc5e13d07d8f75fca369140a91c397ce",
+      "sha256": "217e2c713f1e76e016b30239256f6469e6569606ddbf59094492d43715681938"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ProfessionSpecConstantsDocumentation.lua",
+      "git_blob": "86fa72f48fe8c40bf0a1a4fba8834a295fcad086",
+      "sha256": "c4237b4b28b3c8cc2a6a88cf3e64fb9e0fa29a86553be5514e36c666c2b5fe52"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ProfessionSpecUIDocumentation.lua",
+      "git_blob": "99958dc2712c06c9d0d6bb4327c3bc4558c41eed",
+      "sha256": "8076fa5640012524d8236e7a0dff98821ec33bb671d4b6a2e12dff33029eb30e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PvPFactionConstantsDocumentation.lua",
+      "git_blob": "e2e4a2f07ecb1d8f239595697e14b600e46491e3",
+      "sha256": "39db924c2bfe0b55aa35d0d5bdd8d698cde9acf723ddfce2e48079886f7792c1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PvpInfoConstantsDocumentation.lua",
+      "git_blob": "e6f7c5f3808f25a0520539b03744589e3185e46d",
+      "sha256": "c879a83c4a1102c1b628921edd26ebc573f08774f4c8efaac4a44e7aae004723"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PvpInfoDocumentation.lua",
+      "git_blob": "76d77283d3a4f158ce8b82d2513f0a850c94f153",
+      "sha256": "757773fbc010d49240c969b2144268404785c086c5184ddb5e2db8c0372f0c01"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestConstantsDocumentation.lua",
+      "git_blob": "3b000a1d861224edb14c617549fcbb547b31abda",
+      "sha256": "7f8be9e448de7ea0a246d8bedbafe436f9b07e1e4af411ee0f67321215cccbb5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestConstants_MainlineDocumentation.lua",
+      "git_blob": "2795a42e3b1358dc08e3b67a59aca4d513fa83fa",
+      "sha256": "75e117be087d5e55918bf64440d92be8f12cde4b3d0c2cd069732c143af092b0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestHubInfoDocumentation.lua",
+      "git_blob": "5b78d33f763e844e4e3053b406ade5418cee2b39",
+      "sha256": "0df9b218b1614750930b1984e73dae213b80ab1b30a27da01f4e301bc363adb0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestInfoSharedDocumentation.lua",
+      "git_blob": "dc6382cb61efc3b313416c637706e52f30bddec8",
+      "sha256": "deaaa5d8314dee77bfda96b6652a3520657961cdba1163b941bc20dc56266b18"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestInfoSystemDocumentation.lua",
+      "git_blob": "bba56afb630ec22a76299cdefb63c526cbc10e04",
+      "sha256": "8aadb32fda5d60a4459435a61f9968c9724aeba3223d384f6ce8ce5dc58f5339"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestItemUseDocumentation.lua",
+      "git_blob": "ac97f686136b9f22a55a24b7929ebc4b3027d961",
+      "sha256": "26588d1a45a7b0500322df1eb2eed99306a772737001dddb69ebc2059cbe67a9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestLineInfoDocumentation.lua",
+      "git_blob": "a56042da4580d1af70a4995ab5b5269d8ddd582c",
+      "sha256": "8a88ad0b0bed014d155b033d0a9e970060f53c0529ebdef1d697e52316fab83d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestLogDocumentation.lua",
+      "git_blob": "d249a9462cbd1dbd9c6f57b86a9e045fcf9a075f",
+      "sha256": "cf89f1aaf52aa891657fc4221d3aa8fd9e9d72884d377e7c5697ad11029f9fb0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestOfferDocumentation.lua",
+      "git_blob": "5f648f5650b7811c8d10d2ac65c3c992d1b1ba8a",
+      "sha256": "a280bbc1e7d819b0d207eaf52673fba6bb05af73a266cf394026667d1e728fcc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestRewardsDocumentation.lua",
+      "git_blob": "35a48c77e00ddc3207157b2974bdc6b4d2d9b9ad",
+      "sha256": "61d05485ffa11abcad8ae225a2c52371b0105432587364b45785c2b892a1b0ba"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestSessionConstantsDocumentation.lua",
+      "git_blob": "24da612254db30cc59f57b82618d171f4e92e26c",
+      "sha256": "f54c125e7ae36114dd253fb6cf2e696ec0b999fe24292daf517eb441c603f603"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestSessionDocumentation.lua",
+      "git_blob": "5e17239f2ef6b6b45b2c181b323383fab64476fd",
+      "sha256": "223870c7e1f0f721bbb04f8fbcc0d8cf6b69d87c9a57d28a695b4d439e67491a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestTaskInfoDocumentation.lua",
+      "git_blob": "36a482dd838a5f42fb64a243f0bded4fbde16b96",
+      "sha256": "54c1323a59fdb5d359cc5769697abf8d8bc544a4a41167b7f0e7e243bcb8c351"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QueueSpecificDocumentation.lua",
+      "git_blob": "6e549a038463246c702ff3784525b4b43001ae5a",
+      "sha256": "2cadae0a9a2215ffae0dfdd8f1e5013c19a16828e981a2f370c014daaa5b6b19"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RaidLocksDocumentation.lua",
+      "git_blob": "b12b6820034a16778ac872b2e12d33c635e9a36f",
+      "sha256": "6f72db6987caf5d7a0a67ec5c122352ba8da7dcaab450dbd5a6685501869f45f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RaidMarkersDocumentation.lua",
+      "git_blob": "20d5d3e71c2ffdc1d6e0336e2ffa1ba9b3e85998",
+      "sha256": "f17ff35d689483fa54c254ffb729b0e25d7e3022b5179d9dc087a6f0ec4371d8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RecentAlliesConstantsDocumentation.lua",
+      "git_blob": "3a60f1f478e82d77048b680f88842d773ae0139e",
+      "sha256": "577a58f871f9dd4d709ceb013d0df0e19c13ce7f9ea37f9666ee6a77ae2e6627"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RecentAlliesDocumentation.lua",
+      "git_blob": "af5def358c077eeb922e88f1125d544ea381ce3a",
+      "sha256": "ca81466c64eaa9b1047a74b0a90ab0ddbf0463ef685afc25f7f38e3e65ef9665"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RecruitAFriendDocumentation.lua",
+      "git_blob": "293888efbc803b74a801c78bdf2c5630cb392c90",
+      "sha256": "5ad12930629fa8f55a5a36e96703b4178449e987568d63d531e8b600ec1c60ef"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RecruitAFriendSharedDocumentation.lua",
+      "git_blob": "6a7e41e04b3da9c36c2653ad036d1f637ec56046",
+      "sha256": "ffba9e65fe24d6d715da8a41ba9cd76d7deedcd5f5f721949115cc9fcd96a607"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RemixArtifactUIDocumentation.lua",
+      "git_blob": "9d549525e1aef75b47a02cd990c8151c353e3858",
+      "sha256": "a0367d8deddb4a66318547c69f127591bdcbd8f8f188a47985844b45a73e6f41"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RenownConstantsDocumentation.lua",
+      "git_blob": "e60fbbc583c934a6e4e9359f26d2a3635cffe5a1",
+      "sha256": "80b75a9e52ded33a21b80a82512d1f9de33788cfec0b042129dc1c68e61b9bef"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ReportSystemConstantsDocumentation.lua",
+      "git_blob": "ca7e6fc00f36893c9ee033fb18ed50f55115f89e",
+      "sha256": "bf85c8397c79964fd9515242c131e63de007e067862c1b68ff5c5eb72466b3d6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ReportSystemDocumentation.lua",
+      "git_blob": "f482a27158451cdd03adf96d7582c43b8165f385",
+      "sha256": "dec347ed1d2c3660feaf7451f2859fc403278842e5ee91ca88dd8d7d57c0ba94"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ReputationInfoDocumentation.lua",
+      "git_blob": "9b7dcadb42131631e74f3b5b73be4564f609bc3f",
+      "sha256": "f59ca871c2ce55d3cd8e5d9534b307bfc5c1e3537a00459da2bc2c0e586d830a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ResearchInfoDocumentation.lua",
+      "git_blob": "1439871c1bafa284c7797d307cc152e1d4a782f6",
+      "sha256": "022a85dea5e68fe9302b3c7c102909adea8590e0c07216535689825faa58374e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RestrictedActionsConstantsDocumentation.lua",
+      "git_blob": "020635e6da16d2f274daaed15e47c32e1ccfd007",
+      "sha256": "109b02f69af6f43a5762bd7123e982e0432fff2226ebf927855ba876791a6c32"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RestrictedActionsDocumentation.lua",
+      "git_blob": "5acf5efde9c50029f03f3367201ee848075badf7",
+      "sha256": "3b22f5e0249d53d492432648c92295aabb4a3a211f50f7e617bd7eaca3676680"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RolesetSystemDocumentation.lua",
+      "git_blob": "466e7b3d541c5ef824e98851d9522090751b4e77",
+      "sha256": "62d028e62bb58595b52e887d9dd0f479f5984f02ffdb0c14b1101bb47485c7c1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/RolodexConstantsDocumentation.lua",
+      "git_blob": "8a98eb1748e74c3c3fa176c2e11f258a2c558933",
+      "sha256": "3ebf00c0bdd925daada382c929fcb5245e3fbac16faf5023314bda0b53ea0801"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ScenarioInfoDocumentation.lua",
+      "git_blob": "35ad33b8beced3ea478601a2a9a0d96e932ac984",
+      "sha256": "c406413b8ca00d79508c5ccdddd8041266a0c3286893ec99ae6190b55df5aee8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ScrappingMachineUIDocumentation.lua",
+      "git_blob": "d3f46a4da0451ef27306008c6e08d666c05de7a6",
+      "sha256": "93a27a6e9f2d965d43fa53aa820bae015a2003c9930da862026bc9c3c40b3e49"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ScreenDocumentation.lua",
+      "git_blob": "a2eb2ddf57e3b630384635882b574a81b5e6a612",
+      "sha256": "3ef50f263dcc26fb17d18aea389afc6018a69ab20cd662abc3e9899e0d59747a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ScreenLocationConstantsDocumentation.lua",
+      "git_blob": "ceb90b91264f7e9cb694412abbe5b8a781fadc9c",
+      "sha256": "9582550aa3a6900429d1c0494f4e79d8cbf77ab47ce632248eb3a8bdafa657af"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ScriptWarningsDocumentation.lua",
+      "git_blob": "0b3df5c1fde2bc1dd335158a3f1a6d68ff3d503c",
+      "sha256": "a66e4257e5f867e9da19a81d6b7d4d5ac21e808491d37883c29fe5773400bfa3"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ScriptedAnimationsDocumentation.lua",
+      "git_blob": "0a8a77d8427e4b2bc0ce3ef9b5d6ff54ab7ec576",
+      "sha256": "41f3fc3f72218ac8c0f5deb1e654c7471da98554c5be7d29e37a1e0bd1ef43b8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SeasonInfoDocumentation.lua",
+      "git_blob": "6a856b3a2c9df7e427fddbc0a020873b5f250eec",
+      "sha256": "34802e2515edb2dbac3b1fab9d59dbf8a3ddaf5a71702ca0e5c3ecb669a345c2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SeasonsConstantsDocumentation.lua",
+      "git_blob": "c05f1e48c7daaf8daa14b565b028352af3115e16",
+      "sha256": "593d0340af80b3986ef49ddfe25f77ba9b176cd438c4f47f7bea28ec0de3987b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SecondsFormatterAPIDocumentation.lua",
+      "git_blob": "09dc4fc9f95b0aab2b322229567134e8ab26ea94",
+      "sha256": "9ddd2af27b44aa4d19c113cf60e6a23a640321c8228232e648352e1fbfc5cab4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SecondsFormatterSharedDocumentation.lua",
+      "git_blob": "3bdc211d4f1c11aebbf4496c7de7598fd4ffdca9",
+      "sha256": "1439da4b82977dbdea86535f41626e7e2c263b1badb32192067ec89ae7f2d4e0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SecretAspectConstantsDocumentation.lua",
+      "git_blob": "5d0ddadd780d58aec193baf66f2112e653a3cf8c",
+      "sha256": "214a07f77b10677e7e1d4703751631785179755f6e766ee34b5b9b36b9b5977e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SecretPredicateAPIDocumentation.lua",
+      "git_blob": "53f3f79f0987f491cbdc88db52cfc65b41d91fd3",
+      "sha256": "668a0c15d372a358fbe169465651cdc1ae2e66d0916c81b41eccdd4da92274ae"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SecretPredicatesDocumentation.lua",
+      "git_blob": "5d0c521ff1c04eb6b816341013e92ce5fa1e2ba1",
+      "sha256": "546ecda1e19d34a45fc54ec4b1cff6f9faee4c3fe1f4bb6f9bb0d3a8a48e3aa6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SecretWrapperConstantsDocumentation.lua",
+      "git_blob": "157d7bafcfffda6979adf22a739b737ad6c411b9",
+      "sha256": "8658735814b85e4153f6aba296e776d62874c4e6b5869836e5e35005528c937b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SecureTransferDocumentation.lua",
+      "git_blob": "4532a910bfcbbd2dfc4e61ceb787ce329cd4ec3c",
+      "sha256": "413e5c4846f84a14c5127ea415fe9ba59506a7cb10e80dd1c0cee818a5f4e415"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SettingsUtilDocumentation.lua",
+      "git_blob": "c040aeba8df75e9b5488bd2f797503a3c9287b45",
+      "sha256": "918060428445ce0a0d35f65062ee0465f153569455acdfdcb2830a0573926428"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedScriptObjectModelLightDocumentation.lua",
+      "git_blob": "f09b5898857b5a5a86ae83364fa3f85b81a66540",
+      "sha256": "bb20f7e2283925bc77210073e15cb7f928f054c742316d848047953e5ed879ba"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedScriptObjectNamePlateFrameDocumentation.lua",
+      "git_blob": "e484b0d5bd065d4f10caec785381b6ba478f6fd7",
+      "sha256": "fb1e35647b07cb16762f0a57ddfba0522667fe95f8d033c7de9a512b64b78f85"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedScriptObjectUnitPositionFrameDocumentation.lua",
+      "git_blob": "37107ab519bf4f27865042b9afc65cf25b6db2cf",
+      "sha256": "b0b46a57b543d44024af745a807589e168c75b61c1550479007f7a52cf093eba"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedTraitsDocumentation.lua",
+      "git_blob": "f4083e01b514fd071cd50d0e2607c60e409eb65f",
+      "sha256": "3c21bfadd372fb1d06048715f22ec977556bae742c56056f1e41d914541dac04"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedTraitsEnumsDocumentation.lua",
+      "git_blob": "6e39fbb42bbd821d207a0dfb25ece048bcdba031",
+      "sha256": "8754a5e2305cf05e3ead32c0028cf7d0c7c63b053641104e496d84e5bd8eb7fd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimAPIDocumentation.lua",
+      "git_blob": "45c27f2366a8da7bab846aeef8b743a03483bc16",
+      "sha256": "33b4777b0c40ab1b83a8e7bff757eede9619a2c860897fc91e4aaeaa5f5d78f2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimAlphaAPIDocumentation.lua",
+      "git_blob": "3dcd59b425cc8a0a33824bd1762fbd00577fd558",
+      "sha256": "d646fd48d0ef5c7343e6f660dcd549c55bdc9581c3190f8b723549a0ea57e467"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimFlipBookAPIDocumentation.lua",
+      "git_blob": "99529e1aa28c3ffcab0cfda570f21d138378849d",
+      "sha256": "6fa29487c050484ba95daa0515fbf81e98d5d9e4e000dc4cbed0936db4fc2d41"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimGroupAPIDocumentation.lua",
+      "git_blob": "db2992f886ebd7621f81d584b0e5c6daf33a8c5f",
+      "sha256": "1af7a2b7ccdaceb57505984ed1b5a6682cac6b13b5056175e1d9f9dfff5b0790"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimPathAPIDocumentation.lua",
+      "git_blob": "48d915fc80062a7b05d9bace58c30e8d3f7d9c53",
+      "sha256": "7ad879479b904c919a30f38ceb4c398ef669c4287a910212e66c0f79a90445a9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimRadialProgressAPIDocumentation.lua",
+      "git_blob": "b8800d425c58009490ee340cb96f2e16fd1ee783",
+      "sha256": "b109cd760d260ba3e8a7e671aa75b9ebcaa9818175d96b7825400ee121a1d3c4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimRotationAPIDocumentation.lua",
+      "git_blob": "ded58c6d8a7057d16017e9176fe57510c8d8d118",
+      "sha256": "72168e552ef96342520263297b598bb2f15951f803e19f076a40d34c0f5a10fe"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimScaleAPIDocumentation.lua",
+      "git_blob": "c95dac44d935a44ed1a879b4a6d08637239cac22",
+      "sha256": "d38cdd707632ceaf988e3e1c13f3ffb7f419a0fd8fe2ae58c3d2d8330d2b789a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimScaleLineAPIDocumentation.lua",
+      "git_blob": "63ba1c36b7b5a3b77c7c830ce8c91cf07c9ecb45",
+      "sha256": "e10cf5c3c517a603f2c282dba3691cfb1f98625189584df2d3c36b99e7ff4d09"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimTextureCoordTranslationAPIDocumentation.lua",
+      "git_blob": "4f896818615a8618307b8c125171658713de4e7d",
+      "sha256": "e40bc59cc9ef0b163ee02cb0058e69e37340f3f0c29a7b140604e250c40d60a4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimTranslationAPIDocumentation.lua",
+      "git_blob": "74a705c26ef1fd028efd6c7fe3f03261875321c2",
+      "sha256": "2300a71eda0563a3f8b5968828521b897bfa4f2a9801226f6f132e8c98785cc6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimTranslationLineAPIDocumentation.lua",
+      "git_blob": "d0ff74406e308612166ee6612d6767a25d562ea2",
+      "sha256": "819d57b8438ee8334dfe3908b0d8f0f0208bad37c41de928ffbf7d58e67354eb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimVertexColorAPIDocumentation.lua",
+      "git_blob": "61c7c0c39c166c9dba2f7ff1f45b519f929e8b20",
+      "sha256": "ae207886e072115d9cf8f6e294a24d75e9892f3c5904035fd673b78951f66d39"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleAnimatableObjectAPIDocumentation.lua",
+      "git_blob": "58008c92b35f22de2e24bcdd3ff62f92b1d31929",
+      "sha256": "a80a96dc6196947517e8639d2ac08d8d628e1ac9e164aa859ee103cc2b75f58c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleBrowserAPIDocumentation.lua",
+      "git_blob": "3b28c8c7e7556ecbfc14cb06060e29ac3fd573c4",
+      "sha256": "9ab9fc04aefdd6c782f8b7e9eed5930bf2b966322fb98a70cc5aa602f33d1fae"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleButtonAPIDocumentation.lua",
+      "git_blob": "1e2214ee5348144f5e76e63ab6de22c91b810708",
+      "sha256": "77d01584823f347dc819f2eff5771dfd63ef108afae251a7042657f06a52e16e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleCheckboxAPIDocumentation.lua",
+      "git_blob": "6faf2b4db6e54d48add608d8fec4556953e4be45",
+      "sha256": "6951ac9ece3d8a216e48bfc72392e32e51c5257723fcf59c8b82cb372d59db9a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleColorSelectAPIDocumentation.lua",
+      "git_blob": "ae804817c73abece63a07722404c98db4ba7b043",
+      "sha256": "b4d4e2e946cdfb71c98d24dfff7347254ad46f33c385c151b6e5f5a39d40656e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleControlPointAPIDocumentation.lua",
+      "git_blob": "29cfd8ebdbbc973d264f85dbccb3bbdf12485aff",
+      "sha256": "62b1d01ba17fcd916a3dc3bf50bde0ee375c0087a4f9674cc4b8cee7d945c190"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleEditBoxAPIDocumentation.lua",
+      "git_blob": "9b82eccc3289f66a2deca9b7f6d62c835a239022",
+      "sha256": "aa932f643f66a880c6191043f7597b59d0c9f45df86f229c0322013d533a1aa8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleFontAPIDocumentation.lua",
+      "git_blob": "4070a088b963bbbfa62d6561e97c519fa4ec75c2",
+      "sha256": "8d1fa0dfe1fe7f114eacfeca960f922300312a09b2d559c04e1af41ea181deed"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleFontStringAPIDocumentation.lua",
+      "git_blob": "97448b164fc7e86d17178c832134f3744b449af8",
+      "sha256": "156e370421081e6a8ec78afdee8e4306686cecc99f0d2163c1b62ce9a5ddbe96"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleFrameAPIDocumentation.lua",
+      "git_blob": "f0951c3f8a2556ac881434d33b687d8b9671ca1a",
+      "sha256": "c6275c78b80e584083000b19dff052cbbb7e1065bdcd0db4cf430c584a5c9430"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleFrameScriptObjectAPIDocumentation.lua",
+      "git_blob": "736a214fe7a0c6c776e80ddb577332c306254dd2",
+      "sha256": "09c85f7ee160d6f4d39765ba92a93ccd112d9e578b48d6f99b79f65e2ec42b1d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleFrameScriptObjectConstantsDocumentation.lua",
+      "git_blob": "f157ab0c1648a76b735735db9f7f336f6270c145",
+      "sha256": "b8f47117380e659b09f06bf011109280d86133013cc7d9ba889d8f03fcd27709"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleHTMLAPIDocumentation.lua",
+      "git_blob": "38a052b118211c6b8e2fdba3104cde88232b12e5",
+      "sha256": "8e6452c7d5e2a4adc59eb0031bb42c415fcbea3e08d388286b43382b454cfe9a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleHTMLSharedDocumentation.lua",
+      "git_blob": "8c68743d2bfa726089164b8f42f1a05e92d1f794",
+      "sha256": "ff6bc51efff2cf6c1e270492c9ec2730213147103513439e5199c90c81af808c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleLineAPIDocumentation.lua",
+      "git_blob": "b30bce69c2bd214bb4fbb1cb5779c939ab4f13a8",
+      "sha256": "14aa5593e653b448122cff40ba14701a76d5e8940d93ab69db5cef7d808ab322"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleMapSceneAPIDocumentation.lua",
+      "git_blob": "e8c343963758d2bac7703034bc6ecb91bdb78e59",
+      "sha256": "ad6123cfabff705350f7f2f71a9e00655daa68c3b5759f15a71f83f1f522a2e9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleMaskTextureAPIDocumentation.lua",
+      "git_blob": "fc70c04abf559b496c642db96feb164a50debe96",
+      "sha256": "b692a07dd9c71857a3ec6fe49d44a1c8ab08dcbf816f8e3d0b6da55da21e1ae7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleMessageFrameAPIDocumentation.lua",
+      "git_blob": "58bdf724120fbfe9b4c117a974d58d47fa8b88f9",
+      "sha256": "b8cc74b9bb8c9b0b62b0be7f881540cb32e31dabd7c27814c312f9f415174939"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleModelAPIDocumentation.lua",
+      "git_blob": "4d4725f33d50dcdbbe0ea7c41f9c01869105b00a",
+      "sha256": "a851298c372e9a568372c2ddf8a6e44c55dcd113f2cdfa4f315816f82c81c9db"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleModelFFXAPIDocumentation.lua",
+      "git_blob": "940e8f723f25d4f13f199367892e1162633b7128",
+      "sha256": "3bef97724261841bdac070cd21b5d8e62ef63ceb9ff09894911f9d492b2ac538"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleMovieAPIDocumentation.lua",
+      "git_blob": "32b3467b82cf702400b9419bd7701f614b806eac",
+      "sha256": "966d89ab2d133a700a10e72fa4c145e5f62055378a6da5595a0d72ad842e3eaa"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleObjectAPIDocumentation.lua",
+      "git_blob": "4ebedbb7beebafc0febf723a67c2071dbfc62795",
+      "sha256": "b9def4b5dafa6e1c1c2d5eaf9284c590fc30d4843a1dcd3d9319b28d37962e7a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleOffScreenFrameAPIDocumentation.lua",
+      "git_blob": "da752ac991bb55d0b3754a1846f516baa5f752c0",
+      "sha256": "ef0d4f4a8b5463cafb7164a480d177c9cb505b2197cdeef6c4c733e215986ed9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleRegionAPIDocumentation.lua",
+      "git_blob": "ca66eb6c9e70d9e30c8f92139c184442c368d136",
+      "sha256": "f311fdf12572f2a32df67c3a0cd11195bc699a6f3872dd69f8300cd542bcfbd0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleScriptRegionAPIDocumentation.lua",
+      "git_blob": "f77b86089999d35950ce17d6ae62eace15f01f91",
+      "sha256": "34c57917b3c1e95a2f1054e3dbc6901222311b716322be31c78e62a119d37747"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleScriptRegionResizingAPIDocumentation.lua",
+      "git_blob": "6425c8deefe565688f200fbff9d46c364a8f539b",
+      "sha256": "0763ec5e3bb560b94ad7d1b12439fc5c53ea5de33290ffb8fd8de2737225f9af"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleScrollFrameAPIDocumentation.lua",
+      "git_blob": "7e157216cbc4378c3e6c6083043b3c495f46a42c",
+      "sha256": "19cf167464404e1bca37661fb5e41a9f6f0580fd8adcf8a6e2d1ad2de5d4a59a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleSliderAPIDocumentation.lua",
+      "git_blob": "49de282d73eb432fb4f22879f1bc20589ac2ef3f",
+      "sha256": "f988b61cf0b1c777fb6c755e49faf20827a06613649d6f7ae1ec6e99f60fa24b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleStatusBarAPIDocumentation.lua",
+      "git_blob": "99dd0b3ad25e5bdf33bfeb9d694652b6badfeb90",
+      "sha256": "8a1adba0e8b921e31b3d537f5a24095a946bb69ea9014db134f2c175245265e0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleStatusBarConstantsDocumentation.lua",
+      "git_blob": "0038f49c2d9f3b5a626f5c7b0b2120b8bfc91770",
+      "sha256": "5ea10963827c338cdf73f2be0c4f585fb44becfa17414b12244f212b01edf719"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleTextureAPIDocumentation.lua",
+      "git_blob": "4435c4d7bcab5374e9863d277165e3285fae326b",
+      "sha256": "453c789239e9432546367ccafef7836cac497856306233d948e70e1f803d3b13"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleTextureBaseAPIDocumentation.lua",
+      "git_blob": "adc0caeaeba3c941e9c2d31c9fa644d102054edf",
+      "sha256": "e4ccf4dbc0458473f5f31f69986e7aa12171bfa7359a32f7b884b2edfd6bff00"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SimpleVectorGraphicsAPIDocumentation.lua",
+      "git_blob": "1dda842f24627f03fea7823179d95066e88c8231",
+      "sha256": "f21419c19f72b0a0414ffdadf26602f1ac3aa034e005afaf8804fdd09df82852"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SkillInfoDocumentation.lua",
+      "git_blob": "5d79b07ca91006a24be353e5a07361ca1b8a9fb6",
+      "sha256": "a484dcc88450d49f4348f2b17bc85342e26475d8b02f5cdd76e8ecbdd7af2a3a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SlashCommandDocumentation.lua",
+      "git_blob": "e2559c7ac434a1f6c6de06d304550988a1c5144b",
+      "sha256": "d41f4dd28d4dc9779637f250a62e97b27cd84a275e479a7b353334bf594f426b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SocialConstantsDocumentation.lua",
+      "git_blob": "9d690be0d83ac7e9b4b5b52e7523254029a96e06",
+      "sha256": "0bdca8c36d0df4a87b98524eca2e478483f2460bb9e2f0834895eb6bd807c54d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SocialQueueDocumentation.lua",
+      "git_blob": "699cef6fd381b8555eaedb637b61046399d3abca",
+      "sha256": "ec268fd579ef76039df84f504a8a7e3beaf02eadd83c86bc83bc301cd6c8a9c0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SocialQueueSystemStatusDocumentation.lua",
+      "git_blob": "30ea592332a1caa2ae249e461be9d4e65e72aa1d",
+      "sha256": "c4b724140fae531ad6f66d2c60ab41f0856aca30e907856b52fe7ca60934d323"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SocialRestrictionsDocumentation.lua",
+      "git_blob": "b459f41cf124c42604c3163902de9dafb782fe46",
+      "sha256": "5e0cb78c39e07b945e0fdf43ef21ba559ec3f97e6148ba5a56890673aa89d374"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SocialUIDocumentation.lua",
+      "git_blob": "2740c7d88199d56136f9df6d24657d29ab1ee5da",
+      "sha256": "91b79c32e569e29e6fe92635e1890a9b8ee19d47c274d5711da87d4c9a515d18"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SoftTargetConstantsDocumentation.lua",
+      "git_blob": "1ba898f04f78fa79a7f462eb1d4b116ce2119310",
+      "sha256": "fa7a5191fc037a7be5c187ae95f7c8f1296302188840e9da6d0fae1dbe1a500d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SoulbindsConstantsDocumentation.lua",
+      "git_blob": "2d292be560434a4a4946e52902d006ed22719b47",
+      "sha256": "32d6dec40e341977c7506a21cbad9465cf191fcf7d52505565fe7252fa184d11"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SoulbindsDocumentation.lua",
+      "git_blob": "dbeeb588fb074eaa95fc42db6128f88d9f261c82",
+      "sha256": "dc76e370b98f6dbfdcb6cb6976bb62fa35a87b0af7054957c2acdfba68c3b9da"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SoundDocumentation.lua",
+      "git_blob": "35cd92a9d50926cd9900ff52d9c3f888552832bf",
+      "sha256": "0872bde4963b06134b9bdc923800f9788dd3e8bea4d7e30b99beb08fd1c93821"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpecializationInfoDocumentation.lua",
+      "git_blob": "d5015ff58318d4a456244027da9f8fa147347c36",
+      "sha256": "69c8e4f16877108d942cc4102f7f9458786c405af93a9f60900b99088bb70f0d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpecializationSharedDocumentation.lua",
+      "git_blob": "b2b543a50e69e5843c15896d55d24e7479e53387",
+      "sha256": "f0e20c71175748dede2d17ae8f0e1a20f72d37c7905734a1521da34ca3b1b8ec"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellActivationOverlayDocumentation.lua",
+      "git_blob": "a02de970a14aa714d3db6020538ecb755d27abf1",
+      "sha256": "62a4cc0453e29667b38f7e6128c4a5bc43ceda7bf526372b379a26b2aaf837ba"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellBookConstantsDocumentation.lua",
+      "git_blob": "e260047c236925d510987fe3d457e24158ee8ee3",
+      "sha256": "6a8d429313fd84fa10b45f3c5d7f7328b5d73ee7441be05ae8045d983ef31fde"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellBookDocumentation.lua",
+      "git_blob": "c3c5a55b9073ccb2515be4056d2ba26644e0e20e",
+      "sha256": "3e8e59824108eb7ac4fbc6135e3f5ab55c05e7a3cb0406afd9b1f062b914b257"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellConstantsDocumentation.lua",
+      "git_blob": "8d5df54dbe9cf0ff0bcd901e311a074a234a368a",
+      "sha256": "8e7b003134e18394cbcc27778b4fa45488a9e43c809ccd1c920fc6ff4ef339b9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellDiminishConstantsDocumentation.lua",
+      "git_blob": "71175bd928d4fd811286873f39a1e5b8e8e79d74",
+      "sha256": "789588109072a0841e97822bc8d3ec58c7522ca81571a168722f461dbdc2286f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellDiminishUIDocumentation.lua",
+      "git_blob": "9be750503a4512bf47f77ecdfbad6d52bdf3e6b2",
+      "sha256": "edd2d5cc1f4e6a9d2d95ec5e20b9e6413951569f6f33d012aa69c979b3a4188a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellDocumentation.lua",
+      "git_blob": "d927bfda89f697146dacc9df8cb68b5745232c25",
+      "sha256": "23f46ba2e134f5aa919fafaaaa0a6f18411b9bec24884923967f04ffe5e5d58d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellIDDocumentation.lua",
+      "git_blob": "4560fdbc223c079feef394cc8ab770fc238fcace",
+      "sha256": "b1925def292df25a95495697dc80d58ea607266287f3c6b625e925bc2603d5be"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellSharedDocumentation.lua",
+      "git_blob": "9bd07db4db951c53e681e7f7cdbe1437caa7789d",
+      "sha256": "e143de5645bd6333ba290488d5ada9c4985bdc1e2f49dd728d327aeafcd42846"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SplashScreenConstantsDocumentation.lua",
+      "git_blob": "b1e080413774603110be1c619b309a1ccd1c4f62",
+      "sha256": "a52a8865a511a7931f35706a8ed47e2024ccddfdd1e20a239dc111b5ae6bef38"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SplashScreenDocumentation.lua",
+      "git_blob": "32ee53f7cec53dd03aaa5f270423a64036692aef",
+      "sha256": "d190bef151d3f809dd91af0eea2ac32cbbc5c12bf412dd8630dc72c834d1e41c"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/StableInfoDocumentation.lua",
+      "git_blob": "2822e41117b3869c5f4d868073353c26785490aa",
+      "sha256": "4b68a7ce74906379843c98de8a171632ffbba57868eba0cb26a257f5e20cfa8b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/StorePublicUIDocumentation.lua",
+      "git_blob": "8e1ac97cb14a8649ec589188a69c34bed9b897b4",
+      "sha256": "aae5d8a3c3f5323102e36b8d2a16ef43c92bbe00f77d260e64c71283770080cc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/StreamingDocumentation.lua",
+      "git_blob": "716ec2d1a423c061b6cd56b7c47b6f13c1c7435d",
+      "sha256": "23a6bb068c935418b629ea779725a59a1fa13969c230b42042ee1730ccb91a2e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/StringUtilDocumentation.lua",
+      "git_blob": "9fcbaf19e7d0632fc5a2e204563cbe48fe1ff258",
+      "sha256": "912b03af096957e6ff7e0887e68f72c8e4acaa4d0f99be07256153c0fd1f51e6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SummonConstantsDocumentation.lua",
+      "git_blob": "4feabc4637bd6c068f3ed8900c6320f061d9543a",
+      "sha256": "4b91c5348b77605713776ce92ac69cd22a268aa4a021956c77695a40de7be22f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SummonInfoDocumentation.lua",
+      "git_blob": "9d55514df46810b72a6e17ab3d6e9703cebee183",
+      "sha256": "d0ddcb7b47418b1569d2d6ab529340269a192cc56bdf3a00e6b389fc785997f0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SuperTrackManagerDocumentation.lua",
+      "git_blob": "a59c2b8d3961980a7e04018a6c139a3d427a633e",
+      "sha256": "4fe3b1216557a520d9c6f653fe8acca2b03fa650d5405869eea819d0010e4884"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SuperTrackManagerSharedDocumentation.lua",
+      "git_blob": "a2dbc4887b95eb0051a4fc3a5214489b1dbb5351",
+      "sha256": "277df06498dc940b12d84834152345df4ac835755e99f45b93d3711c3c9135d4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SystemDocumentation.lua",
+      "git_blob": "d0c56b8b8c110480b4df55b6caa9690c56c44c6a",
+      "sha256": "1d94919b1810a9cb203590b79fc13b1f9a994d71ed65316636156a97bb6df1e2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SystemTimeDocumentation.lua",
+      "git_blob": "818872a04c98bff1564409efa55c12928139fc72",
+      "sha256": "034f4b9b15c1c8eb661e6c0a4772995a20b6d3c4a729e9a0c6640cefa3f52ac0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TTSSettingsDocumentation.lua",
+      "git_blob": "d2a6c02a786ad53de998abb97a62cca9166b7ca0",
+      "sha256": "68e8c25526869b818b2e488390a8bc2beee0702ab5821d097463c42be74a1012"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TalentAndGlyphConstantsDocumentation.lua",
+      "git_blob": "1ca8aec9a84d960323114f481b1f68db5d8d8ad3",
+      "sha256": "d9ed16579f120857a3c4eb25878e7066991120890fd1b2a8f3d6aefdfcc6f65a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TalentConstantsDocumentation.lua",
+      "git_blob": "81ac2bc8607f69f2192076d14f3558382a7ff3b9",
+      "sha256": "c3fe000f0652bfda82b11988d8db7854e6a7939250e1047eb838df69066ee582"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TalkingHeadDocumentation.lua",
+      "git_blob": "d71905302e7529c29932abd63fcb130d1c6df935",
+      "sha256": "40fcee5b0dcf1ee115fd04816d0a4b01917c946a43a20e19522b01d01e0f532e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TargetScriptDocumentation.lua",
+      "git_blob": "0503050547b7bf1bd240f41d6513334d0d0fa288",
+      "sha256": "f0d3706f0e19051134f92253048813dae05de9777bbc32b6ed6066f7c5b8ff6b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TaxiMapDocumentation.lua",
+      "git_blob": "494969ade5be03b3c47808c494a1c535a8b0eb97",
+      "sha256": "83815b83f1fca174d6b746407750b73cb3b353d0c8c45903524f13bbb86dae9d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TextureSharedDocumentation.lua",
+      "git_blob": "99b4bc8749f18b3ba87cc1321be3cff055a74508",
+      "sha256": "7226d71ffdecd764f756d539c085e4ebbec46a77350143094eed2825d3d5dcd8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TextureUtilsDocumentation.lua",
+      "git_blob": "98490dfed139463441d7745f598c01c2c2d0d96a",
+      "sha256": "78c6540e66386cbc2b866cba0d7f13aa975a04fd21ffe6b12fbb78f8b6014442"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ThreatDocumentation.lua",
+      "git_blob": "093a64dd2bcf47cfd345c9884dfcc6c26353ca14",
+      "sha256": "11b5fbbccd836d613e23d2dbfbdea15f7256b42c89383a3954e79ce9cba66d29"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TimeDocumentation.lua",
+      "git_blob": "e2499c1cab2292f68c81a62bd21ccac49e8d1711",
+      "sha256": "0da99c1c314668c63d853611b27ecdc852c57075347ba84e6094392822b9dcd1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TimedSignalMapAPIDocumentation.lua",
+      "git_blob": "08571b855a910bb764b5257e943ab92de3bdb53d",
+      "sha256": "5e8f1fa53fbf790a680eae94e716eed2e37928eaa789e79c0ce72ab78971cbcf"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TimedSignalMapSharedDocumentation.lua",
+      "git_blob": "0252b5c49ea113fa5b668e42bfe74356d684d962",
+      "sha256": "6969ff25411e05de1fbc13de52a5faebd3efb9282ce27cf9fbd625e188f60ae1"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TimerConstantsDocumentation.lua",
+      "git_blob": "57f71ad1cf56f4af01991d82a6ad18aaa59b6002",
+      "sha256": "d42f7fccff895fa65d36cdd121963caa8df2fdb7782f7a13d1040a71b5ab44b2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TimerunningConstantsDocumentation.lua",
+      "git_blob": "28ca33f774203470b9c71ab83bfcff2266094669",
+      "sha256": "db640396bc00434c985f1b798df34785ea20c75abec915ced6d4d239e94556f2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TimerunningUIDocumentation.lua",
+      "git_blob": "9615f28a84546ac3ff75afb1fbe7e99ce6821321",
+      "sha256": "02ff5b2648d36623ad2a80003a45b931668a947c0fbc5c00fa284bf32377a598"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TitleDocumentation.lua",
+      "git_blob": "43a4afdd64a2fc9a9542f2ea4e6f55d073f22340",
+      "sha256": "e49e6771c9e222b0f5b44ce9969f7038d0a7d2f037319709906b7ea76a528616"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipComparisonDocumentation.lua",
+      "git_blob": "6e1592cb0879a178b1c4dc9386df46a841452d44",
+      "sha256": "fcc2c2f6428dec02764e58a3d2e0698e7dfe81f61cbc2a3c86982d3860b69edc"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipConstantsDocumentation.lua",
+      "git_blob": "a3fe231c4553f4c1b9917f25e9a42de0a92c1c22",
+      "sha256": "bb332fd85fa899b95d3a2cb7e823b867b4cace59c824dccddea70d771f995e82"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipInfoDocumentation.lua",
+      "git_blob": "7e98596a9076671a19fb3c47d0cb58987c6e5151",
+      "sha256": "0c2184a4ba787a5fbd37646e0f297a6e79a3ac5f60ccbcd07dabcc8048e89718"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipInfoSharedDocumentation.lua",
+      "git_blob": "c290527321efde762cad5e73af9051fc07b37aea",
+      "sha256": "08292af51fa78edbf2c2f8e1f8dc89812db3d4faa05e01528f3750b802ba3741"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TotemDocumentation.lua",
+      "git_blob": "c34c2d0226a780da9e2e54e5af0f32d7cfe58fd7",
+      "sha256": "4bec64ac75abc3825855b73aed64ac19f515c4eb4e0c83f57b749a97773c5814"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ToyBoxInfoDocumentation.lua",
+      "git_blob": "6ce2ea85a99a8dd9be9f1f94710d1c1324bf5b47",
+      "sha256": "10f838f4bc7ede5843373b1328dfc7f7c5be6e18ce576817072d9a6a4f4b9191"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TradeInfoDocumentation.lua",
+      "git_blob": "f44c116fc13f2b550e2f49cc1738e771d44c6be9",
+      "sha256": "b4df84de43473e61344e18c5aba426cf63bcc1ccccd5ecb7676f487124363ac6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TradeSkillUIDocumentation.lua",
+      "git_blob": "88723be07b7cdc117e4d0381642a0f55770cf99b",
+      "sha256": "b1b886b0103d8293a390fdf15f139cf5dd657916574f02ef71e8ff32ae647118"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TradeSkillUITypesDocumentation.lua",
+      "git_blob": "8bfb8bdbb810718b8c59a27d72d6dc15176f0625",
+      "sha256": "c1fcec130e314052873d0246311f1a554141b0cf5ace55ea849ad8c7275be29b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TrainerDocumentation.lua",
+      "git_blob": "88cbc65fcb92f9e8db75b062c90bea3a0c558164",
+      "sha256": "0a23d7e5600958cb78ab0b5bb6d01aaec6d36a5d1ba58a3cd3daef2eb2c7f3ac"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TraitConfigDocumentation.lua",
+      "git_blob": "c76bfb5d9f18aa547627988b9d33dc31612d3092",
+      "sha256": "9b3510262363452d710a7946448a1d2048f5b59eff22bfa16921e7715685deed"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TraitConstantsDocumentation.lua",
+      "git_blob": "796d24334b91b31a2e64ede51ab833664639de19",
+      "sha256": "0fbe3f773a851585b5cc048bef46a3584452060fa472017b900c59a944accde9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TransformManipulatorConstantsDocumentation.lua",
+      "git_blob": "8b6f1b122f760284ae5b57ca60cec19326c23114",
+      "sha256": "1c2f62b2fa9517dedc08da01bac475a8e5479b99286af8a9dd718a04bcdfa560"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TransmogConstantsDocumentation.lua",
+      "git_blob": "8f4804ce6a4e845032c5fc8fc4a7b29c01160f3e",
+      "sha256": "42e269721076df4a83cbedb02194e12991f21ba40e1600fd3a0c077d74b55d7b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TransmogDocumentation.lua",
+      "git_blob": "eab7797f865b9b8b4fa61b5f7ebd4ac5d7b0dc7c",
+      "sha256": "a114e45cac56494e7d2d17a617ab68f0204eaaefc516c637412fb5eff8645fd8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TransmogItemsDocumentation.lua",
+      "git_blob": "c5324e4837a0fbc63f91e567d2535f666be875e1",
+      "sha256": "b9e91e503d303ed2a7ef154f9c32775bf07d6a8858e8380761c4f925544d4661"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TransmogOutfitConstantsDocumentation.lua",
+      "git_blob": "d7f636c55a49cd9e18faf913273db7fde0aa4728",
+      "sha256": "2dc8d687fa25b85f38f7e6ce1c6b4174e45b790032a3593e94fc80ceb7ad692f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TransmogOutfitInfoDocumentation.lua",
+      "git_blob": "2368626b80d50b3d6e9d39b1fd2c5bef26658392",
+      "sha256": "3df83ae27c1d5b564d36b6d5a69bb0a6eccbb8e5bbe0462c9cd810e45c11be7b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TransmogSetsDocumentation.lua",
+      "git_blob": "c3b6fc2453a1283080aa973ebdae0c015a9867a1",
+      "sha256": "18eaf914a095b960d3f38e62efc9149c04584546d14145edbaf60cc6f9bb0b02"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TransmogSharedDocumentation.lua",
+      "git_blob": "bd5dbba35b7f5eaa5d3e8a8e4c814c6ee6b94110",
+      "sha256": "40234678d84704760893609de7eca52ef18af576c513858217187eadcd144fd7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TutorialDocumentation.lua",
+      "git_blob": "dd44a59b3c34d4b162afcb79af676e445fa53e4b",
+      "sha256": "bfe3eafd2c8372d21d8e1ea0a2bc29d41fe555efdb940681cdabb9d70fad0d46"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIActionConstantsDocumentation.lua",
+      "git_blob": "6a67f93179dbe8bd8a91ce8184ccf68f47b9656e",
+      "sha256": "07a477028b490670b8668d2e4d84df896fccd5f3ce648ee64442a8f733fe475f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIActionDocumentation.lua",
+      "git_blob": "19c5a9b60987daf725c02fa4839cb6acabe1a868",
+      "sha256": "368fd033639a4ab8309ab62243fe3eab20a0177286a65aee67c0fa9f3e1d8cb0"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIButtonSharedDocumentation.lua",
+      "git_blob": "c445b4a63c2f31b0a608104d7e4db1384c6de108",
+      "sha256": "151b7d44fe66846e3b45c78482619ead73b2791110eb6c4e7fbd6d461eba7ab5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UICharacterClassConstantsDocumentation.lua",
+      "git_blob": "4b0623aeecb63c68364bf40cf593a2d634266a02",
+      "sha256": "fc59a2343d8b4d5aa134138bfd6bed64140dcc1bdf090e8c23600b4d2aa35b40"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIColorDocumentation.lua",
+      "git_blob": "21357d321025946173384e0a61e74c72b3d10650",
+      "sha256": "6ad3204fd20e9b90b126ca00635c80346ff72dc5d3c7d919d4deb3f1c72228a4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIColorSharedDocumentation.lua",
+      "git_blob": "e8aef5ed4108fe3afec2b08a7c57691a1ee37661",
+      "sha256": "1b3ca2726220727bd073969c7bb0793ebaa9e0a20d9ca2cb22879464626b5cfd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UICovenantDisplayInfoConstantsDocumentation.lua",
+      "git_blob": "6226a4b132882f423e5139aba7005e706b501e3e",
+      "sha256": "0dac3f740a2497b336f0c9f510abfd17a86d9a4c3642d57aa53e9a46ecb9fac6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIEventToastConstantsDocumentation.lua",
+      "git_blob": "5fd384fbe1688544d5461dc69e593b97cc9b6af7",
+      "sha256": "9b60962c7f9250af0d4941821f45bdd35193a13d3c08fe92617d88af2f9e65d2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIEventToastManagerDocumentation.lua",
+      "git_blob": "f7629e2b4bff61cbcfe98349ec26175a7829d9cf",
+      "sha256": "16c56580469d30414f33e71fc49ef90c3c6c83e511769624e96ddd74d040c53a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIFileAssetAPIDocumentation.lua",
+      "git_blob": "ac051c018ec238fd6a483bec3ca6deaa462abc69",
+      "sha256": "f9b2d9aa24354c1e46c3e7fbfac78aa652e9bebc0400a7dfc2249a6c0c0cc099"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIFileAssetSharedDocumentation.lua",
+      "git_blob": "320bb703e303505887181322ef3de680429c1921",
+      "sha256": "0a1c4c017b1002e6a1ca75c4f4d68afcc4c78b8c4e1507b3ecbd8c71bc0ed061"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIFrameManagerDocumentation.lua",
+      "git_blob": "2baeb66c6716a14ba8ea6eed89538b0cae23f844",
+      "sha256": "07b9073ebfd984b5133d2aa6d1b982669aba3524f27be5d51c574bceab8495c4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIGenericWidgetDisplayDocumentation.lua",
+      "git_blob": "96973c42ba72b9465dbb0439ea5552309728f946",
+      "sha256": "35f9455bc8ddec5d442854351022dc52bd6a7316e9416fea020653c95be3caab"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIMacrosDocumentation.lua",
+      "git_blob": "46936062e0d2451eb0f1b68297ba2eb8ccfcd9b8",
+      "sha256": "820b53bce826959781b61bb130659876c13e03280b187da0175847e12390c043"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIManagerDocumentation.lua",
+      "git_blob": "e884295f8cb103e100eaef53c38dfc156ecf4006",
+      "sha256": "3a7f80cedec49138ff4fce077d2b2b5078dd640975ee474a97d7db44010e02ed"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIMapPinSharedDocumentation.lua",
+      "git_blob": "e17b5cf2704311fa2b4ddd16fe3046b6ef14cdac",
+      "sha256": "5b7a3ffcba84a0c8c604a91436647cf5a614f30cc100caaf3f2c22d65a2ee631"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIModelInfoDocumentation.lua",
+      "git_blob": "0bd5765d2fb5e911f78ae419cc67fe154d46ba50",
+      "sha256": "d2165d97c34342270186ab6fc6e77dc6050e2e281640f478dc698212afce4197"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIModelInfoSharedDocumentation.lua",
+      "git_blob": "cf8c81b97aa7d6da36514c202b1051c1f2e3ac05",
+      "sha256": "b0fabdb1e8f767e64c39dd9f02ebaa2cd461c5d924c3e10571cd7fc73beb8f02"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIModifiedInstanceDocumentation.lua",
+      "git_blob": "60bf1555e3486a224145a1e8781e41e0fb5d61de",
+      "sha256": "6037efa6fb3784e30b75e9d755d0cef7d57311277b755a21bd8c4f106e797cbb"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UISharedDocumentation.lua",
+      "git_blob": "83aa3db245575a840318cfc638f224d2c5626a21",
+      "sha256": "caaa7b97a2a37b17240cd3c3d009fcfcdbc3b26cc89c84c4cfb50bdb86750290"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UISystemVisibilityManagerDocumentation.lua",
+      "git_blob": "0ba5d82c8abb9b81677d4b5dcef58c7d099f72ae",
+      "sha256": "638b62855c376f46458b8682e9372bb52e241e44bc69def015e92bbce2b46808"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UITextureAssetSharedDocumentation.lua",
+      "git_blob": "a900ad51837f370d84c25295069e4945628c68e4",
+      "sha256": "5570d644ede096ae7654242453e298fb966f204950df23e9daf967a41ad4eb9e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UITextureConstantsDocumentation.lua",
+      "git_blob": "c7717ba1f1d9b6f19e911197a5276b214e187531",
+      "sha256": "c11a1dcb22b610ea8568c2301f437e49a4fd0e0a1b49500a3b37ea90098abf8f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UITimerDocumentation.lua",
+      "git_blob": "8aff5217b9b1e4c97cfad2489e669ce561f05123",
+      "sha256": "db087ebb155a349c91ac80d55f3d48c7d56913463217ee33d9403f235b616420"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIWidgetManagerDocumentation.lua",
+      "git_blob": "279f75019675e131370b150c838d2f974f79cc40",
+      "sha256": "af6733c5293ba2eefd5c12fca04f2e98358b3dba7dda5275c410842d59e873c5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UIWidgetManagerSharedDocumentation.lua",
+      "git_blob": "831a3899e35fdeedfbcffb8d54e3210c281c738e",
+      "sha256": "48b2a0498735f9999de08fcd2e3ad1578a5bfb2b9851e23173a57c24c518e3f4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/URLDocumentation.lua",
+      "git_blob": "ea70f1b96ca9ec3d3f169f5c7f11ea9a8e8bdad6",
+      "sha256": "5cfb26f0b3a7192c13ce822d8bfcd62a6a801cae31fd19724da55d39f9b5ba6e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UiModelSceneConstantsDocumentation.lua",
+      "git_blob": "ad2b15bd67cc232e1056e90373dae8b899df818b",
+      "sha256": "f0536c846a933014b84262511e58545652daa11f139c93a083e1c83af2cba99b"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UiRpcRequestManagerConstantsDocumentation.lua",
+      "git_blob": "44c58f22415ec02efa3005588620e996983105f0",
+      "sha256": "77e17a83a220f5d25329923909ed02347bbe9b532d9f5a7021c65a630b5ff8c3"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitAuraConstantsDocumentation.lua",
+      "git_blob": "29e287ac4a7deab67887e4867d1ca70f5cc70ac4",
+      "sha256": "ebf2012d8f2dea61eb92d68ad844acbbc624b10b5579156bf45c1b8dfbdc0c0e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitAuraDocumentation.lua",
+      "git_blob": "16ed37f4a4d187e8656c8b85b07db943e70d774d",
+      "sha256": "c2d022fe1355c2d4b55762e19a9930339572b423917196789496763870e248bf"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitAuraSharedDocumentation.lua",
+      "git_blob": "d04aa740e1c285157ad435796fbc1779fb8d75d3",
+      "sha256": "0b406ed169b747887588c1c04f41ac3ee651fc985db8f3609d6290011b7b962f"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitConstantsDocumentation.lua",
+      "git_blob": "124b27389d10c07015b291c803a9d4c044d50aaa",
+      "sha256": "7bff799fdf9ce1079db5682dba507522b5ac6f157229a59310b85bc0387067a5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitDocumentation.lua",
+      "git_blob": "6fa1024ea0b4881edbd14ddf43508c6a99075340",
+      "sha256": "1ac4048d3d8acb63cd624c7be3c40e3149b6761b73a7d6bb271e3ace6af34c94"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitHealPredictionCalculatorAPIDocumentation.lua",
+      "git_blob": "9c7649e2d5b0d59a453d98eac14089541b166d2a",
+      "sha256": "c9396f4d90c75fcd3929422a4221c948aa4cbbd609357bf13d8ccc43ad1f390a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitHealPredictionCalculatorSharedDocumentation.lua",
+      "git_blob": "821b84bd32f9a401d8f84d65a9cdd4040604ccbb",
+      "sha256": "523f52a673c5350f2e5a0a3b6cb835a6b7fd1615bd7e9aee9975377b26fcc2b9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitRoleDocumentation.lua",
+      "git_blob": "142956b90f695a96cfe4d0f74363126b15c475fb",
+      "sha256": "bb1a58e0f798c48191598bef2831f7d90285238382506ce117746bed15051cf4"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitSexConstantsDocumentation.lua",
+      "git_blob": "ad059e7a5a2ac4cbe1456c53eae3dfb5272ccdd9",
+      "sha256": "f970f9aa0a1f79625cf4b22c68e7703ee4b7c3d90be3d0cd9ba5211677041b1e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitSharedDocumentation.lua",
+      "git_blob": "de707dac11196536df800dea4f1c81bdf5f8e6e4",
+      "sha256": "992a796bac162356763f1170933ef7d919d0657cbd8dd2500a91524fcdd838c6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UserFeedbackDocumentation.lua",
+      "git_blob": "8b999805e7d6278ea73e87d07561f6ee9844ce7c",
+      "sha256": "d0afdf0ff59851a8036f1e906ed60b61710e4d1c56ebfcc28898bd9a1b4d1b9e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ValidateNameConstantsDocumentation.lua",
+      "git_blob": "dfe64cbf6e8d71f7aa5ed9e44c80c9c75f386f5d",
+      "sha256": "d93a7673c8637bd0ba70e9ff338f0b7e69b8e8248b4c5be946282a95ce0bc8d2"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/VectorSharedDocumentation.lua",
+      "git_blob": "c0fcf350f948e0ea4460e9518bab1e8547ba45f5",
+      "sha256": "a8df5cff12a1ce94fe6ac6e8d1d78c8c0837cdccd863a0966fe2fcc4f95820e5"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/VehicleDocumentation.lua",
+      "git_blob": "a1c199ed696f3d8624e6b167236690e8e86c8f5f",
+      "sha256": "8c9baf806d914e2c3c60318d8c14bc58a926d004ac80d65410552e0678cc9031"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/VideoDocumentation.lua",
+      "git_blob": "75f3e740d8a4c644b724bcfcd357aac5b52042fd",
+      "sha256": "5d4e52dd226ef58247405506e07cb8aefe46995b4b96b76665dbafeca45d0a78"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/VignetteConstantsDocumentation.lua",
+      "git_blob": "bc74c92a9e46b1ed7e2ee62a4cffeffab0b051bd",
+      "sha256": "53afba5b2e66d3143236900ae2e8910ca86786bd3e497d3e9ac684f3962b8e4a"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/VignetteInfoDocumentation.lua",
+      "git_blob": "22791a4c040cc3f20db2788a95ba9cea3ed25625",
+      "sha256": "c9d960bdd338c52cefaacce2cbb0865ad85f593718654eab9ca812b5a10aed8d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/VisualAlertConstantsDocumentation.lua",
+      "git_blob": "ff05e443fe1eea547db860f0168ae5455e86e9a1",
+      "sha256": "5fabcad4ab686e06c5266769aa051c9cd8c608a8acde04c3d944b96620990b72"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/VoiceChatDocumentation.lua",
+      "git_blob": "a58028dde004986de63d673ff34d3d66c83e7e1b",
+      "sha256": "f3706ac09f7ff9a219858742a72e2b589846f62eb80ceb0b72e81803318594ba"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WarCampaignDocumentation.lua",
+      "git_blob": "b2b7872e005b7d0d51368ffc11ce36c35dd79760",
+      "sha256": "c0b4bdeb34ad14925de39cd25e1e3466c9c91d9bdb793febd85f4e54cbd121b9"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WarbandSceneInfoConstantsDocumentation.lua",
+      "git_blob": "4b3fb77d9027e40e4c339961dae1c636e7beba68",
+      "sha256": "a449b9e8b7cc6f3c5d2d89abdf8c3d562e2079b9b9495557dfc98bb729833e6e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WarbandSceneInfoDocumentation.lua",
+      "git_blob": "d4e6970b11b15874c568ed4c4ae7545de7cb340e",
+      "sha256": "54dc6d31a70e7bc599435b0e90ce6a9181891e3031626547fcfe5a49efece0be"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WeatherConstantsDocumentation.lua",
+      "git_blob": "467f6c99373dbc14ea6d40d45b458a05ebc6b85b",
+      "sha256": "968b29211527ab58e6c86ad47fae4b580865e1483d97f050a28833b6fc2c4307"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WeatherScriptDocumentation.lua",
+      "git_blob": "fcdc52566ffc05d0086e24dfcb1e01b0335e2459",
+      "sha256": "14e1abc1d38c2e83c0854edadd0182204717c051651f8f989c051818c72323ef"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WeeklyRewardsDocumentation.lua",
+      "git_blob": "7d12d57deb2fde25b22bbc156ab18c08a566b61a",
+      "sha256": "ba0594f747574be333ff9a0c943c8dabc3a6f157f39ba55b74096c1073496254"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WeeklyRewardsSharedDocumentation.lua",
+      "git_blob": "e3b0c5456a312ffd7b2faacc0f14ec2d5f577b33",
+      "sha256": "d33b9ceef3a5b7f0db611f7d1f040d8d99817730a5ae52ede7dc4483eba1c1a6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WorldElapsedTimerConstantsDocumentation.lua",
+      "git_blob": "dc71e30dfa462261a9b88fca55bc01fce35c66c1",
+      "sha256": "ab6c76d9969ac5a25cf664060219620be3eace8d3d937df918719392068fddc8"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WorldLootObjectDocumentation.lua",
+      "git_blob": "2a7ceacb434505f4930c89d9bcd51814a3c2925c",
+      "sha256": "883ade648c8282ce776180e6f6a34d87d2bf450d1752fdd6ea4b7e5fa45340c6"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WorldSafeLocsUIInternalDocumentation.lua",
+      "git_blob": "0253f8bf7e124acb0f1609c9966a856d88a4eb06",
+      "sha256": "2b95a9edaf00f46e97db00ce539cdaa78b9476e345fe58ed526e285c29d0159d"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WorldStateInfoDocumentation.lua",
+      "git_blob": "f3bfe05af99064ee745acce24ec25554bd0b7e73",
+      "sha256": "94b614e1b1261f6f37b9341cd95fac438ac68e23688eaf3a5bac7c49aab1b1ee"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WowCSConstantsDocumentation.lua",
+      "git_blob": "83afafaf453a1c1282512c724697ef3a807016a9",
+      "sha256": "aab23b3d4a5fede47c8d755f884c1a570d90e3311edb4ab127a04823971fd123"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WowEntitlementInfoDocumentation.lua",
+      "git_blob": "4e910e8cbf6b0b9c58c8890db4277cb4c22823ef",
+      "sha256": "8dbc5c89bb083ce8763f5e6b9a8f77aa3a9d0a479e2b42585a8821ee1b593a33"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WowSurveyConstantsDocumentation.lua",
+      "git_blob": "93d7084e3388d78b88793e780bbb8e18be14e276",
+      "sha256": "baf09db72de37247c546224b2685c53ba39ecff60cc2c810f345f52fcb5d52b7"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WowSurveyDocumentation.lua",
+      "git_blob": "d5b2b3e390b33273d434553c17efc466447d4012",
+      "sha256": "0756479af545b96021202c4a12d7dc3a1a98051d8b39a54db6219d2b2418cbbd"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/WowTokenUIDocumentation.lua",
+      "git_blob": "fa67354e4a713bdb975b0556025d625a361b0081",
+      "sha256": "f063f179248db9f53d906708f3603b63f028c820cc5783f5ac4091de74af71fa"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/XMLUtilDocumentation.lua",
+      "git_blob": "46b53f12932f5b2d4da23c2838afe6b6ca259380",
+      "sha256": "f1c0675044581c823ca62723c4f1f236730bb0bfe598c2e908f7bd496cc6f430"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ZoneAbilityDocumentation.lua",
+      "git_blob": "5e4322c76bc4807b5b211186e4586a5eb87cf958",
+      "sha256": "64259cb2e84655af2e60e40085738e362b56b1db730598b1dfbade63962f3a8e"
+    },
+    {
+      "file": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ZoneScriptDocumentation.lua",
+      "git_blob": "4ca25e60ba78c75cba486d060fbc8a95c100cbcc",
+      "sha256": "c30336e1b943f638413be8fce068b197ebe6d56cff5c2f141368566eb5cfc621"
+    }
+  ],
+  "symbols_sha256": "93a6fd499c9250fe321ec47c7bb20f9b924b36d2bf89b2d3139d1cf2f6be25a7"
+}

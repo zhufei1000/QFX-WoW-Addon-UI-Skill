@@ -4,17 +4,15 @@ Use this reference whenever designing, reviewing, or modifying World of Warcraft
 
 ## Current verified baseline
 
-Last verified: **2026-10-18**.
+Last verified: **2026-11-05**.
 
-- Retail `live`: **12.1.5.70448** — the working contract for all current addon work.
-- Live HEAD: `b9be9379719047977fca4dba1bb1d9988e8840b3`.
-- Retail `ptr`: **12.1.7.70424** — the next-version preview branch; its additions are not Live APIs.
-- Retail `ptr2`: **12.1.5.70340** — kept only for 12.1.5 historical comparison.
-- `live` **70391 → 70448** touched only `version.txt` and `Blizzard_UIPanels_Game/Mainline/GroupLootFrame.lua`; `Blizzard_APIDocumentationGenerated` did not change, so this round carries **no API contract delta**.
-- Content-level Blob SHA verification of the high-risk generated API files (UnitAura, AuraContainer,
-  CooldownViewer, SecretPredicates, Unit, UnitRole, Spell, ForbiddenAspect, CombatLog,
-  SpecializationInfo, generated documentation TOC) confirmed identical between Live 70448 and
-  PTR2 70340.
+- Retail `live`: **12.1.5.70783** — verified Live snapshot; re-check the branch for future work.
+- Live HEAD: `297d7aaaa736f346b3e036f38ee088eaf7f8c07f`.
+- Retail `ptr`: **12.1.7.70740**, HEAD `e927c305f67ed6b3b460bc00d0c39055747b9119` — preview only; its additions are not Live APIs.
+- Retail `ptr2`: last recorded **12.1.5.70340** (2026-10-18; historical, not re-verified this pass).
+- `live` **70448 → 70783** changes four generated documentation files and six contracts: `UNIT_COMBAT.amount` gains `SecretValue = true`; `C_Roleset.ApplyRolesetFilters` gains `HasRestrictions = true` and documents combat-lockdown blocking for tainted callers; `BNetGameAccountInfo` gains optional `subIcon`; three `C_Texture` title-icon functions gain an optional `subIcon` argument.
+- The previous **70391 → 70448** no-contract-delta result is historical. Do not extend the old Live/PTR2 equality claim to 70783; Unit restriction metadata has changed.
+- The bundled machine index covers **622 Lua documentation files / 10,603 records** from the pinned Live commit, with signatures, nested restriction metadata, source locations and checksums. Use `wow-api-lookup.md` and `scripts/wow_api.py` to query or refresh it; consult `wow-api-common-topics.md` for functional entry points.
 - The 12.1.5 APIs that earlier notes marked PTR2-only have **entered Live**; treat them as the
   formal contract, not as previews. `C_UnitAuras.GetRefreshCarryOverDuration` is the clearest
   example and is already used by shipping addons.
@@ -38,12 +36,11 @@ When API correctness matters, use this order:
 
 > **Local availability.** `Blizzard_APIDocumentationGenerated` ships inside the CASC store, so a
 > normal client install does **not** expose `Interface\AddOns\Blizzard_APIDocumentationGenerated`.
-> When that dump is absent, do not stall — fall back in this order:
-> 1. grep the addons actually installed on this machine for real call sites of the symbol
->    (`Get-ChildItem <AddOns> -Recurse -Filter *.lua | Select-String '<Symbol>'`), which proves what
->    the live client accepts today;
-> 2. the Warcraft Wiki `API:<Name>` page (signature, game-type badges, secret predicates);
-> 3. the `Gethe/wow-ui-source` branch matching the target build.
+> When that dump is absent, use the matching-build bundled snapshot or fetch the matching
+> `Gethe/wow-ui-source` branch and inspect generated docs, then same-build FrameXML.
+> Use Warcraft Wiki for explanatory context, checking its client/build and source dates.
+> Search installed addons with `rg -n -F '<Symbol>' <AddOns> -g '*.lua'` for usage clues only:
+> a call site does not prove the API exists, executes on that branch, or is permitted in combat.
 >
 > Treat "no local dump" as a sourcing change, never as permission to recall a signature.
 
@@ -57,7 +54,7 @@ Recommended public references:
 
 ### Why generated API docs come first
 
-Wiki and PTR summaries can lag behind the actual extracted client build. During 12.1, the public PTR source advanced through several late builds before Live switched to 12.1.5. Current Retail work must now use **Live 12.1.5.70448** generated docs as the primary source of truth.
+Wiki and PTR summaries can lag behind the actual extracted client build. Use generated docs from the exact target commit as the primary contract source. The bundled Live snapshot is **12.1.5.70783**, not a promise that the remote branch will stay at that version.
 
 Therefore:
 
@@ -222,6 +219,7 @@ If there is uncertainty about a WoW API:
 
 1. Read target branch `version.txt`.
 2. Search the target branch generated API documentation.
+   The bundled index can locate declarations offline; refresh it if its client/build does not match. An absent symbol may be a handwritten Lua API, template or inherited widget method: inspect same-build sources before declaring it removed.
 3. Search same-branch FrameXML for Blizzard usage.
 4. Read the latest Blizzard addon/PTR notes for intent.
 5. Use Warcraft Wiki for history and consolidated diffs, checking its documented build.
